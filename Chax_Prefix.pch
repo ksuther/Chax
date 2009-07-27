@@ -1,0 +1,13 @@
+//
+// Prefix header for all source files of the 'Chax' target in the 'Chax' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
+
+#if CHAXLIB
+	#import "Chax.h"
+	#import "BundleUtilities.h"
+	#import "MethodSwizzle.h"
+#endif

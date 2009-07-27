@@ -1,0 +1,535 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		371BA4BC101134CC00CF88C0 /* BundleUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 371BA4BB101134CC00CF88C0 /* BundleUtilities.m */; };
+		371BA5381011373200CF88C0 /* Chax_PeopleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */; };
+		371BA5981011389B00CF88C0 /* Chax.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA940FF7C41F000CBC6A /* Chax.m */; };
+		371BA62010113B2900CF88C0 /* Chax_PeopleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DAE10FF7C778000CBC6A /* Chax_PeopleListController.m */; };
+		3776F58E101CF589009D87B6 /* Chax_AnimatingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F58D101CF589009D87B6 /* Chax_AnimatingTableView.m */; };
+		3776F5AD101CF798009D87B6 /* UnifiedAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F5AA101CF798009D87B6 /* UnifiedAccount.m */; };
+		3776F5AE101CF798009D87B6 /* UnifiedPeopleListController_Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */; };
+		3776F63C101CFC35009D87B6 /* Chax_IMPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */; };
+		3776F9B1101D10E3009D87B6 /* Chax_Fezz.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */; };
+		37844D67100A085C0028BB2D /* MethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA440FF7C271000CBC6A /* MethodSwizzle.m */; };
+		3786DA200FF7C0A8000CBC6A /* Chax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3786DA1F0FF7C0A8000CBC6A /* Chax.icns */; };
+		3786DA470FF7C281000CBC6A /* ChaxLib.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 3786DA3D0FF7C21B000CBC6A /* ChaxLib.dylib */; };
+		3786DA510FF7C2B3000CBC6A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		3786DAA40FF7C513000CBC6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3786DAA20FF7C513000CBC6A /* Localizable.strings */; };
+		3786DAC20FF7C5AD000CBC6A /* menu-badge.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */; };
+		3786DB040FF7C874000CBC6A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DAFB0FF7C86D000CBC6A /* AddressBook.framework */; };
+		3786DB050FF7C874000CBC6A /* InstantMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DAFD0FF7C86D000CBC6A /* InstantMessage.framework */; };
+		3786DB400FF7CA86000CBC6A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DB3B0FF7CA81000CBC6A /* Quartz.framework */; };
+		3786DB570FF7CCB1000CBC6A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DB520FF7CCAC000CBC6A /* WebKit.framework */; };
+		3786DB940FF7CFB3000CBC6A /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DB900FF7CFAE000CBC6A /* QuickLook.framework */; };
+		37CE5F631011477600B5D83C /* Chax_NSDockTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3786DA480FF7C283000CBC6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3786DA3C0FF7C21B000CBC6A;
+			remoteInfo = "Chax dylib";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		256AC3F00F4B6AF500CF3369 /* Chax_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Prefix.pch; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		371BA4BA101134CC00CF88C0 /* BundleUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundleUtilities.h; sourceTree = "<group>"; };
+		371BA4BB101134CC00CF88C0 /* BundleUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundleUtilities.m; sourceTree = "<group>"; };
+		3776F58C101CF589009D87B6 /* Chax_AnimatingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_AnimatingTableView.h; sourceTree = "<group>"; };
+		3776F58D101CF589009D87B6 /* Chax_AnimatingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_AnimatingTableView.m; sourceTree = "<group>"; };
+		3776F5A9101CF798009D87B6 /* UnifiedAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnifiedAccount.h; sourceTree = "<group>"; };
+		3776F5AA101CF798009D87B6 /* UnifiedAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnifiedAccount.m; sourceTree = "<group>"; };
+		3776F5AB101CF798009D87B6 /* UnifiedPeopleListController_Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnifiedPeopleListController_Provider.h; sourceTree = "<group>"; };
+		3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnifiedPeopleListController_Provider.m; sourceTree = "<group>"; };
+		3776F63A101CFC35009D87B6 /* Chax_IMPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_IMPeople.h; sourceTree = "<group>"; };
+		3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_IMPeople.m; sourceTree = "<group>"; };
+		3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Fezz.h; sourceTree = "<group>"; };
+		3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Fezz.m; sourceTree = "<group>"; };
+		3786DA1F0FF7C0A8000CBC6A /* Chax.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Chax.icns; sourceTree = "<group>"; };
+		3786DA3D0FF7C21B000CBC6A /* ChaxLib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = ChaxLib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		3786DA430FF7C271000CBC6A /* MethodSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodSwizzle.h; sourceTree = "<group>"; };
+		3786DA440FF7C271000CBC6A /* MethodSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodSwizzle.m; sourceTree = "<group>"; };
+		3786DA550FF7C2F3000CBC6A /* Chax_NSDockTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_NSDockTile.h; path = Swizzled/Chax_NSDockTile.h; sourceTree = "<group>"; };
+		3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_NSDockTile.m; path = Swizzled/Chax_NSDockTile.m; sourceTree = "<group>"; };
+		3786DA930FF7C41F000CBC6A /* Chax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax.h; sourceTree = "<group>"; };
+		3786DA940FF7C41F000CBC6A /* Chax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax.m; sourceTree = "<group>"; };
+		3786DAA30FF7C513000CBC6A /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "menu-badge.tiff"; sourceTree = "<group>"; };
+		3786DADF0FF7C757000CBC6A /* iChat5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iChat5.h; sourceTree = "<group>"; };
+		3786DAE00FF7C778000CBC6A /* Chax_PeopleListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_PeopleListController.h; path = Swizzled/Chax_PeopleListController.h; sourceTree = "<group>"; };
+		3786DAE10FF7C778000CBC6A /* Chax_PeopleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_PeopleListController.m; path = Swizzled/Chax_PeopleListController.m; sourceTree = "<group>"; };
+		3786DAFB0FF7C86D000CBC6A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
+		3786DAFD0FF7C86D000CBC6A /* InstantMessage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstantMessage.framework; path = /System/Library/Frameworks/InstantMessage.framework; sourceTree = "<absolute>"; };
+		3786DB3B0FF7CA81000CBC6A /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
+		3786DB520FF7CCAC000CBC6A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		3786DB5B0FF7CCFD000CBC6A /* IMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMCore.h; sourceTree = "<group>"; };
+		3786DB630FF7CD34000CBC6A /* IMFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMFoundation.h; sourceTree = "<group>"; };
+		3786DB900FF7CFAE000CBC6A /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = /System/Library/Frameworks/QuickLook.framework; sourceTree = "<absolute>"; };
+		3786DBA40FF7D013000CBC6A /* NSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferences.h; sourceTree = "<group>"; };
+		3786DBC10FF7D189000CBC6A /* Chax_PeopleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_PeopleList.h; path = Swizzled/Chax_PeopleList.h; sourceTree = "<group>"; };
+		3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_PeopleList.m; path = Swizzled/Chax_PeopleList.m; sourceTree = "<group>"; };
+		37BFF35F0FF7D37200B54CF0 /* ChaxLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxLib-Info.plist"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Chax-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Chax-Info.plist"; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* Chax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chax.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3786DA3B0FF7C21B000CBC6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3786DB040FF7C874000CBC6A /* AddressBook.framework in Frameworks */,
+				3786DB050FF7C874000CBC6A /* InstantMessage.framework in Frameworks */,
+				3786DB400FF7CA86000CBC6A /* Quartz.framework in Frameworks */,
+				3786DB940FF7CFB3000CBC6A /* QuickLook.framework in Frameworks */,
+				3786DB570FF7CCB1000CBC6A /* WebKit.framework in Frameworks */,
+				3786DA510FF7C2B3000CBC6A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* ChaxLib */ = {
+			isa = PBXGroup;
+			children = (
+				3786DA930FF7C41F000CBC6A /* Chax.h */,
+				3786DA940FF7C41F000CBC6A /* Chax.m */,
+				3776F5A7101CF77D009D87B6 /* Unified Contact List */,
+				3786DA540FF7C2E0000CBC6A /* Swizzled Classes */,
+				3786DA420FF7C268000CBC6A /* Other Sources */,
+			);
+			name = ChaxLib;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				3786DAFB0FF7C86D000CBC6A /* AddressBook.framework */,
+				3786DAFD0FF7C86D000CBC6A /* InstantMessage.framework */,
+				3786DB3B0FF7CA81000CBC6A /* Quartz.framework */,
+				3786DB520FF7CCAC000CBC6A /* WebKit.framework */,
+				3786DB900FF7CFAE000CBC6A /* QuickLook.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Chax.app */,
+				3786DA3D0FF7C21B000CBC6A /* ChaxLib.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Chax */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* ChaxLib */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Chax;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				256AC3F00F4B6AF500CF3369 /* Chax_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3786DA1F0FF7C0A8000CBC6A /* Chax.icns */,
+				3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */,
+				8D1107310486CEB800E47090 /* Chax-Info.plist */,
+				37BFF35F0FF7D37200B54CF0 /* ChaxLib-Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				3786DAA20FF7C513000CBC6A /* Localizable.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3776F5A7101CF77D009D87B6 /* Unified Contact List */ = {
+			isa = PBXGroup;
+			children = (
+				3776F5A9101CF798009D87B6 /* UnifiedAccount.h */,
+				3776F5AA101CF798009D87B6 /* UnifiedAccount.m */,
+				3776F5AB101CF798009D87B6 /* UnifiedPeopleListController_Provider.h */,
+				3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */,
+			);
+			name = "Unified Contact List";
+			sourceTree = "<group>";
+		};
+		3786DA420FF7C268000CBC6A /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3786DADF0FF7C757000CBC6A /* iChat5.h */,
+				3786DB5B0FF7CCFD000CBC6A /* IMCore.h */,
+				3786DB630FF7CD34000CBC6A /* IMFoundation.h */,
+				3786DBA40FF7D013000CBC6A /* NSPreferences.h */,
+				3786DA430FF7C271000CBC6A /* MethodSwizzle.h */,
+				3786DA440FF7C271000CBC6A /* MethodSwizzle.m */,
+				371BA4BA101134CC00CF88C0 /* BundleUtilities.h */,
+				371BA4BB101134CC00CF88C0 /* BundleUtilities.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		3786DA540FF7C2E0000CBC6A /* Swizzled Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3776F58C101CF589009D87B6 /* Chax_AnimatingTableView.h */,
+				3776F58D101CF589009D87B6 /* Chax_AnimatingTableView.m */,
+				3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */,
+				3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */,
+				3776F63A101CFC35009D87B6 /* Chax_IMPeople.h */,
+				3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */,
+				3786DA550FF7C2F3000CBC6A /* Chax_NSDockTile.h */,
+				3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */,
+				3786DBC10FF7D189000CBC6A /* Chax_PeopleList.h */,
+				3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */,
+				3786DAE00FF7C778000CBC6A /* Chax_PeopleListController.h */,
+				3786DAE10FF7C778000CBC6A /* Chax_PeopleListController.m */,
+			);
+			name = "Swizzled Classes";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3786DA3C0FF7C21B000CBC6A /* ChaxLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3786DA400FF7C24D000CBC6A /* Build configuration list for PBXNativeTarget "ChaxLib" */;
+			buildPhases = (
+				3786DA3A0FF7C21B000CBC6A /* Sources */,
+				3786DA3B0FF7C21B000CBC6A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChaxLib;
+			productName = "Chax dylib";
+			productReference = 3786DA3D0FF7C21B000CBC6A /* ChaxLib.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		8D1107260486CEB800E47090 /* Chax */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Chax" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3786DA490FF7C283000CBC6A /* PBXTargetDependency */,
+			);
+			name = Chax;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Chax;
+			productReference = 8D1107320486CEB800E47090 /* Chax.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Chax" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Chax */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Chax */,
+				3786DA3C0FF7C21B000CBC6A /* ChaxLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3786DA470FF7C281000CBC6A /* ChaxLib.dylib in Resources */,
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				3786DA200FF7C0A8000CBC6A /* Chax.icns in Resources */,
+				3786DAA40FF7C513000CBC6A /* Localizable.strings in Resources */,
+				3786DAC20FF7C5AD000CBC6A /* menu-badge.tiff in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3786DA3A0FF7C21B000CBC6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37844D67100A085C0028BB2D /* MethodSwizzle.m in Sources */,
+				371BA4BC101134CC00CF88C0 /* BundleUtilities.m in Sources */,
+				371BA5381011373200CF88C0 /* Chax_PeopleList.m in Sources */,
+				371BA5981011389B00CF88C0 /* Chax.m in Sources */,
+				371BA62010113B2900CF88C0 /* Chax_PeopleListController.m in Sources */,
+				37CE5F631011477600B5D83C /* Chax_NSDockTile.m in Sources */,
+				3776F58E101CF589009D87B6 /* Chax_AnimatingTableView.m in Sources */,
+				3776F5AD101CF798009D87B6 /* UnifiedAccount.m in Sources */,
+				3776F5AE101CF798009D87B6 /* UnifiedPeopleListController_Provider.m in Sources */,
+				3776F63C101CFC35009D87B6 /* Chax_IMPeople.m in Sources */,
+				3776F9B1101D10E3009D87B6 /* Chax_Fezz.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3786DA490FF7C283000CBC6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3786DA3C0FF7C21B000CBC6A /* ChaxLib */;
+			targetProxy = 3786DA480FF7C283000CBC6A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3786DAA20FF7C513000CBC6A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3786DAA30FF7C513000CBC6A /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3786DA3E0FF7C21C000CBC6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Chax_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = CHAXLIB;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+					"-undefined",
+					dynamic_lookup,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = ChaxLib;
+			};
+			name = Debug;
+		};
+		3786DA3F0FF7C21C000CBC6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Chax_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = CHAXLIB;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+					"-undefined",
+					dynamic_lookup,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = ChaxLib;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Chax_Prefix.pch;
+				INFOPLIST_FILE = "Chax-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Desktop/Test/build/Debug\"",
+				);
+				PRODUCT_NAME = Chax;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Chax_Prefix.pch;
+				INFOPLIST_FILE = "Chax-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Desktop/Test/build/Debug\"",
+				);
+				PRODUCT_NAME = Chax;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3786DA400FF7C24D000CBC6A /* Build configuration list for PBXNativeTarget "ChaxLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3786DA3E0FF7C21C000CBC6A /* Debug */,
+				3786DA3F0FF7C21C000CBC6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Chax" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Chax" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
