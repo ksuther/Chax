@@ -37,7 +37,7 @@ typedef enum ChaxMenuItem {
 extern NSString *ChaxBundleIdentifier;
 
 static inline NSString * ChaxLocalizedString(NSString *key) {
-	return [[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] localizedStringForKey:(key) value:@"" table:nil];
+	return [[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] localizedStringForKey:(key) value:(key) table:nil];
 }
 
 @interface Chax : NSObject {

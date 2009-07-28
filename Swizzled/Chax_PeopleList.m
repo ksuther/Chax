@@ -47,8 +47,6 @@
             CGFloat height = [font xHeight] + [font ascender] - [font descender];
             [tableView setRowHeight:height];
         }
-    } else {
-        float height = (viewOptions & 1 == 1) ? 20.0 : 32.0;
     }
 }
 

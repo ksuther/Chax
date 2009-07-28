@@ -20,7 +20,6 @@
 		const char * typeEncoding = ivar_getTypeEncoding(anIvar);
 		NSGetSizeAndAlignment(typeEncoding, &ivarSize, &ivarAlignment);
 		const char * ivarName = ivar_getName(anIvar);
-		NSString * ivarStringName = [NSString stringWithUTF8String:ivarName];
 		
 		BOOL addIVarResult = class_addIvar(subclass, ivarName, ivarSize, ivarAlignment, typeEncoding  );
 		if (!addIVarResult){

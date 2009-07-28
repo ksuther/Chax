@@ -43,7 +43,7 @@
 	static id sharedController = nil;
 	
 	if (!sharedController) {
-		IMAccount *account = [[UnifiedAccount alloc] initWithUniqueID:@"ChaxUnified" service:nil];
+		IMAccount *account = [[[UnifiedAccount alloc] initWithUniqueID:@"ChaxUnified" service:nil] autorelease];
 		
 		[account setAccountLoginStatus:4];
 		[account setString:ChaxLocalizedString(@"All Accounts") forKey:@"LoginAs"];
@@ -103,9 +103,9 @@
 	
 	objc_msgSendSuper(&superData, @selector(windowDidLoad));
 	
-	NSMenu *addButtonMenu = [[self valueForKey:@"_addButton"] menu];
+	/*NSMenu *addButtonMenu = [[self valueForKey:@"_addButton"] menu];
 	
-	/*_addGroupString = [[[addButtonMenu itemAtIndex:1] title] copy];
+	_addGroupString = [[[addButtonMenu itemAtIndex:1] title] copy];
 	
 	if (!_addGroupString) {
 		_addGroupString = [[NSString alloc] initWithString:@"Add Group..."];
@@ -242,25 +242,25 @@
 {
 	/*if (!_addMenu) {
 		_addMenu = [[NSMenu alloc] init];
-	}*/
+	}
 	
 	NSMenu *addButtonMenu = [[self valueForKey:@"_addButton"] menu];
 	
-	/*if (!_addGroupString) {
+	if (!_addGroupString) {
 		_addGroupString = [[[addButtonMenu itemAtIndex:1] title] copy];
 		
 		if (!_addGroupString) {
 			_addGroupString = [[NSString alloc] initWithString:@"Add Group..."];
 		}
-	}*/
+	}
 	
-	/*while (_addMenu.numberOfItems > 0) {
+	while (_addMenu.numberOfItems > 0) {
 		[_addMenu removeItemAtIndex:0];
-	}*/
+	}
 	
 	NSArray *connectedAccounts = [[IMAccountController sharedInstance] allConnectedAccounts];
 	
-	/*for (IMAccount *nextAccount in connectedAccounts) {
+	for (IMAccount *nextAccount in connectedAccounts) {
 		NSString *description = [nextAccount description];
 		
 		if (description) {
@@ -271,10 +271,10 @@
 			[[accountSubmenu addItemWithTitle:NSLocalizedString(@"Add Buddy\\U2026", nil) action:@selector(addABuddyChax:) keyEquivalent:@""] setRepresentedObject:[nextAccount uniqueID]];
 			[[accountSubmenu addItemWithTitle:_addGroupString action:@selector(addAGroupChax:) keyEquivalent:@""] setRepresentedObject:[nextAccount uniqueID]];
 		}
-	}*/
+	}
 	
-	//[[self valueForKey:@"_addButton"] setUsesMenu:YES];
-	//[[self valueForKey:@"_addButton"] setMenu:_addMenu];
+	[[self valueForKey:@"_addButton"] setUsesMenu:YES];
+	[[self valueForKey:@"_addButton"] setMenu:_addMenu];*/
 }
 
 - (void)addABuddyChax:(id)sender
