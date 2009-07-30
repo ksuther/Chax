@@ -24,6 +24,7 @@
 #import "Chax.h"
 #import "iChat5.h"
 #import "UnifiedPeopleListController_Provider.h"
+#import "StatusChangeController.h"
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 
@@ -41,8 +42,6 @@ static BOOL _screensaverAwayed = NO;
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReceived:) name:NSApplicationWillFinishLaunchingNotification object:nil];
-	
-	//[StatusChangeController sharedController]; //Load the Growl framework and register for Presentity status changes
 	
 	//[Prefs setKnockKnock:![Chax boolForKey:@"SkipNewMessageNotification"]];
 	
@@ -68,6 +67,8 @@ static BOOL _screensaverAwayed = NO;
 {
 	[self registerDefaults];
 	[self addMenuItems];
+    
+    [StatusChangeController sharedController]; //Load the Growl framework and register for status changes
     
     //Display the unified contact list if it has never been shown before
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Chax.Visible"] == nil || [[NSClassFromString(@"UnifiedPeopleListController") sharedController] prefVisible]) {

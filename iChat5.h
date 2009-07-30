@@ -40,6 +40,8 @@
 @class SFCertificateTrustPanel, _GetVCChannelOp, _GetCertificateOp;
 
 @interface ReadOnlyInstantMessage : NSObject
+- (id)sender;
+- (id)text;
 @end
 
 @interface VideoConferenceMultiController : NSObject

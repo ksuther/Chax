@@ -43,7 +43,7 @@
 	static id sharedController = nil;
 	
 	if (!sharedController) {
-		IMAccount *account = [[[UnifiedAccount alloc] initWithUniqueID:@"ChaxUnified" service:nil] autorelease];
+		IMAccount *account = [[[UnifiedAccount alloc] initWithUniqueID:@"Chax" service:nil] autorelease];
 		
 		[account setAccountLoginStatus:4];
 		[account setString:ChaxLocalizedString(@"All Accounts") forKey:@"LoginAs"];
