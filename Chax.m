@@ -25,6 +25,7 @@
 #import "iChat5.h"
 #import "UnifiedPeopleListController_Provider.h"
 #import "StatusChangeController.h"
+#import "LogViewerController.h"
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 
@@ -117,16 +118,16 @@ static BOOL _screensaverAwayed = NO;
 	//Always on top menu item
 	menuItem = [[NSApp windowsMenu] insertItemWithTitle:ChaxLocalizedString(@"always_on_top") action:@selector(chax_toggleAlwaysOnTop:) keyEquivalent:@"" atIndex:3];
 	[menuItem setTag:ALWAYS_ON_TOP_MENU_ITEM];
-	[menuItems addObject:menuItem];
+	[menuItems addObject:menuItem];*/
 	
 	//Log viewer menu item
-	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"log_viewer") action:@selector(showWindow:) keyEquivalent:@""];
-	[menuItem setTag:LOG_VIEWER_MENU_ITEM];
+	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"Log Viewer") action:@selector(showWindow:) keyEquivalent:@""];
+	[menuItem setTag:ChaxMenuitemLogViewer];
 	[menuItem setTarget:[LogViewerController sharedController]];
 	[menuItems addObject:menuItem];
 	
 	//Activity window menu item
-	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"activity") action:@selector(showWindow:) keyEquivalent:@"a"];
+	/*menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"activity") action:@selector(showWindow:) keyEquivalent:@"a"];
 	[menuItem setTag:ACTIVITY_WINDOW_MENU_ITEM];
 	[menuItem setTarget:[ActivityWindowController sharedController]];
 	[menuItem setKeyEquivalentModifierMask:NSCommandKeyMask | NSAlternateKeyMask];
