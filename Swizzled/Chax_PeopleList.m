@@ -93,7 +93,7 @@
 - (void)chax_swizzle__updateLayout
 {
 	[self chax_swizzle__updateLayout];
-	[self chax_updateRowHeights];
+	[self performSelector:@selector(chax_updateRowHeights) withObject:nil afterDelay:0];
 }
 
 - (void)chax_swizzle_endChanges

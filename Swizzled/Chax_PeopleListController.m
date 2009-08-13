@@ -42,7 +42,7 @@
 {
 	if ([[note name] isEqualToString:@"ReloadContactList"]) {
 		[(NSTableView *)[[self peopleList] table] reloadData];
-		[[self peopleList] chax_updateRowHeights];
+		[[self peopleList] performSelector:@selector(chax_updateRowHeights) withObject:nil afterDelay:0];
 	}
 	
 	[self chax_resizeWindow];
@@ -67,7 +67,7 @@
 		
 		preferredFrame.size.width = [[self window] frame].size.width;
 		preferredFrame.origin.x = [[self window] frame].origin.x;
-		preferredFrame.size.height += 1;
+        preferredFrame.size.height += 1;
 		
 		[[self window] setFrame:preferredFrame display:YES animate:YES];
 	}
@@ -95,6 +95,14 @@
 	}
 }
 
+- (void)chax_swizzle_displayWithKey:(BOOL)fp8
+{
+    //Ensures that only the unified contact list appears at launch
+    if (![Chax boolForKey:@"PreferAllContacts"] || [[NSClassFromString(@"Fezz") sharedInstance] deferredLaunchComplete]) {
+        [self chax_swizzle_displayWithKey:fp8];
+    }
+}
+
 - (BOOL)chax_swizzle_validateMenuItem:(NSMenuItem *)sender
 {
 	if ([sender tag] == ChaxMenuItemShowTextStatus) {
@@ -109,7 +117,7 @@
 - (void)chax_swizzle_toggleHidePictures:(id)fp8
 {
 	[self chax_swizzle_toggleHidePictures:fp8];
-	[[self peopleList] chax_updateRowHeights];
+	[[self peopleList] performSelector:@selector(chax_updateRowHeights) withObject:nil afterDelay:0];
 	[self chax_resizeWindow];
 }
 
