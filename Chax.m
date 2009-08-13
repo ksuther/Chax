@@ -67,6 +67,7 @@ static BOOL _screensaverAwayed = NO;
 {
 	[self registerDefaults];
 	[self addMenuItems];
+    [self resetApplicationIcon];
     
     [StatusChangeController sharedController]; //Load the Growl framework and register for status changes
     
@@ -83,6 +84,14 @@ static BOOL _screensaverAwayed = NO;
 	if ([Chax objectForKey:@"AutoUpdateChax"] == nil || [Chax objectForKey:@"AutoUpdateIncludeVersionInfo"] == nil) {
 		//[[UpdateController sharedController] performSelector:@selector(promptForAutomaticUpdates) withObject:nil afterDelay:4.0];
 	}
+}
+
++ (void)resetApplicationIcon
+{
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.iChat"];
+    NSString *path = [bundle pathForResource:[bundle objectForInfoDictionaryKey:@"CFBundleIconFile"] ofType:@"icns"];
+    
+    [NSApp setApplicationIconImage:[[[NSImage alloc] initByReferencingFile:path] autorelease]];
 }
 
 + (void)addMenuItems
