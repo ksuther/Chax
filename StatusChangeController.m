@@ -130,43 +130,47 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 		}*/
 		
 		//Fire a Growl notification for the status change
-		if ([Chax boolForKey:@"GrowlEnabled"]) {
-			NSString *title, *description, *notification;
-			NSString *name = [presentity name];
-			
-			switch ([presentity status]) {
-				case 1: //Offline
-					title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went offline"), name];
-					description = nil;
-					notification = ChaxGrowlUserOffline;
-					break;
-				case 2: //Idle
-					title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went idle"), name];
-					description = nil;
-					notification = ChaxGrowlUserIdle;
-					break;
-				case 3: //Away
-					title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went away"), name];
-					description = [presentity scriptStatusMessage];
-					notification = ChaxGrowlUserAway;
-					break;
-				case 4: //Available
-					if ([presentity previousStatus] == 1) {
-						title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ came online"), name];
-						description = nil;
-						notification = ChaxGrowlUserOnline;
-					} else {
-						title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ became available"), name];
-						description = [presentity scriptStatusMessage];
-						notification = ChaxGrowlUserAvailable;
-					}
-					break;
-				default:
-					return;
-			}
-			
-			[self postGrowlNotificationWithTitle:title description:description notificationName:notification iconData:[[[presentity customPicture] image] TIFFRepresentation] clickContext:[NSDictionary dictionaryWithObject:[presentity guid] forKey:@"IMHandle"]];
-		}
+        NSString *title, *description, *notification;
+        NSString *name = [presentity name];
+        
+        switch ([presentity status]) {
+            case 1: //Offline
+                title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went offline"), name];
+                description = nil;
+                notification = ChaxGrowlUserOffline;
+                break;
+            case 2: //Idle
+                title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went idle"), name];
+                description = nil;
+                notification = ChaxGrowlUserIdle;
+                break;
+            case 3: //Away
+                title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went away"), name];
+                description = [presentity scriptStatusMessage];
+                notification = ChaxGrowlUserAway;
+                break;
+            case 4: //Available
+                if ([presentity previousStatus] == 1) {
+                    title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ came online"), name];
+                    description = nil;
+                    notification = ChaxGrowlUserOnline;
+                } else {
+                    title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ became available"), name];
+                    description = [presentity scriptStatusMessage];
+                    notification = ChaxGrowlUserAvailable;
+                }
+                break;
+            default:
+                return;
+        }
+        
+        NSData *imageData = [[[presentity customPicture] image] TIFFRepresentation];
+        
+        if (imageData == nil) {
+            imageData = [[[presentity genericPicture] image] TIFFRepresentation];
+        }
+        
+        [self postGrowlNotificationWithTitle:title description:description notificationName:notification iconData:imageData clickContext:[NSDictionary dictionaryWithObject:[presentity guid] forKey:@"IMHandle"]];
 	}
 }
 

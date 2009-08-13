@@ -50,11 +50,17 @@
 		InstantMessage *message = [self _createInstantMessage:fp16 chatID:fp8];
 		Presentity *presentity = [message sender];
 		
-		if ([Chax boolForKey:@"GrowlEnabled"] && [[[message text] string] length] > 0) {
+		if ([[[message text] string] length] > 0) {
+            NSData *imageData = [[[presentity customPicture] image] TIFFRepresentation];
+            
+            if (imageData == nil) {
+                imageData = [[[presentity genericPicture] image] TIFFRepresentation];
+            }
+            
 			[[StatusChangeController sharedController] postGrowlNotificationWithTitle:[NSString stringWithFormat:ChaxLocalizedString(@"%@ says"), [presentity name]]
                                                                           description:[[message text] string]
                                                                      notificationName:ChaxGrowlTextInvitation
-                                                                             iconData:[[[presentity customPicture] image] TIFFRepresentation]
+                                                                             iconData:imageData
                                                                          clickContext:[NSDictionary dictionaryWithObject:fp8 forKey:@"Chat"]];
 		}
 	}
@@ -73,11 +79,17 @@
         Presentity *presentity = [[[NSClassFromString(@"Fezz") sharedInstance] _imHandlesWithIDs:[NSArray arrayWithObject:[fp12 sender]] forAccount:self] lastObject];
 		
 		//Post notification only if the message was received from another user, and if there was an associated message
-		if ([Chax boolForKey:@"GrowlEnabled"] && [fp12 flags] == 1 && [[[message text] string] length] > 0) {
+		if ([fp12 flags] == 1 && [[[message text] string] length] > 0) {
+            NSData *imageData = [[[presentity customPicture] image] TIFFRepresentation];
+            
+            if (imageData == nil) {
+                imageData = [[[presentity genericPicture] image] TIFFRepresentation];
+            }
+            
 			[[StatusChangeController sharedController] postGrowlNotificationWithTitle:[NSString stringWithFormat:ChaxLocalizedString(@"%@ says"), [presentity name]]
                                                                           description:[[message text] string]
                                                                      notificationName:ChaxGrowlNewMessage
-                                                                             iconData:[[[presentity customPicture] image] TIFFRepresentation]
+                                                                             iconData:imageData
                                                                          clickContext:[NSDictionary dictionaryWithObject:fp8 forKey:@"Chat"]];
 		}
         
