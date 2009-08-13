@@ -131,6 +131,15 @@ static int _ChaxApplicationMain(int argc, const char **argv)
 	
 	[pool release];
 	
+    char *librariesPath = getenv("DYLD_INSERT_LIBRARIES");
+    char *originalLibrariesPath = getenv("ChaxOriginalInsertLibraries");
+    
+    if (originalLibrariesPath) {
+        setenv("DYLD_INSERT_LIBRARIES", originalLibrariesPath, 1);
+    } else {
+        unsetenv("DYLD_INSERT_LIBRARIES");
+    }
+    
 	return NSApplicationMain(argc, argv);
 }
 

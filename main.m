@@ -142,6 +142,7 @@ int main(int argc, char *argv[])
 	NSString *insertLibraries = [environment objectForKey:@"DYLD_INSERT_LIBRARIES"];
 	
 	if (insertLibraries) {
+        [environment setObject:insertLibraries forKey:@"ChaxOriginalInsertLibraries"];
 		[environment setObject:[insertLibraries stringByAppendingFormat:@":%@", dylibPath] forKey:@"DYLD_INSERT_LIBRARIES"];
 	} else {
 		[environment setObject:dylibPath forKey:@"DYLD_INSERT_LIBRARIES"];
