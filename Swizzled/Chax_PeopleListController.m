@@ -42,10 +42,10 @@
 {
 	if ([[note name] isEqualToString:@"ReloadContactList"]) {
 		[(NSTableView *)[[self peopleList] table] reloadData];
-		[[self peopleList] performSelector:@selector(chax_updateRowHeights) withObject:nil afterDelay:0];
+		[[self peopleList] performSelector:@selector(chax_updateRowHeights) withObject:nil afterDelay:0.0];
 	}
 	
-	[self chax_resizeWindow];
+	[self performSelector:@selector(chax_resizeWindow) withObject:nil afterDelay:0.0];
 }
 
 - (void)chax_resizeWindow

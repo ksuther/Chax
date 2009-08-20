@@ -1,5 +1,5 @@
 /*
- * Chax_NSDockTile.m
+ * Chax_ChatDOMView.m
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,15 +21,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "Chax_NSDockTile.h"
+#import "Chax_ChatDOMView.h"
+#import "DockIconController.h"
+#import "iChat5.h"
 
-@implementation Chax_NSDockTile
+@implementation Chax_ChatDOMView
 
-- (void)chax_swizzle_setBadgeLabel:(NSString *)label
+- (void)chax_swizzle_clearUnreadMessageIfVisible
 {
-	if (![Chax boolForKey:@"ShowNamesInDock"]) {
-		[self chax_swizzle_setBadgeLabel:label];
+	if (![[self chat] hasUnreadMessages]) {
+		[[DockIconController sharedController] removeChat:[self chat]];
 	}
+    
+	[self chax_swizzle_clearUnreadMessageIfVisible];
 }
 
 @end

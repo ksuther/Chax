@@ -1,5 +1,5 @@
 /*
- * Chax_NSDockTile.m
+ * DockIconController.h
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,15 +21,23 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "Chax_NSDockTile.h"
+#import <Cocoa/Cocoa.h>
 
-@implementation Chax_NSDockTile
+@class Chat, ChaxDockView;
 
-- (void)chax_swizzle_setBadgeLabel:(NSString *)label
+@interface DockIconController : NSObject
 {
-	if (![Chax boolForKey:@"ShowNamesInDock"]) {
-		[self chax_swizzle_setBadgeLabel:label];
-	}
+	ChaxDockView *_dockView;
+	NSTimer *_flashTimer;
+	
+	NSMutableArray *_chats;
+	int _chatIndex;
 }
++ (DockIconController *)sharedController;
 
+- (void)addChat:(Chat *)chat;
+- (void)removeChat:(Chat *)chat;
+- (NSArray *)chats;
+
+- (void)updateDockIcon;
 @end

@@ -39,13 +39,19 @@
     unsigned int viewOptions = (NSUInteger)object_getIvar(self, ivar);
     
     //This means showing of buddy pictures is being turned off
-    if ([Chax boolForKey:@"UseCustomContactListFonts"] && (viewOptions & 1 == 1)) {
-        NSData *data = [Chax dataForKey:@"ContactListFont"];
-        NSFont *font = (data != nil) ? [NSUnarchiver unarchiveObjectWithData:data] : nil;
-        
-        if (font) {
-            CGFloat height = [font xHeight] + [font ascender] - [font descender];
-            [tableView setRowHeight:height];
+    if ((viewOptions & 1 == 1)) {
+        if ([Chax boolForKey:@"UseCustomContactListFonts"]) {
+            NSData *data = [Chax dataForKey:@"ContactListFont"];
+            NSFont *font = (data != nil) ? [NSUnarchiver unarchiveObjectWithData:data] : nil;
+            
+            if (font) {
+                CGFloat height = ceilf([font xHeight] + [font ascender] - [font descender]);
+                [tableView setRowHeight:height];
+            }
+        } else {
+            const CGFloat defaultRowHeight = 20.0f;
+            
+            [tableView setRowHeight:defaultRowHeight];
         }
     }
 }

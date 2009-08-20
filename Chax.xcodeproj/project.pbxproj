@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		371A8734103B65C9003EC364 /* Chax_FezPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 371A8733103B65C9003EC364 /* Chax_FezPreferences.m */; };
+		371A873D103B6629003EC364 /* Prefs_Chax.m in Sources */ = {isa = PBXBuildFile; fileRef = 371A873C103B6629003EC364 /* Prefs_Chax.m */; };
 		371BA4BC101134CC00CF88C0 /* BundleUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 371BA4BB101134CC00CF88C0 /* BundleUtilities.m */; };
 		371BA5381011373200CF88C0 /* Chax_PeopleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */; };
 		371BA5981011389B00CF88C0 /* Chax.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA940FF7C41F000CBC6A /* Chax.m */; };
@@ -35,6 +37,14 @@
 		37AFBC6210311458001AA056 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AFBC6110311458001AA056 /* libicucore.dylib */; };
 		37CE5F631011477600B5D83C /* Chax_NSDockTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */; };
 		37D1F4AE1022591F006F0D8C /* Chax_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D1F4AD1022591F006F0D8C /* Chax_Account.m */; };
+		37D5BBB8103B679B00EE8A49 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5BBB6103B679B00EE8A49 /* Preferences.xib */; };
+		37D5BBEC103C6C0100EE8A49 /* ChaxDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5BBEB103C6C0100EE8A49 /* ChaxDefaults.m */; };
+		37D5C4F6103D064700EE8A49 /* URLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C4F5103D064700EE8A49 /* URLTextView.m */; };
+		37D5C522103D0D1500EE8A49 /* ChaxPrefsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C521103D0D1500EE8A49 /* ChaxPrefsView.m */; };
+		37D5C5B1103D149300EE8A49 /* DockIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5B0103D149300EE8A49 /* DockIconController.m */; };
+		37D5C5B5103D14A600EE8A49 /* ChaxDockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5B4103D14A600EE8A49 /* ChaxDockView.m */; };
+		37D5C5CB103D151600EE8A49 /* Chax_Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5CA103D151600EE8A49 /* Chax_Chat.m */; };
+		37D5C5DB103D157F00EE8A49 /* Chax_ChatDOMView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -72,6 +82,10 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		371A8732103B65C9003EC364 /* Chax_FezPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_FezPreferences.h; sourceTree = "<group>"; };
+		371A8733103B65C9003EC364 /* Chax_FezPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_FezPreferences.m; sourceTree = "<group>"; };
+		371A873B103B6629003EC364 /* Prefs_Chax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefs_Chax.h; sourceTree = "<group>"; };
+		371A873C103B6629003EC364 /* Prefs_Chax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prefs_Chax.m; sourceTree = "<group>"; };
 		371BA4BA101134CC00CF88C0 /* BundleUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundleUtilities.h; sourceTree = "<group>"; };
 		371BA4BB101134CC00CF88C0 /* BundleUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundleUtilities.m; sourceTree = "<group>"; };
 		3776F58C101CF589009D87B6 /* Chax_AnimatingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_AnimatingTableView.h; sourceTree = "<group>"; };
@@ -119,6 +133,21 @@
 		37BFF35F0FF7D37200B54CF0 /* ChaxLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxLib-Info.plist"; sourceTree = "<group>"; };
 		37D1F4AC1022591F006F0D8C /* Chax_Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Account.h; sourceTree = "<group>"; };
 		37D1F4AD1022591F006F0D8C /* Chax_Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Account.m; sourceTree = "<group>"; };
+		37D5BBB7103B679B00EE8A49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
+		37D5BBEA103C6C0100EE8A49 /* ChaxDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaxDefaults.h; sourceTree = "<group>"; };
+		37D5BBEB103C6C0100EE8A49 /* ChaxDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxDefaults.m; sourceTree = "<group>"; };
+		37D5C4F4103D064700EE8A49 /* URLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLTextView.h; sourceTree = "<group>"; };
+		37D5C4F5103D064700EE8A49 /* URLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLTextView.m; sourceTree = "<group>"; };
+		37D5C520103D0D1500EE8A49 /* ChaxPrefsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaxPrefsView.h; sourceTree = "<group>"; };
+		37D5C521103D0D1500EE8A49 /* ChaxPrefsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxPrefsView.m; sourceTree = "<group>"; };
+		37D5C5AF103D149300EE8A49 /* DockIconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockIconController.h; sourceTree = "<group>"; };
+		37D5C5B0103D149300EE8A49 /* DockIconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockIconController.m; sourceTree = "<group>"; };
+		37D5C5B3103D14A600EE8A49 /* ChaxDockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaxDockView.h; sourceTree = "<group>"; };
+		37D5C5B4103D14A600EE8A49 /* ChaxDockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxDockView.m; sourceTree = "<group>"; };
+		37D5C5C9103D151600EE8A49 /* Chax_Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Chat.h; sourceTree = "<group>"; };
+		37D5C5CA103D151600EE8A49 /* Chax_Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Chat.m; sourceTree = "<group>"; };
+		37D5C5D9103D157F00EE8A49 /* Chax_ChatDOMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ChatDOMView.h; sourceTree = "<group>"; };
+		37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatDOMView.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Chax-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Chax-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Chax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chax.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -154,7 +183,9 @@
 			children = (
 				3786DA930FF7C41F000CBC6A /* Chax.h */,
 				3786DA940FF7C41F000CBC6A /* Chax.m */,
+				371A8739103B661C003EC364 /* Preferences */,
 				378D4FE7101E717B00176B47 /* Status Changes (Growl) */,
+				37D5C5AC103D148200EE8A49 /* Dock Icon */,
 				37AFBC1E10311253001AA056 /* Log Viewer */,
 				3776F5A7101CF77D009D87B6 /* Unified Contact List */,
 				3786DA540FF7C2E0000CBC6A /* Swizzled Classes */,
@@ -222,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				37AFBC25103112EB001AA056 /* LogViewer.xib */,
+				37D5BBB6103B679B00EE8A49 /* Preferences.xib */,
 				3786DA1F0FF7C0A8000CBC6A /* Chax.icns */,
 				3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */,
 				8D1107310486CEB800E47090 /* Chax-Info.plist */,
@@ -239,6 +271,21 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		371A8739103B661C003EC364 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				371A873B103B6629003EC364 /* Prefs_Chax.h */,
+				371A873C103B6629003EC364 /* Prefs_Chax.m */,
+				37D5BBEA103C6C0100EE8A49 /* ChaxDefaults.h */,
+				37D5BBEB103C6C0100EE8A49 /* ChaxDefaults.m */,
+				37D5C520103D0D1500EE8A49 /* ChaxPrefsView.h */,
+				37D5C521103D0D1500EE8A49 /* ChaxPrefsView.m */,
+				37D5C4F4103D064700EE8A49 /* URLTextView.h */,
+				37D5C4F5103D064700EE8A49 /* URLTextView.m */,
+			);
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 		3776F5A7101CF77D009D87B6 /* Unified Contact List */ = {
@@ -275,8 +322,14 @@
 				37D1F4AD1022591F006F0D8C /* Chax_Account.m */,
 				3776F58C101CF589009D87B6 /* Chax_AnimatingTableView.h */,
 				3776F58D101CF589009D87B6 /* Chax_AnimatingTableView.m */,
+				37D5C5C9103D151600EE8A49 /* Chax_Chat.h */,
+				37D5C5CA103D151600EE8A49 /* Chax_Chat.m */,
+				37D5C5D9103D157F00EE8A49 /* Chax_ChatDOMView.h */,
+				37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */,
 				3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */,
 				3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */,
+				371A8732103B65C9003EC364 /* Chax_FezPreferences.h */,
+				371A8733103B65C9003EC364 /* Chax_FezPreferences.m */,
 				3776F63A101CFC35009D87B6 /* Chax_IMPeople.h */,
 				3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */,
 				3786DA550FF7C2F3000CBC6A /* Chax_NSDockTile.h */,
@@ -314,6 +367,17 @@
 				37AFBC501031144B001AA056 /* RegexKitLite.m */,
 			);
 			name = RegexKit;
+			sourceTree = "<group>";
+		};
+		37D5C5AC103D148200EE8A49 /* Dock Icon */ = {
+			isa = PBXGroup;
+			children = (
+				37D5C5AF103D149300EE8A49 /* DockIconController.h */,
+				37D5C5B0103D149300EE8A49 /* DockIconController.m */,
+				37D5C5B3103D14A600EE8A49 /* ChaxDockView.h */,
+				37D5C5B4103D14A600EE8A49 /* ChaxDockView.m */,
+			);
+			name = "Dock Icon";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +448,7 @@
 				3786DAA40FF7C513000CBC6A /* Localizable.strings in Resources */,
 				3786DAC20FF7C5AD000CBC6A /* menu-badge.tiff in Resources */,
 				37AFBC27103112EB001AA056 /* LogViewer.xib in Resources */,
+				37D5BBB8103B679B00EE8A49 /* Preferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +474,15 @@
 				37D1F4AE1022591F006F0D8C /* Chax_Account.m in Sources */,
 				37AFBC211031125B001AA056 /* LogViewerController.m in Sources */,
 				37AFBC511031144B001AA056 /* RegexKitLite.m in Sources */,
+				371A8734103B65C9003EC364 /* Chax_FezPreferences.m in Sources */,
+				371A873D103B6629003EC364 /* Prefs_Chax.m in Sources */,
+				37D5BBEC103C6C0100EE8A49 /* ChaxDefaults.m in Sources */,
+				37D5C4F6103D064700EE8A49 /* URLTextView.m in Sources */,
+				37D5C522103D0D1500EE8A49 /* ChaxPrefsView.m in Sources */,
+				37D5C5B1103D149300EE8A49 /* DockIconController.m in Sources */,
+				37D5C5B5103D14A600EE8A49 /* ChaxDockView.m in Sources */,
+				37D5C5CB103D151600EE8A49 /* Chax_Chat.m in Sources */,
+				37D5C5DB103D157F00EE8A49 /* Chax_ChatDOMView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +527,14 @@
 				37AFBC26103112EB001AA056 /* English */,
 			);
 			name = LogViewer.xib;
+			sourceTree = "<group>";
+		};
+		37D5BBB6103B679B00EE8A49 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37D5BBB7103B679B00EE8A49 /* English */,
+			);
+			name = Preferences.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -1,5 +1,5 @@
 /*
- * Chax_NSDockTile.m
+ * Chax_ChatDOMView.h
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,15 +21,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "Chax_NSDockTile.h"
+#import <Cocoa/Cocoa.h>
 
-@implementation Chax_NSDockTile
+@class Chat;
 
-- (void)chax_swizzle_setBadgeLabel:(NSString *)label
-{
-	if (![Chax boolForKey:@"ShowNamesInDock"]) {
-		[self chax_swizzle_setBadgeLabel:label];
-	}
+@protocol Chax_ChatDOMViewMethods
+
+@optional
+- (Chat *)chat;
+
+@end
+
+@interface Chax_ChatDOMView : NSObject <Chax_ChatDOMViewMethods> {
+
 }
 
 @end

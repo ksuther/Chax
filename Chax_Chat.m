@@ -1,5 +1,5 @@
 /*
- * Chax_NSDockTile.m
+ * Chax_Chat.m
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,15 +21,21 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "Chax_NSDockTile.h"
+#import "Chax_Chat.h"
+#import "iChat5.h"
+#import "DockIconController.h"
 
-@implementation Chax_NSDockTile
+@implementation Chax_Chat
 
-- (void)chax_swizzle_setBadgeLabel:(NSString *)label
+- (int)chax_swizzle_numberOfUnreadMessages
 {
-	if (![Chax boolForKey:@"ShowNamesInDock"]) {
-		[self chax_swizzle_setBadgeLabel:label];
+	int unreadCount = [self chax_swizzle_numberOfUnreadMessages];
+	
+	if (unreadCount > 0 && (self != [[(Chat *)self chatWindowController] currentChat] || ![NSApp isActive])) {
+		[[DockIconController sharedController] addChat:(Chat *)self];
 	}
+	
+	return unreadCount;
 }
 
 @end

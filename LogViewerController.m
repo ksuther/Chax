@@ -10,6 +10,13 @@
 #import "RegexKitLite.h"
 #import "iChat5.h"
 
+@interface LogViewerController ()
+
+- (void)_loadLogs;
+- (NSString *)_fullNameForFile:(NSString *)file;
+
+@end
+
 @implementation LogViewerController
 
 @synthesize people = _people;
@@ -57,11 +64,27 @@
     [super showWindow:sender];
     
     [_operationQueue addOperationWithBlock:^{
-        [self loadLogs];
+        [self _loadLogs];
     }];
 }
 
-- (void)loadLogs
+#pragma mark -
+#pragma mark NSTableView Data Source/Delegate
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return [_people count];
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    return [_people objectAtIndex:row];
+}
+
+#pragma mark -
+#pragma mark Private
+
+- (void)_loadLogs
 {
     NSString *logPath = [@"~/Documents/iChats" stringByExpandingTildeInPath];
     NSDirectoryEnumerator *directoryEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:logPath];
@@ -93,7 +116,7 @@
                 if (![peopleSet containsObject:name]) {
                     [peopleSet addObject:name];
                     
-                    NSString *fullName = [self fullNameForFile:[logPath stringByAppendingPathComponent:nextFile]];
+                    NSString *fullName = [self _fullNameForFile:[logPath stringByAppendingPathComponent:nextFile]];
                     
                     if (![name isEqualToString:fullName]) {
                         [peopleAssociations setObject:fullName forKey:name];
@@ -137,7 +160,7 @@
     [_peopleTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
-- (NSString *)fullNameForFile:(NSString *)file
+- (NSString *)_fullNameForFile:(NSString *)file
 {
     SavedChat *chat = [[NSClassFromString(@"SavedChat") alloc] initWithTranscriptFile:file];
     NSString *fullName = [[chat otherIMHandle] fullName];
@@ -145,19 +168,6 @@
     [chat release];
     
     return fullName;
-}
-
-#pragma mark -
-#pragma mark NSTableView Data Source/Delegate
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
-{
-    return [_people count];
-}
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
-{
-    return [_people objectAtIndex:row];
 }
 
 @end

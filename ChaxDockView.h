@@ -1,5 +1,5 @@
 /*
- * Chax_NSDockTile.m
+ * ChaxDockView.h
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,15 +21,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "Chax_NSDockTile.h"
+#import <Cocoa/Cocoa.h>
 
-@implementation Chax_NSDockTile
-
-- (void)chax_swizzle_setBadgeLabel:(NSString *)label
-{
-	if (![Chax boolForKey:@"ShowNamesInDock"]) {
-		[self chax_swizzle_setBadgeLabel:label];
-	}
+@interface ChaxDockView : NSView {
+	NSImage *image;
+	BOOL invert;
 }
+
+@property(copy) NSImage *image;
 
 @end
