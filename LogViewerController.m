@@ -13,6 +13,7 @@
 @interface LogViewerController ()
 
 - (void)_loadLogs;
+- (void)_updateAssociationsWithLogs:(NSDictionary *)logs;
 - (NSString *)_fullNameForFile:(NSString *)file;
 
 @end
@@ -97,8 +98,9 @@
 	//Fallback expression that searches for just a date or for the French date format
 	NSString *secondaryRegex = @"(?:.*/)?(. *)(?: (([0-9]{4}|[0-9]{2}).){3})|(?: \\S{2,3} -(([0-9]{4}|[0-9]{2}).){3})";
     
+    NSMutableDictionary *logsToScan = [NSMutableDictionary dictionary];
+    
     NSMutableSet *peopleSet = [NSMutableSet set];
-    NSMutableDictionary *peopleAssociations = [NSMutableDictionary dictionary];
     
     while ( (nextFile = [directoryEnumerator nextObject]) ) {
         if ([[nextFile pathExtension] isEqualToString:@"chat"] || [[nextFile pathExtension] isEqualToString:@"ichat"]) {
@@ -116,11 +118,7 @@
                 if (![peopleSet containsObject:name]) {
                     [peopleSet addObject:name];
                     
-                    NSString *fullName = [self _fullNameForFile:[logPath stringByAppendingPathComponent:nextFile]];
-                    
-                    if (![name isEqualToString:fullName]) {
-                        [peopleAssociations setObject:fullName forKey:name];
-                    }
+                    [logsToScan setObject:name forKey:[logPath stringByAppendingPathComponent:nextFile]];
                 }
                 
                 NSMutableArray *personLogs = [_logs objectForKey:name];
@@ -136,6 +134,29 @@
         }
     }
     
+    [self setPeople:[[peopleSet allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]];
+    
+    [_peopleTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    
+    [self _updateAssociationsWithLogs:logsToScan];
+}
+
+- (void)_updateAssociationsWithLogs:(NSDictionary *)logs
+{
+    NSMutableDictionary *peopleAssociations = [NSMutableDictionary dictionary];
+    NSMutableSet *peopleSet = [NSMutableSet setWithArray:[self people]];
+    
+    //Read the current name from the log
+    for (NSString *nextFile in logs) {
+        NSString *name = [logs objectForKey:nextFile];
+        NSString *fullName = [self _fullNameForFile:nextFile];
+        
+        if (![name isEqualToString:fullName]) {
+            [peopleAssociations setObject:fullName forKey:name];
+        }
+    }
+    
+    //Merge arrays of logs using the more accurate names read from the logs
     for (NSString *key in peopleAssociations) {
         NSString *fullName = [peopleAssociations objectForKey:key];
         
