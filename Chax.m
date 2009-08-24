@@ -72,6 +72,10 @@ static BOOL _screensaverAwayed = NO;
     
     [StatusChangeController sharedController]; //Load the Growl framework and register for status changes
     
+    if ([Chax boolForKey:@"ConfirmQuit"]) {
+        [[NSProcessInfo processInfo] disableSuddenTermination];
+    }
+    
     //Display the unified contact list if it has never been shown before
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Chax.Visible"] == nil || [[NSClassFromString(@"UnifiedPeopleListController") sharedController] prefVisible]) {
 		//Calling showWindow: instead of displayIfPrefVisible ensures that the window is made key if no other windows are opened

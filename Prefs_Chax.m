@@ -141,11 +141,6 @@ const NSUInteger kAbout_DonateButtonTag = 501;
     return [NSString stringWithFormat:@"Chax %@", [[NSBundle bundleForClass:[self class]] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
 }
 
-- (NSFont *)currentContactFont
-{
-    return (_editedFont == kGeneral_SetContactsFontButton) ? _contactsFont : _statusMessagesFont;
-}
-
 - (void)setCurrentContactFont:(NSFont *)font
 {
     if (_editedFont == kGeneral_SetContactsFontButton) {
@@ -161,6 +156,11 @@ const NSUInteger kAbout_DonateButtonTag = 501;
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadContactList" object:nil];
+}
+
+- (NSFont *)currentContactFont
+{
+    return (_editedFont == kGeneral_SetContactsFontButton) ? _contactsFont : _statusMessagesFont;
 }
 
 - (void)setAutoresizeContactList:(BOOL)value
@@ -187,6 +187,22 @@ const NSUInteger kAbout_DonateButtonTag = 501;
 - (BOOL)useCustomContactListFonts
 {
 	return [[_defaults valueForKey:@"UseCustomContactListFonts"] boolValue];
+}
+
+- (void)setConfirmBeforeQuit:(BOOL)value
+{
+    [_defaults setValue:[NSNumber numberWithBool:value] forKey:@"ConfirmQuit"];
+    
+    if (value) {
+        [[NSProcessInfo processInfo] disableSuddenTermination];
+    } else {
+        [[NSProcessInfo processInfo] enableSuddenTermination];
+    }
+}
+
+- (BOOL)confirmBeforeQuit
+{
+    return [[_defaults valueForKey:@"ConfirmQuit"] boolValue];
 }
 
 @end

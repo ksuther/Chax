@@ -22,6 +22,7 @@
  */
 
 #import "Chax_NSDockTile.h"
+#import "DockIconController.h"
 
 @implementation Chax_NSDockTile
 
@@ -29,7 +30,12 @@
 {
 	if (![Chax boolForKey:@"ShowNamesInDock"]) {
 		[self chax_swizzle_setBadgeLabel:label];
-	}
+	} else {
+        [self chax_swizzle_setBadgeLabel:nil];
+        
+        //Immediately update the dock icon so it doesn't continue flashing until the animation timer fires again
+        [[DockIconController sharedController] updateDockIcon];
+    }
 }
 
 @end
