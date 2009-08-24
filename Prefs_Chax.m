@@ -103,7 +103,7 @@ const NSUInteger kAbout_DonateButtonTag = 501;
 {
     switch ([sender tag]) {
         case kAbout_CheckForUpdatesButtonTag:
-            //[[UpdateController sharedController] checkForUpdates:nil];
+            [Chax checkForUpdates];
             break;
         case kAbout_DonateButtonTag:
             [[NSWorkspace sharedWorkspace] openURL:DONATE_URL];

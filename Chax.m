@@ -26,6 +26,7 @@
 #import "UnifiedPeopleListController_Provider.h"
 #import "StatusChangeController.h"
 #import "LogViewerController.h"
+#import <Sparkle/Sparkle.h>
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 
@@ -35,6 +36,8 @@ static NSInteger kChaxDonateRequestSecondInterval = 2678400;
 static NSArray *_chaxMenuItems = nil;
 static NSString *_previousMessage = nil;
 static BOOL _screensaverAwayed = NO;
+
+static SUUpdater *_updater = nil;
 
 @implementation Chax
 
@@ -46,18 +49,8 @@ static BOOL _screensaverAwayed = NO;
 	
 	//[Prefs setKnockKnock:![Chax boolForKey:@"SkipNewMessageNotification"]];
 	
-	//[[UpdateController sharedController] setAutomaticCheckingEnabled:[Chax boolForKey:@"AutoUpdateChax"]];
-	
 	//[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(screensaverNotificationReceived:) name:@"com.apple.screensaver.didstart" object:nil];
 	//[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(screensaverNotificationReceived:) name:@"com.apple.screensaver.didstop" object:nil];
-	
-	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReceived:) name:NSApplicationDidFinishLaunchingNotification object:nil];
-	
-	//Display the unified contact list if it has never been shown before
-	/*if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Chax.Visible"] == nil || [[UnifiedPeopleListController sharedController] prefVisible]) {
-		//Calling showWindow: instead of displayIfPrefVisible ensures that the window is made key if no other windows are opened
-		[[UnifiedPeopleListController sharedController] performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
-	}*/
 	
 	[pool release];
 }
@@ -66,9 +59,9 @@ static BOOL _screensaverAwayed = NO;
 
 + (void)notificationReceived:(NSNotification *)note
 {
-	[self registerDefaults];
 	[self addMenuItems];
     [self resetApplicationIcon];
+    [self setupSparkle];
     
     [StatusChangeController sharedController]; //Load the Growl framework and register for status changes
     
@@ -83,20 +76,25 @@ static BOOL _screensaverAwayed = NO;
 	}
 }
 
-+ (void)registerDefaults
-{
-	//Ask whether or not update checking should be enabled
-	if ([Chax objectForKey:@"AutoUpdateChax"] == nil || [Chax objectForKey:@"AutoUpdateIncludeVersionInfo"] == nil) {
-		//[[UpdateController sharedController] performSelector:@selector(promptForAutomaticUpdates) withObject:nil afterDelay:4.0];
-	}
-}
-
 + (void)resetApplicationIcon
 {
     NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.iChat"];
     NSString *path = [bundle pathForResource:[bundle objectForInfoDictionaryKey:@"CFBundleIconFile"] ofType:@"icns"];
     
     [NSApp setApplicationIconImage:[[[NSImage alloc] initByReferencingFile:path] autorelease]];
+}
+
++ (void)setupSparkle
+{
+    NSBundle *chaxBundle = [NSBundle bundleWithIdentifier:ChaxBundleIdentifier];
+    
+    _updater = [[SUUpdater updaterForBundle:chaxBundle] retain];
+    [_updater resetUpdateCycle];
+}
+
++ (void)checkForUpdates
+{
+    [_updater checkForUpdates:nil];
 }
 
 + (void)addMenuItems

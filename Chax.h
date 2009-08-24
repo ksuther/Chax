@@ -44,8 +44,9 @@ static inline NSString * ChaxLocalizedString(NSString *key) {
 	
 }
 
-+ (void)registerDefaults;
 + (void)resetApplicationIcon;
++ (void)setupSparkle;
++ (void)checkForUpdates;
 + (void)addMenuItems;
 + (NSArray *)menuItems;
 

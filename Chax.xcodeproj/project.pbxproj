@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3710F5B310425E6900EAD72D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3710F5B210425E6900EAD72D /* Sparkle.framework */; };
+		3710F5B610425E6C00EAD72D /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3710F5B210425E6900EAD72D /* Sparkle.framework */; };
+		3710F5E0104260E400EAD72D /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3710F5DF104260E400EAD72D /* dsa_pub.pem */; };
 		371A8734103B65C9003EC364 /* Chax_FezPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 371A8733103B65C9003EC364 /* Chax_FezPreferences.m */; };
 		371A873D103B6629003EC364 /* Prefs_Chax.m in Sources */ = {isa = PBXBuildFile; fileRef = 371A873C103B6629003EC364 /* Prefs_Chax.m */; };
 		371BA4BC101134CC00CF88C0 /* BundleUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 371BA4BB101134CC00CF88C0 /* BundleUtilities.m */; };
@@ -69,6 +72,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				378D4FAE101E700700176B47 /* Growl.framework in Copy Frameworks */,
+				3710F5B610425E6C00EAD72D /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +87,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		3710F5B210425E6900EAD72D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
+		3710F5DF104260E400EAD72D /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = Sparkle/dsa_pub.pem; sourceTree = "<group>"; };
 		371A8732103B65C9003EC364 /* Chax_FezPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_FezPreferences.h; sourceTree = "<group>"; };
 		371A8733103B65C9003EC364 /* Chax_FezPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_FezPreferences.m; sourceTree = "<group>"; };
 		371A873B103B6629003EC364 /* Prefs_Chax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefs_Chax.h; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 				3786DB570FF7CCB1000CBC6A /* WebKit.framework in Frameworks */,
 				3786DA510FF7C2B3000CBC6A /* Cocoa.framework in Frameworks */,
 				37AFBC6210311458001AA056 /* libicucore.dylib in Frameworks */,
+				3710F5B310425E6900EAD72D /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				378D4FA7101E6FE300176B47 /* Growl.framework */,
+				3710F5B210425E6900EAD72D /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				3786DAFB0FF7C86D000CBC6A /* AddressBook.framework */,
 				3786DAFD0FF7C86D000CBC6A /* InstantMessage.framework */,
@@ -263,6 +271,7 @@
 				37BFF35F0FF7D37200B54CF0 /* ChaxLib-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				3786DAA20FF7C513000CBC6A /* Localizable.strings */,
+				3710F5DF104260E400EAD72D /* dsa_pub.pem */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -454,6 +463,7 @@
 				3786DAC20FF7C5AD000CBC6A /* menu-badge.tiff in Resources */,
 				37AFBC27103112EB001AA056 /* LogViewer.xib in Resources */,
 				37D5BBB8103B679B00EE8A49 /* Preferences.xib in Resources */,
+				3710F5E0104260E400EAD72D /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
