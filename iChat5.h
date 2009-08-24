@@ -5234,7 +5234,7 @@ typedef struct {
     NSMenuItem *_balloonMenuItem;
     Chat *_chat;
     ChatController *_chatController;
-    FezWebView *_webView;
+    IBOutlet FezWebView *_webView;
     ChatViewDragDestinationHelper *_dragHelper;
     ChatViewTimeFormatHelper *_timeFormatHelper;
     ChatViewBuddyPictureHelper *_buddyPictureHelper;

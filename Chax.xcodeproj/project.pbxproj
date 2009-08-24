@@ -35,6 +35,7 @@
 		37AFBC27103112EB001AA056 /* LogViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37AFBC25103112EB001AA056 /* LogViewer.xib */; };
 		37AFBC511031144B001AA056 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AFBC501031144B001AA056 /* RegexKitLite.m */; };
 		37AFBC6210311458001AA056 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AFBC6110311458001AA056 /* libicucore.dylib */; };
+		37BCAA591041A2E40088A681 /* NSArrayAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BCAA581041A2E40088A681 /* NSArrayAdditions.m */; };
 		37CE5F631011477600B5D83C /* Chax_NSDockTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */; };
 		37D1F4AE1022591F006F0D8C /* Chax_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D1F4AD1022591F006F0D8C /* Chax_Account.m */; };
 		37D5BBB8103B679B00EE8A49 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5BBB6103B679B00EE8A49 /* Preferences.xib */; };
@@ -130,6 +131,8 @@
 		37AFBC4F1031144B001AA056 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegexKitLite.h; path = RegexKitLite/RegexKitLite.h; sourceTree = "<group>"; };
 		37AFBC501031144B001AA056 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegexKitLite.m; path = RegexKitLite/RegexKitLite.m; sourceTree = "<group>"; };
 		37AFBC6110311458001AA056 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = /usr/lib/libicucore.dylib; sourceTree = "<absolute>"; };
+		37BCAA571041A2E40088A681 /* NSArrayAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayAdditions.h; sourceTree = "<group>"; };
+		37BCAA581041A2E40088A681 /* NSArrayAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArrayAdditions.m; sourceTree = "<group>"; };
 		37BFF35F0FF7D37200B54CF0 /* ChaxLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxLib-Info.plist"; sourceTree = "<group>"; };
 		37D1F4AC1022591F006F0D8C /* Chax_Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Account.h; sourceTree = "<group>"; };
 		37D1F4AD1022591F006F0D8C /* Chax_Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Account.m; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 				3786DA440FF7C271000CBC6A /* MethodSwizzle.m */,
 				371BA4BA101134CC00CF88C0 /* BundleUtilities.h */,
 				371BA4BB101134CC00CF88C0 /* BundleUtilities.m */,
+				37BCAA571041A2E40088A681 /* NSArrayAdditions.h */,
+				37BCAA581041A2E40088A681 /* NSArrayAdditions.m */,
 				37AFBC4E10311444001AA056 /* RegexKit */,
 			);
 			name = "Other Sources";
@@ -483,6 +488,7 @@
 				37D5C5B5103D14A600EE8A49 /* ChaxDockView.m in Sources */,
 				37D5C5CB103D151600EE8A49 /* Chax_Chat.m in Sources */,
 				37D5C5DB103D157F00EE8A49 /* Chax_ChatDOMView.m in Sources */,
+				37BCAA591041A2E40088A681 /* NSArrayAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
