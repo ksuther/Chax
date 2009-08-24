@@ -91,6 +91,19 @@
     [_creationDateCache removeAllObjects];
 }
 
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    BOOL validate = NO;
+    
+    if ([menuItem action] == @selector(showFindPanel:)) {
+        validate = ([_logsTableView selectedRow] > -1);
+    } else {
+        validate = [super validateMenuItem:menuItem];
+    }
+    
+    return validate;
+}
+
 #pragma mark -
 #pragma mark Find
 
@@ -240,10 +253,10 @@
         NSString *fullName = [peopleAssociations objectForKey:key];
         
         NSArray *oldLogs = [_logs objectForKey:key];
-        NSMutableArray *newLogs = [_logs objectForKey:fullName];
+        NSMutableSet *newLogs = [_logs objectForKey:fullName];
         
         if (newLogs == nil) {
-            newLogs = [NSMutableArray array];
+            newLogs = [NSMutableSet set];
             
             [_logs setObject:newLogs forKey:fullName];
             [peopleSet addObject:fullName];
@@ -255,8 +268,7 @@
         [peopleSet removeObject:key];
     }
     
-    [self performSelectorOnMainThread:@selector(setPeople:) withObject:[[peopleSet allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] waitUntilDone:YES];
-    [_peopleTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(_setPeoplePreservingSelection:) withObject:[[peopleSet allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] waitUntilDone:NO];
 }
 
 - (NSString *)_fullNameForFile:(NSString *)file
@@ -319,7 +331,8 @@
     NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
     
     [[_peopleTableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop){
-        NSSet *logsForRow = [_logs objectForKey:[_people objectAtIndex:idx]];
+        NSString *personName = [_people objectAtIndex:idx];
+        NSSet *logsForRow = [_logs objectForKey:personName];
         
         [allLogs addObjectsFromArray:[logsForRow allObjects]];
     }];
@@ -343,6 +356,34 @@
         [self performSelectorOnMainThread:@selector(setVisibleLogs:) withObject:allLogs waitUntilDone:YES];
         [_logsTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     }];
+}
+
+- (void)_setPeoplePreservingSelection:(NSArray *)people
+{
+    NSMutableSet *selectedPersonNames = [NSMutableSet set];
+    
+    [[_peopleTableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop){
+        NSString *personName = [_people objectAtIndex:idx];
+        
+        [selectedPersonNames addObject:personName];
+    }];
+    
+    [self setPeople:people];
+    
+    [_peopleTableView reloadData];
+    
+    NSMutableIndexSet *newIndexes = [NSMutableIndexSet indexSet];
+    
+    for (NSString *nextPersonName in selectedPersonNames) {
+        NSUInteger index = [_people indexOfObject:nextPersonName];
+        
+        if (index != NSNotFound) {
+            [newIndexes addIndex:index];
+        }
+    }
+    
+    [_peopleTableView deselectAll:nil];
+    [_peopleTableView selectRowIndexes:newIndexes byExtendingSelection:YES];
 }
 
 @end
