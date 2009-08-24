@@ -4,5 +4,9 @@
 "%@ went away" = "%@ went away";
 "%@ went idle" = "%@ went idle";
 "%@ went offline" = "%@ went offline";
+"Are you sure you want to delete all selected logs?" = "Are you sure you want to delete all selected logs?";
+"Delete" = "Delete";
+"Delete Logs" = "Delete Logs";
+"Don't Delete" = "Don't Delete";
 "Log Viewer" = "Log Viewer";
 "Show Text Status" = "Show Text Status";

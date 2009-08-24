@@ -42,6 +42,8 @@
 @interface ReadOnlyInstantMessage : NSObject
 - (id)sender;
 - (id)text;
+- (id)time;
+- (id)subject;
 @end
 
 @interface VideoConferenceMultiController : NSObject

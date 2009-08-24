@@ -10,6 +10,13 @@
 #import "RegexKitLite.h"
 #import "iChat5.h"
 
+typedef enum LogViewerToolbarItem {
+    LogViewerToolbarItemDelete = 1,
+    LogViewerToolbarItemExport,
+    LogViewerToolbarItemReveal,
+    LogViewerToolbarItemSearch,
+} LogViewerToolbarItem;
+
 @interface LogViewerController ()
 
 - (void)_loadLogs:(BOOL)firstRun;
@@ -17,6 +24,7 @@
 - (NSString *)_fullNameForFile:(NSString *)file;
 - (NSDate *)_creationDateForLogAtPath:(NSString *)path;
 - (void)_updateLogsTableView;
+- (void)_updateLogWithCurrentSelection;
 
 @end
 
@@ -48,6 +56,15 @@
         _dateFormatter = [[NSDateFormatter alloc] init];
         [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        
+        _deleteImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithPath:[[NSWorkspace sharedWorkspace] fullPathForApplication:@"Mail.app"]] pathForImageResource:@"delete.tiff"]];
+        [_deleteImage setName:@"MailDelete"];
+        
+        _exportImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithPath:[[NSWorkspace sharedWorkspace] fullPathForApplication:@"TextEdit.app"]] pathForImageResource:@"txt.icns"]];
+        [_exportImage setName:@"TextEditExport"];
+        
+        _finderImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithPath:[[NSWorkspace sharedWorkspace] fullPathForApplication:@"Finder.app"]] pathForImageResource:@"Finder.icns"]];
+        [_finderImage setName:@"FinderReveal"];
     }
     return self;
 }
@@ -60,6 +77,10 @@
     [_creationDateCache release];
     [_operationQueue release];
     [_dateFormatter release];
+    
+    [_deleteImage release];
+    [_exportImage release];
+    [_finderImage release];
     
     [super dealloc];
 }
@@ -93,15 +114,123 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    BOOL validate = NO;
+    BOOL valid = NO;
     
-    if ([menuItem action] == @selector(showFindPanel:)) {
-        validate = ([_logsTableView selectedRow] > -1);
+    if ([menuItem action] == @selector(showFindPanel:) || [menuItem action] == @selector(findNext:) || [menuItem action] == @selector(findPrevious:)) {
+        valid = ([_logsTableView selectedRow] > -1);
     } else {
-        validate = [super validateMenuItem:menuItem];
+        valid = YES;
     }
     
-    return validate;
+    return valid;
+}
+
+#pragma mark -
+#pragma mark Spotlight Search
+
+- (void)spotlightNotificationReceived:(NSNotification *)note
+{
+	//Extract results out of the query
+    
+	for (NSUInteger i = 0; i < [[note object] resultCount]; i++) {
+		NSString *path = [[[note object] resultAtIndex:i] valueForAttribute:@"kMDItemPath"];
+	}
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:_spotlightQuery];
+    
+    [_spotlightQuery stopQuery];
+    [_spotlightQuery autorelease];
+    _spotlightQuery = nil;
+}
+
+#pragma mark -
+#pragma mark Toolbar
+
+- (IBAction)toolbarAction:(id)sender
+{
+    switch ([sender tag]) {
+        case LogViewerToolbarItemDelete:
+            if ([[self window] firstResponder] == _peopleTableView && [_peopleTableView selectedRow] > -1) {
+                NSAlert *alert = [NSAlert alertWithMessageText:ChaxLocalizedString(@"Delete Logs") defaultButton:ChaxLocalizedString(@"Delete") alternateButton:ChaxLocalizedString(@"Don't Delete") otherButton:nil informativeTextWithFormat:ChaxLocalizedString(@"Are you sure you want to delete all selected logs?")];
+                
+                [[[alert buttons] objectAtIndex:1] setKeyEquivalent:@"\e"];
+                
+                [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(confirmDeleteSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
+            } else {
+                NSInteger selectedRow = [_logsTableView selectedRow];
+                NSString *selectedLog = [_visibleLogs objectAtIndex:selectedRow];
+                NSString *logPath = [[NSClassFromString(@"Prefs") savedChatPath] stringByAppendingPathComponent:selectedLog];
+                NSURL *logURL = [NSURL fileURLWithPath:logPath];
+                
+                NSMutableArray *newVisibleLogs = [[_visibleLogs mutableCopy] autorelease];
+                [newVisibleLogs removeObjectAtIndex:selectedRow];
+                [self setVisibleLogs:newVisibleLogs];
+                [_logsTableView reloadData];
+                [self _updateLogWithCurrentSelection];
+                
+                [[NSWorkspace sharedWorkspace] recycleURLs:[NSArray arrayWithObject:logURL] completionHandler:nil];
+            }
+            break;
+        case LogViewerToolbarItemExport: 
+            {
+                NSSavePanel *panel = [NSSavePanel savePanel];
+                
+                [panel setCanSelectHiddenExtension:YES];
+                [panel setCanCreateDirectories:YES];
+                [panel setRequiredFileType:@"txt"];
+                [panel setNameFieldStringValue:[[_chatViewController chat] defaultSaveName]];
+                [panel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result){
+                    if (result == NSFileHandlingPanelOKButton) {
+                        //Get a string representation of the currently selected log
+                        NSArray *messages = [[_chatViewController chat] messages];
+                        NSMutableString *stringRepresentation = [[NSMutableString alloc] init];
+                        
+                        for (InstantMessage *message in messages) {
+                            NSString *time = [[message time] descriptionWithCalendarFormat:@"%H:%M:%S" timeZone:nil locale:nil];
+                            
+                            if ([message sender]) {
+                                [stringRepresentation appendFormat:@"(%@) %@: %@\n", time, [(IMHandle *)[message sender] name], [[message text] string]];
+                            } else if ([message subject]) {
+                                [stringRepresentation appendFormat:@"(%@) %@\n", time, [NSString stringWithFormat:[[message text] string], [(IMHandle *)[message subject] name]]];
+                            }
+                        }
+                        
+                        [stringRepresentation writeToURL:[panel URL] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                        [stringRepresentation release];
+                    }
+                }];
+            }
+            break;
+        case LogViewerToolbarItemReveal:
+            if ([_logsTableView selectedRow] > -1) {
+                NSString *path = [[NSClassFromString(@"Prefs") savedChatPath] stringByAppendingPathComponent:[_visibleLogs objectAtIndex:[_logsTableView selectedRow]]];
+                
+                [[NSWorkspace sharedWorkspace] selectFile:path inFileViewerRootedAtPath:[path stringByDeletingLastPathComponent]];
+            }
+            break;
+        case LogViewerToolbarItemSearch:
+            [[self class] cancelPreviousPerformRequestsWithTarget:self];
+            
+            [self performSelector:@selector(_beginSpotlightSearch:) withObject:[(NSSearchField *)[sender view] stringValue] afterDelay:0.1];
+            break;
+    }
+}
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
+{
+    BOOL valid = NO;
+    
+    switch ([toolbarItem tag]) {
+        case LogViewerToolbarItemDelete:
+            valid = ([_peopleTableView selectedRow] > -1);
+            break;
+        case LogViewerToolbarItemExport:
+        case LogViewerToolbarItemReveal:
+            valid = ([_logsTableView numberOfSelectedRows] == 1);
+            break;
+    }
+    
+    return valid;
 }
 
 #pragma mark -
@@ -143,32 +272,7 @@
         
         [self _updateLogsTableView];
     } else if ([notification object] == _logsTableView) {
-        NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
-        NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
-        
-        if ([selectedRowIndexes count] == 0) {
-            [_chatViewController setChat:nil];
-            [_chatViewController loadBaseDocument];
-            [_chatViewController _layoutIfNecessary];
-        } else if ([selectedRowIndexes count] == 1) {
-            NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:[selectedRowIndexes firstIndex]]];
-            SavedChat *chat;
-            
-            if ([[path pathExtension] isEqualToString:@"ichat"]) {
-                chat = [[NSClassFromString(@"SavedChat") alloc] initWithTranscriptFile:path];
-            } else {
-                NSData *data = [NSData dataWithContentsOfFile:path];
-                
-                chat = [[NSClassFromString(@"SavedChat") alloc] initWithSavedData:data];
-            }
-            
-            [_chatViewController scrollToBeginningSmoothly:NO];
-            [_chatViewController setChat:chat];
-            [_chatViewController _layoutIfNecessary];
-            
-            [chat release];
-        } else {
-        }
+        [self _updateLogWithCurrentSelection];
     }
 }
 
@@ -382,8 +486,64 @@
         }
     }
     
-    [_peopleTableView deselectAll:nil];
-    [_peopleTableView selectRowIndexes:newIndexes byExtendingSelection:YES];
+    [_peopleTableView selectRowIndexes:newIndexes byExtendingSelection:NO];
+}
+
+- (void)_beginSpotlightSearch:(NSString *)searchString
+{
+    if ([searchString length] > 0) {
+		if (_spotlightQuery) {
+			[_spotlightQuery stopQuery];
+			[_spotlightQuery autorelease];
+		}
+		
+		//Begin a new search with searchString
+		_spotlightQuery = [[NSMetadataQuery alloc] init];
+		[_spotlightQuery setSearchScopes:[NSArray arrayWithObject:[NSClassFromString(@"Prefs") savedChatPath]]];
+		[_spotlightQuery setPredicate:[NSPredicate predicateWithFormat:@"kMDItemTextContent like[c] %@", searchString]];
+		
+		if ([_spotlightQuery startQuery]) {
+			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(spotlightNotificationReceived:) name:NSMetadataQueryDidFinishGatheringNotification object:_spotlightQuery];
+		}
+	} else {
+		//Stop any current search
+		if (_spotlightQuery) {
+			[_spotlightQuery stopQuery];
+			[_spotlightQuery autorelease];
+			_spotlightQuery = nil;
+            
+			[[NSNotificationCenter defaultCenter] removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:_spotlightQuery];
+		}
+	}
+}
+
+- (void)_updateLogWithCurrentSelection
+{
+    NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
+    NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
+    
+    if ([selectedRowIndexes count] == 1) {
+        NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:[selectedRowIndexes firstIndex]]];
+        SavedChat *chat;
+        
+        if ([[path pathExtension] isEqualToString:@"ichat"]) {
+            chat = [[NSClassFromString(@"SavedChat") alloc] initWithTranscriptFile:path];
+        } else {
+            NSData *data = [NSData dataWithContentsOfFile:path];
+            
+            chat = [[NSClassFromString(@"SavedChat") alloc] initWithSavedData:data];
+        }
+        
+        [_chatViewController scrollToBeginningSmoothly:NO];
+        [_chatViewController setChat:chat];
+        [_chatViewController _layoutIfNecessary];
+        
+        [chat release];
+    } else {
+        [_chatViewController setChat:nil];
+        [_chatViewController loadBaseDocument];
+        [_chatViewController _layoutIfNecessary];
+    }
 }
 
 @end

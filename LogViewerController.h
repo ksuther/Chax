@@ -17,6 +17,7 @@
     IBOutlet NSTableView *_peopleTableView;
     
     NSOperationQueue *_operationQueue;
+    NSMetadataQuery *_spotlightQuery;
     
     NSArray *_people;
     NSArray *_visibleLogs;
@@ -24,11 +25,15 @@
     NSMutableDictionary *_creationDateCache;
     
     NSDateFormatter *_dateFormatter;
+    
+    NSImage *_deleteImage, *_exportImage, *_finderImage;
 }
 
 @property(nonatomic, retain) NSArray *people;
 @property(nonatomic, retain) NSArray *visibleLogs;
 
 + (LogViewerController *)sharedController;
+
+- (IBAction)toolbarAction:(id)sender;
 
 @end
