@@ -102,7 +102,7 @@ static SUUpdater *_updater = nil;
 	NSMutableArray *menuItems = [NSMutableArray array];
 	NSMenuItem *menuItem;
 	NSMenu *viewMenu = [[[NSApp mainMenu] itemAtIndex:3] submenu];
-	//NSMenu *buddiesMenu = [[[NSApp mainMenu] itemAtIndex:4] submenu];
+	NSMenu *buddiesMenu = [[[NSApp mainMenu] itemAtIndex:4] submenu];
 	//NSMenu *audioMenu = [[[NSApp mainMenu] itemAtIndex:5] submenu];
 	
 	//Toggle text status menu item
@@ -111,13 +111,13 @@ static SUUpdater *_updater = nil;
 	[menuItems addObject:menuItem];
 	
 	//Send camera snapshot menu item
-	/*menuItem = [buddiesMenu insertItemWithTitle:ChaxLocalizedString(@"send_camera_snapshot") action:@selector(chax_sendCameraSnapshot:) keyEquivalent:@"j" atIndex:12];
-	[menuItem setTag:SEND_CAMERA_SNAPSHOT_MENU_ITEM];
+	menuItem = [buddiesMenu insertItemWithTitle:ChaxLocalizedString(@"Send Camera Snapshot...") action:@selector(chax_sendCameraSnapshot:) keyEquivalent:@"j" atIndex:14];
+	[menuItem setTag:ChaxMenuItemCameraSnapshot];
 	[menuItem setKeyEquivalentModifierMask:NSCommandKeyMask | NSAlternateKeyMask];
 	[menuItems addObject:menuItem];
 	
 	//Always on top menu item
-	menuItem = [[NSApp windowsMenu] insertItemWithTitle:ChaxLocalizedString(@"always_on_top") action:@selector(chax_toggleAlwaysOnTop:) keyEquivalent:@"" atIndex:3];
+	/*menuItem = [[NSApp windowsMenu] insertItemWithTitle:ChaxLocalizedString(@"always_on_top") action:@selector(chax_toggleAlwaysOnTop:) keyEquivalent:@"" atIndex:3];
 	[menuItem setTag:ALWAYS_ON_TOP_MENU_ITEM];
 	[menuItems addObject:menuItem];*/
 	

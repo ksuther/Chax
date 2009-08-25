@@ -49,6 +49,9 @@
 		37D5C5B5103D14A600EE8A49 /* ChaxDockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5B4103D14A600EE8A49 /* ChaxDockView.m */; };
 		37D5C5CB103D151600EE8A49 /* Chax_Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5CA103D151600EE8A49 /* Chax_Chat.m */; };
 		37D5C5DB103D157F00EE8A49 /* Chax_ChatDOMView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */; };
+		37F29A961043AB70005460A5 /* CameraSnapshotController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F29A951043AB70005460A5 /* CameraSnapshotController.m */; };
+		37F29A9F1043ABB1005460A5 /* CameraSnapshot.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F29A9D1043ABB1005460A5 /* CameraSnapshot.xib */; };
+		37F29AAE1043AC82005460A5 /* Chax_ChatWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -157,6 +160,11 @@
 		37D5C5CA103D151600EE8A49 /* Chax_Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Chat.m; sourceTree = "<group>"; };
 		37D5C5D9103D157F00EE8A49 /* Chax_ChatDOMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ChatDOMView.h; sourceTree = "<group>"; };
 		37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatDOMView.m; sourceTree = "<group>"; };
+		37F29A941043AB70005460A5 /* CameraSnapshotController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSnapshotController.h; sourceTree = "<group>"; };
+		37F29A951043AB70005460A5 /* CameraSnapshotController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSnapshotController.m; sourceTree = "<group>"; };
+		37F29A9E1043ABB1005460A5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CameraSnapshot.xib; sourceTree = "<group>"; };
+		37F29AAC1043AC82005460A5 /* Chax_ChatWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ChatWindowController.h; sourceTree = "<group>"; };
+		37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatWindowController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Chax-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Chax-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Chax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chax.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -197,6 +205,7 @@
 				378D4FE7101E717B00176B47 /* Status Changes (Growl) */,
 				37D5C5AC103D148200EE8A49 /* Dock Icon */,
 				37AFBC1E10311253001AA056 /* Log Viewer */,
+				37F29A931043AB70005460A5 /* Camera Snapshot */,
 				3776F5A7101CF77D009D87B6 /* Unified Contact List */,
 				3786DA540FF7C2E0000CBC6A /* Swizzled Classes */,
 				3786DA420FF7C268000CBC6A /* Other Sources */,
@@ -263,8 +272,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				37AFBC25103112EB001AA056 /* LogViewer.xib */,
 				37D5BBB6103B679B00EE8A49 /* Preferences.xib */,
+				37AFBC25103112EB001AA056 /* LogViewer.xib */,
+				37F29A9D1043ABB1005460A5 /* CameraSnapshot.xib */,
 				3786DA1F0FF7C0A8000CBC6A /* Chax.icns */,
 				3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */,
 				8D1107310486CEB800E47090 /* Chax-Info.plist */,
@@ -340,6 +350,8 @@
 				37D5C5CA103D151600EE8A49 /* Chax_Chat.m */,
 				37D5C5D9103D157F00EE8A49 /* Chax_ChatDOMView.h */,
 				37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */,
+				37F29AAC1043AC82005460A5 /* Chax_ChatWindowController.h */,
+				37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */,
 				3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */,
 				3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */,
 				371A8732103B65C9003EC364 /* Chax_FezPreferences.h */,
@@ -392,6 +404,15 @@
 				37D5C5B4103D14A600EE8A49 /* ChaxDockView.m */,
 			);
 			name = "Dock Icon";
+			sourceTree = "<group>";
+		};
+		37F29A931043AB70005460A5 /* Camera Snapshot */ = {
+			isa = PBXGroup;
+			children = (
+				37F29A941043AB70005460A5 /* CameraSnapshotController.h */,
+				37F29A951043AB70005460A5 /* CameraSnapshotController.m */,
+			);
+			name = "Camera Snapshot";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,9 +482,10 @@
 				3786DA200FF7C0A8000CBC6A /* Chax.icns in Resources */,
 				3786DAA40FF7C513000CBC6A /* Localizable.strings in Resources */,
 				3786DAC20FF7C5AD000CBC6A /* menu-badge.tiff in Resources */,
-				37AFBC27103112EB001AA056 /* LogViewer.xib in Resources */,
-				37D5BBB8103B679B00EE8A49 /* Preferences.xib in Resources */,
 				3710F5E0104260E400EAD72D /* dsa_pub.pem in Resources */,
+				37D5BBB8103B679B00EE8A49 /* Preferences.xib in Resources */,
+				37AFBC27103112EB001AA056 /* LogViewer.xib in Resources */,
+				37F29A9F1043ABB1005460A5 /* CameraSnapshot.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +521,8 @@
 				37D5C5CB103D151600EE8A49 /* Chax_Chat.m in Sources */,
 				37D5C5DB103D157F00EE8A49 /* Chax_ChatDOMView.m in Sources */,
 				37BCAA591041A2E40088A681 /* NSArrayAdditions.m in Sources */,
+				37F29A961043AB70005460A5 /* CameraSnapshotController.m in Sources */,
+				37F29AAE1043AC82005460A5 /* Chax_ChatWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +575,14 @@
 				37D5BBB7103B679B00EE8A49 /* English */,
 			);
 			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
+		37F29A9D1043ABB1005460A5 /* CameraSnapshot.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37F29A9E1043ABB1005460A5 /* English */,
+			);
+			name = CameraSnapshot.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
