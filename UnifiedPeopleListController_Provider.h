@@ -36,6 +36,8 @@
 - (void)refreshList;
 - (void)setPrefIdentifier:(NSString *)prefIdentifier;
 - (void)setName:(NSString *)name;
+- (void)collapseTableAnimated:(BOOL)animate;
+- (void)uncollapseTableAnimated:(BOOL)animate;
 
 @end
 

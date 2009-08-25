@@ -36,9 +36,14 @@
 	return 1648963082045;
 }
 
-- (unsigned int)myStatus
+- (IMPersonStatus)myStatus
 {
-    return [self accountLoginStatus];
+    return [IMService myStatus];
+}
+
+- (NSString *)myStatusMessage
+{
+    return [NSApp myStatusMessage];
 }
 
 - (void)setInvisible:(BOOL)flag

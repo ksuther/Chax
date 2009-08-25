@@ -133,22 +133,22 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
         NSString *name = [presentity name];
         
         switch ([presentity status]) {
-            case 1: //Offline
+            case IMPersonStatusOffline:
                 title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went offline"), name];
                 description = nil;
                 notification = ChaxGrowlUserOffline;
                 break;
-            case 2: //Idle
+            case IMPersonStatusIdle:
                 title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went idle"), name];
                 description = nil;
                 notification = ChaxGrowlUserIdle;
                 break;
-            case 3: //Away
+            case IMPersonStatusAway:
                 title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went away"), name];
                 description = [presentity scriptStatusMessage];
                 notification = ChaxGrowlUserAway;
                 break;
-            case 4: //Available
+            case IMPersonStatusAvailable:
                 if ([presentity previousStatus] == 1) {
                     title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ came online"), name];
                     description = nil;

@@ -5,6 +5,7 @@
  */
 
 #import "IMFoundation.h"
+#import <InstantMessage/IMService.h>
 
 @class IMServiceImpl, IMPeople, IMPerson, IMHandle, IMRemoteObject, IMLocalObject, IMDaemonListener;
 
@@ -217,7 +218,7 @@ struct _FZChatRoomValidity {
 - (id)myNowPlayingString;
 - (id)currentAccountStatus;
 - (id)myProfile;
-- (unsigned int)myStatus;
+- (IMPersonStatus)myStatus;
 - (id)myStatusMessage;
 - (id)myPictureData;
 - (id)myIdleSince;

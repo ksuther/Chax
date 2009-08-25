@@ -76,23 +76,12 @@
 	objc_msgSendSuper(&superData, @selector(dealloc));
 }
 
-/*- (NSWindow *)window
-{
-    struct objc_super superData = {self, [self superclass]};
-	
-	id superresult = objc_msgSendSuper(&superData, @selector(window));
-    
-    NSLog(@"%@", superresult);
-    
-    return superresult;
-}*/
-
 - (void)loadWindow
 {
 	struct objc_super superData = {self, [self superclass]};
 	
 	objc_msgSendSuper(&superData, @selector(loadWindow));
-	
+    
 	[[self window] setFrame:NSRectFromString([[NSUserDefaults standardUserDefaults] objectForKey:@"Chax.WindowSize"]) display:NO];
 }
 
@@ -172,6 +161,9 @@
 			if ([account autoLogin]) {
 				[(IMAccountController *)[IMAccountController sharedInstance] autoLogin];
 				[[self representedAccount] setAccountLoginStatus:4];
+                
+                [self uncollapseTableAnimated:YES];
+                
 				return;
 			}
 		}
@@ -180,6 +172,8 @@
 	} else {
 		[[IMDaemonController sharedController] logoutAllAccounts];
 		[[self representedAccount] setAccountLoginStatus:0];
+        
+        [self collapseTableAnimated:YES];
 	}
 }
 
