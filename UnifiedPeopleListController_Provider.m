@@ -26,6 +26,8 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
+NSMenu *_addMenu = nil;
+
 @implementation UnifiedPeopleListController_Provider
 
 + (void)load
@@ -68,9 +70,8 @@
 
 - (void)dealloc
 {
-	//[_addMenu release];
-	//[_addGroupString release];
-	
+    [_addMenu release];
+    
     struct objc_super superData = {self, [self superclass]};
 	
 	objc_msgSendSuper(&superData, @selector(dealloc));
@@ -90,14 +91,6 @@
 	struct objc_super superData = {self, [self superclass]};
 	
 	objc_msgSendSuper(&superData, @selector(windowDidLoad));
-	
-	/*NSMenu *addButtonMenu = [[self valueForKey:@"_addButton"] menu];
-	
-	_addGroupString = [[[addButtonMenu itemAtIndex:1] title] copy];
-	
-	if (!_addGroupString) {
-		_addGroupString = [[NSString alloc] initWithString:@"Add Group..."];
-	}*/
 }
 
 - (void)windowDidMove:(id)fp8
@@ -198,7 +191,7 @@
 	[self reloadContacts];
 }
 
-/*- (void)_arrangesByGroupChanged
+- (void)_arrangesByGroupChanged
 {
 	struct objc_super superData = {self, [self superclass]};
 	
@@ -210,7 +203,16 @@
 	} else {
 		[self rebuildAddBuddyMenu];
 	}
-}*/
+}
+
+- (void)_deleteBuddies:(id)sender
+{
+    for (PeopleListController *pl in [NSClassFromString(@"PeopleListController") peopleListControllers]) {
+        if (![self isEqual:pl]) {
+            [pl _deleteBuddies:sender];
+        }
+    }
+}
 
 - (void)reloadContacts
 {
@@ -233,19 +235,11 @@
 
 - (void)rebuildAddBuddyMenu
 {
-	/*if (!_addMenu) {
+	if (!_addMenu) {
 		_addMenu = [[NSMenu alloc] init];
 	}
 	
 	NSMenu *addButtonMenu = [[self valueForKey:@"_addButton"] menu];
-	
-	if (!_addGroupString) {
-		_addGroupString = [[[addButtonMenu itemAtIndex:1] title] copy];
-		
-		if (!_addGroupString) {
-			_addGroupString = [[NSString alloc] initWithString:@"Add Group..."];
-		}
-	}
 	
 	while (_addMenu.numberOfItems > 0) {
 		[_addMenu removeItemAtIndex:0];
@@ -262,12 +256,12 @@
 			[[_addMenu addItemWithTitle:description action:nil keyEquivalent:@""] setSubmenu:accountSubmenu];
 			
 			[[accountSubmenu addItemWithTitle:NSLocalizedString(@"Add Buddy\\U2026", nil) action:@selector(addABuddyChax:) keyEquivalent:@""] setRepresentedObject:[nextAccount uniqueID]];
-			[[accountSubmenu addItemWithTitle:_addGroupString action:@selector(addAGroupChax:) keyEquivalent:@""] setRepresentedObject:[nextAccount uniqueID]];
+			[[accountSubmenu addItemWithTitle:ChaxLocalizedString(@"Add Group...") action:@selector(addAGroupChax:) keyEquivalent:@""] setRepresentedObject:[nextAccount uniqueID]];
 		}
 	}
 	
 	[[self valueForKey:@"_addButton"] setUsesMenu:YES];
-	[[self valueForKey:@"_addButton"] setMenu:_addMenu];*/
+	[[self valueForKey:@"_addButton"] setMenu:_addMenu];
 }
 
 - (void)addABuddyChax:(id)sender

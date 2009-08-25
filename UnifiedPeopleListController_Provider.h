@@ -33,6 +33,7 @@
 - (BOOL)isTableCollapsed;
 - (PeopleList *)peopleList;
 - (IMPeople *)sourcePeople;
+- (BOOL)supportsEditing;
 - (void)refreshList;
 - (void)setPrefIdentifier:(NSString *)prefIdentifier;
 - (void)setName:(NSString *)name;
@@ -42,9 +43,6 @@
 @end
 
 @interface UnifiedPeopleListController_Provider : NSObject <UnifiedPeopleListController_ProviderMethods> {
-	//NSMenu *_addMenu;
-	
-	//NSString *_addGroupString;
 }
 
 + (id)sharedController;
