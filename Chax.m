@@ -89,7 +89,6 @@ static SUUpdater *_updater = nil;
     NSBundle *chaxBundle = [NSBundle bundleWithIdentifier:ChaxBundleIdentifier];
     
     _updater = [[SUUpdater updaterForBundle:chaxBundle] retain];
-    [_updater resetUpdateCycle];
 }
 
 + (void)checkForUpdates

@@ -30,7 +30,7 @@
 	<string>http://www.ksuther.com/chax/appcast.php</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
-	<key>SUEnableAutomaticChecks</key>
+	<key>SUEnableSystemProfiling</key>
 	<true/>
 </dict>
 </plist>
