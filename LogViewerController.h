@@ -24,6 +24,9 @@
     NSMutableDictionary *_logs;
     NSMutableDictionary *_creationDateCache;
     
+    NSArray *_searchPeople;
+    NSMutableArray *_searchLogs;
+    
     NSDateFormatter *_dateFormatter;
     
     NSImage *_deleteImage, *_exportImage, *_finderImage;
@@ -31,6 +34,8 @@
 
 @property(nonatomic, retain) NSArray *people;
 @property(nonatomic, retain) NSArray *visibleLogs;
+@property(nonatomic, retain) NSArray *searchPeople;
+@property(nonatomic, readonly) NSArray *visiblePeople;
 
 + (LogViewerController *)sharedController;
 

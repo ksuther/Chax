@@ -32,6 +32,7 @@ typedef enum LogViewerToolbarItem {
 
 @synthesize people = _people;
 @synthesize visibleLogs = _visibleLogs;
+@synthesize searchPeople = _searchPeople;
 
 + (LogViewerController *)sharedController
 {
@@ -48,6 +49,7 @@ typedef enum LogViewerToolbarItem {
     if ( (self = [super initWithWindowNibName:@"LogViewer"]) ) {
         _logs = [[NSMutableDictionary alloc] init];
         _creationDateCache = [[NSMutableDictionary alloc] init];
+        _searchLogs = [[NSMutableArray alloc] init];
         
         _operationQueue = [[NSOperationQueue alloc] init];
         
@@ -74,6 +76,8 @@ typedef enum LogViewerToolbarItem {
     [_people release];
     [_visibleLogs release];
     [_logs release];
+    [_searchPeople release];
+    [_searchLogs release];
     [_creationDateCache release];
     [_operationQueue release];
     [_dateFormatter release];
@@ -125,22 +129,52 @@ typedef enum LogViewerToolbarItem {
     return valid;
 }
 
+- (NSArray *)visiblePeople
+{
+    return (_searchPeople != nil) ? _searchPeople : _people;
+}
+
 #pragma mark -
 #pragma mark Spotlight Search
 
 - (void)spotlightNotificationReceived:(NSNotification *)note
 {
 	//Extract results out of the query
+    NSMutableSet *searchPeopleSet = [NSMutableSet set];
+    NSString *logsPath = [NSClassFromString(@"Prefs") savedChatPath];
+    NSUInteger logsPathLength = [logsPath length] + 1;
+    
+    [_searchLogs removeAllObjects];
     
 	for (NSUInteger i = 0; i < [[note object] resultCount]; i++) {
 		NSString *path = [[[note object] resultAtIndex:i] valueForAttribute:@"kMDItemPath"];
+        
+        path = [path substringFromIndex:logsPathLength];
+        
+        [_searchLogs addObject:path];
+        
+        for (NSString *personName in _logs) {
+            NSSet *personLogs = [_logs objectForKey:personName];
+            
+            if ([personLogs containsObject:path]) {
+                [searchPeopleSet addObject:personName];
+                break;
+            }
+        }
 	}
-	
+    
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:_spotlightQuery];
     
     [_spotlightQuery stopQuery];
     [_spotlightQuery autorelease];
     _spotlightQuery = nil;
+    
+    [self setSearchPeople:[[searchPeopleSet allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]];
+    
+    [_peopleTableView reloadData];
+    
+    [_logsTableView deselectAll:nil];
+    [self _updateLogsTableView];
 }
 
 #pragma mark -
@@ -257,12 +291,28 @@ typedef enum LogViewerToolbarItem {
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return (tableView == _peopleTableView) ? [_people count] : [_visibleLogs count];
+    NSInteger numberOfRows;
+    
+    if (tableView == _peopleTableView) {
+        numberOfRows = [[self visiblePeople] count];
+    } else {
+        numberOfRows = [_visibleLogs count];
+    }
+    
+    return numberOfRows;
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    return (tableView == _peopleTableView) ? [_people objectAtIndex:row] : [_dateFormatter stringFromDate:[_creationDateCache objectForKey:[_visibleLogs objectAtIndex:row]]];
+    id object;
+    
+    if (tableView == _peopleTableView) {
+        object = [[self visiblePeople] objectAtIndex:row];
+    } else {
+        object = [_dateFormatter stringFromDate:[_creationDateCache objectForKey:[_visibleLogs objectAtIndex:row]]];
+    }
+    
+    return object;
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
@@ -435,11 +485,24 @@ typedef enum LogViewerToolbarItem {
     NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
     
     [[_peopleTableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop){
-        NSString *personName = [_people objectAtIndex:idx];
+        NSString *personName = [[self visiblePeople] objectAtIndex:idx];
         NSSet *logsForRow = [_logs objectForKey:personName];
         
         [allLogs addObjectsFromArray:[logsForRow allObjects]];
     }];
+    
+    //Filter logs if there are search results
+    if ([_searchLogs count] > 0) {
+        NSMutableArray *newAllLogs = [NSMutableArray array];
+        
+        for (NSString *nextLog in _searchLogs) {
+            if ([allLogs containsObject:nextLog]) {
+                [newAllLogs addObject:nextLog];
+            }
+        }
+        
+        allLogs = newAllLogs;
+    }
     
     //Get the creation date for each of the logs added
     [_operationQueue addOperationWithBlock:^{
@@ -514,6 +577,18 @@ typedef enum LogViewerToolbarItem {
             
 			[[NSNotificationCenter defaultCenter] removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:_spotlightQuery];
 		}
+        
+        if ([self searchPeople] != nil) {
+            [self setSearchPeople:nil];
+            
+            [_searchLogs removeAllObjects];
+            
+            [_peopleTableView deselectAll:nil];
+            [_logsTableView deselectAll:nil];
+            
+            [_peopleTableView reloadData];
+            [_logsTableView reloadData];
+        }
 	}
 }
 
