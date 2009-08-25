@@ -4,6 +4,7 @@
 "%@ went away" = "%@ went away";
 "%@ went idle" = "%@ went idle";
 "%@ went offline" = "%@ went offline";
+"Always on Top" = "Always on Top";
 "Are you sure you want to delete all selected logs?" = "Are you sure you want to delete all selected logs?";
 "Delete" = "Delete";
 "Delete Logs" = "Delete Logs";

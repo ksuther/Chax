@@ -117,9 +117,9 @@ static SUUpdater *_updater = nil;
 	[menuItems addObject:menuItem];
 	
 	//Always on top menu item
-	/*menuItem = [[NSApp windowsMenu] insertItemWithTitle:ChaxLocalizedString(@"always_on_top") action:@selector(chax_toggleAlwaysOnTop:) keyEquivalent:@"" atIndex:3];
-	[menuItem setTag:ALWAYS_ON_TOP_MENU_ITEM];
-	[menuItems addObject:menuItem];*/
+	menuItem = [[NSApp windowsMenu] insertItemWithTitle:ChaxLocalizedString(@"Always on Top") action:@selector(chax_toggleAlwaysOnTop:) keyEquivalent:@"" atIndex:3];
+	[menuItem setTag:ChaxMenuItemAlwaysOnTop];
+	[menuItems addObject:menuItem];
 	
 	//Log viewer menu item
 	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"Log Viewer") action:@selector(showWindow:) keyEquivalent:@""];

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3701898010444F9600C7C798 /* Chax_SecureWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701897F10444F9600C7C798 /* Chax_SecureWindow.m */; };
+		3701898A1044504500C7C798 /* Chax_PeopleListControllerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 370189891044504500C7C798 /* Chax_PeopleListControllerWindow.m */; };
 		3710F5B310425E6900EAD72D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3710F5B210425E6900EAD72D /* Sparkle.framework */; };
 		3710F5B610425E6C00EAD72D /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3710F5B210425E6900EAD72D /* Sparkle.framework */; };
 		3710F5E0104260E400EAD72D /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3710F5DF104260E400EAD72D /* dsa_pub.pem */; };
@@ -90,6 +92,10 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		3701897E10444F9600C7C798 /* Chax_SecureWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_SecureWindow.h; sourceTree = "<group>"; };
+		3701897F10444F9600C7C798 /* Chax_SecureWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_SecureWindow.m; sourceTree = "<group>"; };
+		370189881044504500C7C798 /* Chax_PeopleListControllerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_PeopleListControllerWindow.h; sourceTree = "<group>"; };
+		370189891044504500C7C798 /* Chax_PeopleListControllerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_PeopleListControllerWindow.m; sourceTree = "<group>"; };
 		3710F5B210425E6900EAD72D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		3710F5DF104260E400EAD72D /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = Sparkle/dsa_pub.pem; sourceTree = "<group>"; };
 		371A8732103B65C9003EC364 /* Chax_FezPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_FezPreferences.h; sourceTree = "<group>"; };
@@ -364,6 +370,10 @@
 				3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */,
 				3786DAE00FF7C778000CBC6A /* Chax_PeopleListController.h */,
 				3786DAE10FF7C778000CBC6A /* Chax_PeopleListController.m */,
+				370189881044504500C7C798 /* Chax_PeopleListControllerWindow.h */,
+				370189891044504500C7C798 /* Chax_PeopleListControllerWindow.m */,
+				3701897E10444F9600C7C798 /* Chax_SecureWindow.h */,
+				3701897F10444F9600C7C798 /* Chax_SecureWindow.m */,
 			);
 			name = "Swizzled Classes";
 			sourceTree = "<group>";
@@ -523,6 +533,8 @@
 				37BCAA591041A2E40088A681 /* NSArrayAdditions.m in Sources */,
 				37F29A961043AB70005460A5 /* CameraSnapshotController.m in Sources */,
 				37F29AAE1043AC82005460A5 /* Chax_ChatWindowController.m in Sources */,
+				3701898010444F9600C7C798 /* Chax_SecureWindow.m in Sources */,
+				3701898A1044504500C7C798 /* Chax_PeopleListControllerWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
