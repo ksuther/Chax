@@ -24,7 +24,6 @@
 #import "ChaxDockView.h"
 #import "DockIconController.h"
 #import "iChat5.h"
-#import "Chax.h"
 
 @implementation ChaxDockView
 

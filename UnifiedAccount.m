@@ -23,7 +23,6 @@
 
 #import "UnifiedAccount.h"
 #import "UnifiedPeopleListController_Provider.h"
-#import "Chax.h"
 
 @implementation UnifiedAccount
 

@@ -22,7 +22,6 @@
  */
 
 #import "StatusChangeController.h"
-#import "Chax.h"
 #import "iChat5.h"
 //#import "ActivityWindowController.h"
 //#import "Chax_Presentity.h"

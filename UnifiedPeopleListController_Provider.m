@@ -23,7 +23,6 @@
 
 #import "UnifiedPeopleListController_Provider.h"
 #import "UnifiedAccount.h"
-#import "Chax.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
 
