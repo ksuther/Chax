@@ -25,6 +25,7 @@ typedef enum LogViewerToolbarItem {
 - (NSDate *)_creationDateForLogAtPath:(NSString *)path;
 - (void)_updateLogsTableView;
 - (void)_updateLogWithCurrentSelection;
+- (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet;
 
 @end
 
@@ -59,6 +60,9 @@ typedef enum LogViewerToolbarItem {
         [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
         
+        _creationDateFormatter = [[NSDateFormatter alloc] init];
+        [_creationDateFormatter setDateFormat:@"yyyy-MM-dd HH.mm"];
+        
         _deleteImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithPath:[[NSWorkspace sharedWorkspace] fullPathForApplication:@"Mail.app"]] pathForImageResource:@"delete.tiff"]];
         [_deleteImage setName:@"MailDelete"];
         
@@ -80,7 +84,9 @@ typedef enum LogViewerToolbarItem {
     [_searchLogs release];
     [_creationDateCache release];
     [_operationQueue release];
+    
     [_dateFormatter release];
+    [_creationDateFormatter release];
     
     [_deleteImage release];
     [_exportImage release];
@@ -129,9 +135,65 @@ typedef enum LogViewerToolbarItem {
     return valid;
 }
 
+- (void)confirmDeleteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode == NSAlertDefaultReturn) {
+        if ([[self window] firstResponder] == _peopleTableView) {
+            NSString *savedChatPath = [NSClassFromString(@"Prefs") savedChatPath];
+            NSArray *selectedPeople = [self selectedPeople];
+            NSMutableArray *newVisiblePeople = [[[self visiblePeople] mutableCopy] autorelease];
+            
+            //Delete all logs for the selected people
+            for (NSString *nextLog in _visibleLogs) {
+                NSString *logPath = [savedChatPath stringByAppendingPathComponent:nextLog];
+                NSURL *logURL = [NSURL fileURLWithPath:logPath];
+                
+                [[NSWorkspace sharedWorkspace] recycleURLs:[NSArray arrayWithObject:logURL] completionHandler:nil];
+            }
+            
+            for (NSString *nextPerson in selectedPeople) {
+                [_logs removeObjectForKey:nextPerson];
+                
+                [newVisiblePeople removeObject:nextPerson];
+            }
+            
+            [self setVisiblePeople:newVisiblePeople];
+            
+            [_peopleTableView deselectAll:nil];
+            [_peopleTableView reloadData];
+            [self _updateLogsTableView];
+        } else {
+            [self _removeLogsWithIndexSet:[_logsTableView selectedRowIndexes]];
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark Properties
+
+- (void)setVisiblePeople:(NSArray *)visiblePeople
+{
+    if (_searchPeople != nil) {
+        [self setSearchPeople:visiblePeople];
+    } else {
+        [self setPeople:visiblePeople];
+    }
+}
+
 - (NSArray *)visiblePeople
 {
     return (_searchPeople != nil) ? _searchPeople : _people;
+}
+
+- (NSArray *)selectedPeople
+{
+    NSMutableArray *selectedPeople = [NSMutableArray array];
+    
+    [[_peopleTableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop){
+        [selectedPeople addObject:[[self visiblePeople] objectAtIndex:idx]];
+    }];
+    
+    return selectedPeople;
 }
 
 #pragma mark -
@@ -184,28 +246,17 @@ typedef enum LogViewerToolbarItem {
 {
     switch ([sender tag]) {
         case LogViewerToolbarItemDelete:
-            if ([[self window] firstResponder] == _peopleTableView && [_peopleTableView selectedRow] > -1) {
+            if (([[self window] firstResponder] == _peopleTableView && [_peopleTableView selectedRow] > -1) || [_logsTableView numberOfSelectedRows] > 1) {
                 NSAlert *alert = [NSAlert alertWithMessageText:ChaxLocalizedString(@"Delete Logs") defaultButton:ChaxLocalizedString(@"Delete") alternateButton:ChaxLocalizedString(@"Don't Delete") otherButton:nil informativeTextWithFormat:ChaxLocalizedString(@"Are you sure you want to delete all selected logs?")];
                 
                 [[[alert buttons] objectAtIndex:1] setKeyEquivalent:@"\e"];
                 
                 [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(confirmDeleteSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
             } else {
-                NSInteger selectedRow = [_logsTableView selectedRow];
-                NSString *selectedLog = [_visibleLogs objectAtIndex:selectedRow];
-                NSString *logPath = [[NSClassFromString(@"Prefs") savedChatPath] stringByAppendingPathComponent:selectedLog];
-                NSURL *logURL = [NSURL fileURLWithPath:logPath];
-                
-                NSMutableArray *newVisibleLogs = [[_visibleLogs mutableCopy] autorelease];
-                [newVisibleLogs removeObjectAtIndex:selectedRow];
-                [self setVisibleLogs:newVisibleLogs];
-                [_logsTableView reloadData];
-                [self _updateLogWithCurrentSelection];
-                
-                [[NSWorkspace sharedWorkspace] recycleURLs:[NSArray arrayWithObject:logURL] completionHandler:nil];
+                [self _removeLogsWithIndexSet:[_logsTableView selectedRowIndexes]];
             }
             break;
-        case LogViewerToolbarItemExport: 
+        case LogViewerToolbarItemExport:
             {
                 NSSavePanel *panel = [NSSavePanel savePanel];
                 
@@ -437,29 +488,23 @@ typedef enum LogViewerToolbarItem {
 
 - (NSDate *)_creationDateForLogAtPath:(NSString *)path
 {
-    NSDate *creationDate;
+    NSDate *creationDate = nil;
     
-    CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:path];
-    FSRef ref;
-    FSCatalogInfo catalogInfo;
+    //Parse the date and time out of the filename - reading directly from the filename is the most correct way of reading logs
+    //as it takes the time zone that the chat took place into account. Reading a log's creation date that was written in
+    //a difference time zone will give you the wrong time zone offset.
+    NSString *dateReadString = [path lastPathComponent];
+    NSUInteger location = [dateReadString rangeOfString:@" "].location;
     
-    CFURLGetFSRef(url, &ref);
-    FSGetCatalogInfo(&ref, kFSCatInfoCreateDate, &catalogInfo, nil, NULL, nil);
+    //Reduce the chance that the user's name was formatted like a date
+    dateReadString = [dateReadString substringFromIndex:location];
     
-    UTCDateTime createDate = catalogInfo.createDate;
-    CFAbsoluteTime absTime;
+    NSString *date = [dateReadString stringByMatching:@"\\d\\d\\d\\d-\\d\\d-\\d\\d"];
+    NSString *time = [dateReadString stringByMatching:@" \\d\\d\\.\\d\\d"];
     
-    if (UCConvertUTCDateTimeToCFAbsoluteTime(&createDate, &absTime) == noErr) {
-        creationDate = [NSDate dateWithTimeIntervalSinceReferenceDate:absTime];
-    } else {
-        //Getting creation date failed one way, try the other way
-        NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
-        
-        creationDate = [attributes objectForKey:NSFileCreationDate];
-        absTime = [creationDate timeIntervalSinceReferenceDate];
-    }
+    creationDate = [_creationDateFormatter dateFromString:[date stringByAppendingString:time]];
     
-    if (absTime < 0) {
+    if (creationDate == nil) {
         //The creation date on the file is invalid, read it out of the log
         SavedChat *savedChat = nil;
         
@@ -614,11 +659,39 @@ typedef enum LogViewerToolbarItem {
         [_chatViewController _layoutIfNecessary];
         
         [chat release];
-    } else {
+    } else if ([_chatViewController chat] != nil) {
         [_chatViewController setChat:nil];
         [_chatViewController loadBaseDocument];
         [_chatViewController _layoutIfNecessary];
     }
+}
+
+- (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet
+{
+    NSString *savedChatPath = [NSClassFromString(@"Prefs") savedChatPath];
+    NSMutableArray *newVisibleLogs = [[_visibleLogs mutableCopy] autorelease];
+    NSArray *selectedPeople = [self selectedPeople];
+    
+    //Delete all selected logs
+    [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop){
+        NSString *log = [_visibleLogs objectAtIndex:idx];
+        NSString *logPath = [savedChatPath stringByAppendingPathComponent:log];
+        NSURL *logURL = [NSURL fileURLWithPath:logPath];
+        
+        [newVisibleLogs removeObject:log];
+        
+        for (NSString *nextPerson in selectedPeople) {
+            NSMutableSet *logsForPerson = [_logs objectForKey:nextPerson];
+            
+            [logsForPerson removeObject:log];
+        }
+        
+        [[NSWorkspace sharedWorkspace] recycleURLs:[NSArray arrayWithObject:logURL] completionHandler:nil];
+    }];
+    
+    [self setVisibleLogs:newVisibleLogs];
+    [_logsTableView reloadData];
+    [self _updateLogWithCurrentSelection];
 }
 
 @end
