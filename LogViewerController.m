@@ -448,7 +448,7 @@ typedef enum LogViewerToolbarItem {
         NSString *name = [logs objectForKey:nextFile];
         NSString *fullName = [self _fullNameForFile:nextFile];
         
-        if (![name isEqualToString:fullName]) {
+        if (fullName != nil && ![name isEqualToString:fullName]) {
             [peopleAssociations setObject:fullName forKey:name];
         }
     }
@@ -479,7 +479,12 @@ typedef enum LogViewerToolbarItem {
 - (NSString *)_fullNameForFile:(NSString *)file
 {
     SavedChat *chat = [[NSClassFromString(@"SavedChat") alloc] initWithTranscriptFile:file];
-    NSString *fullName = [[chat otherIMHandle] fullName];
+    NSString *fullName = nil;
+    NSString *serviceName = [[chat account] serviceName];
+    
+    if (serviceName != nil && ![serviceName isEqualToString:@"SubNet"]) {
+        fullName = [chat _otherIMHandleOrChatroom];
+    }
     
     [chat release];
     
