@@ -338,6 +338,23 @@ typedef enum LogViewerToolbarItem {
 }
 
 #pragma mark -
+#pragma mark NSSplitView Delegate
+
+- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)view
+{
+    BOOL shouldAdjust = YES;
+    
+    //Don't allow the table views to resize when the split view is resized
+    if ([view isKindOfClass:[NSScrollView class]]) {
+        NSView *documentView = [(NSScrollView *)view documentView];
+        
+        shouldAdjust = !(documentView == _logsTableView || documentView == _peopleTableView);
+    }
+    
+    return shouldAdjust;
+}
+
+#pragma mark -
 #pragma mark NSTableView Data Source/Delegate
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
