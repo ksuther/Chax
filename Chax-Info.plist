@@ -67,7 +67,7 @@
 	<key>CFBundleSignature</key>
 	<string>Chax</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0b1</string>
+	<string>3.0a1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>CFBundleVersion</key>

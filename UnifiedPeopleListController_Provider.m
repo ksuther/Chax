@@ -239,8 +239,6 @@ NSMenu *_addMenu = nil;
 		_addMenu = [[NSMenu alloc] init];
 	}
 	
-	NSMenu *addButtonMenu = [[self valueForKey:@"_addButton"] menu];
-	
 	while (_addMenu.numberOfItems > 0) {
 		[_addMenu removeItemAtIndex:0];
 	}

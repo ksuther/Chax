@@ -27,10 +27,12 @@
 #define SENDER_STATE ([(NSCell *)sender state] == NSOnState)
 #define PREF_STATE(x) [Chax boolForKey:x] ? NSOnState : NSOffState
 
-const NSUInteger kGeneral_SetContactsFontButton = 101;
-const NSUInteger kGeneral_SetStatusMessagesFontButton = 102;
-const NSUInteger kAbout_CheckForUpdatesButtonTag = 500;
-const NSUInteger kAbout_DonateButtonTag = 501;
+enum {
+    kGeneral_SetContactsFontButton = 101,
+    kGeneral_SetStatusMessagesFontButton = 102,
+    kAbout_CheckForUpdatesButtonTag = 500,
+    kAbout_DonateButtonTag = 501,
+};
 
 @implementation Prefs_Chax
 

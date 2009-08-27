@@ -131,7 +131,6 @@ static int _ChaxApplicationMain(int argc, const char **argv)
 	
 	[pool release];
 	
-    char *librariesPath = getenv("DYLD_INSERT_LIBRARIES");
     char *originalLibrariesPath = getenv("ChaxOriginalInsertLibraries");
     
     if (originalLibrariesPath) {

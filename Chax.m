@@ -36,8 +36,8 @@ static NSInteger kChaxDonateRequestSecondInterval = 2678400;
 
 static NSArray *_chaxMenuItems = nil;
 static NSImage *_chaxIcon = nil;
-static NSString *_previousMessage = nil;
-static BOOL _screensaverAwayed = NO;
+//static NSString *_previousMessage = nil;
+//static BOOL _screensaverAwayed = NO;
 
 static SUUpdater *_updater = nil;
 

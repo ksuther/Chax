@@ -32,7 +32,6 @@
 
 + (void)chax_removeSuccessfulTransfers
 {
-    FileTransferCenter *transferCenter = [NSClassFromString(@"FileTransferCenter") sharedInstance];
     FileTransferManager *transferManager = [NSClassFromString(@"FileTransferManager") sharedInstance];
     
     NSSet *transfers = [transferManager _transfersMatchingCondition:1 wantsGUIDs:NO];
