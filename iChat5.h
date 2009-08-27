@@ -3483,8 +3483,8 @@ typedef struct {
 - (BOOL)performDragOperation:(id)fp8;
 - (void)_drawDropHighlightBackgroundForRow:(int)fp8;
 - (void)_drawDropHighlight;
-- (float)normalRowHeight;
-- (void)setRowHeight:(float)fp8;
+- (CGFloat)normalRowHeight;
+//- (void)setRowHeight:(CGFloat)fp8;
 - (void)setIntercellSpacing:(NSSize)fp8;
 - (BOOL)_wantsLiveResizeToUseCachedImage;
 - (void)setCustomHighlightColor:(id)fp8;

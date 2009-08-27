@@ -37,7 +37,7 @@ typedef enum LogViewerToolbarItem {
 
 + (LogViewerController *)sharedController
 {
-    LogViewerController *sharedController = nil;
+    static LogViewerController *sharedController = nil;
     
 	if (sharedController == nil) {
 		sharedController = [[LogViewerController alloc] init];

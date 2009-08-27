@@ -46,12 +46,11 @@
             
             if (font) {
                 CGFloat height = ceilf([font xHeight] + [font ascender] - [font descender]);
+                
                 [tableView setRowHeight:height];
             }
         } else {
-            const CGFloat defaultRowHeight = 20.0f;
-            
-            [tableView setRowHeight:defaultRowHeight];
+            [tableView setRowHeight:[tableView normalRowHeight]];
         }
     }
 }
