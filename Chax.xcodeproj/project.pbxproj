@@ -6,6 +6,21 @@
 	objectVersion = 45;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		3784D28010473F2000B56C81 /* Build Disk Image */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 3784D28910473F2500B56C81 /* Build configuration list for PBXAggregateTarget "Build Disk Image" */;
+			buildPhases = (
+				3784D28F10473F3400B56C81 /* ShellScript */,
+			);
+			dependencies = (
+				3784D28B10473F2F00B56C81 /* PBXTargetDependency */,
+			);
+			name = "Build Disk Image";
+			productName = "Build Disk Image";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		3701898010444F9600C7C798 /* Chax_SecureWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701897F10444F9600C7C798 /* Chax_SecureWindow.m */; };
 		3701898A1044504500C7C798 /* Chax_PeopleListControllerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 370189891044504500C7C798 /* Chax_PeopleListControllerWindow.m */; };
@@ -63,6 +78,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3784D28A10473F2F00B56C81 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090 /* Chax */;
+			remoteInfo = Chax;
+		};
 		3786DA480FF7C283000CBC6A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -497,6 +519,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				3784D28010473F2000B56C81 /* Build Disk Image */,
 				8D1107260486CEB800E47090 /* Chax */,
 				3786DA3C0FF7C21B000CBC6A /* ChaxLib */,
 			);
@@ -522,6 +545,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3784D28F10473F3400B56C81 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PROJECT_DIR/dist/build_dmg.py --name Chax.app --icon-position \"{227, 110}\" --window-bounds \"{100, 100, 550, 350}\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3786DA3A0FF7C21B000CBC6A /* Sources */ = {
@@ -573,6 +613,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3784D28B10473F2F00B56C81 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* Chax */;
+			targetProxy = 3784D28A10473F2F00B56C81 /* PBXContainerItemProxy */;
+		};
 		3786DA490FF7C283000CBC6A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3786DA3C0FF7C21B000CBC6A /* ChaxLib */;
@@ -632,6 +677,27 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3784D28110473F2000B56C81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Build Disk Image";
+			};
+			name = Debug;
+		};
+		3784D28210473F2000B56C81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Build Disk Image";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		3786DA3E0FF7C21C000CBC6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -772,6 +838,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3784D28910473F2500B56C81 /* Build configuration list for PBXAggregateTarget "Build Disk Image" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3784D28110473F2000B56C81 /* Debug */,
+				3784D28210473F2000B56C81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3786DA400FF7C24D000CBC6A /* Build configuration list for PBXNativeTarget "ChaxLib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
