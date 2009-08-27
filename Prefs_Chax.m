@@ -48,8 +48,6 @@ const NSUInteger kAbout_DonateButtonTag = 501;
         data = [Chax dataForKey:@"ContactListStatusFont"];
         _statusMessagesFont = (data != nil) ? [[NSUnarchiver unarchiveObjectWithData:data] retain] : [[NSFont fontWithName:@"LucidaGrande" size:11] retain];
         
-        _icon = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:@"com.ksuther.chax"] pathForImageResource:@"Chax"]];
-        
         [NSBundle loadNibNamed:@"Preferences" owner:self];
 	}
 	return self;
@@ -58,7 +56,6 @@ const NSUInteger kAbout_DonateButtonTag = 501;
 - (void)dealloc
 {
     [_defaults release];
-    [_icon release];
     [_contactsFont release];
     [_statusMessagesFont release];
 	[super dealloc];
@@ -79,7 +76,7 @@ const NSUInteger kAbout_DonateButtonTag = 501;
 
 - (NSImage *)imageForPreferenceNamed:(NSString *)name
 {
-	return _icon;
+	return [NSImage imageNamed:@"ChaxIcon"];
 }
 
 - (NSView *)viewForPreferenceNamed:(NSString *)name

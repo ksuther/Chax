@@ -21,12 +21,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#import <Sparkle/Sparkle.h>
 #import "Chax.h"
 #import "iChat5.h"
 #import "UnifiedPeopleListController_Provider.h"
 #import "StatusChangeController.h"
 #import "LogViewerController.h"
-#import <Sparkle/Sparkle.h>
+#import "DonateWindowController.h"
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 
@@ -34,6 +35,7 @@ static NSInteger kChaxDonateRequestFirstInterval = 604800;
 static NSInteger kChaxDonateRequestSecondInterval = 2678400;
 
 static NSArray *_chaxMenuItems = nil;
+static NSImage *_chaxIcon = nil;
 static NSString *_previousMessage = nil;
 static BOOL _screensaverAwayed = NO;
 
@@ -59,9 +61,13 @@ static SUUpdater *_updater = nil;
 
 + (void)notificationReceived:(NSNotification *)note
 {
+    _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:@"com.ksuther.chax"] pathForImageResource:@"Chax"]];
+    [_chaxIcon setName:@"ChaxIcon"];
+    
 	[self addMenuItems];
     [self resetApplicationIcon];
     [self setupSparkle];
+    [self performSelector:@selector(displayDonateWindowIfWanted) withObject:nil afterDelay:2.0];
     
     [StatusChangeController sharedController]; //Load the Growl framework and register for status changes
     
@@ -94,6 +100,32 @@ static SUUpdater *_updater = nil;
 + (void)checkForUpdates
 {
     [_updater checkForUpdates:nil];
+}
+
++ (void)displayDonateWindowIfWanted
+{
+    //Check if the donation window should be shown
+    NSString *msg = nil;
+    NSInteger time = [Chax integerForKey:@"NextDonateRequest"];
+    NSInteger count = [Chax integerForKey:@"DonateCount"];
+    
+    if (count == 0) {
+        [Chax setInteger:[NSDate timeIntervalSinceReferenceDate] + kChaxDonateRequestFirstInterval forKey:@"NextDonateRequest"];
+        [Chax setInteger:1 forKey:@"DonateCount"];
+    } else if (count == 1 && [NSDate timeIntervalSinceReferenceDate] > time) {
+        msg = @"Thank you for using Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will only appear once more.";
+        [Chax setInteger:2 forKey:@"DonateCount"];
+        [Chax setInteger:[NSDate timeIntervalSinceReferenceDate] + kChaxDonateRequestSecondInterval forKey:@"NextDonateRequest"];
+    } else if (count == 2 && [NSDate timeIntervalSinceReferenceDate] > time) {
+        msg = @"Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again.";
+        [Chax setInteger:-1 forKey:@"DonateCount"];
+        [Chax setInteger:0 forKey:@"NextDonateRequest"];
+    }
+    
+    if (msg) {
+        DonateWindowController *controller = [[DonateWindowController alloc] initWithMessage:ChaxLocalizedString(msg)];
+        [controller showWindow:nil];
+    }
 }
 
 + (void)addMenuItems

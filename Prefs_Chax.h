@@ -31,7 +31,6 @@
     IBOutlet URLTextView *_urlTextView;
     
     ChaxDefaults *_defaults;
-    NSImage *_icon;
     
     NSUInteger _editedFont;
     NSFont *_contactsFont;
