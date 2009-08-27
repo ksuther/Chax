@@ -115,6 +115,18 @@ typedef enum LogViewerToolbarItem {
     }
     
     [super showWindow:sender];
+    
+    if (![NSClassFromString(@"Prefs") autosaveChats]) {
+        NSAlert *loggingDisabledAlert = [[NSAlert alloc] init];
+        
+        [loggingDisabledAlert setAlertStyle:NSInformationalAlertStyle];
+        [loggingDisabledAlert setMessageText:ChaxLocalizedString(@"Logging is disabled")];
+        [loggingDisabledAlert setInformativeText:ChaxLocalizedString(@"iChat is not currently logging your conversations, so past conversations will not appear in the log viewer. Go to the Messages tab in the iChat preferences to begin saving your chat transcripts.")];
+        [loggingDisabledAlert setIcon:[NSImage imageNamed:@"ChaxIcon"]];
+        [loggingDisabledAlert addButtonWithTitle:ChaxLocalizedString(@"OK")];
+        [loggingDisabledAlert addButtonWithTitle:ChaxLocalizedString(@"Show Preferences...")];
+        [loggingDisabledAlert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(loggingDisabledSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    }
 }
 
 - (void)windowWillClose:(NSNotification *)notification
@@ -133,6 +145,13 @@ typedef enum LogViewerToolbarItem {
     }
     
     return valid;
+}
+
+- (void)loggingDisabledSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode == NSAlertSecondButtonReturn) {
+        [[NSClassFromString(@"FezPreferences") sharedPreferences] showPreferencesPanelForOwner:[NSClassFromString(@"Prefs_MsgCompose") quickSharedInstance]];
+    }
 }
 
 - (void)confirmDeleteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo

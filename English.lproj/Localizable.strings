@@ -10,8 +10,12 @@
 "Delete" = "Delete";
 "Delete Logs" = "Delete Logs";
 "Don't Delete" = "Don't Delete";
+"iChat is not currently logging your conversations, so past conversations will not appear in the log viewer. Go to the Messages tab in the iChat preferences to begin saving your chat transcripts." = "iChat is not currently logging your conversations, so past conversations will not appear in the log viewer. Go to the Messages tab in the iChat preferences to begin saving your chat transcripts.";
 "Log Viewer" = "Log Viewer";
+"Logging is disabled" = "Logging is disabled";
+"OK" = "OK";
 "Send Camera Snapshot..." = "Send Camera Snapshot…";
+"Show Preferences..." = "Show Preferences…";
 "Show Text Status" = "Show Text Status";
 "Thank you for using Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will only appear once more." = "Thank you for using Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will only appear once more.";
 "Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again." = "Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again.";
