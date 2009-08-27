@@ -54,6 +54,8 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2005-2009 Kent Sutherland</string>
 	<key>CFBundleIconFile</key>
 	<string>Chax</string>
 	<key>CFBundleIdentifier</key>
