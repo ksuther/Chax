@@ -464,9 +464,9 @@ typedef enum LogViewerToolbarItem {
             newLogs = [NSMutableSet set];
             
             [_logs setObject:newLogs forKey:fullName];
-            [peopleSet addObject:fullName];
         }
         
+        [peopleSet addObject:fullName];
         [newLogs addObjectsFromArray:oldLogs];
         
         [_logs removeObjectForKey:key];
