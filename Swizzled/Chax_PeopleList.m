@@ -50,7 +50,7 @@
                 [tableView setRowHeight:height];
             }
         } else {
-            [tableView setRowHeight:[tableView normalRowHeight]];
+            [tableView setRowHeight:20.0f];
         }
     }
 }
