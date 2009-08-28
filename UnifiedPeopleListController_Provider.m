@@ -47,7 +47,6 @@ NSMenu *_addMenu = nil;
 		IMAccount *account = [[[UnifiedAccount alloc] initWithUniqueID:@"Chax" service:nil] autorelease];
 		
 		[account setAccountLoginStatus:4];
-		[account setString:ChaxLocalizedString(@"All Accounts") forKey:@"LoginAs"];
 		
 		sharedController = [[NSClassFromString(@"UnifiedPeopleListController") alloc] initWithAccount:account];
 	}
@@ -168,22 +167,6 @@ NSMenu *_addMenu = nil;
         
         [self collapseTableAnimated:YES];
 	}
-}
-
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
-{
-	if ([menuItem action] == @selector(logServiceInOrOut:)) {
-		if ([(NSArray *)[[IMAccountController sharedInstance] allConnectedAccounts] count] == 0) {
-			[menuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Log In to %@", @"Log In to %@"), [[self representedAccount] login]]];
-		} else {
-			[menuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Log Out of %@", @"Log Out of %@"), [[self representedAccount] login]]];
-		}
-		return YES;
-	}
-	
-    struct objc_super superData = {self, [self superclass]};
-	
-	return (BOOL)objc_msgSendSuper(&superData, @selector(validateMenuItem:), menuItem);
 }
 
 - (void)processIMHandleGroupChange:(IMHandle *)imHandle

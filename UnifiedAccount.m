@@ -46,6 +46,11 @@
     return [NSApp myStatusMessage];
 }
 
+- (NSString *)menuItemDescription
+{
+    return ChaxLocalizedString(@"all accounts");
+}
+
 - (void)setInvisible:(BOOL)flag
 {
 	[[[NSClassFromString(@"Fezz") sharedInstance] valueForKey:@"statusController"] setInvisible:flag];

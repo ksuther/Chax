@@ -107,7 +107,7 @@
 {
 	if ([sender tag] == ChaxMenuItemShowTextStatus) {
 		[sender setState:([Chax boolForKey:[NSString stringWithFormat:@"%@.HideTextStatus", [self prefIdentifier]]] ? NSOffState : NSOnState)];
-	} else if ([sender tag] == ChaxMenuitemByHandle) {
+	} else if ([sender tag] == ChaxMenuItemByHandle) {
 		[sender setState:[[self peopleList] sortOrder] == 100 ? NSOnState : NSOffState];
 	}
 	

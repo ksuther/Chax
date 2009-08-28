@@ -31,7 +31,7 @@ typedef enum ChaxMenuItem {
     ChaxMenuItemAlwaysOnTop,
     ChaxMenuItemAllContacts,
     ChaxMenuItemCameraSnapshot,
-    ChaxMenuitemByHandle,
+    ChaxMenuItemByHandle,
 } ChaxMenuItem;
 
 extern NSString *ChaxBundleIdentifier;
