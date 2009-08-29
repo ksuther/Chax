@@ -51,6 +51,11 @@
     return ChaxLocalizedString(@"all accounts");
 }
 
+- (BOOL)isActive
+{
+    return YES;
+}
+
 - (void)setInvisible:(BOOL)flag
 {
 	[[[NSClassFromString(@"Fezz") sharedInstance] valueForKey:@"statusController"] setInvisible:flag];

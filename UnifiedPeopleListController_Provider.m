@@ -76,50 +76,6 @@ NSMenu *_addMenu = nil;
 	objc_msgSendSuper(&superData, @selector(dealloc));
 }
 
-- (void)loadWindow
-{
-	struct objc_super superData = {self, [self superclass]};
-	
-	objc_msgSendSuper(&superData, @selector(loadWindow));
-    
-	[[self window] setFrame:NSRectFromString([[NSUserDefaults standardUserDefaults] objectForKey:@"Chax.WindowSize"]) display:NO];
-}
-
-- (void)windowDidLoad
-{
-	struct objc_super superData = {self, [self superclass]};
-	
-	objc_msgSendSuper(&superData, @selector(windowDidLoad));
-}
-
-- (void)windowDidMove:(id)fp8
-{
-	NSRect frame = [[self window] frame];
-	frame.origin.y += frame.size.height;
-	
-	if (![self isTableCollapsed]) {
-		[[NSUserDefaults standardUserDefaults] setObject:NSStringFromRect(frame) forKey:@"Chax.WindowSize"];
-	}
-	
-    struct objc_super superData = {self, [self superclass]};
-	
-	objc_msgSendSuper(&superData, @selector(windowDidMove:), fp8);
-}
-
-- (void)windowDidResize:(id)fp8
-{
-	NSRect frame = [[self window] frame];
-	frame.origin.y += frame.size.height;
-	
-	if (![self isTableCollapsed]) {
-		[[NSUserDefaults standardUserDefaults] setObject:NSStringFromRect(frame) forKey:@"Chax.WindowSize"];
-	}
-	
-	struct objc_super superData = {self, [self superclass]};
-	
-	objc_msgSendSuper(&superData, @selector(windowDidResize:), fp8);
-}
-
 - (BOOL)supportsOfflineToggle
 {
 	return YES;
