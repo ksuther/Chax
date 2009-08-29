@@ -29,7 +29,7 @@
         }
     }
     
-    if ([transfer transferState] == 5) {
+    if ([transfer transferState] == 5 && [[transfer localPath] rangeOfString:TemporaryImagePath()].location == NSNotFound) {
         //Let the activity window know that a file transfer was completed
         BOOL isIncoming = [transfer isIncoming];
         NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[transfer otherPerson], @"name",

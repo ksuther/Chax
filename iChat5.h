@@ -14,6 +14,9 @@
 #import "IMCore.h"
 #import "IMFoundation.h"
 
+NSString *TemporaryImagePath();
+NSUInteger SecureRandomUInt();
+
 @protocol TranscriptFragmentProvider, IKPictureTakerVideoReceiver;
 
 @class VCChannelNegotiation, iTunesApplication, VCChannel;

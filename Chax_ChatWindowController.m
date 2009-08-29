@@ -25,9 +25,6 @@
 #import "CameraSnapshotController.h"
 #import "iChat5.h"
 
-NSString *TemporaryImagePath();
-NSUInteger SecureRandomUInt();
-
 @implementation Chax_ChatWindowController
 
 - (void)chax_sendCameraSnapshot:(id)sender
