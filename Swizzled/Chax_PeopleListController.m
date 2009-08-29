@@ -90,9 +90,9 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chax_notificationReceived:) name:@"ReloadContactList" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chax_notificationReceived:) name:@"ResizeContactList" object:[self peopleList]];
 	
-	if ([Chax boolForKey:@"HideContactListsWhenInactive"]) {
+	/*if ([Chax boolForKey:@"HideContactListsWhenInactive"]) {
 		[[self window] setHidesOnDeactivate:YES];
-	}
+	}*/
 }
 
 - (void)chax_swizzle_displayWithKey:(BOOL)fp8
