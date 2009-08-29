@@ -1,12 +1,16 @@
+/* Growl */
 "%@ became available" = "%@ became available";
 "%@ came online" = "%@ came online";
 "%@ says" = "%@ says";
 "%@ went away" = "%@ went away";
 "%@ went idle" = "%@ went idle";
 "%@ went offline" = "%@ went offline";
+
+/* Unified Contact List */
 "Add Group..." = "Add Group…";
 "all accounts" = "all accounts";
-"Always on Top" = "Always on Top";
+
+/* Log Viewer */
 "Are you sure you want to delete all selected logs?" = "Are you sure you want to delete all selected logs?";
 "Delete" = "Delete";
 "Delete Logs" = "Delete Logs";
@@ -14,9 +18,30 @@
 "iChat is not currently logging your conversations, so past conversations will not appear in the log viewer. Go to the Messages tab in the iChat preferences to begin saving your chat transcripts." = "iChat is not currently logging your conversations, so past conversations will not appear in the log viewer. Go to the Messages tab in the iChat preferences to begin saving your chat transcripts.";
 "Log Viewer" = "Log Viewer";
 "Logging is disabled" = "Logging is disabled";
-"OK" = "OK";
+
+/* Donate */
+"Thank you for using Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will only appear once more." = "Thank you for using Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will only appear once more.";
+"Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again." = "Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again.";
+
+/* Preferences - Auto-Accept */
+"Are you sure you want to automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options...\" to only accept AV chats from specific users or on specific accounts." = "Are you sure you want to automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options…\" to only accept AV chats from specific users or on specific accounts.";
+"Automatically Accept AV Chat Invitations?" = "Automatically Accept AV Chat Invitations?";
+"Auto-accept AV chats from:" = "Auto-accept AV chats from:";
+"Auto-accept files from:" = "Auto-accept files from:";
+"Are you sure you want to automatically accept all files that are sent to you? All files are automatically accepted by default. Click \"Options...\" to only accept files from specific users or on specific accounts." = "Are you sure you want to automatically accept all files that are sent to you? All files are automatically accepted by default. Click \"Options…\" to only accept files from specific users or on specific accounts.";
+"Automatically Accept File Transfers?" = "Automatically Accept File Transfers?";
+"Auto-accept screen sharing from:" = "Auto-accept screen sharing from:";
+"Are you sure you want to automatically accept all screen sharing invitations that are sent to you? All screen sharing invitations are automatically accepted by default. Click \"Options...\" to only accept screen sharing invitations from specific users or on specific accounts." = "Are you sure you want to automatically accept all screen sharing invitations that are sent to you? All screen sharing invitations are automatically accepted by default. Click \"Options…\" to only accept screen sharing invitations from specific users or on specific accounts.";
+"Automatically Accept Screen Sharing Invitations?" = "Automatically Accept Screen Sharing Invitations?";
+"Anyone" = "Anyone";
+
+/* Other */
+"Always on Top" = "Always on Top";
 "Send Camera Snapshot..." = "Send Camera Snapshot…";
 "Show Preferences..." = "Show Preferences…";
 "Show Text Status" = "Show Text Status";
-"Thank you for using Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will only appear once more." = "Thank you for using Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will only appear once more.";
-"Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again." = "Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again.";
+
+/* Button Titles */
+"OK" = "OK";
+"No" = "No";
+"Yes" = "Yes";

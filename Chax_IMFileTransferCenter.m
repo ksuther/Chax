@@ -1,5 +1,5 @@
 /*
- * Prefs_Chax.h
+ * Chax_IMFileTransferCenter.m
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -20,30 +20,34 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+ 
+#import "Chax_IMFileTransferCenter.h"
+#import "IMFoundation.h"
+#import "IMCore.h"
+#import "iChat5.h"
 
-#import <Cocoa/Cocoa.h>
-#import "NSPreferences.h"
+@implementation Chax_IMFileTransferCenter
 
-@class ChaxDefaults, URLTextView, AutoAcceptPrefsWindowController;
-
-@interface Prefs_Chax : NSPreferencesModule {
-    IBOutlet AutoAcceptPrefsWindowController *_autoAcceptPrefs;
-    IBOutlet NSView *_view;
-    IBOutlet URLTextView *_urlTextView;
+- (void)chax_swizzle__addPendingTransfer:(id)fp8
+{
+    [self chax_swizzle__addPendingTransfer:fp8];
     
-    ChaxDefaults *_defaults;
+    IMFileTransfer *transfer = [self transferForGUID:fp8];
     
-    NSUInteger _editedFont;
-    NSFont *_contactsFont;
-    NSFont *_statusMessagesFont;
+    if ([Chax boolForKey:@"AutoAcceptFiles"] && [transfer isIncoming]) {
+        NSArray *autoAcceptContacts = [[Chax objectForKey:@"AutoAccept.Files"] objectForKey:[transfer accountID]];
+        
+        if ([Chax integerForKey:@"AutoAcceptSelect.Files"] == 0 || [autoAcceptContacts containsObject:@"Chax_AcceptAnyone"] || [autoAcceptContacts containsObject:[[transfer otherPerson] lowercaseString]]) {
+            [self performSelector:@selector(chax_autoAcceptTransfer:) withObject:fp8 afterDelay:0.0];
+        }
+    }
 }
 
-@property(nonatomic, retain) NSFont *contactsFont;
-@property(nonatomic, retain) NSFont *statusMessagesFont;
-@property(nonatomic, retain) NSFont *currentContactFont;
-
-- (IBAction)aboutAction:(id)sender;
-- (IBAction)changeContactListFont:(id)sender;
-- (IBAction)showAutoAcceptOptions:(id)sender;
+- (void)chax_autoAcceptTransfer:(NSString *)guid
+{
+    id view = [[NSClassFromString(@"FileTransferManager") sharedInstance] _viewForTransferGUID:guid];
+    
+    [view acceptTransfer:nil];
+}
 
 @end

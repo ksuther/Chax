@@ -1,5 +1,5 @@
 /*
- * Prefs_Chax.h
+ * Chax_IMFileTransferCenter.h
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -22,28 +22,17 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "NSPreferences.h"
 
-@class ChaxDefaults, URLTextView, AutoAcceptPrefsWindowController;
+@protocol Chax_IMFileTransferCenterMethods
 
-@interface Prefs_Chax : NSPreferencesModule {
-    IBOutlet AutoAcceptPrefsWindowController *_autoAcceptPrefs;
-    IBOutlet NSView *_view;
-    IBOutlet URLTextView *_urlTextView;
-    
-    ChaxDefaults *_defaults;
-    
-    NSUInteger _editedFont;
-    NSFont *_contactsFont;
-    NSFont *_statusMessagesFont;
+@optional
+- (id)transferForGUID:(id)fp8;
+
+@end
+
+
+@interface Chax_IMFileTransferCenter : NSObject <Chax_IMFileTransferCenterMethods> {
+
 }
-
-@property(nonatomic, retain) NSFont *contactsFont;
-@property(nonatomic, retain) NSFont *statusMessagesFont;
-@property(nonatomic, retain) NSFont *currentContactFont;
-
-- (IBAction)aboutAction:(id)sender;
-- (IBAction)changeContactListFont:(id)sender;
-- (IBAction)showAutoAcceptOptions:(id)sender;
 
 @end

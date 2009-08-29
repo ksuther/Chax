@@ -23,6 +23,9 @@
 
 #import "Prefs_Chax.h"
 #import "ChaxDefaults.h"
+#import "AutoAcceptPrefsWindowController.h"
+#import "Chax_FezPreferences.h"
+#import "iChat5.h"
 
 #define SENDER_STATE ([(NSCell *)sender state] == NSOnState)
 #define PREF_STATE(x) [Chax boolForKey:x] ? NSOnState : NSOffState
@@ -122,6 +125,13 @@ enum {
     [[NSFontManager sharedFontManager] orderFrontFontPanel:self];
 }
 
+- (IBAction)showAutoAcceptOptions:(id)sender
+{
+	//Load auto-accept settings depending on which button was clicked
+	[_autoAcceptPrefs setAutoAcceptType:[sender tag]];
+	[NSApp beginSheet:[_autoAcceptPrefs window] modalForWindow:[[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+}
+
 #pragma mark -
 #pragma mark Properties
 
@@ -202,6 +212,85 @@ enum {
 - (BOOL)confirmBeforeQuit
 {
     return [[_defaults valueForKey:@"ConfirmQuit"] boolValue];
+}
+
+- (void)setAutoAcceptTextInvitations:(BOOL)value
+{
+	[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"SkipNewMessageNotification"];
+	[NSClassFromString(@"Prefs") setKnockKnock:!value];
+}
+
+- (BOOL)autoAcceptTextInvitations
+{
+	return [[_defaults valueForKey:@"SkipNewMessageNotification"] boolValue];
+}
+
+- (void)setAutoAcceptFiles:(BOOL)value
+{
+	if (value) {
+		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically Accept File Transfers?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)1, ChaxLocalizedString(@"Are you sure you want to automatically accept all files that are sent to you? All files are automatically accepted by default. Click \"Options...\" to only accept files from specific users or on specific accounts."));
+	} else {
+		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptFiles"];
+	}
+}
+
+- (BOOL)autoAcceptFiles
+{
+	return [[_defaults valueForKey:@"AutoAcceptFiles"] boolValue];
+}
+
+- (void)setAutoAcceptAVChats:(BOOL)value
+{
+	if (value) {
+		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically Accept File Transfers?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)2, ChaxLocalizedString(@"Automatically Accept AV Chat Invitations?"));
+	} else {
+		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptAVChats"];
+	}
+}
+
+- (BOOL)autoAcceptAVChats
+{
+	return [[_defaults valueForKey:@"AutoAcceptAVChats"] boolValue];
+}
+
+- (void)setAutoAcceptScreenSharing:(BOOL)value
+{
+	if (value) {
+		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically Accept Screen Sharing Invitations?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)3, ChaxLocalizedString(@"Are you sure you want to automatically accept all screen sharing invitations that are sent to you? All screen sharing invitations are automatically accepted by default. Click \"Options...\" to only accept screen sharing invitations from specific users or on specific accounts."));
+	} else {
+		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptScreenSharing"];
+	}
+}
+
+- (BOOL)autoAcceptScreenSharing
+{
+	return [[_defaults valueForKey:@"AutoAcceptScreenSharing"] boolValue];
+}
+
+#pragma mark -
+#pragma mark Sheet Callback
+
+- (void)confirmSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	BOOL value = (returnCode != NSOKButton);
+	
+	switch ((int)contextInfo) {
+		case 1:
+			[self willChangeValueForKey:@"autoAcceptFiles"];
+			[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptFiles"];
+			[self didChangeValueForKey:@"autoAcceptFiles"];
+			break;
+		case 2:
+			[self willChangeValueForKey:@"autoAcceptAVChats"];
+			[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptAVChats"];
+			[self didChangeValueForKey:@"autoAcceptAVChats"];
+			break;
+		case 3:
+			[self willChangeValueForKey:@"autoAcceptScreenSharing"];
+			[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptScreenSharing"];
+			[self didChangeValueForKey:@"autoAcceptScreenSharing"];
+			break;
+	}
 }
 
 @end

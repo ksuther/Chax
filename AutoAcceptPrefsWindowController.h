@@ -1,5 +1,5 @@
 /*
- * Prefs_Chax.h
+ * AutoAcceptPrefsWindowController.h
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -22,28 +22,24 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "NSPreferences.h"
 
-@class ChaxDefaults, URLTextView, AutoAcceptPrefsWindowController;
-
-@interface Prefs_Chax : NSPreferencesModule {
-    IBOutlet AutoAcceptPrefsWindowController *_autoAcceptPrefs;
-    IBOutlet NSView *_view;
-    IBOutlet URLTextView *_urlTextView;
-    
-    ChaxDefaults *_defaults;
-    
-    NSUInteger _editedFont;
-    NSFont *_contactsFont;
-    NSFont *_statusMessagesFont;
+@interface AutoAcceptPrefsWindowController : NSWindowController {
+	IBOutlet NSTextField *_descriptionTextField;
+	IBOutlet NSOutlineView *_outlineView;
+	
+	NSMutableArray *_services;
+	NSMutableDictionary *_contacts;
+	NSMutableDictionary *_autoAcceptDictionary;
+	
+	NSAttributedString *_allContactsString;
+	
+	int _type;
+	NSString *_typeName;
 }
 
-@property(nonatomic, retain) NSFont *contactsFont;
-@property(nonatomic, retain) NSFont *statusMessagesFont;
-@property(nonatomic, retain) NSFont *currentContactFont;
+- (IBAction)cancel:(id)sender;
+- (IBAction)save:(id)sender;
 
-- (IBAction)aboutAction:(id)sender;
-- (IBAction)changeContactListFont:(id)sender;
-- (IBAction)showAutoAcceptOptions:(id)sender;
+- (void)setAutoAcceptType:(int)type;
 
 @end
