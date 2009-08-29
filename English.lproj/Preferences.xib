@@ -604,7 +604,7 @@
 															<reference key="NSSuperview" ref="140071986"/>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSButtonCell" key="NSCell" id="665839981">
-																<int key="NSCellFlags">604110336</int>
+																<int key="NSCellFlags">67239424</int>
 																<int key="NSCellFlags2">0</int>
 																<string key="NSContents">Auto-accept text invitations</string>
 																<reference key="NSSupport" ref="76721948"/>
@@ -1916,6 +1916,22 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<int key="connectionID">187</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: autoAcceptTextInvitations</string>
+						<reference key="source" ref="967281409"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="967281409"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">value: autoAcceptTextInvitations</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">autoAcceptTextInvitations</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">191</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -2903,7 +2919,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">190</int>
+			<int key="maxID">191</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

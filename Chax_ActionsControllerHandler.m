@@ -1,5 +1,5 @@
 /*
- * Chax_SecureWindow.h
+ * Chax_ActionsControllerHandler.m
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,12 +21,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "Chax_ActionsControllerHandler.h"
+#import "iChat5.h"
 
-@interface Chax_SecureWindow : NSWindow {
+@implementation Chax_ActionsControllerHandler
 
+- (id)chax_swizzle_performActionsForEvent:(int)fp8 withIMHandle:(id)fp12 withObject:(id)fp16 withChat:(id)fp20 silent:(BOOL)fp24
+{
+    if (fp20 && [fp20 isKindOfClass:NSClassFromString(@"ActiveChat")] && [fp20 joinState] == 0 && [Chax boolForKey:@"SkipNewMessageNotification"]) {
+		[[[fp20 chatController] notifier] performSelector:@selector(acceptNotification) withObject:nil afterDelay:0.0];
+	}
+    
+    return [self chax_swizzle_performActionsForEvent:fp8 withIMHandle:fp12 withObject:fp16 withChat:fp20 silent:fp24];
 }
-
-+ (void)chax_blockNextShowWindow;
 
 @end

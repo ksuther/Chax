@@ -23,7 +23,26 @@
 
 #import "Chax_SecureWindow.h"
 
+BOOL _chax_blockNextShowWindow = NO;
+
 @implementation Chax_SecureWindow
+
++ (void)chax_blockNextShowWindow
+{
+	_chax_blockNextShowWindow = YES;
+}
+
+#pragma mark -
+
+/*- (void)chax_swizzle_makeKeyAndOrderFront:(id)sender
+{
+	if (_chax_blockNextShowWindow) {
+		_chax_blockNextShowWindow = NO;
+		return;
+	}
+	
+	[self chax_swizzle_makeKeyAndOrderFront:sender];
+}*/
 
 - (void)chax_toggleAlwaysOnTop:(id)sender
 {

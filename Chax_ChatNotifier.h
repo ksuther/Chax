@@ -1,5 +1,5 @@
 /*
- * Chax_SecureWindow.h
+ * Chax_ChatNotifier.h
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -23,10 +23,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Chax_SecureWindow : NSWindow {
+@interface Chax_ChatNotifier : NSObject {
 
 }
-
-+ (void)chax_blockNextShowWindow;
 
 @end

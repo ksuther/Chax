@@ -50,8 +50,6 @@ static SUUpdater *_updater = nil;
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReceived:) name:NSApplicationWillFinishLaunchingNotification object:nil];
 	
-	//[Prefs setKnockKnock:![Chax boolForKey:@"SkipNewMessageNotification"]];
-	
 	//[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(screensaverNotificationReceived:) name:@"com.apple.screensaver.didstart" object:nil];
 	//[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(screensaverNotificationReceived:) name:@"com.apple.screensaver.didstop" object:nil];
 	
@@ -69,6 +67,8 @@ static SUUpdater *_updater = nil;
     [self resetApplicationIcon];
     [self setupSparkle];
     [self performSelector:@selector(displayDonateWindowIfWanted) withObject:nil afterDelay:2.0];
+    
+    [NSClassFromString(@"Prefs") setKnockKnock:![Chax boolForKey:@"SkipNewMessageNotification"]];
     
     [StatusChangeController sharedController]; //Load the Growl framework and register for status changes
     

@@ -25,7 +25,30 @@
 #import "CameraSnapshotController.h"
 #import "iChat5.h"
 
+Chat *_lastChat = nil;
+
 @implementation Chax_ChatWindowController
+
+- (void)chax_swizzle_addChatInvite:(id)fp8 withNotifierWindow:(id)fp12
+{
+	_lastChat = fp8;
+    
+	[self chax_swizzle_addChatInvite:fp8 withNotifierWindow:fp12];
+}
+
+- (void)chax_swizzle_selectChat:(id)fp8
+{
+	if ([Chax boolForKey:@"SkipNewMessageNotification"] && _lastChat && _lastChat == fp8) {
+		[self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
+	} else {
+		[self chax_swizzle_selectChat:fp8];
+	}
+}
+
+- (void)chax_allowSelect
+{
+	_lastChat = nil;
+}
 
 - (void)chax_sendCameraSnapshot:(id)sender
 {

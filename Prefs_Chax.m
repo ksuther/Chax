@@ -242,7 +242,7 @@ enum {
 - (void)setAutoAcceptAVChats:(BOOL)value
 {
 	if (value) {
-		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically Accept File Transfers?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)2, ChaxLocalizedString(@"Automatically Accept AV Chat Invitations?"));
+		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically Accept File Transfers?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)2, ChaxLocalizedString(@"Are you sure you want to automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options...\" to only accept AV chats from specific users or on specific accounts."));
 	} else {
 		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptAVChats"];
 	}

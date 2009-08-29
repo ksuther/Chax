@@ -83,6 +83,8 @@
 		37F4390F1049C605007F8638 /* ActivityModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */; };
 		37F4391C1049C693007F8638 /* ActivityWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F4391A1049C693007F8638 /* ActivityWindow.xib */; };
 		37F4398D1049C9D5007F8638 /* status-offline.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 37F4398C1049C9D5007F8638 /* status-offline.tiff */; };
+		37F43A461049D68F007F8638 /* Chax_ActionsControllerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F43A371049D622007F8638 /* Chax_ActionsControllerHandler.m */; };
+		37F43A571049D730007F8638 /* Chax_ChatNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F43A561049D730007F8638 /* Chax_ChatNotifier.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -231,6 +233,10 @@
 		37F438E11049C5BA007F8638 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
 		37F4391B1049C693007F8638 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ActivityWindow.xib; sourceTree = "<group>"; };
 		37F4398C1049C9D5007F8638 /* status-offline.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "status-offline.tiff"; sourceTree = "<group>"; };
+		37F43A361049D622007F8638 /* Chax_ActionsControllerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ActionsControllerHandler.h; sourceTree = "<group>"; };
+		37F43A371049D622007F8638 /* Chax_ActionsControllerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ActionsControllerHandler.m; sourceTree = "<group>"; };
+		37F43A551049D730007F8638 /* Chax_ChatNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ChatNotifier.h; sourceTree = "<group>"; };
+		37F43A561049D730007F8638 /* Chax_ChatNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatNotifier.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Chax-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Chax-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Chax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chax.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -417,6 +423,8 @@
 			children = (
 				37D1F4AC1022591F006F0D8C /* Chax_Account.h */,
 				37D1F4AD1022591F006F0D8C /* Chax_Account.m */,
+				37F43A361049D622007F8638 /* Chax_ActionsControllerHandler.h */,
+				37F43A371049D622007F8638 /* Chax_ActionsControllerHandler.m */,
 				3776F58C101CF589009D87B6 /* Chax_AnimatingTableView.h */,
 				3776F58D101CF589009D87B6 /* Chax_AnimatingTableView.m */,
 				37F438B11049C0FB007F8638 /* Chax_AVChatController.h */,
@@ -427,6 +435,8 @@
 				37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */,
 				372D8A6410478E2A005E2F5F /* Chax_ChatInputLine.h */,
 				372D8A6510478E2A005E2F5F /* Chax_ChatInputLine.m */,
+				37F43A551049D730007F8638 /* Chax_ChatNotifier.h */,
+				37F43A561049D730007F8638 /* Chax_ChatNotifier.m */,
 				37F29AAC1043AC82005460A5 /* Chax_ChatWindowController.h */,
 				37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */,
 				3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */,
@@ -666,6 +676,8 @@
 				37F438E41049C5BA007F8638 /* ActivityStatusCell.m in Sources */,
 				37F438E51049C5BA007F8638 /* ActivityDateFormatter.m in Sources */,
 				37F438E61049C5BA007F8638 /* ActivityTableView.m in Sources */,
+				37F43A461049D68F007F8638 /* Chax_ActionsControllerHandler.m in Sources */,
+				37F43A571049D730007F8638 /* Chax_ChatNotifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

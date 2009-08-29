@@ -1,5 +1,5 @@
 /*
- * Chax_SecureWindow.h
+ * Chax_ChatNotifier.m
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,12 +21,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "Chax_ChatNotifier.h"
+#import "iChat5.h"
+#import "Chax_SecureWindow.h"
 
-@interface Chax_SecureWindow : NSWindow {
+@implementation Chax_ChatNotifier
 
+- (void)chax_swizzle_acceptNotification
+{
+	if ([Chax boolForKey:@"SkipNewMessageNotification"] && ![NSClassFromString(@"ChatWindowController") wantsCollectedChats]) {
+		[Chax_SecureWindow chax_blockNextShowWindow];
+	}
+	
+	[self chax_swizzle_acceptNotification];
 }
-
-+ (void)chax_blockNextShowWindow;
 
 @end
