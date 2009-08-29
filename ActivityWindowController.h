@@ -39,6 +39,8 @@
 	NSDate *_lastSaveDate;
 	
 	NSMutableSet *_recentActivity;
+    
+    BOOL _terminationDisabled;
 }
 + (ActivityWindowController *)sharedController;
 

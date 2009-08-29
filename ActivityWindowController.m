@@ -29,7 +29,7 @@
 #import "ActivityStatusCell.h"
 #import "ActivityTableView.h"
 
-#define SAVE_INTERVAL 3600 //autosave every hour
+const NSTimeInterval kAutosaveInterval = 60;
 
 static ActivityWindowController *_sharedController;
 
@@ -214,9 +214,13 @@ NSString *FilterToolbarItemIdentifier = @"FilterToolbarItemIdentifier";
 		
 		[_managedObjectContext processPendingChanges];
         
-		if ([_lastSaveDate timeIntervalSinceNow] < -SAVE_INTERVAL) {
+		if ([_lastSaveDate timeIntervalSinceNow] < -kAutosaveInterval) {
 			[self saveDatabase];
-		}
+		} else {
+            _terminationDisabled = YES;
+            
+            [[NSProcessInfo processInfo] disableSuddenTermination];
+        }
 		
 		[_recentActivity addObject:eventIdentifier];
 		[_recentActivity performSelector:@selector(removeObject:) withObject:eventIdentifier afterDelay:1.0];
@@ -259,6 +263,11 @@ NSString *FilterToolbarItemIdentifier = @"FilterToolbarItemIdentifier";
 	_lastSaveDate = [[NSDate date] retain];
 	[_managedObjectContext save:nil];
 	
+    if (_terminationDisabled) {
+        _terminationDisabled = NO;
+        
+        [[NSProcessInfo processInfo] enableSuddenTermination];
+    }
 }
 
 #pragma mark -
