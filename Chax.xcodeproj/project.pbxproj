@@ -76,6 +76,13 @@
 		37F437EA1049B232007F8638 /* AutoAcceptPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F437E91049B232007F8638 /* AutoAcceptPrefsWindowController.m */; };
 		37F4388E1049BBC3007F8638 /* Chax_IMFileTransferCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F4388D1049BBC3007F8638 /* Chax_IMFileTransferCenter.m */; };
 		37F438B31049C0FB007F8638 /* Chax_AVChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F438B21049C0FB007F8638 /* Chax_AVChatController.m */; };
+		37F438E31049C5BA007F8638 /* ActivityWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F438DB1049C5BA007F8638 /* ActivityWindowController.m */; };
+		37F438E41049C5BA007F8638 /* ActivityStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F438DD1049C5BA007F8638 /* ActivityStatusCell.m */; };
+		37F438E51049C5BA007F8638 /* ActivityDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F438DF1049C5BA007F8638 /* ActivityDateFormatter.m */; };
+		37F438E61049C5BA007F8638 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F438E11049C5BA007F8638 /* ActivityTableView.m */; };
+		37F4390F1049C605007F8638 /* ActivityModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */; };
+		37F4391C1049C693007F8638 /* ActivityWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F4391A1049C693007F8638 /* ActivityWindow.xib */; };
+		37F4398D1049C9D5007F8638 /* status-offline.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 37F4398C1049C9D5007F8638 /* status-offline.tiff */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -213,6 +220,17 @@
 		37F4388D1049BBC3007F8638 /* Chax_IMFileTransferCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_IMFileTransferCenter.m; sourceTree = "<group>"; };
 		37F438B11049C0FB007F8638 /* Chax_AVChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_AVChatController.h; sourceTree = "<group>"; };
 		37F438B21049C0FB007F8638 /* Chax_AVChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_AVChatController.m; sourceTree = "<group>"; };
+		37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = ActivityModel.xcdatamodel; sourceTree = "<group>"; };
+		37F438DA1049C5BA007F8638 /* ActivityWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityWindowController.h; sourceTree = "<group>"; };
+		37F438DB1049C5BA007F8638 /* ActivityWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityWindowController.m; sourceTree = "<group>"; };
+		37F438DC1049C5BA007F8638 /* ActivityStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityStatusCell.h; sourceTree = "<group>"; };
+		37F438DD1049C5BA007F8638 /* ActivityStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityStatusCell.m; sourceTree = "<group>"; };
+		37F438DE1049C5BA007F8638 /* ActivityDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDateFormatter.h; sourceTree = "<group>"; };
+		37F438DF1049C5BA007F8638 /* ActivityDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDateFormatter.m; sourceTree = "<group>"; };
+		37F438E01049C5BA007F8638 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
+		37F438E11049C5BA007F8638 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
+		37F4391B1049C693007F8638 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ActivityWindow.xib; sourceTree = "<group>"; };
+		37F4398C1049C9D5007F8638 /* status-offline.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "status-offline.tiff"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Chax-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Chax-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Chax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chax.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -249,6 +267,7 @@
 			children = (
 				3786DA930FF7C41F000CBC6A /* Chax.h */,
 				3786DA940FF7C41F000CBC6A /* Chax.m */,
+				37F438D81049C5BA007F8638 /* Activity Window */,
 				371A8739103B661C003EC364 /* Preferences */,
 				378D4FE7101E717B00176B47 /* Status Changes (Growl) */,
 				37D5C5AC103D148200EE8A49 /* Dock Icon */,
@@ -323,10 +342,12 @@
 			children = (
 				37D5BBB6103B679B00EE8A49 /* Preferences.xib */,
 				37AFBC25103112EB001AA056 /* LogViewer.xib */,
+				37F4391A1049C693007F8638 /* ActivityWindow.xib */,
 				37F29A9D1043ABB1005460A5 /* CameraSnapshot.xib */,
 				37D0E2851046133B009C42DA /* Donate.xib */,
 				3786DA1F0FF7C0A8000CBC6A /* Chax.icns */,
 				3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */,
+				37F4398C1049C9D5007F8638 /* status-offline.tiff */,
 				8D1107310486CEB800E47090 /* Chax-Info.plist */,
 				37BFF35F0FF7D37200B54CF0 /* ChaxLib-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -488,6 +509,22 @@
 			name = "Camera Snapshot";
 			sourceTree = "<group>";
 		};
+		37F438D81049C5BA007F8638 /* Activity Window */ = {
+			isa = PBXGroup;
+			children = (
+				37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */,
+				37F438DA1049C5BA007F8638 /* ActivityWindowController.h */,
+				37F438DB1049C5BA007F8638 /* ActivityWindowController.m */,
+				37F438DC1049C5BA007F8638 /* ActivityStatusCell.h */,
+				37F438DD1049C5BA007F8638 /* ActivityStatusCell.m */,
+				37F438DE1049C5BA007F8638 /* ActivityDateFormatter.h */,
+				37F438DF1049C5BA007F8638 /* ActivityDateFormatter.m */,
+				37F438E01049C5BA007F8638 /* ActivityTableView.h */,
+				37F438E11049C5BA007F8638 /* ActivityTableView.m */,
+			);
+			name = "Activity Window";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -561,6 +598,8 @@
 				37AFBC27103112EB001AA056 /* LogViewer.xib in Resources */,
 				37F29A9F1043ABB1005460A5 /* CameraSnapshot.xib in Resources */,
 				37D0E2871046133B009C42DA /* Donate.xib in Resources */,
+				37F4391C1049C693007F8638 /* ActivityWindow.xib in Resources */,
+				37F4398D1049C9D5007F8638 /* status-offline.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +662,10 @@
 				37F437EA1049B232007F8638 /* AutoAcceptPrefsWindowController.m in Sources */,
 				37F4388E1049BBC3007F8638 /* Chax_IMFileTransferCenter.m in Sources */,
 				37F438B31049C0FB007F8638 /* Chax_AVChatController.m in Sources */,
+				37F438E31049C5BA007F8638 /* ActivityWindowController.m in Sources */,
+				37F438E41049C5BA007F8638 /* ActivityStatusCell.m in Sources */,
+				37F438E51049C5BA007F8638 /* ActivityDateFormatter.m in Sources */,
+				37F438E61049C5BA007F8638 /* ActivityTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +674,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				37F4390F1049C605007F8638 /* ActivityModel.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +740,14 @@
 				37F29A9E1043ABB1005460A5 /* English */,
 			);
 			name = CameraSnapshot.xib;
+			sourceTree = "<group>";
+		};
+		37F4391A1049C693007F8638 /* ActivityWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37F4391B1049C693007F8638 /* English */,
+			);
+			name = ActivityWindow.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -28,6 +28,7 @@
 #import "StatusChangeController.h"
 #import "LogViewerController.h"
 #import "DonateWindowController.h"
+#import "ActivityWindowController.h"
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 
@@ -61,7 +62,7 @@ static SUUpdater *_updater = nil;
 
 + (void)notificationReceived:(NSNotification *)note
 {
-    _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:@"com.ksuther.chax"] pathForImageResource:@"Chax"]];
+    _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] pathForImageResource:@"Chax"]];
     [_chaxIcon setName:@"ChaxIcon"];
     
 	[self addMenuItems];
@@ -155,16 +156,16 @@ static SUUpdater *_updater = nil;
 	
 	//Log viewer menu item
 	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"Log Viewer") action:@selector(showWindow:) keyEquivalent:@""];
-	[menuItem setTag:ChaxMenuitemLogViewer];
+	[menuItem setTag:ChaxMenuItemLogViewer];
 	[menuItem setTarget:[LogViewerController sharedController]];
 	[menuItems addObject:menuItem];
 	
 	//Activity window menu item
-	/*menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"activity") action:@selector(showWindow:) keyEquivalent:@"a"];
-	[menuItem setTag:ACTIVITY_WINDOW_MENU_ITEM];
+	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"Activity") action:@selector(showWindow:) keyEquivalent:@"a"];
+	[menuItem setTag:ChaxMenuItemActivityViewer];
 	[menuItem setTarget:[ActivityWindowController sharedController]];
 	[menuItem setKeyEquivalentModifierMask:NSCommandKeyMask | NSAlternateKeyMask];
-	[menuItems addObject:menuItem];*/
+	[menuItems addObject:menuItem];
 	
 	//All contacts menu item
 	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"All Contacts") action:@selector(showPeopleListController:) keyEquivalent:@"1"];

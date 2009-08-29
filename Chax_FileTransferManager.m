@@ -20,13 +20,23 @@
 
 + (void)chax_fileTransferUpdatedNotification:(NSNotification *)note
 {
+    IMFileTransfer *transfer = [note object];
+    
     if ([Chax boolForKey:@"AutoclearFileTransfers"]) {
-        IMFileTransfer *transfer = [note object];
-        
         if ([transfer transferState] == 4 && [transfer error] == 0) {
             [self cancelPreviousPerformRequestsWithTarget:self selector:@selector(chax_removeSuccessfulTransfers) object:nil];
             [self performSelector:@selector(chax_removeSuccessfulTransfers) withObject:nil afterDelay:2.0];
         }
+    }
+    
+    if ([transfer transferState] == 5) {
+        //Let the activity window know that a file transfer was completed
+        BOOL isIncoming = [transfer isIncoming];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[transfer otherPerson], @"name",
+                                                                            [NSNumber numberWithInt:isIncoming ? 101 : 102], @"type",
+                                                                            [transfer localPath], @"path", nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChaxFileTransferCompleted" object:nil userInfo:userInfo];
     }
 }
 

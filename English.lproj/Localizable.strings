@@ -19,6 +19,20 @@
 "Log Viewer" = "Log Viewer";
 "Logging is disabled" = "Logging is disabled";
 
+/* Activity Viewer */
+"Activity" = "Activity";
+"Are you sure you want to permanently delete all past activity?" = "Are you sure you want to permanently delete all past activity?";
+"Clear" = "Clear";
+"Clear Past Activity" = "Clear Past Activity";
+"Delete" = "Delete";
+"Don't Delete" = "Don't Delete";
+"Export" = "Export";
+"Filter" = "Filter";
+"iChat Activity Log" = "iChat Activity Log";
+"Incoming File" = "Incoming File";
+"Outgoing File" = "Outgoing File";
+"Recent Activity Length" = "Recent Activity Length";
+
 /* Donate */
 "Thank you for using Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will only appear once more." = "Thank you for using Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will only appear once more.";
 "Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again." = "Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again.";

@@ -1,5 +1,5 @@
 /*
- * Chax.h
+ * ActivityStatusCell.h
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -23,42 +23,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define DONATE_URL [NSURL URLWithString:@"http://www.ksuther.com/chax/donate"]
-
-typedef enum ChaxMenuItem {
-    ChaxMenuItemShowTextStatus = 13371,
-    ChaxMenuItemLogViewer,
-    ChaxMenuItemActivityViewer,
-    ChaxMenuItemAlwaysOnTop,
-    ChaxMenuItemAllContacts,
-    ChaxMenuItemCameraSnapshot,
-    ChaxMenuItemByHandle,
-} ChaxMenuItem;
-
-extern NSString *ChaxBundleIdentifier;
-
-static inline NSString * ChaxLocalizedString(NSString *key) {
-	return [[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] localizedStringForKey:(key) value:(key) table:nil];
+@interface ActivityStatusCell : NSTextFieldCell
+{
 }
-
-@interface Chax : NSObject {
-	
-}
-
-+ (void)resetApplicationIcon;
-+ (void)setupSparkle;
-+ (void)checkForUpdates;
-+ (void)displayDonateWindowIfWanted;
-+ (void)addMenuItems;
-+ (NSArray *)menuItems;
-
-+ (BOOL)boolForKey:(NSString *)key;
-+ (int)integerForKey:(NSString *)key;
-+ (NSData *)dataForKey:(NSString *)key;
-+ (NSString *)stringForKey:(NSString *)key;
-+ (id)objectForKey:(NSString *)key;
-+ (void)setBool:(BOOL)value forKey:(NSString *)key;
-+ (void)setInteger:(int)value forKey:(NSString *)key;
-+ (void)setObject:(id)value forKey:(NSString *)key;
 
 @end

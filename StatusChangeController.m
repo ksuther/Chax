@@ -23,8 +23,7 @@
 
 #import "StatusChangeController.h"
 #import "iChat5.h"
-//#import "ActivityWindowController.h"
-//#import "Chax_Presentity.h"
+#import "ActivityWindowController.h"
 
 NSString *ChaxGrowlNewMessage = @"New message received";
 NSString *ChaxGrowlTextInvitation = @"Text invitation received";
@@ -85,7 +84,7 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 	if ([presentity timeSinceStatusChanged] < 1 && [[presentity account] accountLoginStatus] == 4 && ![[presentity account] justLoggedIn] &&
         [presentity status] != [presentity previousStatus] && [presentity status] != 5 && [presentity person] != [[IMMe me] person]) {
 		//Notify the activity window of the change
-		//[[ActivityWindowController sharedController] addPresentityToActivity:presentity];
+		[[ActivityWindowController sharedController] addPresentityToActivity:presentity];
 		
 		//Check if the person has an active chat and post the status change to the chat window
 		/*if ([Chax boolForKey:@"ShowStatusChanges"]) {

@@ -1,5 +1,5 @@
 /*
- * Chax.h
+ * ActivityDateFormatter.m
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,44 +21,28 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "ActivityDateFormatter.h"
 
-#define DONATE_URL [NSURL URLWithString:@"http://www.ksuther.com/chax/donate"]
+@implementation ActivityDateFormatter
 
-typedef enum ChaxMenuItem {
-    ChaxMenuItemShowTextStatus = 13371,
-    ChaxMenuItemLogViewer,
-    ChaxMenuItemActivityViewer,
-    ChaxMenuItemAlwaysOnTop,
-    ChaxMenuItemAllContacts,
-    ChaxMenuItemCameraSnapshot,
-    ChaxMenuItemByHandle,
-} ChaxMenuItem;
-
-extern NSString *ChaxBundleIdentifier;
-
-static inline NSString * ChaxLocalizedString(NSString *key) {
-	return [[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] localizedStringForKey:(key) value:(key) table:nil];
-}
-
-@interface Chax : NSObject {
+- (NSString *)stringForObjectValue:(id)anObject
+{
+	if (![anObject isKindOfClass:[NSDate class]]) {
+        return nil;
+    }
 	
+	NSString *value = [super stringForObjectValue:anObject];
+	NSCalendar *calendar = [NSCalendar currentCalendar];
+	
+	if ([[calendar components:kCFCalendarUnitDay fromDate:anObject] day] != [[calendar components:kCFCalendarUnitDay fromDate:[NSDate date]] day]) {
+		[self setTimeStyle:NSDateFormatterShortStyle];
+		[self setDateStyle:NSDateFormatterShortStyle];
+		value = [super stringForObjectValue:anObject];
+		[self setTimeStyle:NSDateFormatterShortStyle];
+		[self setDateStyle:NSDateFormatterNoStyle];
+	}
+	
+	return value;
 }
-
-+ (void)resetApplicationIcon;
-+ (void)setupSparkle;
-+ (void)checkForUpdates;
-+ (void)displayDonateWindowIfWanted;
-+ (void)addMenuItems;
-+ (NSArray *)menuItems;
-
-+ (BOOL)boolForKey:(NSString *)key;
-+ (int)integerForKey:(NSString *)key;
-+ (NSData *)dataForKey:(NSString *)key;
-+ (NSString *)stringForKey:(NSString *)key;
-+ (id)objectForKey:(NSString *)key;
-+ (void)setBool:(BOOL)value forKey:(NSString *)key;
-+ (void)setInteger:(int)value forKey:(NSString *)key;
-+ (void)setObject:(id)value forKey:(NSString *)key;
 
 @end
