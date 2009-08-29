@@ -75,6 +75,7 @@
 		37F29AAE1043AC82005460A5 /* Chax_ChatWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */; };
 		37F437EA1049B232007F8638 /* AutoAcceptPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F437E91049B232007F8638 /* AutoAcceptPrefsWindowController.m */; };
 		37F4388E1049BBC3007F8638 /* Chax_IMFileTransferCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F4388D1049BBC3007F8638 /* Chax_IMFileTransferCenter.m */; };
+		37F438B31049C0FB007F8638 /* Chax_AVChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F438B21049C0FB007F8638 /* Chax_AVChatController.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -210,6 +211,8 @@
 		37F437E91049B232007F8638 /* AutoAcceptPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoAcceptPrefsWindowController.m; sourceTree = "<group>"; };
 		37F4388C1049BBC3007F8638 /* Chax_IMFileTransferCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_IMFileTransferCenter.h; sourceTree = "<group>"; };
 		37F4388D1049BBC3007F8638 /* Chax_IMFileTransferCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_IMFileTransferCenter.m; sourceTree = "<group>"; };
+		37F438B11049C0FB007F8638 /* Chax_AVChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_AVChatController.h; sourceTree = "<group>"; };
+		37F438B21049C0FB007F8638 /* Chax_AVChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_AVChatController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Chax-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Chax-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Chax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chax.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -395,6 +398,8 @@
 				37D1F4AD1022591F006F0D8C /* Chax_Account.m */,
 				3776F58C101CF589009D87B6 /* Chax_AnimatingTableView.h */,
 				3776F58D101CF589009D87B6 /* Chax_AnimatingTableView.m */,
+				37F438B11049C0FB007F8638 /* Chax_AVChatController.h */,
+				37F438B21049C0FB007F8638 /* Chax_AVChatController.m */,
 				37D5C5C9103D151600EE8A49 /* Chax_Chat.h */,
 				37D5C5CA103D151600EE8A49 /* Chax_Chat.m */,
 				37D5C5D9103D157F00EE8A49 /* Chax_ChatDOMView.h */,
@@ -617,6 +622,7 @@
 				372D8A6610478E2A005E2F5F /* Chax_ChatInputLine.m in Sources */,
 				37F437EA1049B232007F8638 /* AutoAcceptPrefsWindowController.m in Sources */,
 				37F4388E1049BBC3007F8638 /* Chax_IMFileTransferCenter.m in Sources */,
+				37F438B31049C0FB007F8638 /* Chax_AVChatController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
