@@ -65,6 +65,7 @@ static SUUpdater *_updater = nil;
     
 	[self addMenuItems];
     [self resetApplicationIcon];
+    [self registerURLHandlers];
     [self setupSparkle];
     [self performSelector:@selector(displayDonateWindowIfWanted) withObject:nil afterDelay:2.0];
     
@@ -89,6 +90,11 @@ static SUUpdater *_updater = nil;
     NSString *path = [bundle pathForResource:[bundle objectForInfoDictionaryKey:@"CFBundleIconFile"] ofType:@"icns"];
     
     [NSApp setApplicationIconImage:[[[NSImage alloc] initByReferencingFile:path] autorelease]];
+}
+
++ (void)registerURLHandlers
+{
+    LSSetDefaultHandlerForURLScheme((CFStringRef)@"ichat", (CFStringRef)ChaxBundleIdentifier);
 }
 
 + (void)setupSparkle

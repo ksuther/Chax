@@ -113,7 +113,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 37E49159104C6DF300DA1B09 /* ChaxAgentLib */;
+			remoteGlobalIDString = 37E49159104C6DF300DA1B09;
 			remoteInfo = ChaxAgentLib;
 		};
 /* End PBXContainerItemProxy section */

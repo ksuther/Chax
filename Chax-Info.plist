@@ -82,5 +82,40 @@
 	<string>dsa_pub.pem</string>
 	<key>SUEnableSystemProfiling</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>iChat URL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>iChat</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>AIM</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>aim</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>XMPP</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>xmpp</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>CPIM</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>im</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -46,6 +46,7 @@ static inline NSString * ChaxLocalizedString(NSString *key) {
 }
 
 + (void)resetApplicationIcon;
++ (void)registerURLHandlers;
 + (void)setupSparkle;
 + (void)checkForUpdates;
 + (void)displayDonateWindowIfWanted;
