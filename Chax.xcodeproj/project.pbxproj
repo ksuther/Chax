@@ -213,7 +213,6 @@
 		37AFBC6110311458001AA056 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = /usr/lib/libicucore.dylib; sourceTree = "<absolute>"; };
 		37BCAA571041A2E40088A681 /* NSArrayAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayAdditions.h; sourceTree = "<group>"; };
 		37BCAA581041A2E40088A681 /* NSArrayAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArrayAdditions.m; sourceTree = "<group>"; };
-		37BFF35F0FF7D37200B54CF0 /* ChaxLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxLib-Info.plist"; sourceTree = "<group>"; };
 		37D0E26A104612C1009C42DA /* DonateWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DonateWindowController.h; path = "../Chax 10.5/DonateWindowController.h"; sourceTree = "<group>"; };
 		37D0E26B104612C1009C42DA /* DonateWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DonateWindowController.m; path = "../Chax 10.5/DonateWindowController.m"; sourceTree = "<group>"; };
 		37D0E2861046133B009C42DA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Donate.xib; sourceTree = "<group>"; };
@@ -394,7 +393,6 @@
 				3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */,
 				37F4398C1049C9D5007F8638 /* status-offline.tiff */,
 				8D1107310486CEB800E47090 /* Chax-Info.plist */,
-				37BFF35F0FF7D37200B54CF0 /* ChaxLib-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				3786DAA20FF7C513000CBC6A /* Localizable.strings */,
 				3710F5DF104260E400EAD72D /* dsa_pub.pem */,
