@@ -10,8 +10,6 @@
 				<string>ichat</string>
 				<string>chat</string>
 			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>savedChatFile</string>
 			<key>CFBundleTypeName</key>
 			<string>Chat transcript</string>
 			<key>CFBundleTypeOSTypes</key>
@@ -28,8 +26,6 @@
 			<array>
 				<string>ichattransfer</string>
 			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>savedXferFile</string>
 			<key>CFBundleTypeName</key>
 			<string>iChat file transfer</string>
 			<key>CFBundleTypeRole</key>
