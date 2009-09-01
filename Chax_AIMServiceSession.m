@@ -57,7 +57,7 @@
 
 - (int)chax_swizzle__sendMessage:(id)arg1 toBuddy:(id)arg2 secure:(BOOL)arg3
 {
-    if ([arg2 isICQ]) {
+    if ([arg2 isICQ] && !CFPreferencesGetAppBooleanValue((CFStringRef)@"DisablePlainText", (CFStringRef)@"com.ksuther.chax", nil)) {
         chax_sendNextPlainText = YES;
     }
     
