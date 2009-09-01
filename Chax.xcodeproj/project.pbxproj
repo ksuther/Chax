@@ -40,6 +40,11 @@
 		3776F5AE101CF798009D87B6 /* UnifiedPeopleListController_Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */; };
 		3776F63C101CFC35009D87B6 /* Chax_IMPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */; };
 		3776F9B1101D10E3009D87B6 /* Chax_Fezz.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */; };
+		377D7157104DC6E9007DC7EE /* Chax_AIMServiceSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D7156104DC6E9007DC7EE /* Chax_AIMServiceSession.m */; };
+		377D7173104DC720007DC7EE /* BundleUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 371BA4BB101134CC00CF88C0 /* BundleUtilities.m */; };
+		377D7187104DC79A007DC7EE /* MethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA440FF7C271000CBC6A /* MethodSwizzle.m */; };
+		377D718A104DC7A8007DC7EE /* AutomaticSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D7189104DC7A8007DC7EE /* AutomaticSwizzle.m */; };
+		377D71CA104DCB3E007DC7EE /* Chax_SuperToAIMParserContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D71C9104DCB3E007DC7EE /* Chax_SuperToAIMParserContext.m */; };
 		37844D67100A085C0028BB2D /* MethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA440FF7C271000CBC6A /* MethodSwizzle.m */; };
 		3786DA200FF7C0A8000CBC6A /* Chax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3786DA1F0FF7C0A8000CBC6A /* Chax.icns */; };
 		3786DA470FF7C281000CBC6A /* ChaxLib.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 3786DA3D0FF7C21B000CBC6A /* ChaxLib.dylib */; };
@@ -168,6 +173,12 @@
 		3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_IMPeople.m; sourceTree = "<group>"; };
 		3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Fezz.h; sourceTree = "<group>"; };
 		3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Fezz.m; sourceTree = "<group>"; };
+		377D7155104DC6E9007DC7EE /* Chax_AIMServiceSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_AIMServiceSession.h; sourceTree = "<group>"; };
+		377D7156104DC6E9007DC7EE /* Chax_AIMServiceSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_AIMServiceSession.m; sourceTree = "<group>"; };
+		377D7188104DC7A8007DC7EE /* AutomaticSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutomaticSwizzle.h; sourceTree = "<group>"; };
+		377D7189104DC7A8007DC7EE /* AutomaticSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutomaticSwizzle.m; sourceTree = "<group>"; };
+		377D71C8104DCB3E007DC7EE /* Chax_SuperToAIMParserContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_SuperToAIMParserContext.h; sourceTree = "<group>"; };
+		377D71C9104DCB3E007DC7EE /* Chax_SuperToAIMParserContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_SuperToAIMParserContext.m; sourceTree = "<group>"; };
 		3786DA1F0FF7C0A8000CBC6A /* Chax.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Chax.icns; sourceTree = "<group>"; };
 		3786DA3D0FF7C21B000CBC6A /* ChaxLib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = ChaxLib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		3786DA430FF7C271000CBC6A /* MethodSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodSwizzle.h; sourceTree = "<group>"; };
@@ -437,6 +448,8 @@
 				3786DBA40FF7D013000CBC6A /* NSPreferences.h */,
 				3786DA430FF7C271000CBC6A /* MethodSwizzle.h */,
 				3786DA440FF7C271000CBC6A /* MethodSwizzle.m */,
+				377D7188104DC7A8007DC7EE /* AutomaticSwizzle.h */,
+				377D7189104DC7A8007DC7EE /* AutomaticSwizzle.m */,
 				371BA4BA101134CC00CF88C0 /* BundleUtilities.h */,
 				371BA4BB101134CC00CF88C0 /* BundleUtilities.m */,
 				37BCAA571041A2E40088A681 /* NSArrayAdditions.h */,
@@ -546,6 +559,10 @@
 			isa = PBXGroup;
 			children = (
 				37E49176104C6E3400DA1B09 /* URLToIChatApp.m */,
+				377D7155104DC6E9007DC7EE /* Chax_AIMServiceSession.h */,
+				377D7156104DC6E9007DC7EE /* Chax_AIMServiceSession.m */,
+				377D71C8104DCB3E007DC7EE /* Chax_SuperToAIMParserContext.h */,
+				377D71C9104DCB3E007DC7EE /* Chax_SuperToAIMParserContext.m */,
 			);
 			name = ChaxAgentLib;
 			sourceTree = "<group>";
@@ -739,6 +756,7 @@
 				37F43A571049D730007F8638 /* Chax_ChatNotifier.m in Sources */,
 				37E49122104C688100DA1B09 /* Chax_IMDaemonController.m in Sources */,
 				37F7C2F0104C87F300C01941 /* Chax_ActiveChat.m in Sources */,
+				377D718A104DC7A8007DC7EE /* AutomaticSwizzle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,6 +765,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37E49177104C6E3400DA1B09 /* URLToIChatApp.m in Sources */,
+				377D7157104DC6E9007DC7EE /* Chax_AIMServiceSession.m in Sources */,
+				377D7173104DC720007DC7EE /* BundleUtilities.m in Sources */,
+				377D7187104DC79A007DC7EE /* MethodSwizzle.m in Sources */,
+				377D71CA104DCB3E007DC7EE /* Chax_SuperToAIMParserContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

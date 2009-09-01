@@ -1,5 +1,5 @@
 /*
- * MethodSwizzle.m
+ * AutomaticSwizzle.h
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,33 +21,10 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "MethodSwizzle.h"
-#import <objc/objc-class.h>
+#import <Cocoa/Cocoa.h>
 
-void MethodSwizzle(Class aClass, SEL orig_sel, SEL alt_sel)
-{
-    Method orig_method = nil, alt_method = nil;
-	
-    // First, look for the methods
-    orig_method = class_getInstanceMethod(aClass, orig_sel);
-    alt_method = class_getInstanceMethod(aClass, alt_sel);
-	
-    // If both are found, swizzle them
-    if ((orig_method != nil) && (alt_method != nil)) {
-        method_exchangeImplementations(orig_method, alt_method);
-	}
-}
+@interface NSObject (MethodSwizzle)
 
-void MethodSwizzleClass(Class aClass, SEL orig_sel, SEL alt_sel)
-{
-    Method orig_method = nil, alt_method = nil;
-	
-    // First, look for the methods
-    orig_method = class_getClassMethod(aClass, orig_sel);
-    alt_method = class_getClassMethod(aClass, alt_sel);
-	
-    // If both are found, swizzle them
-    if ((orig_method != nil) && (alt_method != nil)) {
-        method_exchangeImplementations(orig_method, alt_method);
-	}
-}
++ (void)swizzleMethods;
+
+@end

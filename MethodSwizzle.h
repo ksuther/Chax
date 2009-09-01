@@ -25,11 +25,3 @@
 
 void MethodSwizzle(Class aClass, SEL orig_sel, SEL alt_sel);
 void MethodSwizzleClass(Class aClass, SEL orig_sel, SEL alt_sel);
-
-#pragma mark -
-
-@interface NSObject (MethodSwizzle)
-
-+ (void)swizzleMethods;
-
-@end
