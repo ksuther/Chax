@@ -27,8 +27,10 @@
 
 - (BOOL)chax_swizzle_applicationShouldHandleReopen:(id)fp8 hasVisibleWindows:(BOOL)fp12
 {
-	if (!fp12 && [Chax boolForKey:@"PreferAllContacts"]) {
-		[[NSClassFromString(@"UnifiedPeopleListController") sharedController] showWindow:nil];
+    PeopleListController *uplc = [NSClassFromString(@"UnifiedPeopleListController") sharedController];
+    
+	if ([Chax boolForKey:@"PreferAllContacts"] && [NSApp keyWindow] == nil && (!fp12 || ![[uplc window] isVisible])) {
+		[uplc showWindow:nil];
 		return NO;
 	}
 	
