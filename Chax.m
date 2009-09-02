@@ -192,7 +192,9 @@ static SUUpdater *_updater = nil;
 	[menuItem setTag:BY_HANDLE_MENU_ITEM];
 	[menuItems addObject:menuItem];*/
 	
-	[menuItems makeObjectsPerformSelector:@selector(setImage:) withObject:badgeImage];
+    if (![Chax boolForKey:@"HideMenuBadge"]) {
+        [menuItems makeObjectsPerformSelector:@selector(setImage:) withObject:badgeImage];
+    }
 	
 	_chaxMenuItems = [[NSArray alloc] initWithArray:menuItems];
 }
