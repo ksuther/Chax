@@ -43,7 +43,19 @@
 
 - (NSString *)myStatusMessage
 {
-    return [NSApp myStatusMessage];
+    NSArray *connectedAccounts = [[NSClassFromString(@"IMAccountController") sharedInstance] allConnectedAccounts];
+    NSString *status = [NSApp myStatusMessage];
+    
+    if ([connectedAccounts count] > 0) {
+        IMAccount *anAccount = [connectedAccounts lastObject];
+        NSString *playingString = [anAccount myNowPlayingString];
+        
+        if (playingString != nil) {
+            status = playingString;
+        }
+    }
+    
+    return status;
 }
 
 - (NSString *)menuItemDescription
@@ -108,15 +120,20 @@
 	return sortedGroups;
 }
 
-- (void)didWakeNotification:(id)fp8
+- (void)systemDidWake
 {
-	//Do nothing
+	[[NSClassFromString(@"UnifiedPeopleListController") sharedController] logServiceInOrOut:nil];
 }
 
-- (void)willSleepNotification:(id)fp8
+- (void)systemWillSleep
+{
+    [self logoutAccount];
+}
+
+/*- (void)willSleepNotification:(id)fp8
 {
 	//Prevents a crash when using groups
 	[[[NSClassFromString(@"PeopleListController") peopleListControllerWithRepresentedAccount:self] peopleList] removeAllIMHandlesAndGroups:YES];
-}
+}*/
 
 @end
