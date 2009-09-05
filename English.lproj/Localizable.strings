@@ -6,6 +6,13 @@
 "%@ went idle" = "%@ went idle";
 "%@ went offline" = "%@ went offline";
 
+/* Status Changes */
+"%@ became available." = "%@ became available.";
+"%@ became available. (%@)" = "%@ became available. (%@)";
+"%@ went away." = "%@ went away.";
+"%@ went away. (%@)" = "%@ went away. (%@)";
+"%@ went idle." = "%@ went idle.";
+
 /* Unified Contact List */
 "Add Group..." = "Add Group…";
 "all accounts" = "all accounts";

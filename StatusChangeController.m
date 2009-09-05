@@ -80,6 +80,7 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 - (void)statusNotificationReceived:(NSNotification *)note
 {
 	Presentity *presentity = [note object];
+    NSString *statusMessage = [presentity scriptStatusMessage];
     
 	if ([presentity timeSinceStatusChanged] < 1 && [[presentity account] accountLoginStatus] == 4 && ![[presentity account] justLoggedIn] &&
         [presentity status] != [presentity previousStatus] && [presentity status] != 5 && [presentity person] != [[IMMe me] person]) {
@@ -87,31 +88,31 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 		[[ActivityWindowController sharedController] addPresentityToActivity:presentity];
 		
 		//Check if the person has an active chat and post the status change to the chat window
-		/*if ([Chax boolForKey:@"ShowStatusChanges"]) {
-			Chat *chat = [ChatWindowController existingChatWithPresentity:presentity];
+		if ([Chax boolForKey:@"ShowStatusChanges"]) {
+			Chat *chat = [NSClassFromString(@"ChatWindowController") existingChatWithIMHandle:presentity];
 			
-			if (chat && [chat isKindOfClass:[ActiveChat class]]) {
+			if (chat && [chat isKindOfClass:NSClassFromString(@"ActiveChat")]) {
 				NSString *statusString = nil;
 				
 				switch ([presentity status]) {
-					case 2: //Idle
-						statusString = ChaxLocalizedString(@"idle_status");
+					case IMPersonStatusIdle:
+						statusString = ChaxLocalizedString(@"%@ went idle.");
 						break;
-					case 3: //Away
-						if ([presentity status] != [presentity previousStatus] && [presentity previousStatus] != 1) {
-							if ([[presentity statusMessage] length] == 0) {
-								statusString = ChaxLocalizedString(@"away_status");
+					case IMPersonStatusAway:
+						if ([presentity status] != [presentity previousStatus] && [presentity previousStatus] != IMPersonStatusOffline) {
+							if ([statusMessage length] == 0) {
+								statusString = ChaxLocalizedString(@"%@ went away.");
 							} else {
-								statusString = [NSString stringWithFormat:ChaxLocalizedString(@"away_status_msg"), @"%@", [presentity chax_strippedStatusMessage]];
+								statusString = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went away. (%@)"), @"%@", statusMessage];
 							}
 						}
 						break;
-					case 4: //Available
-						if ([presentity status] != [presentity previousStatus] && [presentity previousStatus] != 1) {
-							if ([[presentity statusMessage] length] == 0) {
-								statusString = ChaxLocalizedString(@"available_status");
+					case IMPersonStatusAvailable:
+						if ([presentity status] != [presentity previousStatus] && [presentity previousStatus] != IMPersonStatusOffline) {
+							if ([statusMessage length] == 0) {
+								statusString = ChaxLocalizedString(@"%@ became available.");
 							} else {
-								statusString = [NSString stringWithFormat:ChaxLocalizedString(@"available_status_msg"), @"%@", [presentity chax_strippedStatusMessage]];
+								statusString = [NSString stringWithFormat:ChaxLocalizedString(@"%@ became available. (%@)"), @"%@", statusMessage];
 							}
 						}
 						break;
@@ -119,13 +120,12 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 				
 				if (statusString && [_recentStatusChanges objectForKey:[presentity ID]] == nil) {
 					[(ActiveChat *)chat addAnnouncementString:statusString subject:presentity];
-					//[(ActiveChat *)chat addStatusChangeString:statusString subject:presentity];
 					
 					[_recentStatusChanges setObject:statusString forKey:[presentity ID]];
 					[_recentStatusChanges performSelector:@selector(removeObjectForKey:) withObject:[presentity ID] afterDelay:1.0];
 				}
 			}
-		}*/
+		}
 		
 		//Fire a Growl notification for the status change
         NSString *title, *description, *notification;
@@ -144,7 +144,7 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
                 break;
             case IMPersonStatusAway:
                 title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went away"), name];
-                description = [presentity scriptStatusMessage];
+                description = statusMessage;
                 notification = ChaxGrowlUserAway;
                 break;
             case IMPersonStatusAvailable:
@@ -154,7 +154,7 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
                     notification = ChaxGrowlUserOnline;
                 } else {
                     title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ became available"), name];
-                    description = [presentity scriptStatusMessage];
+                    description = statusMessage;
                     notification = ChaxGrowlUserAvailable;
                 }
                 break;
