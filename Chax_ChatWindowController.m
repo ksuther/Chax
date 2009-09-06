@@ -36,13 +36,22 @@ Chat *_lastChat = nil;
 	[self chax_swizzle_addChatInvite:fp8 withNotifierWindow:fp12];
 }
 
-- (void)chax_swizzle_selectChat:(id)fp8
+- (void)chax_swizzle_displayChat:(id)fp8
 {
 	if ([Chax boolForKey:@"SkipNewMessageNotification"] && _lastChat && _lastChat == fp8) {
 		[self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
 	} else {
-		[self chax_swizzle_selectChat:fp8];
+		[self chax_swizzle_displayChat:fp8];
 	}
+}
+
+-(void)chax_swizzle__startNotifierAnimationTimer
+{
+    [self chax_swizzle__startNotifierAnimationTimer];
+    
+    if ([Chax boolForKey:@"SkipNewMessageNotification"]) {
+        [self cancelActiveNotifierAnimations];
+    }
 }
 
 - (void)chax_allowSelect

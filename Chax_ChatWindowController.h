@@ -27,6 +27,7 @@
 
 @optional
 - (id)currentChatController;
+- (void)cancelActiveNotifierAnimations;
 
 @end
 
