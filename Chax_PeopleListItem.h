@@ -1,5 +1,5 @@
 /*
- * GrowlController.h
+ * Chax_PeopleListItem.h
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -22,26 +22,9 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <Growl/Growl.h>
 
-extern NSString *ChaxGrowlNewMessage;
-extern NSString *ChaxGrowlTextInvitation;
-extern NSString *ChaxGrowlUserOffline;
-extern NSString *ChaxGrowlUserOnline;
-extern NSString *ChaxGrowlUserAway;
-extern NSString *ChaxGrowlUserIdle;
-extern NSString *ChaxGrowlUserAvailable;
+@interface Chax_PeopleListItem : NSObject {
 
-@class Presentity;
-
-@interface StatusChangeController : NSObject <GrowlApplicationBridgeDelegate> {
-	NSMutableSet *_recentGrowlNotifications;
-	NSMutableDictionary *_recentStatusChanges;
 }
-
-+ (StatusChangeController *)sharedController;
-
-- (void)presentityStatusChanged:(Presentity *)presentity;
-- (void)postGrowlNotificationWithTitle:(NSString *)title description:(NSString *)description notificationName:(NSString *)noteName iconData:(NSData *)iconData clickContext:(NSDictionary *)clickContext;
 
 @end

@@ -34,6 +34,7 @@
 		371BA5381011373200CF88C0 /* Chax_PeopleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */; };
 		371BA5981011389B00CF88C0 /* Chax.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA940FF7C41F000CBC6A /* Chax.m */; };
 		371BA62010113B2900CF88C0 /* Chax_PeopleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DAE10FF7C778000CBC6A /* Chax_PeopleListController.m */; };
+		3725864B1053716D0073C799 /* Chax_PeopleListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725864A1053716D0073C799 /* Chax_PeopleListItem.m */; };
 		372D8A6610478E2A005E2F5F /* Chax_ChatInputLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 372D8A6510478E2A005E2F5F /* Chax_ChatInputLine.m */; };
 		3776F58E101CF589009D87B6 /* Chax_AnimatingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F58D101CF589009D87B6 /* Chax_AnimatingTableView.m */; };
 		3776F5AD101CF798009D87B6 /* UnifiedAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F5AA101CF798009D87B6 /* UnifiedAccount.m */; };
@@ -161,6 +162,8 @@
 		371A873C103B6629003EC364 /* Prefs_Chax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prefs_Chax.m; sourceTree = "<group>"; };
 		371BA4BA101134CC00CF88C0 /* BundleUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundleUtilities.h; sourceTree = "<group>"; };
 		371BA4BB101134CC00CF88C0 /* BundleUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundleUtilities.m; sourceTree = "<group>"; };
+		372586491053716D0073C799 /* Chax_PeopleListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_PeopleListItem.h; sourceTree = "<group>"; };
+		3725864A1053716D0073C799 /* Chax_PeopleListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_PeopleListItem.m; sourceTree = "<group>"; };
 		372D8A6410478E2A005E2F5F /* Chax_ChatInputLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ChatInputLine.h; sourceTree = "<group>"; };
 		372D8A6510478E2A005E2F5F /* Chax_ChatInputLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatInputLine.m; sourceTree = "<group>"; };
 		3776F58C101CF589009D87B6 /* Chax_AnimatingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_AnimatingTableView.h; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 				3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */,
 				3786DBC10FF7D189000CBC6A /* Chax_PeopleList.h */,
 				3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */,
+				372586491053716D0073C799 /* Chax_PeopleListItem.h */,
+				3725864A1053716D0073C799 /* Chax_PeopleListItem.m */,
 				3786DAE00FF7C778000CBC6A /* Chax_PeopleListController.h */,
 				3786DAE10FF7C778000CBC6A /* Chax_PeopleListController.m */,
 				370189881044504500C7C798 /* Chax_PeopleListControllerWindow.h */,
@@ -755,6 +760,7 @@
 				37E49122104C688100DA1B09 /* Chax_IMDaemonController.m in Sources */,
 				37F7C2F0104C87F300C01941 /* Chax_ActiveChat.m in Sources */,
 				377D718A104DC7A8007DC7EE /* AutomaticSwizzle.m in Sources */,
+				3725864B1053716D0073C799 /* Chax_PeopleListItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

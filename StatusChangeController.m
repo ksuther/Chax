@@ -24,6 +24,7 @@
 #import "StatusChangeController.h"
 #import "iChat5.h"
 #import "ActivityWindowController.h"
+#import <InstantMessage/IMService.h>
 
 NSString *ChaxGrowlNewMessage = @"New message received";
 NSString *ChaxGrowlTextInvitation = @"Text invitation received";
@@ -49,9 +50,6 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 - (id)init
 {
 	if ([super init]) {
-		//Register for status change events from iChat
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusNotificationReceived:) name:@"IMHandleStatusChanged" object:nil];
-        
 		_recentGrowlNotifications = [[NSMutableSet alloc] init];
 		_recentStatusChanges = [[NSMutableDictionary alloc] init];
 		
@@ -77,9 +75,8 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 	[super dealloc];
 }
 
-- (void)statusNotificationReceived:(NSNotification *)note
+- (void)presentityStatusChanged:(Presentity *)presentity
 {
-	Presentity *presentity = [note object];
     NSString *statusMessage = [presentity scriptStatusMessage];
     
 	if ([presentity timeSinceStatusChanged] < 1 && [[presentity account] accountLoginStatus] == 4 && ![[presentity account] justLoggedIn] &&

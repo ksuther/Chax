@@ -1,5 +1,5 @@
 /*
- * GrowlController.h
+ * Chax_PeopleListItem.m
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,27 +21,21 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
-#import <Growl/Growl.h>
+#import "Chax_PeopleListItem.h"
+#import "StatusChangeController.h"
+#import "iChat5.h"
 
-extern NSString *ChaxGrowlNewMessage;
-extern NSString *ChaxGrowlTextInvitation;
-extern NSString *ChaxGrowlUserOffline;
-extern NSString *ChaxGrowlUserOnline;
-extern NSString *ChaxGrowlUserAway;
-extern NSString *ChaxGrowlUserIdle;
-extern NSString *ChaxGrowlUserAvailable;
+@implementation Chax_PeopleListItem
 
-@class Presentity;
-
-@interface StatusChangeController : NSObject <GrowlApplicationBridgeDelegate> {
-	NSMutableSet *_recentGrowlNotifications;
-	NSMutableDictionary *_recentStatusChanges;
+- (void)chax_swizzle__presenceStatusChanged:(id)fp8
+{
+    Presentity *presentity = [[fp8 userInfo] objectForKey:@"kIMHandleResponsible"];
+    
+    if (presentity != nil) {
+        [[StatusChangeController sharedController] presentityStatusChanged:presentity];
+    }
+    
+    [self chax_swizzle__presenceStatusChanged:fp8];
 }
-
-+ (StatusChangeController *)sharedController;
-
-- (void)presentityStatusChanged:(Presentity *)presentity;
-- (void)postGrowlNotificationWithTitle:(NSString *)title description:(NSString *)description notificationName:(NSString *)noteName iconData:(NSData *)iconData clickContext:(NSDictionary *)clickContext;
 
 @end
