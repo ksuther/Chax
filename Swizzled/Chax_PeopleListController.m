@@ -111,6 +111,8 @@
 
 - (void)chax_swizzle_displayWithKey:(BOOL)fp8
 {
+    [[self window] setAlphaValue:1.0];
+    
     //Ensures that only the unified contact list appears at launch
     if (![Chax boolForKey:@"PreferAllContacts"] || [[NSClassFromString(@"Fezz") sharedInstance] deferredLaunchComplete]) {
         [self chax_swizzle_displayWithKey:fp8];

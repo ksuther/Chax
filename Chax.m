@@ -49,7 +49,7 @@ static NSImage *_chaxIcon = nil;
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReceived:) name:NSBundleDidLoadNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bundleDidLoadNotificationReceived:) name:NSBundleDidLoadNotification object:nil];
 	
 	//[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(screensaverNotificationReceived:) name:@"com.apple.screensaver.didstart" object:nil];
 	//[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(screensaverNotificationReceived:) name:@"com.apple.screensaver.didstop" object:nil];
@@ -59,7 +59,7 @@ static NSImage *_chaxIcon = nil;
 
 #pragma mark -
 
-+ (void)notificationReceived:(NSNotification *)note
++ (void)bundleDidLoadNotificationReceived:(NSNotification *)note
 {
     if ([[[note object] bundleIdentifier] isEqualToString:ChaxLibBundleIdentifier]) {
         NSURL *chaxPath = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:ChaxBundleIdentifier];
