@@ -38,16 +38,14 @@
         NSArray *autoAcceptContacts = [[Chax objectForKey:@"AutoAccept.Files"] objectForKey:[transfer accountID]];
         
         if ([Chax integerForKey:@"AutoAcceptSelect.Files"] == 0 || [autoAcceptContacts containsObject:@"Chax_AcceptAnyone"] || [autoAcceptContacts containsObject:[[transfer otherPerson] lowercaseString]]) {
-            [self performSelector:@selector(chax_autoAcceptTransfer:) withObject:fp8 afterDelay:0.0];
+            [self performSelector:@selector(chax_autoAcceptTransfer:) withObject:transfer afterDelay:0.0];
         }
     }
 }
 
-- (void)chax_autoAcceptTransfer:(NSString *)guid
+- (void)chax_autoAcceptTransfer:(IMFileTransfer *)transfer
 {
-    id view = [[NSClassFromString(@"FileTransferManager") sharedInstance] _viewForTransferGUID:guid];
-    
-    [view acceptTransfer:nil];
+    [NSClassFromString(@"FileTransferManager") fileTransfer:transfer saveTo:nil attachedToWindow:nil];
 }
 
 @end
