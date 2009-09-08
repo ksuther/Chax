@@ -23,6 +23,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+void PerformAutomaticSwizzle();
+
 @interface NSObject (MethodSwizzle)
 
 + (void)swizzleMethods;

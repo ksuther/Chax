@@ -76,7 +76,7 @@ static DockIconController *_sharedController = nil;
 	[_chats removeObject:chat];
 	
 	if ([_chats count] == 0) {
-		[Chax resetApplicationIcon];
+        [[NSApp dockTile] setContentView:nil];
         
 		[_flashTimer invalidate], _flashTimer = nil;
 	}

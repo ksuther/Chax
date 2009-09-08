@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.ksuther.chax.addition</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>OSAX</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.0a5</string>
+	<key>CFBundleSignature</key>
+	<string>ChxA</string>
+	<key>CFBundleVersion</key>
+	<string>5</string>
+	<key>OSAScriptingDefinition</key>
+	<string>ChaxAddition.sdef</string>
+	<key>OSAXHandlers</key>
+	<dict>
+		<key>Events</key>
+		<dict>
+			<key>ChaxLoad</key>
+			<dict>
+				<key>Context</key>
+				<string>Process</string>
+				<key>Handler</key>
+				<string>ChaxLoad</string>
+				<key>ThreadSafe</key>
+				<false/>
+			</dict>
+			<key>ChxLLoad</key>
+			<dict>
+				<key>Context</key>
+				<string>Process</string>
+				<key>Handler</key>
+				<string>ChxLLoad</string>
+				<key>ThreadSafe</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>

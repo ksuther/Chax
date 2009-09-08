@@ -105,7 +105,7 @@ NSString *FilterToolbarItemIdentifier = @"FilterToolbarItemIdentifier";
 - (NSManagedObjectContext *)managedObjectContext
 {
 	if (!_managedObjectContext) {
-		NSManagedObjectModel *managedObjectModel = [[[NSManagedObjectModel alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] pathForResource:@"ActivityModel" ofType:@"mom"]]] autorelease];
+		NSManagedObjectModel *managedObjectModel = [[[NSManagedObjectModel alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForResource:@"ActivityModel" ofType:@"mom"]]] autorelease];
 		NSPersistentStoreCoordinator *persistentStoreCoordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel] autorelease];
 		
 		NSString *applicationSupportFolder = [self applicationSupportFolder];

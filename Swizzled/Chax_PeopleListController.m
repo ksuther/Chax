@@ -28,6 +28,20 @@
 
 @implementation Chax_PeopleListController
 
++ (void)load
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
+	
+	for (PeopleListController *plc in controllers) {
+        [[NSNotificationCenter defaultCenter] addObserver:plc selector:@selector(chax_notificationReceived:) name:@"ReloadContactList" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:plc selector:@selector(chax_notificationReceived:) name:@"ResizeContactList" object:[plc peopleList]];
+    }
+    
+    [pool release];
+}
+
 #pragma mark -
 #pragma mark Added Methods
 
@@ -52,7 +66,7 @@
 {
     StatusController *statusController = [self valueForKey:@"_myStatusController"];
     
-	if ([statusController currentStatus] > 1 && [Chax boolForKey:@"AutoresizeContactList"] && [statusController currentStatus] > 1 && ![[self representedAccount] justLoggedIn]) {
+	if ([statusController currentStatus] > 1 && [Chax boolForKey:@"AutoresizeContactList"] && [statusController currentStatus] > 1) {
 		NSRect frame = [[self window] frame], screenFrame = [[[self window] screen] frame];
 		NSRect preferredFrame = [self windowWillUseStandardFrame:[self window] defaultFrame:screenFrame];
 		

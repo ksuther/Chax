@@ -59,8 +59,6 @@ NSMenu *_addMenu = nil;
 	struct objc_super superData = {self, [self superclass]};
 	
 	if ( (self = objc_msgSendSuper(&superData, @selector(initWithAccount:), account)) ) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chax_notificationReceived:) name:@"ReloadContactList" object:nil];
-		
 		[self setPrefIdentifier:@"Chax"];
 		[self setName:ChaxLocalizedString(@"Contacts")];
 	}
@@ -74,6 +72,38 @@ NSMenu *_addMenu = nil;
     struct objc_super superData = {self, [self superclass]};
 	
 	objc_msgSendSuper(&superData, @selector(dealloc));
+}
+
+- (void)windowDidLoad
+{
+    struct objc_super superData = {self, [self superclass]};
+	
+	objc_msgSendSuper(&superData, @selector(windowDidLoad));
+    
+    //Populate the unified list with the people from the other lists
+    //We have to do this manually now since we're loading in after launch
+    [self reloadContacts];
+    
+    //Hide the other contact lists if the unified list is primary
+    if ([Chax boolForKey:@"PreferAllContacts"]) {
+        [self performSelector:@selector(hideOtherLists) withObject:nil afterDelay:0.0];
+    }
+}
+
+- (void)hideOtherLists
+{
+    NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
+    
+    for (PeopleListController *plc in controllers) {
+        if (![self isEqual:plc]) {
+            NSDictionary *animationDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[plc window], NSViewAnimationTargetKey, NSViewAnimationFadeOutEffect, NSViewAnimationEffectKey, nil];
+            NSArray *animationsArray = [NSArray arrayWithObject:animationDictionary];
+            NSViewAnimation *animation = [[[NSViewAnimation alloc] initWithViewAnimations:animationsArray] autorelease];
+            
+            [animation setDuration:0.5];
+            [animation startAnimation];
+        }
+    }
 }
 
 - (BOOL)supportsOfflineToggle
@@ -155,21 +185,21 @@ NSMenu *_addMenu = nil;
 
 - (void)reloadContacts
 {
-	[[self sourcePeople] beginCoalescedChanges];
-	
-	[[self peopleList] removeAllIMHandlesAndGroups:YES];
-	
-	for (PeopleListController *pl in [NSClassFromString(@"PeopleListController") peopleListControllers]) {
-		if (![self isEqual:pl]) {
-			NSArray *handles = [[pl peopleList] allIMHandles];
-			
-			for (IMHandle *nextIMHandle in handles) {
-				[[self sourcePeople] addIMHandle:nextIMHandle];
-			}
-		}
-	}
-	
-	[[self sourcePeople] endCoalescedChanges];
+    NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
+    
+    [[self peopleList] beginChangesNoAnimation];
+    
+    [[self peopleList] removeAllIMHandlesAndGroups:YES];
+    
+    for (PeopleListController *plc in controllers) {
+        if (![self isEqual:plc]) {
+            id people = [[plc sourcePeople] people];
+            
+            [[self peopleList] addPeopleFromArray:people];
+        }
+    }
+    
+    [[self peopleList] endChanges];
 }
 
 - (void)rebuildAddBuddyMenu

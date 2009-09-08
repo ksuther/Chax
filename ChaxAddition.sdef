@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary>
+	<suite name="Chax Suite" code="ChxA" description="Chax Scripting Addition">
+		<command name="Load Chax" code="ChaxLoad" description="Load Chax">
+			<result type="text" name="Dictionary"/>
+		</command>
+		<command name="Load ChaxAgent" code="ChxLLoad" description="Load Chax Agent">
+			<result type="text" name="Dictionary"/>
+		</command>
+	</suite>
+</dictionary>

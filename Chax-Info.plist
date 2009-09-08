@@ -2,50 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>ichat</string>
-				<string>chat</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>Chat transcript</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>chat</string>
-			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>NSDocumentClass</key>
-			<string>ChatDoc</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>ichattransfer</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>iChat file transfer</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSTypeIsPackage</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>transcriptstyle</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>iChat transcript style</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSTypeIsPackage</key>
-			<true/>
-		</dict>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
@@ -65,11 +21,11 @@
 	<key>CFBundleSignature</key>
 	<string>Chax</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0a4</string>
+	<string>3.0a5</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
@@ -78,40 +34,5 @@
 	<string>dsa_pub.pem</string>
 	<key>SUEnableSystemProfiling</key>
 	<true/>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>iChat URL</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>iChat</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>AIM</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>aim</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>XMPP</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>xmpp</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>CPIM</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>im</string>
-			</array>
-		</dict>
-	</array>
 </dict>
 </plist>

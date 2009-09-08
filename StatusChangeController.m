@@ -55,7 +55,7 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 		
 		//Load the Growl framework
 		if (!NSClassFromString(@"GrowlApplicationBridge")) {
-			NSString *frameworkPath = [[[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] privateFrameworksPath] stringByAppendingPathComponent:@"Growl.framework"];
+			NSString *frameworkPath = [[[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] privateFrameworksPath] stringByAppendingPathComponent:@"Growl.framework"];
 			NSBundle *framework = [NSBundle bundleWithPath:frameworkPath];
             
 			if ([framework load]) {

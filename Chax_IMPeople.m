@@ -42,13 +42,6 @@
 	return [self chax_swizzle_addIMHandle:fp8];
 }
 
-- (BOOL)chax_addPeopleFromArray:(id)fp8
-{
-	[[[NSClassFromString(@"UnifiedPeopleListController") sharedController] sourcePeople] chax_addPeopleFromArray:fp8];
-    
-	return [self chax_addPeopleFromArray:fp8];
-}
-
 - (BOOL)chax_swizzle_removeIMHandle:(id)fp8
 {
 	NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
@@ -72,13 +65,6 @@
 	[[[NSClassFromString(@"UnifiedPeopleListController") sharedController] sourcePeople] chax_swizzle_removeIMHandle:fp8];
     
 	return [self chax_swizzle_removeIMHandle:fp8];
-}
-
-- (BOOL)chax_removePeopleFromArray:(id)fp8
-{
-	[[[NSClassFromString(@"UnifiedPeopleListController") sharedController] sourcePeople] chax_removePeopleFromArray:fp8];
-    
-	return [self chax_removePeopleFromArray:fp8];
 }
 
 @end

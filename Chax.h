@@ -36,16 +36,16 @@ typedef enum ChaxMenuItem {
 } ChaxMenuItem;
 
 extern NSString *ChaxBundleIdentifier;
+extern NSString *ChaxLibBundleIdentifier;
 
 static inline NSString * ChaxLocalizedString(NSString *key) {
-	return [[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] localizedStringForKey:(key) value:(key) table:nil];
+	return [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] localizedStringForKey:(key) value:(key) table:nil];
 }
 
 @interface Chax : NSObject {
 	
 }
 
-+ (void)resetApplicationIcon;
 + (void)registerURLHandlers;
 + (void)setupSparkle;
 + (void)checkForUpdates;

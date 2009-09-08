@@ -39,7 +39,7 @@ static NSDictionary *_images;
 			[document setSize:NSMakeSize(13, 13)];
 			
 			_images = [[NSDictionary alloc] initWithObjectsAndKeys:[NSImage imageNamed:[IMService imageNameForStatus:IMPersonStatusUnknown]], [NSNumber numberWithInt:IMPersonStatusUnknown],
-														[[[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] pathForImageResource:@"status-offline"]] autorelease], [NSNumber numberWithInt:IMPersonStatusOffline],
+														[[[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForImageResource:@"status-offline"]] autorelease], [NSNumber numberWithInt:IMPersonStatusOffline],
 														[NSImage imageNamed:[IMService imageNameForStatus:IMPersonStatusIdle]], [NSNumber numberWithInt:IMPersonStatusIdle],
 														[NSImage imageNamed:[IMService imageNameForStatus:IMPersonStatusAway]], [NSNumber numberWithInt:IMPersonStatusAway],
 														[NSImage imageNamed:[IMService imageNameForStatus:IMPersonStatusAvailable]], [NSNumber numberWithInt:IMPersonStatusAvailable],

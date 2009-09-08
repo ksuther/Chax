@@ -26,6 +26,28 @@
 
 const char *ChaxMethodSwizzlePrefix = "chax_swizzle_";
 
+void PerformAutomaticSwizzle()
+{
+	NSUInteger numClasses;
+	Class *classes = NULL;
+	
+	classes = NULL;
+	numClasses = objc_getClassList(NULL, 0);
+	
+	if (numClasses > 0) {
+		classes = malloc(sizeof(Class) * numClasses);
+		numClasses = objc_getClassList(classes, numClasses);
+		
+		for (NSUInteger i = 0; i < numClasses; i++) {
+			if (strncmp(class_getName(classes[i]), "Chax_", 5) == 0) {
+				[classes[i] swizzleMethods];
+			}
+		}
+		
+		free(classes);
+	}
+}
+
 @implementation NSObject (MethodSwizzle)
 
 + (void)swizzleMethods
@@ -68,48 +90,3 @@ const char *ChaxMethodSwizzlePrefix = "chax_swizzle_";
 }
 
 @end
-
-#pragma mark -
-#pragma mark NSApplication Override
-
-#define DYLD_INTERPOSE(_replacment,_replacee) \
-__attribute__((used)) static struct{ const void* replacment; const void* replacee; } _interpose_##_replacee \
-__attribute__ ((section ("__DATA,__interpose"))) = { (const void*)(unsigned long)&_replacment, (const void*)(unsigned long)&_replacee };
-
-static int _ChaxApplicationMain(int argc, const char **argv)
-{
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	NSUInteger numClasses;
-	Class *classes = NULL;
-	
-	classes = NULL;
-	numClasses = objc_getClassList(NULL, 0);
-	
-	if (numClasses > 0) {
-		classes = malloc(sizeof(Class) * numClasses);
-		numClasses = objc_getClassList(classes, numClasses);
-		
-		for (NSUInteger i = 0; i < numClasses; i++) {
-			if (strncmp(class_getName(classes[i]), "Chax_", 5) == 0) {
-				[classes[i] swizzleMethods];
-			}
-		}
-		
-		free(classes);
-	}
-	
-	[pool release];
-	
-    char *originalLibrariesPath = getenv("ChaxOriginalInsertLibraries");
-    
-    if (originalLibrariesPath) {
-        setenv("DYLD_INSERT_LIBRARIES", originalLibrariesPath, 1);
-    } else {
-        unsetenv("DYLD_INSERT_LIBRARIES");
-    }
-    
-	return NSApplicationMain(argc, argv);
-}
-
-DYLD_INTERPOSE(_ChaxApplicationMain, NSApplicationMain);

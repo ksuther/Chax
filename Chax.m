@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Sparkle/Sparkle.h>
+//#import <Sparkle/Sparkle.h>
 #import "Chax.h"
 #import "iChat5.h"
 #import "UnifiedPeopleListController_Provider.h"
@@ -31,6 +31,7 @@
 #import "ActivityWindowController.h"
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
+NSString *ChaxLibBundleIdentifier = @"com.ksuther.chax.lib";
 
 static NSInteger kChaxDonateRequestFirstInterval = 604800;
 static NSInteger kChaxDonateRequestSecondInterval = 2678400;
@@ -40,15 +41,15 @@ static NSImage *_chaxIcon = nil;
 //static NSString *_previousMessage = nil;
 //static BOOL _screensaverAwayed = NO;
 
-static SUUpdater *_updater = nil;
+//static SUUpdater *_updater = nil;
 
 @implementation Chax
 
 + (void)load
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReceived:) name:NSApplicationWillFinishLaunchingNotification object:nil];
+    
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReceived:) name:NSBundleDidLoadNotification object:nil];
 	
 	//[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(screensaverNotificationReceived:) name:@"com.apple.screensaver.didstart" object:nil];
 	//[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(screensaverNotificationReceived:) name:@"com.apple.screensaver.didstop" object:nil];
@@ -60,53 +61,53 @@ static SUUpdater *_updater = nil;
 
 + (void)notificationReceived:(NSNotification *)note
 {
-    _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] pathForImageResource:@"Chax"]];
-    [_chaxIcon setName:@"ChaxIcon"];
-    
-	[self addMenuItems];
-    [self resetApplicationIcon];
-    [self registerURLHandlers];
-    [self setupSparkle];
-    [self performSelector:@selector(displayDonateWindowIfWanted) withObject:nil afterDelay:2.0];
-    
-    [NSClassFromString(@"Prefs") setKnockKnock:![Chax boolForKey:@"SkipNewMessageNotification"]];
-    
-    [StatusChangeController sharedController]; //Load the Growl framework and register for status changes
-    
-    if ([Chax boolForKey:@"ConfirmQuit"]) {
-        [[NSProcessInfo processInfo] disableSuddenTermination];
+    if ([[[note object] bundleIdentifier] isEqualToString:ChaxLibBundleIdentifier]) {
+        NSURL *chaxPath = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:ChaxBundleIdentifier];
+        
+        if (chaxPath != nil) {
+            _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithURL:chaxPath] pathForImageResource:@"Chax"]];
+            [_chaxIcon setName:@"ChaxIcon"];
+        }
+        
+        [self addMenuItems];
+        [self registerURLHandlers];
+        [self setupSparkle];
+        [self performSelector:@selector(displayDonateWindowIfWanted) withObject:nil afterDelay:2.0];
+        [NSClassFromString(@"Prefs") setKnockKnock:![Chax boolForKey:@"SkipNewMessageNotification"]];
+        
+        [StatusChangeController sharedController]; //Load the Growl framework and register for status changes
+        
+        if ([Chax boolForKey:@"ConfirmQuit"]) {
+            [[NSProcessInfo processInfo] disableSuddenTermination];
+        }
+        
+        //Display the unified contact list if it has never been shown before
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Chax.Visible"] == nil || [[NSClassFromString(@"UnifiedPeopleListController") sharedController] prefVisible]) {
+            //Calling showWindow: instead of displayIfPrefVisible ensures that the window is made key if no other windows are opened
+            [[NSClassFromString(@"UnifiedPeopleListController") sharedController] performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
+        }
+        
+        PerformAutomaticSwizzle();
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadContactList" object:nil];
     }
-    
-    //Display the unified contact list if it has never been shown before
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Chax.Visible"] == nil || [[NSClassFromString(@"UnifiedPeopleListController") sharedController] prefVisible]) {
-		//Calling showWindow: instead of displayIfPrefVisible ensures that the window is made key if no other windows are opened
-		[[NSClassFromString(@"UnifiedPeopleListController") sharedController] performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
-	}
-}
-
-+ (void)resetApplicationIcon
-{
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.iChat"];
-    NSString *path = [bundle pathForResource:[bundle objectForInfoDictionaryKey:@"CFBundleIconFile"] ofType:@"icns"];
-    
-    [NSApp setApplicationIconImage:[[[NSImage alloc] initByReferencingFile:path] autorelease]];
 }
 
 + (void)registerURLHandlers
 {
-    LSSetDefaultHandlerForURLScheme((CFStringRef)@"ichat", (CFStringRef)ChaxBundleIdentifier);
+    LSSetDefaultHandlerForURLScheme((CFStringRef)@"ichat", CFSTR("com.apple.iChat"));
 }
 
 + (void)setupSparkle
 {
-    NSBundle *chaxBundle = [NSBundle bundleWithIdentifier:ChaxBundleIdentifier];
+    /*NSBundle *chaxBundle = [NSBundle bundleWithIdentifier:ChaxBundleIdentifier];
     
-    _updater = [[SUUpdater updaterForBundle:chaxBundle] retain];
+    _updater = [[SUUpdater updaterForBundle:chaxBundle] retain];*/
 }
 
 + (void)checkForUpdates
 {
-    [_updater checkForUpdates:nil];
+    //[_updater checkForUpdates:nil];
 }
 
 + (void)displayDonateWindowIfWanted
@@ -137,13 +138,13 @@ static SUUpdater *_updater = nil;
 
 + (void)addMenuItems
 {
-	NSImage *badgeImage = [[[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithIdentifier:ChaxBundleIdentifier] pathForImageResource:@"menu-badge"]] autorelease];
+	NSImage *badgeImage = [[[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForImageResource:@"menu-badge"]] autorelease];
 	NSMutableArray *menuItems = [NSMutableArray array];
 	NSMenuItem *menuItem;
 	NSMenu *viewMenu = [[[NSApp mainMenu] itemAtIndex:3] submenu];
 	NSMenu *buddiesMenu = [[[NSApp mainMenu] itemAtIndex:4] submenu];
 	//NSMenu *audioMenu = [[[NSApp mainMenu] itemAtIndex:5] submenu];
-	
+    
 	//Toggle text status menu item
 	menuItem = [viewMenu insertItemWithTitle:ChaxLocalizedString(@"Show Text Status") action:@selector(chax_toggleTextStatus:) keyEquivalent:@"" atIndex:5];
 	[menuItem setTag:ChaxMenuItemShowTextStatus];
