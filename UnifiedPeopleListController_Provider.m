@@ -95,13 +95,26 @@ NSMenu *_addMenu = nil;
     NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
     
     for (PeopleListController *plc in controllers) {
-        if (![self isEqual:plc]) {
-            NSDictionary *animationDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[plc window], NSViewAnimationTargetKey, NSViewAnimationFadeOutEffect, NSViewAnimationEffectKey, nil];
-            NSArray *animationsArray = [NSArray arrayWithObject:animationDictionary];
-            NSViewAnimation *animation = [[[NSViewAnimation alloc] initWithViewAnimations:animationsArray] autorelease];
+        if (![self isEqual:plc] && [[plc window] isVisible]) {
+            //Stupid GCD-based workaround to the fact that NSViewAnimation prevents the window from reappearing properly
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
             
-            [animation setDuration:0.5];
-            [animation startAnimation];
+            dispatch_async(queue, ^{
+                NSWindow *window = [plc window];
+                
+                while ([window alphaValue] > 0.0) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [window setAlphaValue:MAX([window alphaValue] - 0.033, 0.0)];
+                    });
+                    
+                    [NSThread sleepForTimeInterval:0.01];
+                }
+                
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [window setAlphaValue:1.0];
+                    [window orderOut:nil];
+                });
+            });
         }
     }
 }
