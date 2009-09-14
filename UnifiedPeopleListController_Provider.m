@@ -176,11 +176,19 @@ NSMenu *_addMenu = nil;
 
 - (void)_deleteBuddies:(id)sender
 {
-    for (PeopleListController *pl in [NSClassFromString(@"PeopleListController") peopleListControllers]) {
-        if (![self isEqual:pl]) {
-            [pl _deleteBuddies:sender];
+    for (PeopleListController *plc in [NSClassFromString(@"PeopleListController") peopleListControllers]) {
+        if (![self isEqual:plc]) {
+            [plc _deleteBuddies:sender];
         }
     }
+    
+    [[self peopleList] beginChanges];
+    
+    for (IMHandle *nextHandle in sender) {
+        [[self peopleList] removeIMHandle:nextHandle];
+    }
+    
+    [[self peopleList] endChanges];
 }
 
 - (void)reloadContacts
