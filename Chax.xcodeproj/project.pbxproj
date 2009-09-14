@@ -85,7 +85,6 @@
 		375091761056FCA300F472F1 /* AutomaticSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D7189104DC7A8007DC7EE /* AutomaticSwizzle.m */; };
 		375091771056FCA300F472F1 /* Chax_PeopleListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725864A1053716D0073C799 /* Chax_PeopleListItem.m */; };
 		3750918D1056FDB900F472F1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
-		375091AA1056FE1000F472F1 /* ActivityModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */; };
 		375091D41056FF9600F472F1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3786DAA20FF7C513000CBC6A /* Localizable.strings */; };
 		375091D51056FF9D00F472F1 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5BBB6103B679B00EE8A49 /* Preferences.xib */; };
 		375091D61056FF9D00F472F1 /* LogViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37AFBC25103112EB001AA056 /* LogViewer.xib */; };
@@ -96,6 +95,9 @@
 		375091E51056FFF800F472F1 /* status-offline.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 37F4398C1049C9D5007F8638 /* status-offline.tiff */; };
 		375091E91057000E00F472F1 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 378D4FA7101E6FE300176B47 /* Growl.framework */; };
 		375092061057012F00F472F1 /* ActivityModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */; };
+		377AAC1F105DE96E0068A68F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377AAC1D105DE96E0068A68F /* MainMenu.xib */; };
+		377AAC63105DEACA0068A68F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		377AAC76105DEC1F0068A68F /* helper_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AAC75105DEC1F0068A68F /* helper_main.m */; };
 		3786DA200FF7C0A8000CBC6A /* Chax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3786DA1F0FF7C0A8000CBC6A /* Chax.icns */; };
 		37BC686B1056EE9500F1FCD9 /* ChaxAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC686A1056EE9500F1FCD9 /* ChaxAddition.m */; };
 		37BC686D1056EEB700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
@@ -111,15 +113,29 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 375090F21056FA5A00F472F1 /* ChaxAgentLib */;
+			remoteGlobalIDString = 375090F21056FA5A00F472F1;
 			remoteInfo = ChaxAgentLib;
 		};
 		3750913B1056FC7500F472F1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 375091301056FC5F00F472F1 /* ChaxLib */;
+			remoteGlobalIDString = 375091301056FC5F00F472F1;
 			remoteInfo = ChaxLib;
+		};
+		377AAC5F105DEABC0068A68F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 377AAC3C105DEA380068A68F /* ChaxHelperApp */;
+			remoteInfo = ChaxHelperApp;
+		};
+		377AAC61105DEAC20068A68F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37BC68571056EBDB00F1FCD9 /* ChaxAddition */;
+			remoteInfo = ChaxAddition;
 		};
 		3784D28A10473F2F00B56C81 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -140,6 +156,16 @@
 				375091E91057000E00F472F1 /* Growl.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		377AAC6D105DEAFB0068A68F /* Copy Executables */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+			);
+			name = "Copy Executables";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		378D4FB6101E700A00176B47 /* Copy Frameworks */ = {
@@ -196,6 +222,10 @@
 		3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_IMPeople.m; sourceTree = "<group>"; };
 		3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Fezz.h; sourceTree = "<group>"; };
 		3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Fezz.m; sourceTree = "<group>"; };
+		377AAC1E105DE96E0068A68F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		377AAC3D105DEA380068A68F /* ChaxHelperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChaxHelperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		377AAC3F105DEA380068A68F /* ChaxHelperApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxHelperApp-Info.plist"; sourceTree = "<group>"; };
+		377AAC75105DEC1F0068A68F /* helper_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = helper_main.m; sourceTree = "<group>"; };
 		377D7155104DC6E9007DC7EE /* Chax_AIMServiceSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_AIMServiceSession.h; sourceTree = "<group>"; };
 		377D7156104DC6E9007DC7EE /* Chax_AIMServiceSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_AIMServiceSession.m; sourceTree = "<group>"; };
 		377D7188104DC7A8007DC7EE /* AutomaticSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutomaticSwizzle.h; sourceTree = "<group>"; };
@@ -316,6 +346,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		377AAC3B105DEA380068A68F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				377AAC63105DEACA0068A68F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37BC68561056EBDB00F1FCD9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -387,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* Chax.app */,
+				377AAC3D105DEA380068A68F /* ChaxHelperApp.app */,
 				37BC68581056EBDB00F1FCD9 /* ChaxAddition.osax */,
 				375090F31056FA5A00F472F1 /* ChaxAgentLib.bundle */,
 				375091311056FC5F00F472F1 /* ChaxLib.bundle */,
@@ -397,6 +436,8 @@
 		29B97314FDCFA39411CA2CEA /* Chax */ = {
 			isa = PBXGroup;
 			children = (
+				377AAC47105DEA3F0068A68F /* Chax */,
+				377AAC4C105DEA430068A68F /* ChaxHelperApp */,
 				080E96DDFE201D6D7F000001 /* ChaxLib */,
 				37E49165104C6E1100DA1B09 /* ChaxAgentLib */,
 				37BC68691056EDFD00F1FCD9 /* ChaxAddition */,
@@ -420,6 +461,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				377AAC1D105DE96E0068A68F /* MainMenu.xib */,
 				37D5BBB6103B679B00EE8A49 /* Preferences.xib */,
 				37AFBC25103112EB001AA056 /* LogViewer.xib */,
 				37F4391A1049C693007F8638 /* ActivityWindow.xib */,
@@ -429,6 +471,7 @@
 				3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */,
 				37F4398C1049C9D5007F8638 /* status-offline.tiff */,
 				8D1107310486CEB800E47090 /* Chax-Info.plist */,
+				377AAC3F105DEA380068A68F /* ChaxHelperApp-Info.plist */,
 				37BC68591056EBDB00F1FCD9 /* ChaxAddition-Info.plist */,
 				375091321056FC5F00F472F1 /* ChaxLib-Info.plist */,
 				375090F41056FA5A00F472F1 /* ChaxAgentLib-Info.plist */,
@@ -475,6 +518,21 @@
 				3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */,
 			);
 			name = "Unified Contact List";
+			sourceTree = "<group>";
+		};
+		377AAC47105DEA3F0068A68F /* Chax */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Chax;
+			sourceTree = "<group>";
+		};
+		377AAC4C105DEA430068A68F /* ChaxHelperApp */ = {
+			isa = PBXGroup;
+			children = (
+				377AAC75105DEC1F0068A68F /* helper_main.m */,
+			);
+			name = ChaxHelperApp;
 			sourceTree = "<group>";
 		};
 		3786DA420FF7C268000CBC6A /* Other Sources */ = {
@@ -676,6 +734,23 @@
 			productReference = 375091311056FC5F00F472F1 /* ChaxLib.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		377AAC3C105DEA380068A68F /* ChaxHelperApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 377AAC46105DEA390068A68F /* Build configuration list for PBXNativeTarget "ChaxHelperApp" */;
+			buildPhases = (
+				377AAC39105DEA380068A68F /* Resources */,
+				377AAC3A105DEA380068A68F /* Sources */,
+				377AAC3B105DEA380068A68F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChaxHelperApp;
+			productName = ChaxHelperApp;
+			productReference = 377AAC3D105DEA380068A68F /* ChaxHelperApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		37BC68571056EBDB00F1FCD9 /* ChaxAddition */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37BC685C1056EBDC00F1FCD9 /* Build configuration list for PBXNativeTarget "ChaxAddition" */;
@@ -703,12 +778,15 @@
 			buildPhases = (
 				8D1107290486CEB800E47090 /* Resources */,
 				378D4FB6101E700A00176B47 /* Copy Frameworks */,
+				377AAC6D105DEAFB0068A68F /* Copy Executables */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				377AAC60105DEABC0068A68F /* PBXTargetDependency */,
+				377AAC62105DEAC20068A68F /* PBXTargetDependency */,
 			);
 			name = Chax;
 			productInstallPath = "$(HOME)/Applications";
@@ -730,6 +808,7 @@
 			targets = (
 				3784D28010473F2000B56C81 /* Build Disk Image */,
 				8D1107260486CEB800E47090 /* Chax */,
+				377AAC3C105DEA380068A68F /* ChaxHelperApp */,
 				37BC68571056EBDB00F1FCD9 /* ChaxAddition */,
 				375091301056FC5F00F472F1 /* ChaxLib */,
 				375090F21056FA5A00F472F1 /* ChaxAgentLib */,
@@ -760,6 +839,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		377AAC39105DEA380068A68F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37BC68541056EBDB00F1FCD9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -777,6 +863,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				3786DA200FF7C0A8000CBC6A /* Chax.icns in Resources */,
 				3710F5E0104260E400EAD72D /* dsa_pub.pem in Resources */,
+				377AAC1F105DE96E0068A68F /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,6 +975,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		377AAC3A105DEA380068A68F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				377AAC76105DEC1F0068A68F /* helper_main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37BC68551056EBDB00F1FCD9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -901,7 +996,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				375091AA1056FE1000F472F1 /* ActivityModel.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,6 +1012,16 @@
 			target = 375091301056FC5F00F472F1 /* ChaxLib */;
 			targetProxy = 3750913B1056FC7500F472F1 /* PBXContainerItemProxy */;
 		};
+		377AAC60105DEABC0068A68F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 377AAC3C105DEA380068A68F /* ChaxHelperApp */;
+			targetProxy = 377AAC5F105DEABC0068A68F /* PBXContainerItemProxy */;
+		};
+		377AAC62105DEAC20068A68F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37BC68571056EBDB00F1FCD9 /* ChaxAddition */;
+			targetProxy = 377AAC61105DEAC20068A68F /* PBXContainerItemProxy */;
+		};
 		3784D28B10473F2F00B56C81 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D1107260486CEB800E47090 /* Chax */;
@@ -932,6 +1036,14 @@
 				089C165DFE840E0CC02AAC07 /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		377AAC1D105DE96E0068A68F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				377AAC1E105DE96E0068A68F /* English */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		3786DAA20FF7C513000CBC6A /* Localizable.strings */ = {
@@ -1091,6 +1203,54 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = ChaxLib;
 				WRAPPER_EXTENSION = bundle;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		377AAC40105DEA390068A68F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Chax_Prefix.pch;
+				INFOPLIST_FILE = "ChaxHelperApp-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = ChaxHelperApp;
+			};
+			name = Debug;
+		};
+		377AAC41105DEA390068A68F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Chax_Prefix.pch;
+				INFOPLIST_FILE = "ChaxHelperApp-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = ChaxHelperApp;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1256,6 +1416,15 @@
 			buildConfigurations = (
 				375091331056FC6000F472F1 /* Debug */,
 				375091341056FC6000F472F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		377AAC46105DEA390068A68F /* Build configuration list for PBXNativeTarget "ChaxHelperApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				377AAC40105DEA390068A68F /* Debug */,
+				377AAC41105DEA390068A68F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

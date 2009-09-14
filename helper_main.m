@@ -23,7 +23,40 @@
 
 #import <Cocoa/Cocoa.h>
 
+NSString *iChatBundleIdentifier = @"com.apple.iChat";
+
+@interface ChaxHelperApp : NSObject
+{}
+
+@end
+
+@implementation ChaxHelperApp
+
++ (void)applicationDidLaunch:(NSNotification *)note
+{
+    NSString *bundleIdentifier = [[note userInfo] objectForKey:@"NSApplicationBundleIdentifier"];
+    
+    if ([bundleIdentifier isEqualToString:iChatBundleIdentifier]) {
+        NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"iChat\" to Load Chax"] autorelease];
+        NSDictionary *errorInfo = nil;
+        
+        [script executeAndReturnError:&errorInfo];
+        
+        if (errorInfo != nil) {
+            NSLog(@"Failed to load into iChat: %@", errorInfo);
+        }
+    }
+}
+
+@end
+
 int main(int argc, char *argv[])
 {
-    return NSApplicationMain(argc,  (const char **) argv);
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:[ChaxHelperApp class] selector:@selector(applicationDidLaunch:) name:NSWorkspaceDidLaunchApplicationNotification object:nil];
+    
+    [[NSApplication sharedApplication] run];
+    
+    [pool release];
 }
