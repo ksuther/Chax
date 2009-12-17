@@ -61,13 +61,11 @@ static NSImage *_chaxIcon = nil;
 
 + (void)bundleDidLoadNotificationReceived:(NSNotification *)note
 {
+    NSBundle *bundle = [note object];
+    
     if ([[[note object] bundleIdentifier] isEqualToString:ChaxLibBundleIdentifier]) {
-        NSURL *chaxPath = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:ChaxBundleIdentifier];
-        
-        if (chaxPath != nil) {
-            _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithURL:chaxPath] pathForImageResource:@"Chax"]];
-            [_chaxIcon setName:@"ChaxIcon"];
-        }
+        _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[bundle pathForImageResource:@"Chax"]];
+        [_chaxIcon setName:@"ChaxIcon"];
         
         [self addMenuItems];
         [self registerURLHandlers];
