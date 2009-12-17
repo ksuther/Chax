@@ -127,14 +127,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 377AAC3C105DEA380068A68F /* ChaxHelperApp */;
+			remoteGlobalIDString = 377AAC3C105DEA380068A68F;
 			remoteInfo = ChaxHelperApp;
 		};
 		377AAC61105DEAC20068A68F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 37BC68571056EBDB00F1FCD9 /* ChaxAddition */;
+			remoteGlobalIDString = 37BC68571056EBDB00F1FCD9;
 			remoteInfo = ChaxAddition;
 		};
 		3784D28A10473F2F00B56C81 /* PBXContainerItemProxy */ = {

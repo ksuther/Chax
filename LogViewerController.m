@@ -315,7 +315,11 @@ typedef enum LogViewerToolbarItem {
         case LogViewerToolbarItemSearch:
             [[self class] cancelPreviousPerformRequestsWithTarget:self];
             
-            [self performSelector:@selector(_beginSpotlightSearch:) withObject:[(NSSearchField *)[sender view] stringValue] afterDelay:0.1];
+            if ([sender isKindOfClass:[NSSearchField class]]) {
+                [self performSelector:@selector(_beginSpotlightSearch:) withObject:[(NSSearchField *)sender stringValue] afterDelay:0.1];
+            } else {
+                [self performSelector:@selector(_beginSpotlightSearch:) withObject:[(NSSearchField *)[sender view] stringValue] afterDelay:0.1];
+            }
             break;
     }
 }
