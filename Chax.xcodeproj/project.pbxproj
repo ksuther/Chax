@@ -14,7 +14,6 @@
 				3784D28F10473F3400B56C81 /* Build DMG */,
 			);
 			dependencies = (
-				37CC44CA10E0A23100998593 /* PBXTargetDependency */,
 				3784D28B10473F2F00B56C81 /* PBXTargetDependency */,
 			);
 			name = "Build Disk Image";
@@ -112,12 +111,14 @@
 		3773529210DC9C2700CF1C88 /* ChaxHelperApp.app in Resources */ = {isa = PBXBuildFile; fileRef = 377AAC3D105DEA380068A68F /* ChaxHelperApp.app */; };
 		377AAC63105DEACA0068A68F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		377AAC76105DEC1F0068A68F /* helper_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AAC75105DEC1F0068A68F /* helper_main.m */; };
-		37B49C9C10D9E8C900F016A4 /* Chax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3786DA1F0FF7C0A8000CBC6A /* Chax.icns */; };
 		37BC686B1056EE9500F1FCD9 /* ChaxAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC686A1056EE9500F1FCD9 /* ChaxAddition.m */; };
 		37BC686D1056EEB700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC68881056EEC700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC689C1056EFD400F1FCD9 /* ChaxAddition.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 37BC689B1056EFD400F1FCD9 /* ChaxAddition.sdef */; };
 		37CC446C10DEDDE300998593 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37CC446A10DEDDE300998593 /* Localizable.strings */; };
+		37CC44F210E140E200998593 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3710F5B210425E6900EAD72D /* Sparkle.framework */; };
+		37FEDB1D10E1594A0060BB05 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3710F5DF104260E400EAD72D /* dsa_pub.pem */; };
+		37FEDB5010E15AFD0060BB05 /* Chax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3786DA1F0FF7C0A8000CBC6A /* Chax.icns */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -158,11 +159,11 @@
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Chax;
 		};
-		37CC44C910E0A23100998593 /* PBXContainerItemProxy */ = {
+		37CC452E10E1460000998593 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 37CC44C610E0A22600998593 /* Update Plist Versions */;
+			remoteGlobalIDString = 37CC44C610E0A22600998593;
 			remoteInfo = "Update Plist Versions";
 		};
 /* End PBXContainerItemProxy section */
@@ -175,6 +176,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				375091E91057000E00F472F1 /* Growl.framework in Copy Frameworks */,
+				37CC44F210E140E200998593 /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -797,6 +799,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				37CC452F10E1460000998593 /* PBXTargetDependency */,
 				377AAC62105DEAC20068A68F /* PBXTargetDependency */,
 			);
 			name = "Chax Installer";
@@ -840,7 +843,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37B49C9C10D9E8C900F016A4 /* Chax.icns in Resources */,
 				375091E41056FFF800F472F1 /* menu-badge.tiff in Resources */,
 				375091E51056FFF800F472F1 /* status-offline.tiff in Resources */,
 				375091D51056FF9D00F472F1 /* Preferences.xib in Resources */,
@@ -863,8 +865,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37FEDB1D10E1594A0060BB05 /* dsa_pub.pem in Resources */,
 				3773529210DC9C2700CF1C88 /* ChaxHelperApp.app in Resources */,
 				375091411056FC7A00F472F1 /* ChaxLib.bundle in Resources */,
+				37FEDB5010E15AFD0060BB05 /* Chax.icns in Resources */,
 				37BC689C1056EFD400F1FCD9 /* ChaxAddition.sdef in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1056,10 +1060,10 @@
 			target = 8D1107260486CEB800E47090 /* Chax Installer */;
 			targetProxy = 3784D28A10473F2F00B56C81 /* PBXContainerItemProxy */;
 		};
-		37CC44CA10E0A23100998593 /* PBXTargetDependency */ = {
+		37CC452F10E1460000998593 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 37CC44C610E0A22600998593 /* Update Plist Versions */;
-			targetProxy = 37CC44C910E0A23100998593 /* PBXContainerItemProxy */;
+			targetProxy = 37CC452E10E1460000998593 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

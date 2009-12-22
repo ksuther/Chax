@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-//#import <Sparkle/Sparkle.h>
+#import <Sparkle/Sparkle.h>
 #import "Chax.h"
 #import "iChat5.h"
 #import "UnifiedPeopleListController_Provider.h"
@@ -32,6 +32,7 @@
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 NSString *ChaxLibBundleIdentifier = @"com.ksuther.chax.lib";
+NSString *ChaxAdditionBundleIdentifier = @"com.ksuther.chax.addition";
 
 static NSInteger kChaxDonateRequestFirstInterval = 604800;
 static NSInteger kChaxDonateRequestSecondInterval = 2678400;
@@ -41,7 +42,8 @@ static NSImage *_chaxIcon = nil;
 //static NSString *_previousMessage = nil;
 //static BOOL _screensaverAwayed = NO;
 
-//static SUUpdater *_updater = nil;
+static NSString *_bundlePath = nil;
+static id _updater = nil;
 
 @implementation Chax
 
@@ -64,7 +66,7 @@ static NSImage *_chaxIcon = nil;
     NSBundle *bundle = [note object];
     
     if ([[[note object] bundleIdentifier] isEqualToString:ChaxLibBundleIdentifier]) {
-        _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[bundle pathForImageResource:@"Chax"]];
+        _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:ChaxAdditionBundleIdentifier] pathForImageResource:@"Chax"]];
         [_chaxIcon setName:@"ChaxIcon"];
         
         [self addMenuItems];
@@ -98,14 +100,27 @@ static NSImage *_chaxIcon = nil;
 
 + (void)setupSparkle
 {
-    /*NSBundle *chaxBundle = [NSBundle bundleWithIdentifier:ChaxBundleIdentifier];
+    NSBundle *chaxBundle = [NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier];
     
-    _updater = [[SUUpdater updaterForBundle:chaxBundle] retain];*/
+    //Load Sparkle framework
+    if (!NSClassFromString(@"SUUpdater")) {
+        NSString *frameworkPath = [[chaxBundle privateFrameworksPath] stringByAppendingPathComponent:@"Sparkle.framework"];
+        NSBundle *framework = [NSBundle bundleWithPath:frameworkPath];
+        
+        if (![framework load]) {
+            NSLog(@"Chax: There was an error loading Sparkle.framework from %@", frameworkPath);
+        }
+    }
+    
+    _bundlePath = [chaxBundle bundlePath]; //Save the original bundle path since the original one will move when updating
+    
+    _updater = [[NSClassFromString(@"SUUpdater") updaterForBundle:[NSBundle bundleWithIdentifier:ChaxAdditionBundleIdentifier]] retain];
+    [_updater setDelegate:self];
 }
 
 + (void)checkForUpdates
 {
-    //[_updater checkForUpdates:nil];
+    [_updater checkForUpdates:nil];
 }
 
 + (void)displayDonateWindowIfWanted
@@ -201,6 +216,45 @@ static NSImage *_chaxIcon = nil;
 + (NSArray *)menuItems
 {
 	return _chaxMenuItems;
+}
+
+#pragma mark -
+#pragma mark Sparkle Delegate
+
++ (void)updaterWillRelaunchApplication:(id)updater
+{
+    //Quit ChaxHelperApp
+    NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"ChaxHelperApp\" to quit"] autorelease];
+    
+    [script executeAndReturnError:nil];
+    
+    //Relaunch ChaxHelperApp
+    NSString *launchPath = [[NSBundle bundleWithIdentifier:ChaxAdditionBundleIdentifier] pathForResource:@"ChaxHelperApp" ofType:@"app"];
+    
+    if (launchPath) {
+        OSStatus err;
+        LSApplicationParameters params;
+        FSRef fsRef;
+        
+        CFURLGetFSRef((CFURLRef)[NSURL fileURLWithPath:launchPath], &fsRef);
+        
+        params.version = 0;
+        params.flags = kLSLaunchDontSwitch | kLSLaunchNewInstance | kLSLaunchNoParams;
+        params.application = &fsRef;
+        params.environment = NULL;
+        params.argv = NULL;
+        params.initialEvent = NULL;
+        
+        err = LSOpenApplication(&params, NULL);
+        if (err != noErr) {
+            NSLog(@"Failed to relaunch ChaxHelperApp: LSOpenApplication() failed (%d)", err);
+        }
+    }
+}
+
++ (NSString *)pathToRelaunchForUpdater:(id)updater
+{
+    return [[NSWorkspace sharedWorkspace] fullPathForApplication:@"iChat.app"];
 }
 
 #pragma mark -
