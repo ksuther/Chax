@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Build distribution for Cameras
+# Build distribution for Chax
 #
 
 import sys, os, subprocess, time, shutil, plistlib
