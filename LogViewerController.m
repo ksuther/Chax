@@ -288,7 +288,16 @@ typedef enum LogViewerToolbarItem {
 }
 
 #pragma mark -
-#pragma mark Toolbar
+#pragma mark IBActions
+
+- (IBAction)filterButtonAction:(id)sender
+{
+    [_conversationButton setState:NSOffState];
+    [_fileButton setState:NSOffState];
+    [_linkButton setState:NSOffState];
+    
+    [(NSButton *)sender setState:NSOnState];
+}
 
 - (IBAction)toolbarAction:(id)sender
 {
@@ -353,6 +362,9 @@ typedef enum LogViewerToolbarItem {
     }
 }
 
+#pragma mark -
+#pragma mark Toolbar
+
 - (BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
     BOOL valid = NO;
@@ -391,6 +403,16 @@ typedef enum LogViewerToolbarItem {
 
 #pragma mark -
 #pragma mark NSSplitView Delegate
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
+{
+    return (splitView == _verticalSplitView) ? 120 : 70;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
+{
+    return (splitView == _verticalSplitView) ? [splitView bounds].size.width - 300 : [splitView bounds].size.height - 70;
+}
 
 - (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)view
 {
@@ -634,6 +656,8 @@ typedef enum LogViewerToolbarItem {
 {
     NSMutableArray *allLogs = [NSMutableArray array];
     NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
+    
+    [_logsTableView scrollRowToVisible:0];
     
     [[_peopleTableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop){
         NSString *personName = [[self visiblePeople] objectAtIndex:idx];

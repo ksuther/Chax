@@ -18,6 +18,13 @@
     IBOutlet NSProgressIndicator *_progressIndicator;
     IBOutlet NSTextField *_statusTextField;
     
+    IBOutlet NSSplitView *_horizontalSplitView;
+    IBOutlet NSSplitView *_verticalSplitView;
+    
+    IBOutlet NSButton *_conversationButton;
+    IBOutlet NSButton *_fileButton;
+    IBOutlet NSButton *_linkButton;
+    
     NSOperationQueue *_operationQueue;
     NSOperationQueue *_searchQueue;
     NSMetadataQuery *_spotlightQuery;
@@ -44,6 +51,7 @@
 
 + (LogViewerController *)sharedController;
 
+- (IBAction)filterButtonAction:(id)sender;
 - (IBAction)toolbarAction:(id)sender;
 
 @end
