@@ -26,6 +26,13 @@
 "Log Viewer" = "Log Viewer";
 "Logging is disabled" = "Logging is disabled";
 
+/* Log Viewer - Status Strings */
+"No results" = "No results";
+"One result" = "One result";
+"%d results" = "%d results";
+"Searching..." = "Searching…";
+"Loading logs..." = "Loading logs…";
+
 /* Activity Viewer */
 "Activity" = "Activity";
 "Are you sure you want to permanently delete all past activity?" = "Are you sure you want to permanently delete all past activity?";

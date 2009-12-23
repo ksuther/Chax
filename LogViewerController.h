@@ -15,6 +15,8 @@
     IBOutlet FezWebView *_webView;
     IBOutlet NSTableView *_logsTableView;
     IBOutlet NSTableView *_peopleTableView;
+    IBOutlet NSProgressIndicator *_progressIndicator;
+    IBOutlet NSTextField *_statusTextField;
     
     NSOperationQueue *_operationQueue;
     NSMetadataQuery *_spotlightQuery;

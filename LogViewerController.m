@@ -19,6 +19,9 @@ typedef enum LogViewerToolbarItem {
 
 @interface LogViewerController ()
 
+- (void)_startSpinnerAnimation;
+- (void)_stopSpinnerAnimation;
+
 - (void)_loadLogs:(BOOL)firstRun;
 - (void)_updateAssociationsWithLogs:(NSDictionary *)logs people:(NSMutableSet *)peopleSet;
 - (NSString *)_fullNameForFile:(NSString *)file;
@@ -107,6 +110,11 @@ typedef enum LogViewerToolbarItem {
 - (void)showWindow:(id)sender
 {
     if (![[self window] isVisible]) {
+        //Bump the status text back to the right initially
+        NSRect frame = [_statusTextField frame];
+        frame.origin.x = 20;
+        [_statusTextField setFrame:frame];
+        
         [_operationQueue addOperationWithBlock:^{
             [self _loadLogs:([_people count] == 0)];
         }];
@@ -224,10 +232,11 @@ typedef enum LogViewerToolbarItem {
     NSMutableSet *searchPeopleSet = [NSMutableSet set];
     NSString *logsPath = [NSClassFromString(@"Prefs") savedChatPath];
     NSUInteger logsPathLength = [logsPath length] + 1;
+    NSUInteger resultCount = [[note object] resultCount];
     
     [_searchLogs removeAllObjects];
     
-	for (NSUInteger i = 0; i < [[note object] resultCount]; i++) {
+	for (NSUInteger i = 0; i < resultCount; i++) {
 		NSString *path = [[[note object] resultAtIndex:i] valueForAttribute:@"kMDItemPath"];
         
         path = [path substringFromIndex:logsPathLength];
@@ -256,6 +265,17 @@ typedef enum LogViewerToolbarItem {
     
     [_logsTableView deselectAll:nil];
     [self _updateLogsTableView];
+    
+    //Update the status text and progress indicator
+    [self _stopSpinnerAnimation];
+    
+    if (resultCount == 0) {
+        [_statusTextField setStringValue:ChaxLocalizedString(@"No results")];
+    } else if (resultCount == 1) {
+        [_statusTextField setStringValue:ChaxLocalizedString(@"One result")];
+    } else {
+        [_statusTextField setStringValue:[NSString stringWithFormat:ChaxLocalizedString(@"%d results"), resultCount]];
+    }
 }
 
 #pragma mark -
@@ -420,8 +440,37 @@ typedef enum LogViewerToolbarItem {
 #pragma mark -
 #pragma mark Private
 
+/*
+ * Begin the progress indicator animation and move the status text to the right
+ */
+- (void)_startSpinnerAnimation
+{
+    NSRect frame = [_statusTextField frame];
+    
+    frame.origin.x = 20;
+    
+    [_progressIndicator startAnimation:nil];
+    [[_statusTextField animator] setFrame:frame];
+}
+
+/*
+ * End the progress indicator animation and move the status text to the left
+ */
+- (void)_stopSpinnerAnimation
+{
+    NSRect frame = [_statusTextField frame];
+    
+    frame.origin.x = 1;
+    
+    [_progressIndicator stopAnimation:nil];
+    [[_statusTextField animator] setFrame:frame];
+}
+
 - (void)_loadLogs:(BOOL)firstRun
 {
+    [self _startSpinnerAnimation];
+    [_statusTextField setStringValue:ChaxLocalizedString(@"Loading logs...")];
+    
     NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
     NSDirectoryEnumerator *directoryEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:logPath];
     NSString *nextFile;
@@ -514,6 +563,9 @@ typedef enum LogViewerToolbarItem {
     }
     
     [self performSelectorOnMainThread:@selector(_setPeoplePreservingSelection:) withObject:[[peopleSet allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] waitUntilDone:NO];
+    
+    [self _stopSpinnerAnimation];
+    [_statusTextField setStringValue:@""];
 }
 
 - (NSString *)_fullNameForFile:(NSString *)file
@@ -658,6 +710,9 @@ typedef enum LogViewerToolbarItem {
 		if ([_spotlightQuery startQuery]) {
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(spotlightNotificationReceived:) name:NSMetadataQueryDidFinishGatheringNotification object:_spotlightQuery];
 		}
+        
+        [self _startSpinnerAnimation];
+        [_statusTextField setStringValue:ChaxLocalizedString(@"Searching...")];
 	} else {
 		//Stop any current search
 		if (_spotlightQuery) {
@@ -679,6 +734,9 @@ typedef enum LogViewerToolbarItem {
             [_peopleTableView reloadData];
             [_logsTableView reloadData];
         }
+        
+        [self _stopSpinnerAnimation];
+        [_statusTextField setStringValue:@""];
 	}
 }
 
