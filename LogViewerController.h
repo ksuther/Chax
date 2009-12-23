@@ -19,6 +19,7 @@
     IBOutlet NSTextField *_statusTextField;
     
     NSOperationQueue *_operationQueue;
+    NSOperationQueue *_searchQueue;
     NSMetadataQuery *_spotlightQuery;
     
     NSArray *_people;

@@ -56,8 +56,10 @@ typedef enum LogViewerToolbarItem {
         _searchLogs = [[NSMutableArray alloc] init];
         
         _operationQueue = [[NSOperationQueue alloc] init];
-        
         [_operationQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
+        
+        _searchQueue = [[NSOperationQueue alloc] init];
+        [_searchQueue setMaxConcurrentOperationCount:1];
         
         _dateFormatter = [[NSDateFormatter alloc] init];
         [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -87,6 +89,7 @@ typedef enum LogViewerToolbarItem {
     [_searchLogs release];
     [_creationDateCache release];
     [_operationQueue release];
+    [_searchQueue release];
     
     [_dateFormatter release];
     [_creationDateFormatter release];
@@ -228,54 +231,60 @@ typedef enum LogViewerToolbarItem {
 
 - (void)spotlightNotificationReceived:(NSNotification *)note
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:_spotlightQuery];
+    
 	//Extract results out of the query
     NSMutableSet *searchPeopleSet = [NSMutableSet set];
     NSString *logsPath = [NSClassFromString(@"Prefs") savedChatPath];
     NSUInteger logsPathLength = [logsPath length] + 1;
     NSUInteger resultCount = [[note object] resultCount];
     
-    [_searchLogs removeAllObjects];
-    
-	for (NSUInteger i = 0; i < resultCount; i++) {
-		NSString *path = [[[note object] resultAtIndex:i] valueForAttribute:@"kMDItemPath"];
+    [_searchQueue addOperationWithBlock:^{
+        [_searchLogs removeAllObjects];
         
-        path = [path substringFromIndex:logsPathLength];
-        
-        [_searchLogs addObject:path];
-        
-        for (NSString *personName in _logs) {
-            NSSet *personLogs = [_logs objectForKey:personName];
+        for (NSUInteger i = 0; i < resultCount; i++) {
+            NSString *path = [[[note object] resultAtIndex:i] valueForAttribute:@"kMDItemPath"];
             
-            if ([personLogs containsObject:path]) {
-                [searchPeopleSet addObject:personName];
-                break;
+            path = [path substringFromIndex:logsPathLength];
+            
+            [_searchLogs addObject:path];
+            
+            for (NSString *personName in _logs) {
+                NSSet *personLogs = [_logs objectForKey:personName];
+                
+                if ([personLogs containsObject:path]) {
+                    [searchPeopleSet addObject:personName];
+                    break;
+                }
             }
         }
-	}
-    
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:_spotlightQuery];
-    
-    [_spotlightQuery stopQuery];
-    [_spotlightQuery autorelease];
-    _spotlightQuery = nil;
-    
-    [self setSearchPeople:[[searchPeopleSet allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]];
-    
-    [_peopleTableView reloadData];
-    
-    [_logsTableView deselectAll:nil];
-    [self _updateLogsTableView];
-    
-    //Update the status text and progress indicator
-    [self _stopSpinnerAnimation];
-    
-    if (resultCount == 0) {
-        [_statusTextField setStringValue:ChaxLocalizedString(@"No results")];
-    } else if (resultCount == 1) {
-        [_statusTextField setStringValue:ChaxLocalizedString(@"One result")];
-    } else {
-        [_statusTextField setStringValue:[NSString stringWithFormat:ChaxLocalizedString(@"%d results"), resultCount]];
-    }
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if ([note object] == _spotlightQuery) {
+                [_spotlightQuery stopQuery];
+                [_spotlightQuery autorelease];
+                _spotlightQuery = nil;
+                
+                [self setSearchPeople:[[searchPeopleSet allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]];
+                
+                [_peopleTableView reloadData];
+                
+                [_logsTableView deselectAll:nil];
+                [self _updateLogsTableView];
+                
+                //Update the status text and progress indicator
+                [self _stopSpinnerAnimation];
+                
+                if (resultCount == 0) {
+                    [_statusTextField setStringValue:ChaxLocalizedString(@"No results")];
+                } else if (resultCount == 1) {
+                    [_statusTextField setStringValue:ChaxLocalizedString(@"One result")];
+                } else {
+                    [_statusTextField setStringValue:[NSString stringWithFormat:ChaxLocalizedString(@"%d results"), resultCount]];
+                }
+            }
+        });
+    }];
 }
 
 #pragma mark -
@@ -696,6 +705,8 @@ typedef enum LogViewerToolbarItem {
 
 - (void)_beginSpotlightSearch:(NSString *)searchString
 {
+    [_searchQueue cancelAllOperations];
+    
     if ([searchString length] > 0) {
 		if (_spotlightQuery) {
 			[_spotlightQuery stopQuery];
@@ -762,6 +773,27 @@ typedef enum LogViewerToolbarItem {
         [_chatViewController _layoutIfNecessary];
         
         [chat release];
+        
+        //Get all the links out of the log
+        /*for (InstantMessage *msg in [chat messages]) {
+            [[msg text] enumerateAttribute:@"IMLinkAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
+                if (value) {
+                    NSLog(@"%@", value);
+                }
+            }];
+            
+            [[msg text] enumerateAttribute:@"IMFileTransferGUIDAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
+                if (value) {
+                    NSLog(@"transfer: %@", [[[IMFileTransferCenter sharedInstance] transferForGUID:value includeRemoved:YES] previewItemURL]);
+                }
+            }];
+            
+            [[msg text] enumerateAttribute:@"IMFilenameAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
+                if (value) {
+                    NSLog(@"%@", [msg attributedSummaryString]);
+                }
+            }];
+        }*/
     } else if ([_chatViewController chat] != nil) {
         [_chatViewController setChat:nil];
         [_chatViewController loadBaseDocument];
