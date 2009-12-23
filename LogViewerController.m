@@ -460,7 +460,7 @@ typedef enum LogViewerToolbarItem {
 {
     NSRect frame = [_statusTextField frame];
     
-    frame.origin.x = 1;
+    frame.origin.x = 2;
     
     [_progressIndicator stopAnimation:nil];
     [[_statusTextField animator] setFrame:frame];

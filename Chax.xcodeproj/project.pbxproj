@@ -111,6 +111,7 @@
 		3773529210DC9C2700CF1C88 /* ChaxHelperApp.app in Resources */ = {isa = PBXBuildFile; fileRef = 377AAC3D105DEA380068A68F /* ChaxHelperApp.app */; };
 		377AAC63105DEACA0068A68F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		377AAC76105DEC1F0068A68F /* helper_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AAC75105DEC1F0068A68F /* helper_main.m */; };
+		378D13D710E20599003E2410 /* LogViewerModeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378D13D610E20599003E2410 /* LogViewerModeBackgroundView.m */; };
 		37BC686B1056EE9500F1FCD9 /* ChaxAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC686A1056EE9500F1FCD9 /* ChaxAddition.m */; };
 		37BC686D1056EEB700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC68881056EEC700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
@@ -262,6 +263,8 @@
 		3786DBA40FF7D013000CBC6A /* NSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferences.h; sourceTree = "<group>"; };
 		3786DBC10FF7D189000CBC6A /* Chax_PeopleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_PeopleList.h; path = Swizzled/Chax_PeopleList.h; sourceTree = "<group>"; };
 		3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_PeopleList.m; path = Swizzled/Chax_PeopleList.m; sourceTree = "<group>"; };
+		378D13D510E20599003E2410 /* LogViewerModeBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerModeBackgroundView.h; sourceTree = "<group>"; };
+		378D13D610E20599003E2410 /* LogViewerModeBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewerModeBackgroundView.m; sourceTree = "<group>"; };
 		378D4FA7101E6FE300176B47 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/Growl.framework; sourceTree = "<group>"; };
 		378D4FF1101E722B00176B47 /* StatusChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusChangeController.h; sourceTree = "<group>"; };
 		378D4FF2101E722B00176B47 /* StatusChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusChangeController.m; sourceTree = "<group>"; };
@@ -633,6 +636,8 @@
 			children = (
 				37AFBC1F1031125B001AA056 /* LogViewerController.h */,
 				37AFBC201031125B001AA056 /* LogViewerController.m */,
+				378D13D510E20599003E2410 /* LogViewerModeBackgroundView.h */,
+				378D13D610E20599003E2410 /* LogViewerModeBackgroundView.m */,
 			);
 			name = "Log Viewer";
 			sourceTree = "<group>";
@@ -1004,6 +1009,7 @@
 				375091751056FCA300F472F1 /* Chax_ActiveChat.m in Sources */,
 				375091761056FCA300F472F1 /* AutomaticSwizzle.m in Sources */,
 				375091771056FCA300F472F1 /* Chax_PeopleListItem.m in Sources */,
+				378D13D710E20599003E2410 /* LogViewerModeBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1201,6 +1207,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/InstantMessage.framework/Versions/A/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -1232,6 +1239,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SYSTEM_LIBRARY_DIR)/Frameworks/InstantMessage.framework/Versions/A/Frameworks\"",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
