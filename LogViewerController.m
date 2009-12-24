@@ -449,7 +449,7 @@ typedef enum LogViewerToolbarItem {
     id object;
     
     if (tableView == _peopleTableView) {
-        object = [[self visiblePeople] objectAtIndex:row];
+        object = [[tableColumn identifier] isEqualToString:@"name"] ? [[self visiblePeople] objectAtIndex:row] : @"";
     } else {
         object = [_dateFormatter stringFromDate:[_creationDateCache objectForKey:[_visibleLogs objectAtIndex:row]]];
     }
