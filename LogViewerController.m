@@ -550,6 +550,16 @@ typedef enum LogViewerToolbarItem {
         InstantMessage *im = [(LinkButtonCell *)cell instantMessage];
         NSRect messageBounds = [[_chatViewController renderer] rectOfMessage:im];
         
+        if (NSEqualPoints(messageBounds.origin, NSZeroPoint)) {
+            //The GUIDs aren't matching, manually search through the messages and find the message
+            for (InstantMessage *msg in [[_chatViewController chat] messages]) {
+                if ([[im text] isEqualToAttributedString:[msg text]] && [[im sender] isEqual:[msg sender]]) {
+                    messageBounds = [[_chatViewController renderer] rectOfMessage:msg];
+                    break;
+                }
+            }
+        }
+        
         messageBounds.origin.y += [_webView frame].size.height - messageBounds.size.height - 12;
         
         //Freakish thing required to get at the actual view we want to scroll
