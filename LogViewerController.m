@@ -395,6 +395,49 @@ typedef enum LogViewerToolbarItem {
 }
 
 #pragma mark -
+#pragma mark Forwarded Chat View Methods
+
+- (void)makeTextBigger:(id)fp8
+{
+    [_chatViewController makeTextLarger:fp8];
+}
+
+- (void)makeTextStandardSize:(id)fp8
+{
+    [_chatViewController makeTextStandardSize:fp8];
+}
+
+- (void)makeTextSmaller:(id)fp8
+{
+    [_chatViewController makeTextSmaller:fp8];
+}
+
+- (void)toggleHideSmileys:(id)fp8
+{
+    [_chatViewController toggleHideSmileys:fp8];
+}
+
+- (void)setChatShowsNames:(id)fp8
+{
+    [_chatViewController setChatShowsNames:fp8];
+}
+
+- (void)setChatShowsPictures:(id)fp8
+{
+    [_chatViewController setChatShowsPictures:fp8];
+}
+
+- (void)setChatShowsNamesAndPictures:(id)fp8
+{
+    [_chatViewController setChatShowsNamesAndPictures:fp8];
+}
+
+- (void)setTranscriptStyleFromMenuItem:(id)fp8
+{
+    [_chatViewController setTranscriptStyleFromMenuItem:fp8];
+}
+
+#pragma mark -
 #pragma mark Find
 
 - (void)showFindPanel:(id)sender
@@ -500,7 +543,7 @@ typedef enum LogViewerToolbarItem {
         InstantMessage *im = [(LinkButtonCell *)cell instantMessage];
         NSRect messageBounds = [[_chatViewController renderer] rectOfMessage:im];
         
-        messageBounds.origin.y += [_webView frame].size.height - messageBounds.size.height - 15;
+        messageBounds.origin.y += [_webView frame].size.height - messageBounds.size.height - 12;
         
         //Freakish thing required to get at the actual view we want to scroll
         //ChatViewScrollHelper seems to do it this way, so I'm just copying Apple
@@ -837,8 +880,12 @@ typedef enum LogViewerToolbarItem {
         }
     } else if ([[[_logTabView selectedTabViewItem] identifier] isEqualToString:@"files"]) {
     } else {
-        NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12], NSFontAttributeName, nil];
         NSAttributedString *newline = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
+        NSMutableParagraphStyle *paragraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+        
+        [paragraphStyle setParagraphSpacing:4.0];
+        
+        NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12], NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
         
         //Get the links out of the selected logs
         [_linksTextView setString:@""];
@@ -859,7 +906,7 @@ typedef enum LogViewerToolbarItem {
                     [[msg text] enumerateAttribute:@"IMLinkAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
                         if (value) {
                             NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName, value, NSLinkAttributeName, nil];
-                            NSString *senderString = [[(IMHandle *)[msg sender] name] stringByAppendingString:@": "];
+                            NSString *senderString = [NSString stringWithFormat:@" %@: ", [(IMHandle *)[msg sender] name]];
                             NSTextAttachment *attachment = [[[NSTextAttachment alloc] initWithFileWrapper:nil] autorelease];
                             LinkButtonCell *linkButtonCell = [[[LinkButtonCell alloc] initWithInstantMessage:msg] autorelease];
                             
