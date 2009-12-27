@@ -1,5 +1,5 @@
 /*
- * LogViewerModeBackgroundView.m
+ * LogViewerHorizontalSplitView.m
  *
  * Copyright (c) 2007-2009 Kent Sutherland
  * 
@@ -21,24 +21,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "LogViewerModeBackgroundView.h"
+#import "LogViewerHorizontalSplitView.h"
 
-@implementation LogViewerModeBackgroundView
+@implementation LogViewerHorizontalSplitView
 
-- (void)drawRect:(NSRect)rect
+- (NSColor *)dividerColor
 {
-    NSRect bounds = [self bounds];
-    bounds = NSInsetRect(bounds, -1, 0);
-    
-    NSGradient *gradient = [[[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.8 alpha:1.0] endingColor:[NSColor colorWithCalibratedWhite:0.9 alpha:1.0]] autorelease];
-    
-    [gradient drawInRect:bounds angle:90.0];
-    
-    bounds.origin.y++;
-    bounds.size.height--;
-    
-    [[NSColor darkGrayColor] set];
-    [NSBezierPath strokeRect:bounds];
+    return [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
 }
 
 @end

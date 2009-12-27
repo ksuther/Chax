@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="121"/>
+			<integer value="93"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -937,7 +937,7 @@
 																							<nil key="NSDefaultParagraphStyle"/>
 																						</object>
 																						<int key="NSTVFlags">6</int>
-																						<string key="NSMaxSize">{869, 1e+07}</string>
+																						<string key="NSMaxSize">{884, 1e+07}</string>
 																						<string key="NSMinize">{223, 0}</string>
 																						<nil key="NSDelegate"/>
 																					</object>
@@ -1900,15 +1900,16 @@
 					<string>86.IBPluginDependency</string>
 					<string>87.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
+					<string>92.CustomClassName</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{117, 230}, {616, 427}}</string>
+					<string>{{168, 318}, {616, 427}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{117, 230}, {616, 427}}</string>
+					<string>{{168, 318}, {616, 427}}</string>
 					<boolean value="NO"/>
 					<boolean value="YES"/>
 					<string>{500, 300}</string>
@@ -1960,6 +1961,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>LogViewerHorizontalSplitView</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -2054,6 +2056,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">LogViewerController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LogViewerHorizontalSplitView</string>
+					<string key="superclassName">NSSpliteView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">LogViewerHorizontalSplitView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

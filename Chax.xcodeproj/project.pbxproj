@@ -115,6 +115,7 @@
 		378D15E610E594FE003E2410 /* LinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 378D15E510E594FE003E2410 /* LinkButtonCell.m */; };
 		378D161F10E5971F003E2410 /* link-icon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 378D161E10E5971F003E2410 /* link-icon.tiff */; };
 		378D16C710E722F0003E2410 /* link-icon-selected.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 378D16C610E722F0003E2410 /* link-icon-selected.tiff */; };
+		378D182410E73D08003E2410 /* LogViewerHorizontalSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378D182310E73D08003E2410 /* LogViewerHorizontalSplitView.m */; };
 		37BC686B1056EE9500F1FCD9 /* ChaxAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC686A1056EE9500F1FCD9 /* ChaxAddition.m */; };
 		37BC686D1056EEB700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC68881056EEC700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
@@ -273,6 +274,8 @@
 		378D161E10E5971F003E2410 /* link-icon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "link-icon.tiff"; sourceTree = "<group>"; };
 		378D16C610E722F0003E2410 /* link-icon-selected.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "link-icon-selected.tiff"; sourceTree = "<group>"; };
 		378D17E410E73093003E2410 /* IMRenderingFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMRenderingFoundation.h; sourceTree = "<group>"; };
+		378D182210E73D08003E2410 /* LogViewerHorizontalSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerHorizontalSplitView.h; sourceTree = "<group>"; };
+		378D182310E73D08003E2410 /* LogViewerHorizontalSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewerHorizontalSplitView.m; sourceTree = "<group>"; };
 		378D4FA7101E6FE300176B47 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/Growl.framework; sourceTree = "<group>"; };
 		378D4FF1101E722B00176B47 /* StatusChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusChangeController.h; sourceTree = "<group>"; };
 		378D4FF2101E722B00176B47 /* StatusChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusChangeController.m; sourceTree = "<group>"; };
@@ -651,6 +654,8 @@
 				378D13D610E20599003E2410 /* LogViewerModeBackgroundView.m */,
 				378D15E410E594FE003E2410 /* LinkButtonCell.h */,
 				378D15E510E594FE003E2410 /* LinkButtonCell.m */,
+				378D182210E73D08003E2410 /* LogViewerHorizontalSplitView.h */,
+				378D182310E73D08003E2410 /* LogViewerHorizontalSplitView.m */,
 			);
 			name = "Log Viewer";
 			sourceTree = "<group>";
@@ -1026,6 +1031,7 @@
 				375091771056FCA300F472F1 /* Chax_PeopleListItem.m in Sources */,
 				378D13D710E20599003E2410 /* LogViewerModeBackgroundView.m in Sources */,
 				378D15E610E594FE003E2410 /* LinkButtonCell.m in Sources */,
+				378D182410E73D08003E2410 /* LogViewerHorizontalSplitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
