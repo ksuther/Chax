@@ -38,7 +38,7 @@ static NSInteger kChaxDonateRequestFirstInterval = 604800;
 static NSInteger kChaxDonateRequestSecondInterval = 2678400;
 
 static NSArray *_chaxMenuItems = nil;
-static NSImage *_chaxIcon = nil;
+static NSMutableDictionary *_imageDictionary = nil;
 //static NSString *_previousMessage = nil;
 //static BOOL _screensaverAwayed = NO;
 
@@ -66,8 +66,19 @@ static id _updater = nil;
     NSBundle *bundle = [note object];
     
     if ([[[note object] bundleIdentifier] isEqualToString:ChaxLibBundleIdentifier]) {
-        _chaxIcon = [[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:ChaxAdditionBundleIdentifier] pathForImageResource:@"Chax"]];
-        [_chaxIcon setName:@"ChaxIcon"];
+        _imageDictionary = [[NSMutableDictionary alloc] init];
+        
+        NSImage *image = [[[NSImage alloc] initWithContentsOfFile:[bundle pathForImageResource:@"link-icon"]] autorelease];
+        [image setName:@"LinkIcon"];
+        [_imageDictionary setObject:image forKey:@"LinkIcon"];
+        
+        image = [[[NSImage alloc] initWithContentsOfFile:[bundle pathForImageResource:@"link-icon-selected"]] autorelease];
+        [image setName:@"LinkIconSelected"];
+        [_imageDictionary setObject:image forKey:@"LinkIconSelected"];
+        
+        image = [[[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:ChaxAdditionBundleIdentifier] pathForImageResource:@"Chax"]] autorelease];
+        [image setName:@"ChaxIcon"];
+        [_imageDictionary setObject:image forKey:@"ChaxIcon"];
         
         [self addMenuItems];
         [self registerURLHandlers];
