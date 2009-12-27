@@ -9,6 +9,8 @@
 #import "LogViewerController.h"
 #import "RegexKitLite.h"
 #import "iChat5.h"
+#import "IMRenderingFoundation.h"
+#import "LinkButtonCell.h"
 
 typedef enum LogViewerToolbarItem {
     LogViewerToolbarItemDelete = 1,
@@ -29,6 +31,8 @@ typedef enum LogViewerToolbarItem {
 - (void)_updateLogsTableView;
 - (void)_updateLogWithCurrentSelection;
 - (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet;
+
+- (SavedChat *)_savedPathAtPath:(NSString *)path;
 
 @end
 
@@ -297,6 +301,14 @@ typedef enum LogViewerToolbarItem {
     [_linkButton setState:NSOffState];
     
     [(NSButton *)sender setState:NSOnState];
+    
+    if (sender == _conversationButton) {
+        [_logTabView selectTabViewItemAtIndex:0];
+    } else if (sender == _fileButton) {
+        [_logTabView selectTabViewItemAtIndex:1];
+    } else {
+        [_logTabView selectTabViewItemAtIndex:2];
+    }
 }
 
 - (IBAction)toolbarAction:(id)sender
@@ -429,6 +441,14 @@ typedef enum LogViewerToolbarItem {
 }
 
 #pragma mark -
+#pragma mark NSTabView Delegate
+
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    [self _updateLogWithCurrentSelection];
+}
+
+#pragma mark -
 #pragma mark NSTableView Data Source/Delegate
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -465,6 +485,26 @@ typedef enum LogViewerToolbarItem {
         [self _updateLogsTableView];
     } else if ([notification object] == _logsTableView) {
         [self _updateLogWithCurrentSelection];
+    }
+}
+
+#pragma mark -
+#pragma mark NSTextView Delegate
+
+- (void)textView:(NSTextView *)textView clickedOnCell:(id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame atIndex:(NSUInteger)charIndex
+{
+    if ([cell isKindOfClass:[LinkButtonCell class]]) {
+        [self filterButtonAction:_conversationButton];
+        
+        //Find the frame of the message containing the link
+        InstantMessage *im = [(LinkButtonCell *)cell instantMessage];
+        NSRect messageBounds = [[_chatViewController renderer] rectOfMessage:im];
+        
+        messageBounds.origin.y += [_webView frame].size.height - messageBounds.size.height - 15;
+        
+        //Freakish thing required to get at the actual view we want to scroll
+        //ChatViewScrollHelper seems to do it this way, so I'm just copying Apple
+        [[[[[[_webView mainFrame] frameView] documentView] enclosingScrollView] contentView] scrollRectToVisible:messageBounds];
     }
 }
 
@@ -780,48 +820,86 @@ typedef enum LogViewerToolbarItem {
     NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
     NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
     
-    if ([selectedRowIndexes count] == 1) {
-        NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:[selectedRowIndexes firstIndex]]];
-        SavedChat *chat;
-        
-        if ([[path pathExtension] isEqualToString:@"ichat"]) {
-            chat = [[NSClassFromString(@"SavedChat") alloc] initWithTranscriptFile:path];
-        } else {
-            NSData *data = [NSData dataWithContentsOfFile:path];
+    if ([[[_logTabView selectedTabViewItem] identifier] isEqualToString:@"conversation"]) {
+        if ([selectedRowIndexes count] == 1) {
+            NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:[selectedRowIndexes firstIndex]]];
+            SavedChat *chat = [self _savedPathAtPath:path];
             
-            chat = [[NSClassFromString(@"SavedChat") alloc] initWithSavedData:data];
+            [_chatViewController scrollToBeginningSmoothly:NO];
+            [_chatViewController setChat:chat];
+            [_chatViewController _layoutIfNecessary];
+            
+            [chat release];
+        } else if ([_chatViewController chat] != nil) {
+            [_chatViewController setChat:nil];
+            [_chatViewController loadBaseDocument];
+            [_chatViewController _layoutIfNecessary];
         }
+    } else if ([[[_logTabView selectedTabViewItem] identifier] isEqualToString:@"files"]) {
+    } else {
+        NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12], NSFontAttributeName, nil];
+        NSAttributedString *newline = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
         
-        [_chatViewController scrollToBeginningSmoothly:NO];
-        [_chatViewController setChat:chat];
-        [_chatViewController _layoutIfNecessary];
+        //Get the links out of the selected logs
+        [_linksTextView setString:@""];
         
-        [chat release];
-        
-        //Get all the links out of the log
-        /*for (InstantMessage *msg in [chat messages]) {
-            [[msg text] enumerateAttribute:@"IMLinkAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
-                if (value) {
-                    NSLog(@"%@", value);
-                }
-            }];
+        [selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
+            NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
+            SavedChat *chat = [self _savedPathAtPath:path];
             
-            [[msg text] enumerateAttribute:@"IMFileTransferGUIDAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
-                if (value) {
-                    NSLog(@"transfer: %@", [[[IMFileTransferCenter sharedInstance] transferForGUID:value includeRemoved:YES] previewItemURL]);
+            if ([(NSArray *)[chat messages] count] > 0) {
+                NSString *headingString = [NSString stringWithFormat:@"%@: %@\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
+                NSAttributedString *attributedHeadingString = [[[NSAttributedString alloc] initWithString:headingString attributes:headingAttributes] autorelease];
+                __block NSUInteger linkCount = 0;
+                
+                [[_linksTextView textStorage] appendAttributedString:attributedHeadingString];
+                
+                for (InstantMessage *msg in [chat messages]) {
+                    //Add a line for each URL
+                    [[msg text] enumerateAttribute:@"IMLinkAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
+                        if (value) {
+                            NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName, value, NSLinkAttributeName, nil];
+                            NSString *senderString = [[(IMHandle *)[msg sender] name] stringByAppendingString:@": "];
+                            NSTextAttachment *attachment = [[[NSTextAttachment alloc] initWithFileWrapper:nil] autorelease];
+                            LinkButtonCell *linkButtonCell = [[[LinkButtonCell alloc] initWithInstantMessage:msg] autorelease];
+                            
+                            [attachment setAttachmentCell:linkButtonCell];
+                            
+                            [[_linksTextView textStorage] appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
+                            [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:senderString] autorelease]];
+                            [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", value] attributes:linkAttributes] autorelease]];
+                            
+                            linkCount++;
+                        }
+                    }];
+                    
+                    /*[[msg text] enumerateAttribute:@"IMFileTransferGUIDAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
+                        if (value) {
+                            NSLog(@"transfer: %@", [[[IMFileTransferCenter sharedInstance] transferForGUID:value includeRemoved:YES] previewItemURL]);
+                        }
+                    }];
+                    
+                    [[msg text] enumerateAttribute:@"IMFilenameAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
+                        if (value) {
+                            NSLog(@"%@", [msg attributedSummaryString]);
+                        }
+                    }];*/
                 }
-            }];
-            
-            [[msg text] enumerateAttribute:@"IMFilenameAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
-                if (value) {
-                    NSLog(@"%@", [msg attributedSummaryString]);
+                
+                //If there were no URLs in the log, write no logs
+                if (linkCount == 0) {
+                    NSDictionary *noLinksAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:0.2], NSObliquenessAttributeName, nil];
+                    
+                    [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[ChaxLocalizedString(@"No links in transcript.") stringByAppendingString:@"\n"] attributes:noLinksAttributes] autorelease]];
                 }
-            }];
-        }*/
-    } else if ([_chatViewController chat] != nil) {
-        [_chatViewController setChat:nil];
-        [_chatViewController loadBaseDocument];
-        [_chatViewController _layoutIfNecessary];
+                
+                [[_linksTextView textStorage] appendAttributedString:newline];
+            }
+        }];
+        
+        if ([[_linksTextView textStorage] length] > 0) {
+            [[_linksTextView textStorage] deleteCharactersInRange:NSMakeRange([[_linksTextView textStorage] length] - 1, 1)];
+        }
     }
 }
 
@@ -851,6 +929,21 @@ typedef enum LogViewerToolbarItem {
     [self setVisibleLogs:newVisibleLogs];
     [_logsTableView reloadData];
     [self _updateLogWithCurrentSelection];
+}
+
+- (SavedChat *)_savedPathAtPath:(NSString *)path
+{
+    SavedChat *chat = nil;
+    
+    if ([[path pathExtension] isEqualToString:@"ichat"]) {
+        chat = [[NSClassFromString(@"SavedChat") alloc] initWithTranscriptFile:path];
+    } else {
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        
+        chat = [[NSClassFromString(@"SavedChat") alloc] initWithSavedData:data];
+    }
+    
+    return chat;
 }
 
 @end

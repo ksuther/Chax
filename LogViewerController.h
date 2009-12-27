@@ -12,9 +12,13 @@
 
 @interface LogViewerController : NSWindowController {
     IBOutlet ChatViewController *_chatViewController;
-    IBOutlet FezWebView *_webView;
     IBOutlet NSTableView *_logsTableView;
     IBOutlet NSTableView *_peopleTableView;
+    
+    IBOutlet NSTabView *_logTabView;
+    IBOutlet FezWebView *_webView;
+    IBOutlet NSTextView *_linksTextView;
+    
     IBOutlet NSProgressIndicator *_progressIndicator;
     IBOutlet NSTextField *_statusTextField;
     
