@@ -27,6 +27,7 @@
 
 @synthesize attachment = _attachment;
 @synthesize instantMessage = _instantMessage;
+@synthesize chatPath = _chatPath;
 
 - (id)initWithInstantMessage:(InstantMessage *)instantMessage
 {

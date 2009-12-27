@@ -29,6 +29,8 @@
     IBOutlet NSButton *_fileButton;
     IBOutlet NSButton *_linkButton;
     
+    BOOL _linksNeedUpdate;
+    
     NSOperationQueue *_operationQueue;
     NSOperationQueue *_searchQueue;
     NSMetadataQuery *_spotlightQuery;

@@ -31,8 +31,8 @@ typedef enum LogViewerToolbarItem {
 - (void)_updateLogsTableView;
 - (void)_updateLogWithCurrentSelection;
 - (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet;
-
-- (SavedChat *)_savedPathAtPath:(NSString *)path;
+- (void)_displayLogAtPath:(NSString *)path;
+- (SavedChat *)_savedChatAtPath:(NSString *)path;
 
 @end
 
@@ -527,6 +527,8 @@ typedef enum LogViewerToolbarItem {
         
         [self _updateLogsTableView];
     } else if ([notification object] == _logsTableView) {
+        _linksNeedUpdate = YES;
+        
         [self _updateLogWithCurrentSelection];
     }
 }
@@ -538,6 +540,11 @@ typedef enum LogViewerToolbarItem {
 {
     if ([cell isKindOfClass:[LinkButtonCell class]]) {
         [self filterButtonAction:_conversationButton];
+        
+        //Multiple logs might be selected, in this case we need to explicitly load the correct log
+        if ([_chatViewController chat] == nil) {
+            [self _displayLogAtPath:[(LinkButtonCell *)cell chatPath]];
+        }
         
         //Find the frame of the message containing the link
         InstantMessage *im = [(LinkButtonCell *)cell instantMessage];
@@ -866,20 +873,15 @@ typedef enum LogViewerToolbarItem {
     if ([[[_logTabView selectedTabViewItem] identifier] isEqualToString:@"conversation"]) {
         if ([selectedRowIndexes count] == 1) {
             NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:[selectedRowIndexes firstIndex]]];
-            SavedChat *chat = [self _savedPathAtPath:path];
             
-            [_chatViewController scrollToBeginningSmoothly:NO];
-            [_chatViewController setChat:chat];
-            [_chatViewController _layoutIfNecessary];
-            
-            [chat release];
+            [self _displayLogAtPath:path];
         } else if ([_chatViewController chat] != nil) {
             [_chatViewController setChat:nil];
             [_chatViewController loadBaseDocument];
             [_chatViewController _layoutIfNecessary];
         }
     } else if ([[[_logTabView selectedTabViewItem] identifier] isEqualToString:@"files"]) {
-    } else {
+    } else if (_linksNeedUpdate) {
         NSAttributedString *newline = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
         NSMutableParagraphStyle *paragraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
         
@@ -891,8 +893,9 @@ typedef enum LogViewerToolbarItem {
         [_linksTextView setString:@""];
         
         [selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
+            NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
             NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
-            SavedChat *chat = [self _savedPathAtPath:path];
+            SavedChat *chat = [self _savedChatAtPath:path];
             
             if ([(NSArray *)[chat messages] count] > 0) {
                 NSString *headingString = [NSString stringWithFormat:@"%@: %@\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
@@ -910,6 +913,7 @@ typedef enum LogViewerToolbarItem {
                             NSTextAttachment *attachment = [[[NSTextAttachment alloc] initWithFileWrapper:nil] autorelease];
                             LinkButtonCell *linkButtonCell = [[[LinkButtonCell alloc] initWithInstantMessage:msg] autorelease];
                             
+                            [linkButtonCell setChatPath:path];
                             [attachment setAttachmentCell:linkButtonCell];
                             
                             [[_linksTextView textStorage] appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
@@ -942,11 +946,15 @@ typedef enum LogViewerToolbarItem {
                 
                 [[_linksTextView textStorage] appendAttributedString:newline];
             }
+            
+            [pool release];
         }];
         
         if ([[_linksTextView textStorage] length] > 0) {
             [[_linksTextView textStorage] deleteCharactersInRange:NSMakeRange([[_linksTextView textStorage] length] - 1, 1)];
         }
+        
+        _linksNeedUpdate = NO;
     }
 }
 
@@ -978,7 +986,16 @@ typedef enum LogViewerToolbarItem {
     [self _updateLogWithCurrentSelection];
 }
 
-- (SavedChat *)_savedPathAtPath:(NSString *)path
+- (void)_displayLogAtPath:(NSString *)path
+{
+    SavedChat *chat = [self _savedChatAtPath:path];
+    
+    [_chatViewController scrollToBeginningSmoothly:NO];
+    [_chatViewController setChat:chat];
+    [_chatViewController _layoutIfNecessary];
+}
+
+- (SavedChat *)_savedChatAtPath:(NSString *)path
 {
     SavedChat *chat = nil;
     
@@ -990,7 +1007,7 @@ typedef enum LogViewerToolbarItem {
         chat = [[NSClassFromString(@"SavedChat") alloc] initWithSavedData:data];
     }
     
-    return chat;
+    return [chat autorelease];
 }
 
 @end

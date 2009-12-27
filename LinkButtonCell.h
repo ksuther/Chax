@@ -27,10 +27,12 @@
 @interface LinkButtonCell : NSButtonCell <NSTextAttachmentCell> {
     NSTextAttachment *_attachment;
     InstantMessage *_instantMessage;
+    NSString *_chatPath;
 }
 
 @property(retain) NSTextAttachment *attachment;
 @property(retain) InstantMessage *instantMessage;
+@property(retain) NSString *chatPath;
 
 - (id)initWithInstantMessage:(InstantMessage *)instantMessage;
 
