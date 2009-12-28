@@ -30,6 +30,8 @@ typedef enum LogViewerToolbarItem {
 - (NSDate *)_creationDateForLogAtPath:(NSString *)path;
 - (void)_updateLogsTableView;
 - (void)_updateLogWithCurrentSelection;
+- (void)_gatherFilesAndImages;
+- (void)_gatherLinks;
 - (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet;
 - (void)_displayLogAtPath:(NSString *)path;
 - (SavedChat *)_savedChatAtPath:(NSString *)path;
@@ -527,6 +529,7 @@ typedef enum LogViewerToolbarItem {
         
         [self _updateLogsTableView];
     } else if ([notification object] == _logsTableView) {
+        _transfersNeedUpdate = YES;
         _linksNeedUpdate = YES;
         
         [self _updateLogWithCurrentSelection];
@@ -890,82 +893,156 @@ typedef enum LogViewerToolbarItem {
             [_chatViewController loadBaseDocument];
             [_chatViewController _layoutIfNecessary];
         }
-    } else if ([[[_logTabView selectedTabViewItem] identifier] isEqualToString:@"files"]) {
+    } else if (_transfersNeedUpdate && [[[_logTabView selectedTabViewItem] identifier] isEqualToString:@"files"]) {
+        [self _gatherFilesAndImages];
     } else if (_linksNeedUpdate) {
-        NSAttributedString *newline = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
-        NSMutableParagraphStyle *paragraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+        [self _gatherLinks];
+    }
+}
+
+- (void)_gatherFilesAndImages
+{
+    NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
+    NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
+    NSAttributedString *newline = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
+    NSMutableParagraphStyle *paragraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+    
+    [paragraphStyle setParagraphSpacing:4.0];
+    
+    NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12], NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
+    
+    //Get the links out of the selected logs
+    [_transfersTextView setString:@""];
+    
+    [selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
+        SavedChat *chat = [self _savedChatAtPath:path];
         
-        [paragraphStyle setParagraphSpacing:4.0];
-        
-        NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12], NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
-        
-        //Get the links out of the selected logs
-        [_linksTextView setString:@""];
-        
-        [selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
-            NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-            NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
-            SavedChat *chat = [self _savedChatAtPath:path];
-            
-            if ([(NSArray *)[chat messages] count] > 0) {
-                NSString *headingString = [NSString stringWithFormat:@"%@: %@\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
-                NSAttributedString *attributedHeadingString = [[[NSAttributedString alloc] initWithString:headingString attributes:headingAttributes] autorelease];
-                __block NSUInteger linkCount = 0;
+        if ([(NSArray *)[chat messages] count] > 0) {
+            NSString *headingString = [NSString stringWithFormat:@"%@: %@\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
+            NSAttributedString *attributedHeadingString = [[[NSAttributedString alloc] initWithString:headingString attributes:headingAttributes] autorelease];
+            __block NSUInteger transferCount = 0;
+            NSLog(@"begin");
+            [[_transfersTextView textStorage] appendAttributedString:attributedHeadingString];
+            for (InstantMessage *msg in [chat messages]) {
+                //Add file transfers
+                [[msg text] enumerateAttribute:@"IMFileTransferGUIDAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
+                    if (value) {
+                        NSLog(@"transfer: %@ %@", value, [[[IMFileTransferCenter sharedInstance] transferForGUID:value includeRemoved:YES] previewItemURL]);
+                        
+                        /*NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName, value, NSLinkAttributeName, nil];
+                        NSString *senderString = [NSString stringWithFormat:@" %@: ", [(IMHandle *)[msg sender] name]];
+                        NSTextAttachment *attachment = [[[NSTextAttachment alloc] initWithFileWrapper:nil] autorelease];
+                        LinkButtonCell *linkButtonCell = [[[LinkButtonCell alloc] initWithInstantMessage:msg] autorelease];
+                        
+                        [linkButtonCell setChatPath:path];
+                        [attachment setAttachmentCell:linkButtonCell];
+                        
+                        [[_linksTextView textStorage] appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
+                        [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:senderString] autorelease]];
+                        [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", value] attributes:linkAttributes] autorelease]];*/
+                        
+                        transferCount++;
+                    }
+                }];
                 
-                [[_linksTextView textStorage] appendAttributedString:attributedHeadingString];
-                
-                for (InstantMessage *msg in [chat messages]) {
-                    //Add a line for each URL
-                    [[msg text] enumerateAttribute:@"IMLinkAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
-                        if (value) {
-                            NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName, value, NSLinkAttributeName, nil];
-                            NSString *senderString = [NSString stringWithFormat:@" %@: ", [(IMHandle *)[msg sender] name]];
-                            NSTextAttachment *attachment = [[[NSTextAttachment alloc] initWithFileWrapper:nil] autorelease];
-                            LinkButtonCell *linkButtonCell = [[[LinkButtonCell alloc] initWithInstantMessage:msg] autorelease];
-                            
-                            [linkButtonCell setChatPath:path];
-                            [attachment setAttachmentCell:linkButtonCell];
-                            
-                            [[_linksTextView textStorage] appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
-                            [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:senderString] autorelease]];
-                            [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", value] attributes:linkAttributes] autorelease]];
-                            
-                            linkCount++;
-                        }
-                    }];
-                    
-                    /*[[msg text] enumerateAttribute:@"IMFileTransferGUIDAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
-                        if (value) {
-                            NSLog(@"transfer: %@", [[[IMFileTransferCenter sharedInstance] transferForGUID:value includeRemoved:YES] previewItemURL]);
-                        }
-                    }];
-                    
-                    [[msg text] enumerateAttribute:@"IMFilenameAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
-                        if (value) {
-                            NSLog(@"%@", [msg attributedSummaryString]);
-                        }
-                    }];*/
-                }
-                
-                //If there were no URLs in the log, write no logs
-                if (linkCount == 0) {
-                    NSDictionary *noLinksAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:0.2], NSObliquenessAttributeName, nil];
-                    
-                    [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[ChaxLocalizedString(@"No links in transcript.") stringByAppendingString:@"\n"] attributes:noLinksAttributes] autorelease]];
-                }
-                
-                [[_linksTextView textStorage] appendAttributedString:newline];
+                /*[[msg text] enumerateAttribute:@"IMFilenameAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
+                    if (value) {
+                        NSLog(@"%@ %@", [msg attributedSummaryString], value);
+                    }
+                }];*/
             }
             
-            [pool release];
-        }];
-        
-        if ([[_linksTextView textStorage] length] > 0) {
-            [[_linksTextView textStorage] deleteCharactersInRange:NSMakeRange([[_linksTextView textStorage] length] - 1, 1)];
+            //If there were no transfers in the log, write no transfers
+            if (transferCount == 0) {
+                NSDictionary *noTransfersAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:0.2], NSObliquenessAttributeName, nil];
+                
+                [[_transfersTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[ChaxLocalizedString(@"No file transfers in transcript.") stringByAppendingString:@"\n"] attributes:noTransfersAttributes] autorelease]];
+            }
+            
+            [[_transfersTextView textStorage] appendAttributedString:newline];
         }
         
-        _linksNeedUpdate = NO;
+        [pool release];
+    }];
+    
+    if ([[_linksTextView textStorage] length] > 0) {
+        [[_linksTextView textStorage] deleteCharactersInRange:NSMakeRange([[_linksTextView textStorage] length] - 1, 1)];
     }
+    
+    _transfersNeedUpdate = NO;
+}
+
+- (void)_gatherLinks
+{
+    NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
+    NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
+    NSAttributedString *newline = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
+    NSMutableParagraphStyle *paragraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+    
+    [paragraphStyle setParagraphSpacing:4.0];
+    
+    NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12], NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
+    
+    //Get the links out of the selected logs
+    [_linksTextView setString:@""];
+    
+    [selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
+        SavedChat *chat = [self _savedChatAtPath:path];
+        
+        if ([(NSArray *)[chat messages] count] > 0) {
+            NSString *headingString = [NSString stringWithFormat:@"%@: %@\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
+            NSAttributedString *attributedHeadingString = [[[NSAttributedString alloc] initWithString:headingString attributes:headingAttributes] autorelease];
+            __block NSUInteger linkCount = 0;
+            
+            [[_linksTextView textStorage] appendAttributedString:attributedHeadingString];
+            
+            for (InstantMessage *msg in [chat messages]) {
+                //Add a line for each URL
+                [[msg text] enumerateAttribute:@"IMLinkAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
+                    if (value) {
+                        NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName, value, NSLinkAttributeName, nil];
+                        NSString *senderString = [NSString stringWithFormat:@" %@: ", [(IMHandle *)[msg sender] name]];
+                        NSTextAttachment *attachment = [[[NSTextAttachment alloc] initWithFileWrapper:nil] autorelease];
+                        LinkButtonCell *linkButtonCell = [[[LinkButtonCell alloc] initWithInstantMessage:msg] autorelease];
+                        
+                        [linkButtonCell setChatPath:path];
+                        [attachment setAttachmentCell:linkButtonCell];
+                        
+                        NSMutableAttributedString *attachmentString = [[[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy] autorelease];
+                        
+                        [attachmentString addAttribute:NSToolTipAttributeName value:ChaxLocalizedString(@"Show link in transcript") range:NSMakeRange(0, [attachmentString length])];
+                        
+                        [[_linksTextView textStorage] appendAttributedString:attachmentString];
+                        [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:senderString] autorelease]];
+                        [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", value] attributes:linkAttributes] autorelease]];
+                        
+                        linkCount++;
+                    }
+                }];
+            }
+            
+            //If there were no URLs in the log, write no logs
+            if (linkCount == 0) {
+                NSDictionary *noLinksAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:0.2], NSObliquenessAttributeName, nil];
+                
+                [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[ChaxLocalizedString(@"No links in transcript.") stringByAppendingString:@"\n"] attributes:noLinksAttributes] autorelease]];
+            }
+            
+            [[_linksTextView textStorage] appendAttributedString:newline];
+        }
+        
+        [pool release];
+    }];
+    
+    if ([[_linksTextView textStorage] length] > 0) {
+        [[_linksTextView textStorage] deleteCharactersInRange:NSMakeRange([[_linksTextView textStorage] length] - 1, 1)];
+    }
+    
+    _linksNeedUpdate = NO;
 }
 
 - (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet

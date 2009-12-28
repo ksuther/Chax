@@ -17,6 +17,7 @@
     
     IBOutlet NSTabView *_logTabView;
     IBOutlet FezWebView *_webView;
+    IBOutlet NSTextView *_transfersTextView;
     IBOutlet NSTextView *_linksTextView;
     
     IBOutlet NSProgressIndicator *_progressIndicator;
@@ -29,7 +30,7 @@
     IBOutlet NSButton *_fileButton;
     IBOutlet NSButton *_linkButton;
     
-    BOOL _linksNeedUpdate;
+    BOOL _transfersNeedUpdate, _linksNeedUpdate;
     
     NSOperationQueue *_operationQueue;
     NSOperationQueue *_searchQueue;
