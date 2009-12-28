@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="115"/>
+			<integer value="91"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -714,6 +714,26 @@
 											<int key="NSvFlags">292</int>
 											<object class="NSMutableArray" key="NSSubviews">
 												<bool key="EncodedWithXMLCoder">YES</bool>
+												<object class="NSTextField" id="426067088">
+													<reference key="NSNextResponder" ref="317384909"/>
+													<int key="NSvFlags">301</int>
+													<string key="NSFrame">{{159, 124}, {124, 19}}</string>
+													<reference key="NSSuperview" ref="317384909"/>
+													<bool key="NSEnabled">YES</bool>
+													<object class="NSTextFieldCell" key="NSCell" id="504055929">
+														<int key="NSCellFlags">68288064</int>
+														<int key="NSCellFlags2">272630784</int>
+														<string key="NSContents">No log selected</string>
+														<object class="NSFont" key="NSSupport">
+															<string key="NSName">LucidaGrande</string>
+															<double key="NSSize">16</double>
+															<int key="NSfFlags">16</int>
+														</object>
+														<reference key="NSControlView" ref="426067088"/>
+														<reference key="NSBackgroundColor" ref="383803073"/>
+														<reference key="NSTextColor" ref="191447755"/>
+													</object>
+												</object>
 												<object class="NSTabView" id="378008884">
 													<reference key="NSNextResponder" ref="317384909"/>
 													<int key="NSvFlags">18</int>
@@ -1531,6 +1551,70 @@
 					</object>
 					<int key="connectionID">132</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">hidden: isLogSelected</string>
+						<reference key="source" ref="426067088"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="426067088"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">hidden: isLogSelected</string>
+							<string key="NSBinding">hidden</string>
+							<string key="NSKeyPath">isLogSelected</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">140</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: isLogSelected</string>
+						<reference key="source" ref="4592722"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="4592722"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">enabled: isLogSelected</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">isLogSelected</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">146</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: isLogSelected</string>
+						<reference key="source" ref="486856768"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="486856768"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">enabled: isLogSelected</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">isLogSelected</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">147</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: isLogSelected</string>
+						<reference key="source" ref="111192056"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="111192056"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">enabled: isLogSelected</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">isLogSelected</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">148</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1705,6 +1789,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="339312226"/>
 							<reference ref="378008884"/>
+							<reference ref="426067088"/>
 						</object>
 						<reference key="parent" ref="477948186"/>
 					</object>
@@ -2007,6 +2092,20 @@
 						<reference key="object" ref="400084947"/>
 						<reference key="parent" ref="474756485"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">133</int>
+						<reference key="object" ref="426067088"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="504055929"/>
+						</object>
+						<reference key="parent" ref="317384909"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">134</int>
+						<reference key="object" ref="504055929"/>
+						<reference key="parent" ref="426067088"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -2032,6 +2131,8 @@
 					<string>128.IBPluginDependency</string>
 					<string>129.IBPluginDependency</string>
 					<string>130.IBPluginDependency</string>
+					<string>133.IBPluginDependency</string>
+					<string>134.IBPluginDependency</string>
 					<string>17.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
@@ -2105,6 +2206,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>FezWebView</string>
 					<string>com.apple.WebKitIBPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2151,7 +2254,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">132</int>
+			<int key="maxID">148</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -164,6 +164,11 @@ typedef enum LogViewerToolbarItem {
     return valid;
 }
 
+- (BOOL)isLogSelected
+{
+    return [[_logsTableView selectedRowIndexes] count] > 0;
+}
+
 - (void)loggingDisabledSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
     if (returnCode == NSAlertSecondButtonReturn) {
@@ -533,6 +538,9 @@ typedef enum LogViewerToolbarItem {
         _linksNeedUpdate = YES;
         
         [self _updateLogWithCurrentSelection];
+        
+        [self willChangeValueForKey:@"isLogSelected"];
+        [self didChangeValueForKey:@"isLogSelected"];
     }
 }
 
