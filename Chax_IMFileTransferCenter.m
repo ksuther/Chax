@@ -34,7 +34,7 @@
     
     IMFileTransfer *transfer = [self transferForGUID:fp8];
     
-    if ([Chax boolForKey:@"AutoAcceptFiles"] && [transfer isIncoming]) {
+    if ([Chax boolForKey:@"AutoAcceptFiles"] && [transfer isIncoming] && [transfer wasRegisteredAsStandalone]) {
         NSArray *autoAcceptContacts = [[Chax objectForKey:@"AutoAccept.Files"] objectForKey:[transfer accountID]];
         
         if ([Chax integerForKey:@"AutoAcceptSelect.Files"] == 0 || [autoAcceptContacts containsObject:@"Chax_AcceptAnyone"] || [autoAcceptContacts containsObject:[[transfer otherPerson] lowercaseString]]) {
