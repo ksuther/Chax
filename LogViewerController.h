@@ -79,4 +79,6 @@
 - (IBAction)filterButtonAction:(id)sender;
 - (IBAction)toolbarAction:(id)sender;
 
+- (void)jumpToMessage:(NSString *)messageGUID inLogAtPath:(NSString *)logPath;
+
 @end

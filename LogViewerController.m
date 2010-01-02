@@ -52,8 +52,8 @@ typedef enum LogViewerToolbarItem {
 - (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet;
 - (void)_displayLogAtPath:(NSString *)path;
 - (SavedChat *)_savedChatAtPath:(NSString *)path;
-
 - (NSString *)_meString;
+- (void)_jumpToMessage:(InstantMessage *)instantMessage inLogAtPath:(NSString *)logPath;
 
 @end
 
@@ -62,6 +62,11 @@ typedef enum LogViewerToolbarItem {
 @synthesize people = _people;
 @synthesize visibleLogs = _visibleLogs;
 @synthesize searchPeople = _searchPeople;
+
++ (BOOL)isSelectorExcludedFromWebScript:(SEL)selector
+{
+    return (selector != @selector(jumpToMessage:inLogAtPath:));
+}
 
 + (LogViewerController *)sharedController
 {
@@ -230,6 +235,24 @@ typedef enum LogViewerToolbarItem {
             [self _updateLogsTableView];
         } else {
             [self _removeLogsWithIndexSet:[_logsTableView selectedRowIndexes]];
+        }
+    }
+}
+
+- (void)jumpToMessage:(NSString *)messageGUID inLogAtPath:(NSString *)logPath
+{
+    //Remove the jump button from the WebView
+    DOMElement *jumpElement = [[[_transfersWebView mainFrame] DOMDocument] getElementById:@"jump_to_conversation"];
+    
+    [[jumpElement parentElement] removeChild:jumpElement];
+    
+    //Find the actual InstantMessag object from its guid, then jump to it
+    SavedChat *chat = [self _savedChatAtPath:logPath];
+    
+    for (InstantMessage *nextMessage in [chat messages]) {
+        if ([[nextMessage guid] isEqualToString:messageGUID]) {
+            [self _jumpToMessage:nextMessage inLogAtPath:logPath];
+            break;
         }
     }
 }
@@ -604,32 +627,7 @@ typedef enum LogViewerToolbarItem {
 - (void)textView:(NSTextView *)textView clickedOnCell:(id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame atIndex:(NSUInteger)charIndex
 {
     if ([cell isKindOfClass:[LinkButtonCell class]]) {
-        [self filterButtonAction:_conversationButton];
-        
-        //Multiple logs might be selected, in this case we need to explicitly load the correct log
-        if ([_chatViewController chat] == nil) {
-            [self _displayLogAtPath:[(LinkButtonCell *)cell chatPath]];
-        }
-        
-        //Find the frame of the message containing the link
-        InstantMessage *im = [(LinkButtonCell *)cell instantMessage];
-        NSRect messageBounds = [[_chatViewController renderer] rectOfMessage:im];
-        
-        if (NSEqualPoints(messageBounds.origin, NSZeroPoint)) {
-            //The GUIDs aren't matching, manually search through the messages and find the message
-            for (InstantMessage *msg in [[_chatViewController chat] messages]) {
-                if ([[im text] isEqualToAttributedString:[msg text]] && [[im sender] isEqual:[msg sender]]) {
-                    messageBounds = [[_chatViewController renderer] rectOfMessage:msg];
-                    break;
-                }
-            }
-        }
-        
-        messageBounds.origin.y += [_webView frame].size.height - messageBounds.size.height - 12;
-        
-        //Freakish thing required to get at the actual view we want to scroll
-        //ChatViewScrollHelper seems to do it this way, so I'm just copying Apple
-        [[[[[[_webView mainFrame] frameView] documentView] enclosingScrollView] contentView] scrollRectToVisible:messageBounds];
+        [self _jumpToMessage:[(LinkButtonCell *)cell instantMessage] inLogAtPath:[(LinkButtonCell *)cell chatPath]];
     }
 }
 
@@ -639,6 +637,7 @@ typedef enum LogViewerToolbarItem {
 - (void)webView:(WebView *)sender didClearWindowObject:(WebScriptObject *)windowObject forFrame:(WebFrame *)frame
 {
     [windowObject setValue:_quickLookController forKey:@"quickLook"];
+    [windowObject setValue:self forKey:@"logViewer"];
 }
 
 #pragma mark -
@@ -646,8 +645,10 @@ typedef enum LogViewerToolbarItem {
 
 - (NSURLRequest *)webView:(WebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(WebDataSource *)dataSource
 {
-    if ([[[[request URL] path] lastPathComponent] isEqualToString:@"logviewer.css"]) {
-        NSString *cssPath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForResource:@"logviewer" ofType:@"css"];
+    NSString *lastPathComponent = [[[request URL] path] lastPathComponent];
+    
+    if ([lastPathComponent isEqualToString:@"logviewer.css"] || [lastPathComponent isEqualToString:@"link-icon.tiff"] || [lastPathComponent isEqualToString:@"link-icon-selected.tiff"]) {
+        NSString *cssPath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForResource:[lastPathComponent stringByDeletingPathExtension] ofType:[lastPathComponent pathExtension]];
         
         request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:cssPath]];
     }
@@ -674,20 +675,41 @@ typedef enum LogViewerToolbarItem {
 
 - (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
 {
-    //NSLog(@"%@", elementInformation);
+    DOMElement *node = [elementInformation objectForKey:WebElementDOMNodeKey];
+    DOMElement *jumpElement = [[[sender mainFrame] DOMDocument] getElementById:@"jump_to_conversation"];
     
-    /*
-     1/2/10 1:39:40 PM	iChat[30339]	{
-     WebElementDOMNode = "<DOMHTMLImageElement [IMG]: 0x116973000 ''>";
-     WebElementFrame = "<WebFrame: 0x1168357a0>";
-     WebElementImage = "<NSImage 0x1174b3220 Size={543, 410} Reps=(\n    \"NSBitmapImageRep 0x117489060 Size={543, 410} ColorSpace=(not yet loaded) BPS=8 BPP=(not yet loaded) Pixels=543x410 Alpha=NO Planar=NO Format=(not yet loaded) CurrentBacking=nil (faulting) CGImageSource=0x1174d3ac0\"\n)>";
-     WebElementImageRect = "NSRect: {{15, 384}, {150, 113}}";
-     WebElementImageURL = "file:///var/folders/eI/eIzqJ0JnGw87360ZkG3+o++++TI/-Tmp-/iChat/Images/EDE11D9D-E0A7-41B1-A73A-242FA920C70A/iChat%20Image(1849974313).png";
-     WebElementIsContentEditableKey = 0;
-     WebElementIsSelected = 0;
-     WebElementLinkIsLive = 0;
-     }
-    */
+    //Move the 'jump to conversation' button to the current image we're hovering over
+    if ([node isKindOfClass:[DOMElement class]]) {
+        //Remove the jump button from its current position if necessary
+        if (jumpElement && jumpElement != node && [jumpElement parentElement] != node) {
+            [[jumpElement parentElement] removeChild:jumpElement];
+        }
+        
+        //We can be hovering over either the inline image div, or a child of the div
+        if ([[[node parentElement] getAttribute:@"class"] isEqualToString:@"thumbnail"]) {
+            node = [node parentElement];
+        } else if (![[node getAttribute:@"class"] isEqualToString:@"thumbnail"]) {
+            node = nil;
+        }
+        
+        //Put the jump button in its new spot
+        if (node) {
+            if (!jumpElement) {
+                jumpElement = [[[sender mainFrame] DOMDocument] createElement:@"div"];
+                
+                [jumpElement setAttribute:@"class" value:@"jump_to_conversation"];
+                [jumpElement setAttribute:@"id" value:@"jump_to_conversation"];
+                [jumpElement setAttribute:@"title" value:ChaxLocalizedString(@"Show link in transcript")];
+            }
+            
+            NSString *guid = [node getAttribute:@"id"]; //The guid of the InstantMessage to jump to
+            NSString *logPath = [[node parentElement] getAttribute:@"id"]; //The file path to the log to jump to
+            
+            [jumpElement setAttribute:@"onclick" value:[NSString stringWithFormat:@"jumpToMessage('%@', '%@'); event.cancelBubble=true;", guid, logPath]];
+            
+            [node appendChild:jumpElement];
+        }
+    }
 }
 
 #pragma mark -
@@ -1023,11 +1045,14 @@ typedef enum LogViewerToolbarItem {
 {
     NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
     NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
-    NSMutableString *htmlString = [[[NSMutableString alloc] initWithString:@"<html><head>"] autorelease];
+    NSMutableString *htmlString = [[[NSMutableString alloc] initWithString:@"<html><head>\n"] autorelease];
     
-    [htmlString appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"logviewer.css\"/>"];
-    [htmlString appendString:@"<script type=\"text/javascript\">var quickLook; function showImage(path) { quickLook.quickLookImage_(path) }</script>"];
-    [htmlString appendString:@"</head><body>"];
+    [htmlString appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"logviewer.css\"/>\n"];
+    [htmlString appendString:@"<script type=\"text/javascript\">\n"];
+    [htmlString appendString:@"var quickLook; function showImage(path) { quickLook.quickLookImage_(path); }\n"];
+    [htmlString appendString:@"var logViewer; function jumpToMessage(guid, logPath) { logViewer.jumpToMessage_inLogAtPath_(guid, logPath); }\n"];
+    [htmlString appendString:@"</script>\n"];
+    [htmlString appendString:@"</head><body>\n"];
     
     if ([selectedRowIndexes count] == 0) {
         [[_transfersWebView mainFrame] loadHTMLString:@"" baseURL:nil];
@@ -1043,7 +1068,7 @@ typedef enum LogViewerToolbarItem {
             NSString *headingString = [NSString stringWithFormat:@"%@: %@<br />\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
             __block NSUInteger transferCount = 0;
             
-            [htmlString appendString:@"<div class=\"transcript\">"];
+            [htmlString appendFormat:@"<div id=\"%@\" class=\"transcript\">", path];
             [htmlString appendFormat:@"<h2>%@</h2>", headingString];
             
             for (InstantMessage *msg in [chat messages]) {
@@ -1075,7 +1100,7 @@ typedef enum LogViewerToolbarItem {
                             
                             [imagePaths addObject:imagePath];
                             
-                            [htmlString appendFormat:@"<div class=\"thumbnail\" onclick=\"showImage('%@')\">", imagePath];
+                            [htmlString appendFormat:@"<div id=\"%@\" class=\"thumbnail\" onclick=\"showImage('%@')\">", [msg guid], imagePath];
                             
                             if (imageSize.width > imageSize.height) {
                                 [htmlString appendFormat:@"<img id=\"%@\" src=\"%@\" width=\"150\" style=\"margin-top: %.0f\" /><br />", imagePath, imagePath, (150.0f - (150.0f * (imageSize.height / imageSize.width))) / 2.0f];
@@ -1248,6 +1273,35 @@ typedef enum LogViewerToolbarItem {
     NSBundle *addressBookFramework = [NSBundle bundleWithPath:@"/System/Library/Frameworks/AddressBook.framework"];
     
     return [addressBookFramework localizedStringForKey:@"ME_LABEL" value:@"me" table:@"ABStrings"];
+}
+
+- (void)_jumpToMessage:(InstantMessage *)instantMessage inLogAtPath:(NSString *)logPath
+{
+    [self filterButtonAction:_conversationButton];
+    
+    //Multiple logs might be selected, in this case we need to explicitly load the correct log
+    if ([_chatViewController chat] == nil) {
+        [self _displayLogAtPath:logPath];
+    }
+    
+    //Find the frame of the message containing the link
+    NSRect messageBounds = [[_chatViewController renderer] rectOfMessage:instantMessage];
+    
+    if (NSEqualPoints(messageBounds.origin, NSZeroPoint)) {
+        //The GUIDs aren't matching, manually search through the messages and find the message
+        for (InstantMessage *msg in [[_chatViewController chat] messages]) {
+            if ([[instantMessage text] isEqualToAttributedString:[msg text]] && [[instantMessage sender] isEqual:[msg sender]]) {
+                messageBounds = [[_chatViewController renderer] rectOfMessage:msg];
+                break;
+            }
+        }
+    }
+    
+    messageBounds.origin.y += [_webView frame].size.height - messageBounds.size.height - 12;
+    
+    //Freakish thing required to get at the actual view we want to scroll
+    //ChatViewScrollHelper seems to do it this way, so I'm just copying Apple
+    [[[[[[_webView mainFrame] frameView] documentView] enclosingScrollView] contentView] scrollRectToVisible:messageBounds];
 }
 
 @end
