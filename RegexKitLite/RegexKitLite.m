@@ -5,7 +5,7 @@
 //
 
 /*
- Copyright (c) 2008-2009, John Engelhart
+ Copyright (c) 2008-, John Engelhart
  
  All rights reserved.
  

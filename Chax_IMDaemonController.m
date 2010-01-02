@@ -1,7 +1,7 @@
 /*
- * ChaxPrefsView.h
+ * Chax_IMDaemonController.m
  *
- * Copyright (c) 2007- Kent Sutherland
+ * Copyright (c) 2007-2009 Kent Sutherland
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -21,11 +21,17 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "Chax_IMDaemonController.h"
 
-@interface ChaxPrefsView : NSView
+@implementation Chax_IMDaemonController
+
+- (void)chax_swizzle__agentDidLaunchNotification:(id)fp8
 {
-	IBOutlet id _controller;
+    NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"iChatAgent\" to Load ChaxAgent"] autorelease];
+    
+    [script executeAndReturnError:nil];
+    
+    [self chax_swizzle__agentDidLaunchNotification:fp8];
 }
 
 @end
