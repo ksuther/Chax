@@ -496,12 +496,23 @@ typedef enum LogViewerToolbarItem {
 
 - (void)beginPreviewPanelControl:(QLPreviewPanel *)panel
 {
+    DOMNode *node = [[[_transfersWebView mainFrame] DOMDocument] getElementById:[_quickLookController imagePath]];
+    NSRect boundingBox = [node boundingBox];
+    NSView *docView = [[[[node ownerDocument] webFrame] frameView] documentView];
+    
+    boundingBox = [docView convertRect:boundingBox toView:nil];
+    boundingBox.origin = [[docView window] convertBaseToScreen:boundingBox.origin];
+    
+    [_quickLookController setImageRect:boundingBox];
+    
     [panel setDataSource:_quickLookController];
+    [panel setDelegate:_quickLookController];
 }
 
 - (void)endPreviewPanelControl:(QLPreviewPanel *)panel
 {
     [panel setDataSource:nil];
+    [panel setDelegate:nil];
 }
 
 #pragma mark -
@@ -1044,7 +1055,7 @@ typedef enum LogViewerToolbarItem {
                             
                             [imagePaths addObject:imagePath];
                             
-                            [htmlString appendFormat:@"<div class=\"thumbnail\" onclick=\"showImage('%@')\">", imagePath];
+                            [htmlString appendFormat:@"<div id=\"%@\" class=\"thumbnail\" onclick=\"showImage('%@')\">", imagePath, imagePath];
                             
                             if (imageSize.width > imageSize.height) {
                                 [htmlString appendFormat:@"<img src=\"%@\" width=\"150\" style=\"margin-top: %.0f\" /><br />", imagePath, (150.0f - (150.0f * (imageSize.height / imageSize.width))) / 2.0f];

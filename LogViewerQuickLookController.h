@@ -24,10 +24,12 @@
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
 
-@interface LogViewerQuickLookController : NSObject <QLPreviewPanelDataSource> {
+@interface LogViewerQuickLookController : NSObject <QLPreviewPanelDataSource, QLPreviewPanelDelegate> {
     NSString *_imagePath;
+    NSRect _imageRect;
 }
 
 @property(copy) NSString *imagePath;
+@property(assign) NSRect imageRect;
 
 @end

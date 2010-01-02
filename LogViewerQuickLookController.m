@@ -28,6 +28,7 @@
 @implementation LogViewerQuickLookController
 
 @synthesize imagePath = _imagePath;
+@synthesize imageRect = _imageRect;
 
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)selector
 {
@@ -43,10 +44,9 @@
 
 - (void)quickLookImage:(NSString *)imageName
 {
-    NSString *imagePath = [TemporaryImagePath() stringByAppendingPathComponent:imageName];
     QLPreviewPanel *panel = [QLPreviewPanel sharedPreviewPanel];
     
-    [self setImagePath:imagePath];
+    [self setImagePath:imageName];
     
     [panel makeKeyAndOrderFront:nil];
 }
@@ -61,7 +61,17 @@
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index
 {
-    return [LogViewerPreviewItem previewItemWithURL:[NSURL fileURLWithPath:[self imagePath]]];
+    NSString *path = [TemporaryImagePath() stringByAppendingPathComponent:[self imagePath]];
+    
+    return [LogViewerPreviewItem previewItemWithURL:[NSURL fileURLWithPath:path]];
+}
+
+#pragma mark -
+#pragma mark QLPreviewPanel Delegate
+
+- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item
+{
+    return [self imageRect];
 }
 
 @end
