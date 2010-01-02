@@ -53,6 +53,8 @@ typedef enum LogViewerToolbarItem {
 - (void)_displayLogAtPath:(NSString *)path;
 - (SavedChat *)_savedChatAtPath:(NSString *)path;
 
+- (NSString *)_meString;
+
 @end
 
 @implementation LogViewerController
@@ -670,6 +672,24 @@ typedef enum LogViewerToolbarItem {
     return menuItems;
 }
 
+- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
+{
+    //NSLog(@"%@", elementInformation);
+    
+    /*
+     1/2/10 1:39:40 PM	iChat[30339]	{
+     WebElementDOMNode = "<DOMHTMLImageElement [IMG]: 0x116973000 ''>";
+     WebElementFrame = "<WebFrame: 0x1168357a0>";
+     WebElementImage = "<NSImage 0x1174b3220 Size={543, 410} Reps=(\n    \"NSBitmapImageRep 0x117489060 Size={543, 410} ColorSpace=(not yet loaded) BPS=8 BPP=(not yet loaded) Pixels=543x410 Alpha=NO Planar=NO Format=(not yet loaded) CurrentBacking=nil (faulting) CGImageSource=0x1174d3ac0\"\n)>";
+     WebElementImageRect = "NSRect: {{15, 384}, {150, 113}}";
+     WebElementImageURL = "file:///var/folders/eI/eIzqJ0JnGw87360ZkG3+o++++TI/-Tmp-/iChat/Images/EDE11D9D-E0A7-41B1-A73A-242FA920C70A/iChat%20Image(1849974313).png";
+     WebElementIsContentEditableKey = 0;
+     WebElementIsSelected = 0;
+     WebElementLinkIsLive = 0;
+     }
+    */
+}
+
 #pragma mark -
 #pragma mark Private
 
@@ -1055,12 +1075,16 @@ typedef enum LogViewerToolbarItem {
                             
                             [imagePaths addObject:imagePath];
                             
-                            [htmlString appendFormat:@"<div id=\"%@\" class=\"thumbnail\" onclick=\"showImage('%@')\">", imagePath, imagePath];
+                            [htmlString appendFormat:@"<div class=\"thumbnail\" onclick=\"showImage('%@')\">", imagePath];
                             
                             if (imageSize.width > imageSize.height) {
-                                [htmlString appendFormat:@"<img src=\"%@\" width=\"150\" style=\"margin-top: %.0f\" /><br />", imagePath, (150.0f - (150.0f * (imageSize.height / imageSize.width))) / 2.0f];
+                                [htmlString appendFormat:@"<img id=\"%@\" src=\"%@\" width=\"150\" style=\"margin-top: %.0f\" /><br />", imagePath, imagePath, (150.0f - (150.0f * (imageSize.height / imageSize.width))) / 2.0f];
                             } else {
-                                [htmlString appendFormat:@"<img src=\"%@\" height=\"150\" /><br />", imagePath];
+                                [htmlString appendFormat:@"<img id=\"%@\" src=\"%@\" height=\"150\" /><br />", imagePath, imagePath];
+                            }
+                            
+                            if ([msg fromMe]) {
+                                [htmlString appendFormat:@"<div class=\"me\">%@</div>", [self _meString]];
                             }
                             
                             [htmlString appendString:@"</div>\n"];
@@ -1076,10 +1100,11 @@ typedef enum LogViewerToolbarItem {
                 [htmlString appendFormat:@"<p class=\"no_images\">%@</p>\n", ChaxLocalizedString(@"No inline images in transcript.")];
             }
             
+            [htmlString appendString:@"<div class=\"spacer\"></div>"];
             [htmlString appendString:@"</div>"];
         }
         
-        [htmlString appendString:@"<div class=\"transcript\"></div>"];
+        [htmlString appendString:@"<div class=\"spacer\"></div>"];
         
         [htmlString appendString:@"</body></html>"];
         
@@ -1216,6 +1241,13 @@ typedef enum LogViewerToolbarItem {
     }
     
     return [chat autorelease];
+}
+
+- (NSString *)_meString
+{
+    NSBundle *addressBookFramework = [NSBundle bundleWithPath:@"/System/Library/Frameworks/AddressBook.framework"];
+    
+    return [addressBookFramework localizedStringForKey:@"ME_LABEL" value:@"me" table:@"ABStrings"];
 }
 
 @end

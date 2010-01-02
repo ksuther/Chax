@@ -48,6 +48,7 @@
     
     [self setImagePath:imageName];
     
+    [panel reloadData];
     [panel makeKeyAndOrderFront:nil];
 }
 
