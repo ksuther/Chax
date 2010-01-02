@@ -1,0 +1,23 @@
+.transcript {
+    clear: both;
+    margin-bottom: 1em;
+}
+
+.transcript h2 {
+    margin: 0 0 0 5px;
+    font-size: large;
+    background-color: #ddd;
+}
+
+.transcript p {
+    margin-left: 5px;
+}
+
+.thumbnail {
+    float: left;
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ddd;
+    margin: 5px;
+    text-align: center;
+}

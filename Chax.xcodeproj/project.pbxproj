@@ -44,7 +44,6 @@
 		375091421056FC8600F472F1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DAFB0FF7C86D000CBC6A /* AddressBook.framework */; };
 		375091431056FC8600F472F1 /* InstantMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DAFD0FF7C86D000CBC6A /* InstantMessage.framework */; };
 		375091441056FC8600F472F1 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DB3B0FF7CA81000CBC6A /* Quartz.framework */; };
-		375091451056FC8600F472F1 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DB900FF7CFAE000CBC6A /* QuickLook.framework */; };
 		375091461056FC8600F472F1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3786DB520FF7CCAC000CBC6A /* WebKit.framework */; };
 		375091471056FC8600F472F1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		375091481056FC8600F472F1 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AFBC6110311458001AA056 /* libicucore.dylib */; };
@@ -103,6 +102,10 @@
 		375091E51056FFF800F472F1 /* status-offline.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 37F4398C1049C9D5007F8638 /* status-offline.tiff */; };
 		375091E91057000E00F472F1 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 378D4FA7101E6FE300176B47 /* Growl.framework */; };
 		375092061057012F00F472F1 /* ActivityModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */; };
+		3753EA4A10E87EAF006B0F24 /* IMRenderingFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3753EA4910E87EAF006B0F24 /* IMRenderingFoundation.framework */; };
+		3753EB7F10EEB4DA006B0F24 /* logviewer.css in Resources */ = {isa = PBXBuildFile; fileRef = 3753EB7E10EEB4DA006B0F24 /* logviewer.css */; };
+		3753EBBA10EEC045006B0F24 /* LogViewerQuickLookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3753EBB910EEC045006B0F24 /* LogViewerQuickLookController.m */; };
+		3753EC1310EED866006B0F24 /* LogViewerPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */; };
 		377351F110DC948100CF1C88 /* InstallChax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 377351F010DC948100CF1C88 /* InstallChax.icns */; };
 		377351F610DC959F00CF1C88 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377AAC1D105DE96E0068A68F /* MainMenu.xib */; };
 		377351FE10DC960600CF1C88 /* InstallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377351FD10DC960600CF1C88 /* InstallController.m */; };
@@ -219,6 +222,12 @@
 		375090F41056FA5A00F472F1 /* ChaxAgentLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxAgentLib-Info.plist"; sourceTree = "<group>"; };
 		375091311056FC5F00F472F1 /* ChaxLib.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaxLib.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		375091321056FC5F00F472F1 /* ChaxLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxLib-Info.plist"; sourceTree = "<group>"; };
+		3753EA4910E87EAF006B0F24 /* IMRenderingFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IMRenderingFoundation.framework; path = /System/Library/Frameworks/InstantMessage.framework/Versions/A/Frameworks/IMRenderingFoundation.framework; sourceTree = "<absolute>"; };
+		3753EB7E10EEB4DA006B0F24 /* logviewer.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = logviewer.css; sourceTree = "<group>"; };
+		3753EBB810EEC045006B0F24 /* LogViewerQuickLookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerQuickLookController.h; sourceTree = "<group>"; };
+		3753EBB910EEC045006B0F24 /* LogViewerQuickLookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewerQuickLookController.m; sourceTree = "<group>"; };
+		3753EC1110EED866006B0F24 /* LogViewerPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerPreviewItem.h; sourceTree = "<group>"; };
+		3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewerPreviewItem.m; sourceTree = "<group>"; };
 		377351F010DC948100CF1C88 /* InstallChax.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = InstallChax.icns; path = Installer/InstallChax.icns; sourceTree = "<group>"; };
 		377351F310DC94D700CF1C88 /* ChaxInstaller-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ChaxInstaller-Info.plist"; sourceTree = "<group>"; };
 		377351FC10DC960600CF1C88 /* InstallController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstallController.h; path = Installer/InstallController.h; sourceTree = "<group>"; };
@@ -263,7 +272,6 @@
 		3786DB520FF7CCAC000CBC6A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		3786DB5B0FF7CCFD000CBC6A /* IMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMCore.h; sourceTree = "<group>"; };
 		3786DB630FF7CD34000CBC6A /* IMFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMFoundation.h; sourceTree = "<group>"; };
-		3786DB900FF7CFAE000CBC6A /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = /System/Library/Frameworks/QuickLook.framework; sourceTree = "<absolute>"; };
 		3786DBA40FF7D013000CBC6A /* NSPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPreferences.h; sourceTree = "<group>"; };
 		3786DBC10FF7D189000CBC6A /* Chax_PeopleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_PeopleList.h; path = Swizzled/Chax_PeopleList.h; sourceTree = "<group>"; };
 		3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_PeopleList.m; path = Swizzled/Chax_PeopleList.m; sourceTree = "<group>"; };
@@ -360,11 +368,11 @@
 				375091421056FC8600F472F1 /* AddressBook.framework in Frameworks */,
 				375091431056FC8600F472F1 /* InstantMessage.framework in Frameworks */,
 				375091441056FC8600F472F1 /* Quartz.framework in Frameworks */,
-				375091451056FC8600F472F1 /* QuickLook.framework in Frameworks */,
 				375091461056FC8600F472F1 /* WebKit.framework in Frameworks */,
 				375091471056FC8600F472F1 /* Cocoa.framework in Frameworks */,
 				375091481056FC8600F472F1 /* libicucore.dylib in Frameworks */,
 				3750918D1056FDB900F472F1 /* Carbon.framework in Frameworks */,
+				3753EA4A10E87EAF006B0F24 /* IMRenderingFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,9 +433,9 @@
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				3786DAFB0FF7C86D000CBC6A /* AddressBook.framework */,
 				3786DAFD0FF7C86D000CBC6A /* InstantMessage.framework */,
+				3753EA4910E87EAF006B0F24 /* IMRenderingFoundation.framework */,
 				3786DB3B0FF7CA81000CBC6A /* Quartz.framework */,
 				3786DB520FF7CCAC000CBC6A /* WebKit.framework */,
-				3786DB900FF7CFAE000CBC6A /* QuickLook.framework */,
 				37AFBC6110311458001AA056 /* libicucore.dylib */,
 				37BC686C1056EEB700F1FCD9 /* Carbon.framework */,
 				3773527610DC9BDC00CF1C88 /* ScriptingBridge.framework */,
@@ -492,6 +500,7 @@
 				37F29A9D1043ABB1005460A5 /* CameraSnapshot.xib */,
 				37D0E2851046133B009C42DA /* Donate.xib */,
 				3786DA1F0FF7C0A8000CBC6A /* Chax.icns */,
+				3753EB7E10EEB4DA006B0F24 /* logviewer.css */,
 				378D161E10E5971F003E2410 /* link-icon.tiff */,
 				378D16C610E722F0003E2410 /* link-icon-selected.tiff */,
 				3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */,
@@ -650,6 +659,10 @@
 			children = (
 				37AFBC1F1031125B001AA056 /* LogViewerController.h */,
 				37AFBC201031125B001AA056 /* LogViewerController.m */,
+				3753EBB810EEC045006B0F24 /* LogViewerQuickLookController.h */,
+				3753EBB910EEC045006B0F24 /* LogViewerQuickLookController.m */,
+				3753EC1110EED866006B0F24 /* LogViewerPreviewItem.h */,
+				3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */,
 				378D13D510E20599003E2410 /* LogViewerModeBackgroundView.h */,
 				378D13D610E20599003E2410 /* LogViewerModeBackgroundView.m */,
 				378D15E410E594FE003E2410 /* LinkButtonCell.h */,
@@ -876,6 +889,7 @@
 				375091D91056FF9D00F472F1 /* ActivityWindow.xib in Resources */,
 				375091D41056FF9600F472F1 /* Localizable.strings in Resources */,
 				378D16C710E722F0003E2410 /* link-icon-selected.tiff in Resources */,
+				3753EB7F10EEB4DA006B0F24 /* logviewer.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,6 +1046,8 @@
 				378D13D710E20599003E2410 /* LogViewerModeBackgroundView.m in Sources */,
 				378D15E610E594FE003E2410 /* LinkButtonCell.m in Sources */,
 				378D182410E73D08003E2410 /* LogViewerHorizontalSplitView.m in Sources */,
+				3753EBBA10EEC045006B0F24 /* LogViewerQuickLookController.m in Sources */,
+				3753EC1310EED866006B0F24 /* LogViewerPreviewItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

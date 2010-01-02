@@ -25,7 +25,7 @@
 "iChat is not currently logging your conversations, so past conversations will not appear in the log viewer. Go to the Messages tab in the iChat preferences to begin saving your chat transcripts." = "iChat is not currently logging your conversations, so past conversations will not appear in the log viewer. Go to the Messages tab in the iChat preferences to begin saving your chat transcripts.";
 "Log Viewer" = "Log Viewer";
 "Logging is disabled" = "Logging is disabled";
-"No file transfers in transcript." = "No file transfers in transcript.";
+"No inline images in transcript." = "No inline images in transcript.";
 "No links in transcript." = "No links in transcript.";
 "Show link in transcript" = "Show link in transcript";
 

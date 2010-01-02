@@ -21,6 +21,53 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+@interface ReadOnlyInstantMessage : NSObject
+{
+    IMHandle *_sender;
+    IMHandle *_subject;
+    NSDate *_time;
+    NSAttributedString *_text;
+    NSString *_plainBody;
+    unsigned int _flags;
+    NSString *_guid;
+    NSColor *_fgColor;
+    NSColor *_bgColor;
+    NSArray *_fileTransferGUIDs;
+}
+
+- (void)dealloc;
+- (id)sender;
+- (id)subject;
+- (id)time;
+- (id)text;
+- (id)plainBody;
+- (id)senderName;
+- (id)guid;
+- (id)summaryString;
+- (id)speechDescription;
+- (id)foregroundColor;
+- (id)backgroundColor;
+- (id)fileTransferGUIDs;
+- (BOOL)isRTL;
+- (BOOL)finished;
+- (BOOL)hasInlineAttachments;
+- (id)inlineAttachmentAttributesArray;
+- (BOOL)isEmote;
+- (BOOL)fromMe;
+- (BOOL)isEmpty;
+- (BOOL)isDelayed;
+- (BOOL)isAutoReply;
+- (BOOL)isAddressedToMe;
+- (BOOL)isAlert;
+- (BOOL)isSystemMessage;
+- (BOOL)isAnnouncementMessage;
+- (BOOL)isHeader;
+- (BOOL)isMarkMessage;
+- (BOOL)isStatusChangeMessage;
+- (BOOL)isTimestamp;
+
+@end
+
 @interface TranscriptStyleController : NSObject
 {
 }
@@ -157,5 +204,52 @@
 - (void)ddMessageNeedsSync:(id)arg1;
 - (id)ddMessagesNeedingSync;
 - (void)clearDDResults;
+
+@end
+
+@interface SuperToAppKitParserContext : IMFromSuperParserContext
+{
+    NSMutableAttributedString *_appKitAttributedString;
+    NSColor *_bodyBackgroundColor;
+    NSColor *_bodyForegroundColor;
+    BOOL _didAddBodyAttributes;
+    BOOL _isRightToLeft;
+}
+
+- (id)initWithAttributedString:(id)arg1;
+- (void)dealloc;
+- (id)appKitAttributedString;
+- (id)bodyBackgroundColor;
+- (id)_appKitFontFromIMFont:(id)arg1;
+- (id)_appKitColorFromIMColor:(id)arg1;
+- (void)parserDidStart:(id)arg1 bodyBackgroundColor:(id)arg2 bodyForegroundColor:(id)arg3 isRightToLeft:(BOOL)arg4;
+- (void)parser:(id)arg1 foundAttributes:(id)arg2 inRange:(struct _NSRange)arg3 characters:(id)arg4 backgroundColor:(id)arg5 foregroundColor:(id)arg6 font:(id)arg7 link:(id)arg8 isUnderline:(BOOL)arg9;
+- (void)parser:(id)arg1 foundAttributes:(id)arg2 inRange:(struct _NSRange)arg3 fileTransferGUID:(id)arg4 filename:(id)arg5 bookmark:(id)arg6 width:(id)arg7 height:(id)arg8;
+- (void)parserDidEnd:(id)arg1;
+
+@end
+
+@interface SuperToWebKitParserContext : IMFromSuperParserContext
+{
+    ReadOnlyInstantMessage *_message;
+    DOMHTMLElement *_messageElement;
+    DOMHTMLElement *_spanElement;
+    DOMDocument *_dom;
+    TranscriptStyleController *_styleController;
+    IMFont *_defaultFont;
+    BOOL _messageIsEmote;
+    BOOL _didTrimEmotePrefix;
+}
+
+- (id)initWithMessage:(id)arg1 dom:(id)arg2 styleController:(id)arg3 defaultFont:(id)arg4;
+- (void)dealloc;
+- (id)outMessageElement;
+- (BOOL)_workaroundWebKitLineHeightBug;
+- (void)parserDidStart:(id)arg1 bodyBackgroundColor:(id)arg2 bodyForegroundColor:(id)arg3 isRightToLeft:(BOOL)arg4;
+- (void)parser:(id)arg1 foundAttributes:(id)arg2 inRange:(struct _NSRange)arg3 characters:(id)arg4 backgroundColor:(id)arg5 foregroundColor:(id)arg6 font:(id)arg7 link:(id)arg8 isUnderline:(BOOL)arg9;
+- (void)parser:(id)arg1 foundAttributes:(id)arg2 inRange:(struct _NSRange)arg3 fileTransferGUID:(id)arg4 filename:(id)arg5 bookmark:(id)arg6 width:(id)arg7 height:(id)arg8;
+- (void)parserDidEnd:(id)arg1;
+- (BOOL)shouldPreprocess;
+- (id)parser:(id)arg1 preprocessedAttributesForAttributes:(id)arg2 range:(struct _NSRange)arg3;
 
 @end

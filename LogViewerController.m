@@ -9,8 +9,10 @@
 #import "LogViewerController.h"
 #import "RegexKitLite.h"
 #import "iChat5.h"
+#import "IMFoundation.h"
 #import "IMRenderingFoundation.h"
 #import "LinkButtonCell.h"
+#import "LogViewerQuickLookController.h"
 
 typedef enum LogViewerToolbarItem {
     LogViewerToolbarItemDelete = 1,
@@ -82,6 +84,8 @@ typedef enum LogViewerToolbarItem {
         
         _finderImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithPath:[[NSWorkspace sharedWorkspace] fullPathForApplication:@"Finder.app"]] pathForImageResource:@"Finder.icns"]];
         [_finderImage setName:@"FinderReveal"];
+        
+        _quickLookController = [[LogViewerQuickLookController alloc] init];
     }
     return self;
 }
@@ -104,12 +108,16 @@ typedef enum LogViewerToolbarItem {
     [_exportImage release];
     [_finderImage release];
     
+    [_quickLookController release];
+    
     [super dealloc];
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    
+    [[_transfersWebView preferences] setJavaScriptEnabled:YES];
     
     [_chatViewController willBecomeVisible];
     
@@ -464,6 +472,24 @@ typedef enum LogViewerToolbarItem {
 }
 
 #pragma mark -
+#pragma mark Quick Look
+
+- (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    return YES;
+}
+
+- (void)beginPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    [panel setDataSource:_quickLookController];
+}
+
+- (void)endPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    [panel setDataSource:nil];
+}
+
+#pragma mark -
 #pragma mark NSSplitView Delegate
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
@@ -577,6 +603,45 @@ typedef enum LogViewerToolbarItem {
         //ChatViewScrollHelper seems to do it this way, so I'm just copying Apple
         [[[[[[_webView mainFrame] frameView] documentView] enclosingScrollView] contentView] scrollRectToVisible:messageBounds];
     }
+}
+
+#pragma mark -
+#pragma mark WebView Frame Load Delegate
+
+- (void)webView:(WebView *)sender didClearWindowObject:(WebScriptObject *)windowObject forFrame:(WebFrame *)frame
+{
+    [windowObject setValue:_quickLookController forKey:@"quickLook"];
+}
+
+#pragma mark -
+#pragma mark WebView Resource Load Delegate
+
+- (NSURLRequest *)webView:(WebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(WebDataSource *)dataSource
+{
+    if ([[[[request URL] path] lastPathComponent] isEqualToString:@"logviewer.css"]) {
+        NSString *cssPath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForResource:@"logviewer" ofType:@"css"];
+        
+        request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:cssPath]];
+    }
+    
+    return request;
+}
+
+#pragma mark -
+#pragma mark WebView UI Delegate
+
+- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
+{
+    NSArray *menuItems = nil;
+    
+    for (NSMenuItem *item in defaultMenuItems) {
+        if ([item tag] == WebMenuItemTagCopyImageToClipboard) {
+            menuItems = [NSArray arrayWithObject:item];
+            break;
+        }
+    }
+    
+    return menuItems;
 }
 
 #pragma mark -
@@ -912,65 +977,87 @@ typedef enum LogViewerToolbarItem {
 {
     NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
     NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
-    NSAttributedString *newline = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
-    NSMutableParagraphStyle *paragraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+    NSMutableString *htmlString = [[[NSMutableString alloc] initWithString:@"<html><head>"] autorelease];
     
-    [paragraphStyle setParagraphSpacing:4.0];
+    [htmlString appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"logviewer.css\"/>"];
+    [htmlString appendString:@"<script type=\"text/javascript\">var quickLook; function showImage(path) { quickLook.quickLookImage_(path) }</script>"];
+    [htmlString appendString:@"</head><body>"];
     
-    NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12], NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
-    
-    //Get the links out of the selected logs
-    [_transfersTextView setString:@""];
+    if ([selectedRowIndexes count] == 0) {
+        [[_transfersWebView mainFrame] loadHTMLString:@"" baseURL:nil];
+    }
     
     [selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
         SavedChat *chat = [self _savedChatAtPath:path];
+        NSMutableArray *imagePaths = [NSMutableArray array];
         
         if ([(NSArray *)[chat messages] count] > 0) {
-            NSString *headingString = [NSString stringWithFormat:@"%@: %@\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
-            NSAttributedString *attributedHeadingString = [[[NSAttributedString alloc] initWithString:headingString attributes:headingAttributes] autorelease];
+            NSString *headingString = [NSString stringWithFormat:@"%@: %@<br />\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
             __block NSUInteger transferCount = 0;
-            NSLog(@"begin");
-            [[_transfersTextView textStorage] appendAttributedString:attributedHeadingString];
+            
+            [htmlString appendString:@"<div class=\"transcript\">"];
+            [htmlString appendFormat:@"<h2>%@</h2>", headingString];
+            
             for (InstantMessage *msg in [chat messages]) {
                 //Add file transfers
                 [[msg text] enumerateAttribute:@"IMFileTransferGUIDAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
                     if (value) {
-                        NSLog(@"transfer: %@ %@", value, [[[IMFileTransferCenter sharedInstance] transferForGUID:value includeRemoved:YES] previewItemURL]);
+                        //Does this have IMFileBookmarkAttributeName associated with it also? If it does, this was a file transfer rather than an inline image
+                        NSData *bookmarkData = [[msg text] attribute:@"IMFileBookmarkAttributeName" atIndex:range.location effectiveRange:NULL];
+                        NSString *filename = [[msg text] attribute:@"IMFilenameAttributeName" atIndex:range.location effectiveRange:NULL];
                         
-                        /*NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName, value, NSLinkAttributeName, nil];
-                        NSString *senderString = [NSString stringWithFormat:@" %@: ", [(IMHandle *)[msg sender] name]];
-                        NSTextAttachment *attachment = [[[NSTextAttachment alloc] initWithFileWrapper:nil] autorelease];
-                        LinkButtonCell *linkButtonCell = [[[LinkButtonCell alloc] initWithInstantMessage:msg] autorelease];
-                        
-                        [linkButtonCell setChatPath:path];
-                        [attachment setAttachmentCell:linkButtonCell];
-                        
-                        [[_linksTextView textStorage] appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
-                        [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:senderString] autorelease]];
-                        [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", value] attributes:linkAttributes] autorelease]];*/
+                        if (bookmarkData) {
+                            //We don't show file transfer anymore, just inline images
+                            /*BOOL stale;
+                            NSError *error = nil;
+                            NSURL *bookmarkURL = [NSURL URLByResolvingBookmarkData:bookmarkData options:NSURLBookmarkResolutionWithoutUI | NSURLBookmarkResolutionWithoutMounting relativeToURL:nil bookmarkDataIsStale:&stale error:&error];
+                            NSString *filename = [[msg text] attribute:@"IMFilenameAttributeName" atIndex:range.location effectiveRange:NULL];
+                            
+                            if (bookmarkURL) {
+                                filename = [NSString stringWithFormat:@"%@ (%@)", filename, [bookmarkURL path]];
+                            }
+                            
+                            [[_transfersTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:filename] autorelease]];
+                            [[_transfersTextView textStorage] appendAttributedString:newline];*/
+                        } else {
+                            //Build a path to the temporary inline image
+                            NSString *imagePath = [value stringByAppendingPathComponent:filename];
+                            NSImage *image = [[[NSImage alloc] initByReferencingFile:[TemporaryImagePath() stringByAppendingPathComponent:imagePath]] autorelease];
+                            NSSize imageSize = [image size];
+                            
+                            [imagePaths addObject:imagePath];
+                            
+                            [htmlString appendFormat:@"<div class=\"thumbnail\" onclick=\"showImage('%@')\">", imagePath];
+                            
+                            if (imageSize.width > imageSize.height) {
+                                [htmlString appendFormat:@"<img src=\"%@\" width=\"150\" style=\"margin-top: %.0f\" /><br />", imagePath, (150.0f - (150.0f * (imageSize.height / imageSize.width))) / 2.0f];
+                            } else {
+                                [htmlString appendFormat:@"<img src=\"%@\" height=\"150\" /><br />", imagePath];
+                            }
+                            
+                            [htmlString appendString:@"</div>\n"];
+                        }
                         
                         transferCount++;
                     }
                 }];
-                
-                /*[[msg text] enumerateAttribute:@"IMFilenameAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
-                    if (value) {
-                        NSLog(@"%@ %@", [msg attributedSummaryString], value);
-                    }
-                }];*/
             }
             
             //If there were no transfers in the log, write no transfers
             if (transferCount == 0) {
-                NSDictionary *noTransfersAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:0.2], NSObliquenessAttributeName, nil];
-                
-                [[_transfersTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[ChaxLocalizedString(@"No file transfers in transcript.") stringByAppendingString:@"\n"] attributes:noTransfersAttributes] autorelease]];
+                [htmlString appendFormat:@"<p>%@</p>\n", ChaxLocalizedString(@"No inline images in transcript.")];
             }
             
-            [[_transfersTextView textStorage] appendAttributedString:newline];
+            [htmlString appendString:@"</div>"];
         }
+        
+        [htmlString appendString:@"<div class=\"transcript\"></div>"];
+        
+        [htmlString appendString:@"</body></html>"];
+        
+        [[_transfersWebView mainFrame] loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:TemporaryImagePath()]];
         
         [pool release];
     }];

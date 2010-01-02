@@ -13,6 +13,7 @@
 #import "NSPreferences.h"
 #import "IMCore.h"
 #import "IMFoundation.h"
+#import "IMRenderingFoundation.h"
 
 NSString *TemporaryImagePath();
 NSUInteger SecureRandomUInt();
@@ -41,13 +42,6 @@ NSUInteger SecureRandomUInt();
 @class OpenGLVideoConferenceLayer, AudioConferenceView, SecureWindowTitleCell, PresenceTooltip, Service, OpenGLNSViewLayerWindow, ViewTable, GLFBO, GLSLProgram;
 @class IMAuxVideoProvider, FZLargeTypeController, ValidationObject, IMSharedPixelBufferPool, NSDataRetainingImage, Prefs_MsgCompose;
 @class SFCertificateTrustPanel, _GetVCChannelOp, _GetCertificateOp;
-
-@interface ReadOnlyInstantMessage : NSObject
-- (id)sender;
-- (id)text;
-- (id)time;
-- (id)subject;
-@end
 
 @interface VideoConferenceMultiController : NSObject
 @end

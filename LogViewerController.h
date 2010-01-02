@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <WebKit/WebKit.h>
 
-@class FezWebView, ChatViewController;
+@class FezWebView, ChatViewController, LogViewerQuickLookController;
 
 @interface LogViewerController : NSWindowController {
     IBOutlet ChatViewController *_chatViewController;
@@ -17,7 +18,7 @@
     
     IBOutlet NSTabView *_logTabView;
     IBOutlet FezWebView *_webView;
-    IBOutlet NSTextView *_transfersTextView;
+    IBOutlet WebView *_transfersWebView;
     IBOutlet NSTextView *_linksTextView;
     
     IBOutlet NSProgressIndicator *_progressIndicator;
@@ -48,6 +49,8 @@
     NSDateFormatter *_creationDateFormatter;
     
     NSImage *_deleteImage, *_exportImage, *_finderImage;
+    
+    LogViewerQuickLookController *_quickLookController;
 }
 
 @property(nonatomic, retain) NSArray *people;
