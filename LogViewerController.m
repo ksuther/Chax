@@ -1053,16 +1053,16 @@ typedef enum LogViewerToolbarItem {
                             }
                             
                             [htmlString appendString:@"</div>\n"];
+                            
+                            transferCount++;
                         }
-                        
-                        transferCount++;
                     }
                 }];
             }
             
             //If there were no transfers in the log, write no transfers
             if (transferCount == 0) {
-                [htmlString appendFormat:@"<p>%@</p>\n", ChaxLocalizedString(@"No inline images in transcript.")];
+                [htmlString appendFormat:@"<p class=\"no_images\">%@</p>\n", ChaxLocalizedString(@"No inline images in transcript.")];
             }
             
             [htmlString appendString:@"</div>"];

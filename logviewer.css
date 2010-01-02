@@ -4,13 +4,18 @@
 }
 
 .transcript h2 {
-    margin: 0 0 0 5px;
+    margin: 0;
+    padding: 5px;
     font-size: large;
     background-color: #ddd;
 }
 
 .transcript p {
     margin-left: 5px;
+}
+
+.no_images {
+    font-style: italic;
 }
 
 .thumbnail {
