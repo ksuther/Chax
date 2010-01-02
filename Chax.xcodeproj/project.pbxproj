@@ -106,12 +106,12 @@
 		3753EB7F10EEB4DA006B0F24 /* logviewer.css in Resources */ = {isa = PBXBuildFile; fileRef = 3753EB7E10EEB4DA006B0F24 /* logviewer.css */; };
 		3753EBBA10EEC045006B0F24 /* LogViewerQuickLookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3753EBB910EEC045006B0F24 /* LogViewerQuickLookController.m */; };
 		3753EC1310EED866006B0F24 /* LogViewerPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */; };
+		3753ECFD10EEEF3F006B0F24 /* ChaxHelperApp.app in Copy Executables */ = {isa = PBXBuildFile; fileRef = 377AAC3D105DEA380068A68F /* ChaxHelperApp.app */; };
 		377351F110DC948100CF1C88 /* InstallChax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 377351F010DC948100CF1C88 /* InstallChax.icns */; };
 		377351F610DC959F00CF1C88 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377AAC1D105DE96E0068A68F /* MainMenu.xib */; };
 		377351FE10DC960600CF1C88 /* InstallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377351FD10DC960600CF1C88 /* InstallController.m */; };
 		3773526110DC9B5900CF1C88 /* ChaxAddition.osax in Resources */ = {isa = PBXBuildFile; fileRef = 37BC68581056EBDB00F1FCD9 /* ChaxAddition.osax */; };
 		3773527710DC9BDC00CF1C88 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3773527610DC9BDC00CF1C88 /* ScriptingBridge.framework */; };
-		3773529210DC9C2700CF1C88 /* ChaxHelperApp.app in Resources */ = {isa = PBXBuildFile; fileRef = 377AAC3D105DEA380068A68F /* ChaxHelperApp.app */; };
 		377AAC63105DEACA0068A68F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		377AAC76105DEC1F0068A68F /* helper_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AAC75105DEC1F0068A68F /* helper_main.m */; };
 		378D13D710E20599003E2410 /* LogViewerModeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378D13D610E20599003E2410 /* LogViewerModeBackgroundView.m */; };
@@ -187,6 +187,17 @@
 				37CC44F210E140E200998593 /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3753ECFE10EEEF3F006B0F24 /* Copy Executables */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				3753ECFD10EEEF3F006B0F24 /* ChaxHelperApp.app in Copy Executables */,
+			);
+			name = "Copy Executables";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -807,6 +818,7 @@
 			buildConfigurationList = 37BC685C1056EBDC00F1FCD9 /* Build configuration list for PBXNativeTarget "ChaxAddition" */;
 			buildPhases = (
 				37BC68541056EBDB00F1FCD9 /* Resources */,
+				3753ECFE10EEEF3F006B0F24 /* Copy Executables */,
 				37BC68551056EBDB00F1FCD9 /* Sources */,
 				37BC68561056EBDB00F1FCD9 /* Frameworks */,
 				375090A91056F7E200F472F1 /* ShellScript */,
@@ -905,7 +917,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FEDB1D10E1594A0060BB05 /* dsa_pub.pem in Resources */,
-				3773529210DC9C2700CF1C88 /* ChaxHelperApp.app in Resources */,
 				375091411056FC7A00F472F1 /* ChaxLib.bundle in Resources */,
 				37FEDB5010E15AFD0060BB05 /* Chax.icns in Resources */,
 				37BC689C1056EFD400F1FCD9 /* ChaxAddition.sdef in Resources */,

@@ -126,7 +126,8 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
 {
     NSBundle *installedAdditionsBundle = [NSBundle bundleWithPath:[SCRIPTING_ADDITIONS_PATH stringByAppendingPathComponent:ChaxAdditionFilename]];
     
-    return [installedAdditionsBundle pathForResource:@"ChaxHelperApp" ofType:@"app"];
+    //pathForAuxiliaryExecutable nor pathForResource:ofType: seem to work here
+    return [[[[installedAdditionsBundle bundlePath] stringByAppendingPathComponent:@"Contents"] stringByAppendingPathComponent:@"MacOS"] stringByAppendingPathComponent:@"ChaxHelperApp.app"];
 }
 
 #pragma mark -
