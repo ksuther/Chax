@@ -521,14 +521,12 @@ typedef enum LogViewerToolbarItem {
 
 - (void)beginPreviewPanelControl:(QLPreviewPanel *)panel
 {
-    DOMNode *node = [[[_transfersWebView mainFrame] DOMDocument] getElementById:[_quickLookController imagePath]];
+    /*DOMNode *node = [[[_transfersWebView mainFrame] DOMDocument] getElementById:[_quickLookController currentImagePath]];
     NSRect boundingBox = [node boundingBox];
     NSView *docView = [[[[node ownerDocument] webFrame] frameView] documentView];
     
     boundingBox = [docView convertRect:boundingBox toView:nil];
-    boundingBox.origin = [[docView window] convertBaseToScreen:boundingBox.origin];
-    
-    [_quickLookController setImageRect:boundingBox];
+    boundingBox.origin = [[docView window] convertBaseToScreen:boundingBox.origin];*/
     
     [panel setDataSource:_quickLookController];
     [panel setDelegate:_quickLookController];
@@ -1046,10 +1044,11 @@ typedef enum LogViewerToolbarItem {
     NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
     NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
     NSMutableString *htmlString = [[[NSMutableString alloc] initWithString:@"<html><head>\n"] autorelease];
+    NSMutableArray *imagePaths = [NSMutableArray array];
     
     [htmlString appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"logviewer.css\"/>\n"];
     [htmlString appendString:@"<script type=\"text/javascript\">\n"];
-    [htmlString appendString:@"var quickLook; function showImage(path) { quickLook.quickLookImage_(path); }\n"];
+    [htmlString appendString:@"var quickLook; function showImage(index) { quickLook.quickLookImageAtIndex_(index); }\n"];
     [htmlString appendString:@"var logViewer; function jumpToMessage(guid, logPath) { logViewer.jumpToMessage_inLogAtPath_(guid, logPath); }\n"];
     [htmlString appendString:@"</script>\n"];
     [htmlString appendString:@"</head><body>\n"];
@@ -1062,7 +1061,6 @@ typedef enum LogViewerToolbarItem {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
         SavedChat *chat = [self _savedChatAtPath:path];
-        NSMutableArray *imagePaths = [NSMutableArray array];
         
         if ([(NSArray *)[chat messages] count] > 0) {
             NSString *headingString = [NSString stringWithFormat:@"%@: %@<br />\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
@@ -1098,9 +1096,8 @@ typedef enum LogViewerToolbarItem {
                             NSImage *image = [[[NSImage alloc] initByReferencingFile:[TemporaryImagePath() stringByAppendingPathComponent:imagePath]] autorelease];
                             NSSize imageSize = [image size];
                             
+                            [htmlString appendFormat:@"<div id=\"%@\" class=\"thumbnail\" onclick=\"showImage('%d')\">", [msg guid], [imagePaths count]];
                             [imagePaths addObject:imagePath];
-                            
-                            [htmlString appendFormat:@"<div id=\"%@\" class=\"thumbnail\" onclick=\"showImage('%@')\">", [msg guid], imagePath];
                             
                             if (imageSize.width > imageSize.height) {
                                 [htmlString appendFormat:@"<img id=\"%@\" src=\"%@\" width=\"150\" style=\"margin-top: %.0f\" /><br />", imagePath, imagePath, (150.0f - (150.0f * (imageSize.height / imageSize.width))) / 2.0f];
@@ -1130,7 +1127,6 @@ typedef enum LogViewerToolbarItem {
         }
         
         [htmlString appendString:@"<div class=\"spacer\"></div>"];
-        
         [htmlString appendString:@"</body></html>"];
         
         [[_transfersWebView mainFrame] loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:TemporaryImagePath()]];
@@ -1141,6 +1137,8 @@ typedef enum LogViewerToolbarItem {
     if ([[_linksTextView textStorage] length] > 0) {
         [[_linksTextView textStorage] deleteCharactersInRange:NSMakeRange([[_linksTextView textStorage] length] - 1, 1)];
     }
+    
+    [_quickLookController setImagePaths:imagePaths];
     
     _transfersNeedUpdate = NO;
 }

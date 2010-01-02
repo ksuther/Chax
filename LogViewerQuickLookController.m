@@ -27,26 +27,27 @@
 
 @implementation LogViewerQuickLookController
 
-@synthesize imagePath = _imagePath;
-@synthesize imageRect = _imageRect;
+@synthesize imagePaths = _imagePaths;
 
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)selector
 {
-    return (selector != @selector(quickLookImage:));
+    return (selector != @selector(quickLookImageAtIndex:));
 }
 
 - (void)dealloc
 {
-    [_imagePath release];
+    [_imagePaths release];
     
     [super dealloc];
 }
 
-- (void)quickLookImage:(NSString *)imageName
+- (void)quickLookImageAtIndex:(int)imageIndex
 {
     QLPreviewPanel *panel = [QLPreviewPanel sharedPreviewPanel];
     
-    [self setImagePath:imageName];
+    if ([panel currentController]) {
+        [panel setCurrentPreviewItemIndex:imageIndex];
+    }
     
     [panel makeKeyAndOrderFront:nil];
 }
@@ -56,12 +57,12 @@
 
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel
 {
-    return 1;
+    return [_imagePaths count];
 }
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index
 {
-    NSString *path = [TemporaryImagePath() stringByAppendingPathComponent:[self imagePath]];
+    NSString *path = [TemporaryImagePath() stringByAppendingPathComponent:[_imagePaths objectAtIndex:index]];
     
     return [LogViewerPreviewItem previewItemWithURL:[NSURL fileURLWithPath:path]];
 }
@@ -71,7 +72,7 @@
 
 - (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item
 {
-    return [self imageRect];
+    return NSZeroRect;
 }
 
 @end
