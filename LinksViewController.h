@@ -25,6 +25,8 @@
 
 @interface LinksViewController : NSViewController {
     NSDateFormatter *_dateFormatter;
+    
+    NSMutableDictionary *_instantMessageCache;
 }
 
 - (void)updateWithSavedChatPaths:(NSArray *)savedChatPaths;

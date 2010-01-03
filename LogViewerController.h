@@ -24,7 +24,7 @@
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
 
-@class FezWebView, ChatViewController, SavedChat;
+@class FezWebView, ChatViewController, SavedChat, InstantMessage;
 @class ConversationViewController, TransfersViewController, LinksViewController;
 
 @interface LogViewerController : NSWindowController {
@@ -83,7 +83,7 @@
 - (IBAction)filterButtonAction:(id)sender;
 - (IBAction)toolbarAction:(id)sender;
 
-- (void)jumpToMessageGUID:(NSString *)messageGUID inLogAtPath:(NSString *)logPath;
+- (void)jumpToInstantMessage:(InstantMessage *)instantMessage inLogAtPath:(NSString *)logPath;
 - (void)selectConversationFilterButton;
 
 @end

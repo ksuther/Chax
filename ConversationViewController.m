@@ -69,9 +69,33 @@
     if (NSEqualPoints(messageBounds.origin, NSZeroPoint)) {
         //The GUIDs aren't matching, manually search through the messages and find the message
         for (InstantMessage *msg in [[_chatViewController chat] messages]) {
-            if ([[instantMessage text] isEqualToAttributedString:[msg text]] && [[instantMessage sender] isEqual:[msg sender]]) {
-                messageBounds = [[_chatViewController renderer] rectOfMessage:msg];
-                break;
+            if ([[instantMessage sender] isEqual:[msg sender]]) {
+                if ([[instantMessage text] isEqualToAttributedString:[msg text]]) {
+                    messageBounds = [[_chatViewController renderer] rectOfMessage:msg];
+                    break;
+                } else {
+                    NSArray *matchAttachments = [instantMessage inlineAttachmentAttributesArray];
+                    NSArray *nextAttachments = [msg inlineAttachmentAttributesArray];
+                    
+                    //The text doesn't match, but there may be inline images that we can use to compare data
+                    if ([matchAttachments count] == [nextAttachments count]) {
+                        for (NSUInteger i = 0; i < [matchAttachments count]; i++) {
+                            NSDictionary *matchDictionary = [matchAttachments objectAtIndex:i];
+                            NSDictionary *nextDictionary = [nextAttachments objectAtIndex:i];
+                            
+                            NSString *matchPath = [[TemporaryImagePath() stringByAppendingPathComponent:[matchDictionary objectForKey:@"IMFileTransferGUIDAttributeName"]] stringByAppendingPathComponent:[matchDictionary objectForKey:@"IMFilenameAttributeName"]];
+                            NSString *nextPath = [[TemporaryImagePath() stringByAppendingPathComponent:[nextDictionary objectForKey:@"IMFileTransferGUIDAttributeName"]] stringByAppendingPathComponent:[nextDictionary objectForKey:@"IMFilenameAttributeName"]];
+                            
+                            NSData *matchData = [NSData dataWithContentsOfFile:matchPath];
+                            NSData *nextData = [NSData dataWithContentsOfFile:nextPath];
+                            
+                            if ([matchData isEqualToData:nextData]) {
+                                messageBounds = [[_chatViewController renderer] rectOfMessage:msg];
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

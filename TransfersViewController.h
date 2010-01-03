@@ -30,6 +30,8 @@
     
     QLPreviewPanel *_previewPanel;
     NSInteger _currentImageIndex;
+    
+    NSMutableDictionary *_instantMessageCache;
 }
 
 @property(nonatomic, copy) NSArray *imagePaths;

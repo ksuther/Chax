@@ -35,6 +35,7 @@
 - (void)dealloc
 {
     [_dateFormatter release];
+    [_instantMessageCache release];
     
     [super dealloc];
 }
@@ -42,6 +43,8 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    _instantMessageCache = [[NSMutableDictionary alloc] init];
     
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -52,13 +55,19 @@
 
 - (void)jumpToMessageGUID:(NSString *)messageGUID inLogAtPath:(NSString *)logPath
 {
-    [[LogViewerController sharedController] jumpToMessageGUID:messageGUID inLogAtPath:logPath];
+    [[LogViewerController sharedController] jumpToInstantMessage:[_instantMessageCache objectForKey:messageGUID] inLogAtPath:logPath];
 }
 
 - (void)updateWithSavedChatPaths:(NSArray *)savedChatPaths
 {
     WebView *webView = (WebView *)[self view];
     NSMutableString *htmlString = [[[NSMutableString alloc] initWithString:@"<html><head>\n"] autorelease];
+    
+    //Flush the InstantMessage cache
+    //This is used to reconnect GUIDs with InstantMessages. This isn't necessary for iChat's new saved chat format,
+    //but older logs have new GUIDs generated each time they are opened, so they won't survive when we try to jump to them.
+    //Caching the InstantMessage allows us to pass an entire object to match, rather than just a GUID.
+    [_instantMessageCache removeAllObjects];
     
     [htmlString appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"logviewer.css\"/>\n"];
     [htmlString appendString:@"<script type=\"text/javascript\">\n"];
@@ -89,6 +98,8 @@
                         [htmlString appendFormat:@"<div class=\"jump_to_conversation_link\" title=\"%@\" onclick=\"jumpToMessage('%@', '%@'); event.cancelBubble=true;\"></div>", ChaxLocalizedString(@"Show link in transcript"), [msg guid], nextSavedChatPath];
                         [htmlString appendFormat:@"%@: <a href=\"%@\">%@</a>", [(IMHandle *)[msg sender] name], value, value];
                         [htmlString appendString:@"</div>\n"];
+                        
+                        [_instantMessageCache setObject:msg forKey:[msg guid]];
                         
                         linkCount++;
                     }

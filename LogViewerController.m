@@ -255,9 +255,9 @@ typedef enum LogViewerToolbarItem {
     }
 }
 
-- (void)jumpToMessageGUID:(NSString *)messageGUID inLogAtPath:(NSString *)logPath
+- (void)jumpToInstantMessage:(InstantMessage *)instantMessage inLogAtPath:(NSString *)logPath
 {
-    [_conversationViewController jumpToMessageGUID:messageGUID inLogAtPath:logPath];
+    [_conversationViewController jumpToInstantMessage:instantMessage inLogAtPath:logPath];
 }
 
 - (void)selectConversationFilterButton
