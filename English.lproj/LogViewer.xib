@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="115"/>
+			<integer value="93"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1155,12 +1155,14 @@
 									</object>
 									<string key="NSFrame">{{175, 0}, {442, 408}}</string>
 									<reference key="NSSuperview" ref="219076803"/>
+									<string key="NSAutosaveName">Horizontal</string>
 								</object>
 							</object>
 							<string key="NSFrame">{{-1, 20}, {617, 408}}</string>
 							<reference key="NSSuperview" ref="963503547"/>
 							<bool key="NSIsVertical">YES</bool>
 							<int key="NSDividerStyle">2</int>
+							<string key="NSAutosaveName">Vertical</string>
 						</object>
 					</object>
 					<string key="NSFrameSize">{616, 427}</string>
