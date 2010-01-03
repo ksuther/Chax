@@ -801,10 +801,8 @@
 																									<string>WebKitDefaultFontSize</string>
 																									<string>WebKitJavaEnabled</string>
 																									<string>WebKitJavaScriptCanOpenWindowsAutomatically</string>
-																									<string>WebKitJavaScriptEnabled</string>
 																									<string>WebKitMinimumFontSize</string>
 																									<string>WebKitPluginsEnabled</string>
-																									<string>WebKitSerifFont</string>
 																									<string>WebKitStandardFont</string>
 																								</object>
 																								<object class="NSMutableArray" key="dict.values">
@@ -813,10 +811,8 @@
 																									<integer value="12"/>
 																									<boolean value="NO"/>
 																									<boolean value="NO"/>
-																									<boolean value="YES"/>
 																									<integer value="1"/>
 																									<boolean value="NO"/>
-																									<string>Times</string>
 																									<string>Lucida Grande</string>
 																								</object>
 																							</object>
@@ -1178,6 +1174,9 @@
 			<object class="NSCustomObject" id="409179069">
 				<string key="NSClassName">ChatViewController</string>
 			</object>
+			<object class="NSViewController" id="545084646"/>
+			<object class="NSViewController" id="954471638"/>
+			<object class="NSViewController" id="926311428"/>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -1301,14 +1300,6 @@
 						<reference key="destination" ref="409179069"/>
 					</object>
 					<int key="connectionID">44</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_webView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="318030774"/>
-					</object>
-					<int key="connectionID">45</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1455,22 +1446,6 @@
 					<int key="connectionID">120</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_linksTextView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="807226352"/>
-					</object>
-					<int key="connectionID">125</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="807226352"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">126</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">hidden: isLogSelected</string>
 						<reference key="source" ref="426067088"/>
@@ -1536,43 +1511,91 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">_transfersWebView</string>
-						<reference key="source" ref="1001"/>
+						<string key="label">view</string>
+						<reference key="source" ref="545084646"/>
+						<reference key="destination" ref="318030774"/>
+					</object>
+					<int key="connectionID">162</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">view</string>
+						<reference key="source" ref="954471638"/>
 						<reference key="destination" ref="77486006"/>
 					</object>
-					<int key="connectionID">155</int>
+					<int key="connectionID">164</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">policyDelegate</string>
-						<reference key="source" ref="77486006"/>
-						<reference key="destination" ref="1001"/>
+						<string key="label">view</string>
+						<reference key="source" ref="926311428"/>
+						<reference key="destination" ref="807226352"/>
 					</object>
-					<int key="connectionID">157</int>
+					<int key="connectionID">166</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">resourceLoadDelegate</string>
-						<reference key="source" ref="77486006"/>
-						<reference key="destination" ref="1001"/>
+						<string key="label">_conversationViewController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="545084646"/>
 					</object>
-					<int key="connectionID">158</int>
+					<int key="connectionID">167</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">UIDelegate</string>
-						<reference key="source" ref="77486006"/>
-						<reference key="destination" ref="1001"/>
+						<string key="label">_transfersViewController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="954471638"/>
 					</object>
-					<int key="connectionID">159</int>
+					<int key="connectionID">168</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_linksViewController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="926311428"/>
+					</object>
+					<int key="connectionID">169</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_chatViewController</string>
+						<reference key="source" ref="545084646"/>
+						<reference key="destination" ref="409179069"/>
+					</object>
+					<int key="connectionID">170</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="807226352"/>
+						<reference key="destination" ref="926311428"/>
+					</object>
+					<int key="connectionID">171</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">frameLoadDelegate</string>
 						<reference key="source" ref="77486006"/>
-						<reference key="destination" ref="1001"/>
+						<reference key="destination" ref="954471638"/>
 					</object>
-					<int key="connectionID">160</int>
+					<int key="connectionID">183</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">UIDelegate</string>
+						<reference key="source" ref="77486006"/>
+						<reference key="destination" ref="954471638"/>
+					</object>
+					<int key="connectionID">184</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">resourceLoadDelegate</string>
+						<reference key="source" ref="77486006"/>
+						<reference key="destination" ref="954471638"/>
+					</object>
+					<int key="connectionID">185</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2040,6 +2063,21 @@
 						<reference key="parent" ref="426067088"/>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">161</int>
+						<reference key="object" ref="545084646"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">163</int>
+						<reference key="object" ref="954471638"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">165</int>
+						<reference key="object" ref="926311428"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">154</int>
 						<reference key="object" ref="77486006"/>
 						<reference key="parent" ref="279826203"/>
@@ -2068,6 +2106,12 @@
 					<string>133.IBPluginDependency</string>
 					<string>134.IBPluginDependency</string>
 					<string>154.IBPluginDependency</string>
+					<string>161.CustomClassName</string>
+					<string>161.IBPluginDependency</string>
+					<string>163.CustomClassName</string>
+					<string>163.IBPluginDependency</string>
+					<string>165.CustomClassName</string>
+					<string>165.IBPluginDependency</string>
 					<string>17.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
@@ -2110,9 +2154,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{168, 318}, {616, 427}}</string>
+					<string>{{192, 167}, {616, 427}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{168, 318}, {616, 427}}</string>
+					<string>{{192, 167}, {616, 427}}</string>
 					<boolean value="NO"/>
 					<boolean value="YES"/>
 					<string>{500, 300}</string>
@@ -2132,6 +2176,12 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.WebKitIBPlugin</string>
+					<string>ConversationViewController</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>TransfersViewController</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>LinksViewController</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2186,7 +2236,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">160</int>
+			<int key="maxID">185</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2204,9 +2254,29 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">ConversationViewController</string>
+					<string key="superclassName">NSViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">_chatViewController</string>
+						<string key="NS.object.0">ChatViewController</string>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">ConversationViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">FezWebView</string>
 					<string key="superclassName">WebView</string>
 					<reference key="sourceIdentifier" ref="46445905"/>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LinksViewController</string>
+					<string key="superclassName">NSViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">LinksViewController.h</string>
+					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">LogViewerController</string>
@@ -2230,35 +2300,35 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>_chatViewController</string>
 							<string>_conversationButton</string>
+							<string>_conversationViewController</string>
 							<string>_fileButton</string>
 							<string>_horizontalSplitView</string>
 							<string>_linkButton</string>
-							<string>_linksTextView</string>
+							<string>_linksViewController</string>
 							<string>_logTabView</string>
 							<string>_logsTableView</string>
 							<string>_peopleTableView</string>
 							<string>_progressIndicator</string>
 							<string>_statusTextField</string>
-							<string>_transfersWebView</string>
+							<string>_transfersViewController</string>
 							<string>_verticalSplitView</string>
-							<string>_webView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>ChatViewController</string>
 							<string>NSButton</string>
+							<string>ConversationViewController</string>
 							<string>NSButton</string>
 							<string>NSSplitView</string>
 							<string>NSButton</string>
-							<string>NSTextView</string>
+							<string>LinksViewController</string>
 							<string>NSTabView</string>
 							<string>NSTableView</string>
 							<string>NSTableView</string>
 							<string>NSProgressIndicator</string>
 							<string>NSTextField</string>
-							<string>WebView</string>
+							<string>TransfersViewController</string>
 							<string>NSSplitView</string>
-							<string>FezWebView</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -2345,6 +2415,14 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">NSWindow</string>
 					<reference key="sourceIdentifier" ref="46445905"/>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TransfersViewController</string>
+					<string key="superclassName">NSViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">TransfersViewController.h</string>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableArray" key="referencedPartialClassDescriptionsV3.2+">
@@ -3022,6 +3100,18 @@
 					<string key="className">NSView</string>
 					<string key="superclassName">NSResponder</string>
 					<reference key="sourceIdentifier" ref="649623200"/>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSViewController</string>
+					<string key="superclassName">NSResponder</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">view</string>
+						<string key="NS.object.0">NSView</string>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">AppKit.framework/Headers/NSViewController.h</string>
+					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSWindow</string>

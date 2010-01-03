@@ -1,5 +1,5 @@
 /*
- * LogViewerQuickLookController.h
+ * ConversationViewController.h
  *
  * Copyright (c) 2007-2010 Kent Sutherland
  * 
@@ -22,14 +22,16 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <Quartz/Quartz.h>
 
-@interface LogViewerQuickLookController : NSObject <QLPreviewPanelDataSource, QLPreviewPanelDelegate> {
-    NSArray *_imagePaths;
+@class ChatViewController, InstantMessage;
+
+@interface ConversationViewController : NSViewController {
+    IBOutlet ChatViewController *_chatViewController;
 }
 
-@property(copy) NSArray *imagePaths;
+- (void)displayLogAtPath:(NSString *)path;
 
-- (void)quickLookImageAtIndex:(int)imageIndex;
+- (void)jumpToMessageGUID:(NSString *)messageGUID inLogAtPath:(NSString *)logPath;
+- (void)jumpToInstantMessage:(InstantMessage *)instantMessage inLogAtPath:(NSString *)logPath;
 
 @end

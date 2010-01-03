@@ -27,7 +27,9 @@
 #import "IMFoundation.h"
 #import "IMRenderingFoundation.h"
 #import "LinkButtonCell.h"
-#import "LogViewerQuickLookController.h"
+#import "TransfersViewController.h"
+#import "ConversationViewController.h"
+#import "LinksViewController.h"
 
 typedef enum LogViewerToolbarItem {
     LogViewerToolbarItemDelete = 1,
@@ -47,13 +49,8 @@ typedef enum LogViewerToolbarItem {
 - (NSDate *)_creationDateForLogAtPath:(NSString *)path;
 - (void)_updateLogsTableView;
 - (void)_updateLogWithCurrentSelection;
-- (void)_gatherFilesAndImages;
-- (void)_gatherLinks;
 - (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet;
-- (void)_displayLogAtPath:(NSString *)path;
-- (SavedChat *)_savedChatAtPath:(NSString *)path;
-- (NSString *)_meString;
-- (void)_jumpToMessage:(InstantMessage *)instantMessage inLogAtPath:(NSString *)logPath;
+- (NSArray *)_selectedSavedChatPaths;
 
 @end
 
@@ -63,11 +60,6 @@ typedef enum LogViewerToolbarItem {
 @synthesize visibleLogs = _visibleLogs;
 @synthesize searchPeople = _searchPeople;
 
-+ (BOOL)isSelectorExcludedFromWebScript:(SEL)selector
-{
-    return (selector != @selector(jumpToMessage:inLogAtPath:));
-}
-
 + (LogViewerController *)sharedController
 {
     static LogViewerController *sharedController = nil;
@@ -76,6 +68,21 @@ typedef enum LogViewerToolbarItem {
 		sharedController = [[LogViewerController alloc] init];
 	}
 	return sharedController;
+}
+
++ (SavedChat *)savedChatAtPath:(NSString *)path
+{
+    SavedChat *chat = nil;
+    
+    if ([[path pathExtension] isEqualToString:@"ichat"]) {
+        chat = [[NSClassFromString(@"SavedChat") alloc] initWithTranscriptFile:path];
+    } else {
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        
+        chat = [[NSClassFromString(@"SavedChat") alloc] initWithSavedData:data];
+    }
+    
+    return [chat autorelease];
 }
 
 - (id)init
@@ -106,8 +113,6 @@ typedef enum LogViewerToolbarItem {
         
         _finderImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithPath:[[NSWorkspace sharedWorkspace] fullPathForApplication:@"Finder.app"]] pathForImageResource:@"Finder.icns"]];
         [_finderImage setName:@"FinderReveal"];
-        
-        _quickLookController = [[LogViewerQuickLookController alloc] init];
     }
     return self;
 }
@@ -130,16 +135,12 @@ typedef enum LogViewerToolbarItem {
     [_exportImage release];
     [_finderImage release];
     
-    [_quickLookController release];
-    
     [super dealloc];
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    [[_transfersWebView preferences] setJavaScriptEnabled:YES];
     
     [_chatViewController willBecomeVisible];
     
@@ -239,22 +240,14 @@ typedef enum LogViewerToolbarItem {
     }
 }
 
-- (void)jumpToMessage:(NSString *)messageGUID inLogAtPath:(NSString *)logPath
+- (void)jumpToMessageGUID:(NSString *)messageGUID inLogAtPath:(NSString *)logPath
 {
-    //Remove the jump button from the WebView
-    DOMElement *jumpElement = [[[_transfersWebView mainFrame] DOMDocument] getElementById:@"jump_to_conversation"];
-    
-    [[jumpElement parentElement] removeChild:jumpElement];
-    
-    //Find the actual InstantMessag object from its guid, then jump to it
-    SavedChat *chat = [self _savedChatAtPath:logPath];
-    
-    for (InstantMessage *nextMessage in [chat messages]) {
-        if ([[nextMessage guid] isEqualToString:messageGUID]) {
-            [self _jumpToMessage:nextMessage inLogAtPath:logPath];
-            break;
-        }
-    }
+    [_conversationViewController jumpToMessageGUID:messageGUID inLogAtPath:logPath];
+}
+
+- (void)selectConversationFilterButton
+{
+    [self filterButtonAction:_conversationButton];
 }
 
 #pragma mark -
@@ -450,95 +443,6 @@ typedef enum LogViewerToolbarItem {
 }
 
 #pragma mark -
-#pragma mark Forwarded Chat View Methods
-
-- (void)makeTextBigger:(id)fp8
-{
-    [_chatViewController makeTextLarger:fp8];
-}
-
-- (void)makeTextStandardSize:(id)fp8
-{
-    [_chatViewController makeTextStandardSize:fp8];
-}
-
-- (void)makeTextSmaller:(id)fp8
-{
-    [_chatViewController makeTextSmaller:fp8];
-}
-
-- (void)toggleHideSmileys:(id)fp8
-{
-    [_chatViewController toggleHideSmileys:fp8];
-}
-
-- (void)setChatShowsNames:(id)fp8
-{
-    [_chatViewController setChatShowsNames:fp8];
-}
-
-- (void)setChatShowsPictures:(id)fp8
-{
-    [_chatViewController setChatShowsPictures:fp8];
-}
-
-- (void)setChatShowsNamesAndPictures:(id)fp8
-{
-    [_chatViewController setChatShowsNamesAndPictures:fp8];
-}
-
-- (void)setTranscriptStyleFromMenuItem:(id)fp8
-{
-    [_chatViewController setTranscriptStyleFromMenuItem:fp8];
-}
-
-#pragma mark -
-#pragma mark Find
-
-- (void)showFindPanel:(id)sender
-{
-	[[NSClassFromString(@"FindPanelController") sharedController] showWindow:sender];
-	[[self window] makeFirstResponder:_webView];
-}
-
-- (void)findNext:(id)sender
-{
-	[[NSClassFromString(@"FindPanelController") sharedController] findNext:sender];
-}
-
-- (void)findPrevious:(id)sender
-{
-	[[NSClassFromString(@"FindPanelController") sharedController] findPrevious:sender];
-}
-
-#pragma mark -
-#pragma mark Quick Look
-
-- (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel
-{
-    return YES;
-}
-
-- (void)beginPreviewPanelControl:(QLPreviewPanel *)panel
-{
-    /*DOMNode *node = [[[_transfersWebView mainFrame] DOMDocument] getElementById:[_quickLookController currentImagePath]];
-    NSRect boundingBox = [node boundingBox];
-    NSView *docView = [[[[node ownerDocument] webFrame] frameView] documentView];
-    
-    boundingBox = [docView convertRect:boundingBox toView:nil];
-    boundingBox.origin = [[docView window] convertBaseToScreen:boundingBox.origin];*/
-    
-    [panel setDataSource:_quickLookController];
-    [panel setDelegate:_quickLookController];
-}
-
-- (void)endPreviewPanelControl:(QLPreviewPanel *)panel
-{
-    [panel setDataSource:nil];
-    [panel setDelegate:nil];
-}
-
-#pragma mark -
 #pragma mark NSSplitView Delegate
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
@@ -570,6 +474,18 @@ typedef enum LogViewerToolbarItem {
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
+    switch ([tabView indexOfTabViewItem:tabViewItem]) {
+        case 0:
+            [self setNextResponder:_conversationViewController];
+            break;
+        case 1:
+            [self setNextResponder:_transfersViewController];
+            break;
+        case 2:
+            [self setNextResponder:_linksViewController];
+            break;
+    }
+    
     [self _updateLogWithCurrentSelection];
 }
 
@@ -616,97 +532,6 @@ typedef enum LogViewerToolbarItem {
         
         [self willChangeValueForKey:@"isLogSelected"];
         [self didChangeValueForKey:@"isLogSelected"];
-    }
-}
-
-#pragma mark -
-#pragma mark NSTextView Delegate
-
-- (void)textView:(NSTextView *)textView clickedOnCell:(id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame atIndex:(NSUInteger)charIndex
-{
-    if ([cell isKindOfClass:[LinkButtonCell class]]) {
-        [self _jumpToMessage:[(LinkButtonCell *)cell instantMessage] inLogAtPath:[(LinkButtonCell *)cell chatPath]];
-    }
-}
-
-#pragma mark -
-#pragma mark WebView Frame Load Delegate
-
-- (void)webView:(WebView *)sender didClearWindowObject:(WebScriptObject *)windowObject forFrame:(WebFrame *)frame
-{
-    [windowObject setValue:_quickLookController forKey:@"quickLook"];
-    [windowObject setValue:self forKey:@"logViewer"];
-}
-
-#pragma mark -
-#pragma mark WebView Resource Load Delegate
-
-- (NSURLRequest *)webView:(WebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(WebDataSource *)dataSource
-{
-    NSString *lastPathComponent = [[[request URL] path] lastPathComponent];
-    
-    if ([lastPathComponent isEqualToString:@"logviewer.css"] || [lastPathComponent isEqualToString:@"link-icon.tiff"] || [lastPathComponent isEqualToString:@"link-icon-selected.tiff"]) {
-        NSString *cssPath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForResource:[lastPathComponent stringByDeletingPathExtension] ofType:[lastPathComponent pathExtension]];
-        
-        request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:cssPath]];
-    }
-    
-    return request;
-}
-
-#pragma mark -
-#pragma mark WebView UI Delegate
-
-- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
-{
-    NSArray *menuItems = nil;
-    
-    for (NSMenuItem *item in defaultMenuItems) {
-        if ([item tag] == WebMenuItemTagCopyImageToClipboard) {
-            menuItems = [NSArray arrayWithObject:item];
-            break;
-        }
-    }
-    
-    return menuItems;
-}
-
-- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
-{
-    DOMElement *node = [elementInformation objectForKey:WebElementDOMNodeKey];
-    DOMElement *jumpElement = [[[sender mainFrame] DOMDocument] getElementById:@"jump_to_conversation"];
-    
-    //Move the 'jump to conversation' button to the current image we're hovering over
-    if ([node isKindOfClass:[DOMElement class]]) {
-        //Remove the jump button from its current position if necessary
-        if (jumpElement && jumpElement != node && [jumpElement parentElement] != node) {
-            [[jumpElement parentElement] removeChild:jumpElement];
-        }
-        
-        //We can be hovering over either the inline image div, or a child of the div
-        if ([[[node parentElement] getAttribute:@"class"] isEqualToString:@"thumbnail"]) {
-            node = [node parentElement];
-        } else if (![[node getAttribute:@"class"] isEqualToString:@"thumbnail"]) {
-            node = nil;
-        }
-        
-        //Put the jump button in its new spot
-        if (node) {
-            if (!jumpElement) {
-                jumpElement = [[[sender mainFrame] DOMDocument] createElement:@"div"];
-                
-                [jumpElement setAttribute:@"class" value:@"jump_to_conversation"];
-                [jumpElement setAttribute:@"id" value:@"jump_to_conversation"];
-                [jumpElement setAttribute:@"title" value:ChaxLocalizedString(@"Show link in transcript")];
-            }
-            
-            NSString *guid = [node getAttribute:@"id"]; //The guid of the InstantMessage to jump to
-            NSString *logPath = [[node parentElement] getAttribute:@"id"]; //The file path to the log to jump to
-            
-            [jumpElement setAttribute:@"onclick" value:[NSString stringWithFormat:@"jumpToMessage('%@', '%@'); event.cancelBubble=true;", guid, logPath]];
-            
-            [node appendChild:jumpElement];
-        }
     }
 }
 
@@ -1026,192 +851,21 @@ typedef enum LogViewerToolbarItem {
         if ([selectedRowIndexes count] == 1) {
             NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:[selectedRowIndexes firstIndex]]];
             
-            [self _displayLogAtPath:path];
+            [_conversationViewController displayLogAtPath:path];
         } else if ([_chatViewController chat] != nil) {
             [_chatViewController setChat:nil];
             [_chatViewController loadBaseDocument];
             [_chatViewController _layoutIfNecessary];
         }
     } else if (_transfersNeedUpdate && [[[_logTabView selectedTabViewItem] identifier] isEqualToString:@"files"]) {
-        [self _gatherFilesAndImages];
+        [_transfersViewController updateWithSavedChatPaths:[self _selectedSavedChatPaths]];
+        
+        _transfersNeedUpdate = NO;
     } else if (_linksNeedUpdate) {
-        [self _gatherLinks];
+        [_linksViewController updateWithSavedChatPaths:[self _selectedSavedChatPaths]];
+        
+        _linksNeedUpdate = NO;
     }
-}
-
-- (void)_gatherFilesAndImages
-{
-    NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
-    NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
-    NSMutableString *htmlString = [[[NSMutableString alloc] initWithString:@"<html><head>\n"] autorelease];
-    NSMutableArray *imagePaths = [NSMutableArray array];
-    
-    [htmlString appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"logviewer.css\"/>\n"];
-    [htmlString appendString:@"<script type=\"text/javascript\">\n"];
-    [htmlString appendString:@"var quickLook; function showImage(index) { quickLook.quickLookImageAtIndex_(index); }\n"];
-    [htmlString appendString:@"var logViewer; function jumpToMessage(guid, logPath) { logViewer.jumpToMessage_inLogAtPath_(guid, logPath); }\n"];
-    [htmlString appendString:@"</script>\n"];
-    [htmlString appendString:@"</head><body>\n"];
-    
-    if ([selectedRowIndexes count] == 0) {
-        [[_transfersWebView mainFrame] loadHTMLString:@"" baseURL:nil];
-    }
-    
-    [selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
-        SavedChat *chat = [self _savedChatAtPath:path];
-        
-        if ([(NSArray *)[chat messages] count] > 0) {
-            NSString *headingString = [NSString stringWithFormat:@"%@: %@<br />\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
-            __block NSUInteger transferCount = 0;
-            
-            [htmlString appendFormat:@"<div id=\"%@\" class=\"transcript\">", path];
-            [htmlString appendFormat:@"<h2>%@</h2>", headingString];
-            
-            for (InstantMessage *msg in [chat messages]) {
-                //Add file transfers
-                [[msg text] enumerateAttribute:@"IMFileTransferGUIDAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
-                    if (value) {
-                        //Does this have IMFileBookmarkAttributeName associated with it also? If it does, this was a file transfer rather than an inline image
-                        NSData *bookmarkData = [[msg text] attribute:@"IMFileBookmarkAttributeName" atIndex:range.location effectiveRange:NULL];
-                        NSString *filename = [[msg text] attribute:@"IMFilenameAttributeName" atIndex:range.location effectiveRange:NULL];
-                        
-                        if (bookmarkData) {
-                            //We don't show file transfer anymore, just inline images
-                            /*BOOL stale;
-                            NSError *error = nil;
-                            NSURL *bookmarkURL = [NSURL URLByResolvingBookmarkData:bookmarkData options:NSURLBookmarkResolutionWithoutUI | NSURLBookmarkResolutionWithoutMounting relativeToURL:nil bookmarkDataIsStale:&stale error:&error];
-                            NSString *filename = [[msg text] attribute:@"IMFilenameAttributeName" atIndex:range.location effectiveRange:NULL];
-                            
-                            if (bookmarkURL) {
-                                filename = [NSString stringWithFormat:@"%@ (%@)", filename, [bookmarkURL path]];
-                            }
-                            
-                            [[_transfersTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:filename] autorelease]];
-                            [[_transfersTextView textStorage] appendAttributedString:newline];*/
-                        } else {
-                            //Build a path to the temporary inline image
-                            NSString *imagePath = [value stringByAppendingPathComponent:filename];
-                            NSImage *image = [[[NSImage alloc] initByReferencingFile:[TemporaryImagePath() stringByAppendingPathComponent:imagePath]] autorelease];
-                            NSSize imageSize = [image size];
-                            
-                            [htmlString appendFormat:@"<div id=\"%@\" class=\"thumbnail\" onclick=\"showImage('%d')\">", [msg guid], [imagePaths count]];
-                            [imagePaths addObject:imagePath];
-                            
-                            if (imageSize.width > imageSize.height) {
-                                [htmlString appendFormat:@"<img id=\"%@\" src=\"%@\" width=\"150\" style=\"margin-top: %.0f\" /><br />", imagePath, imagePath, (150.0f - (150.0f * (imageSize.height / imageSize.width))) / 2.0f];
-                            } else {
-                                [htmlString appendFormat:@"<img id=\"%@\" src=\"%@\" height=\"150\" /><br />", imagePath, imagePath];
-                            }
-                            
-                            if ([msg fromMe]) {
-                                [htmlString appendFormat:@"<div class=\"me\">%@</div>", [self _meString]];
-                            }
-                            
-                            [htmlString appendString:@"</div>\n"];
-                            
-                            transferCount++;
-                        }
-                    }
-                }];
-            }
-            
-            //If there were no transfers in the log, write no transfers
-            if (transferCount == 0) {
-                [htmlString appendFormat:@"<p class=\"no_images\">%@</p>\n", ChaxLocalizedString(@"No inline images in transcript.")];
-            }
-            
-            [htmlString appendString:@"<div class=\"spacer\"></div>"];
-            [htmlString appendString:@"</div>"];
-        }
-        
-        [htmlString appendString:@"<div class=\"spacer\"></div>"];
-        [htmlString appendString:@"</body></html>"];
-        
-        [[_transfersWebView mainFrame] loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:TemporaryImagePath()]];
-        
-        [pool release];
-    }];
-    
-    if ([[_linksTextView textStorage] length] > 0) {
-        [[_linksTextView textStorage] deleteCharactersInRange:NSMakeRange([[_linksTextView textStorage] length] - 1, 1)];
-    }
-    
-    [_quickLookController setImagePaths:imagePaths];
-    
-    _transfersNeedUpdate = NO;
-}
-
-- (void)_gatherLinks
-{
-    NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
-    NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
-    NSAttributedString *newline = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
-    NSMutableParagraphStyle *paragraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
-    
-    [paragraphStyle setParagraphSpacing:4.0];
-    
-    NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12], NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
-    
-    //Get the links out of the selected logs
-    [_linksTextView setString:@""];
-    
-    [selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
-        SavedChat *chat = [self _savedChatAtPath:path];
-        
-        if ([(NSArray *)[chat messages] count] > 0) {
-            NSString *headingString = [NSString stringWithFormat:@"%@: %@\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
-            NSAttributedString *attributedHeadingString = [[[NSAttributedString alloc] initWithString:headingString attributes:headingAttributes] autorelease];
-            __block NSUInteger linkCount = 0;
-            
-            [[_linksTextView textStorage] appendAttributedString:attributedHeadingString];
-            
-            for (InstantMessage *msg in [chat messages]) {
-                //Add a line for each URL
-                [[msg text] enumerateAttribute:@"IMLinkAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
-                    if (value) {
-                        NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName, value, NSLinkAttributeName, nil];
-                        NSString *senderString = [NSString stringWithFormat:@" %@: ", [(IMHandle *)[msg sender] name]];
-                        NSTextAttachment *attachment = [[[NSTextAttachment alloc] initWithFileWrapper:nil] autorelease];
-                        LinkButtonCell *linkButtonCell = [[[LinkButtonCell alloc] initWithInstantMessage:msg] autorelease];
-                        
-                        [linkButtonCell setChatPath:path];
-                        [attachment setAttachmentCell:linkButtonCell];
-                        
-                        NSMutableAttributedString *attachmentString = [[[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy] autorelease];
-                        
-                        [attachmentString addAttribute:NSToolTipAttributeName value:ChaxLocalizedString(@"Show link in transcript") range:NSMakeRange(0, [attachmentString length])];
-                        
-                        [[_linksTextView textStorage] appendAttributedString:attachmentString];
-                        [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:senderString] autorelease]];
-                        [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", value] attributes:linkAttributes] autorelease]];
-                        
-                        linkCount++;
-                    }
-                }];
-            }
-            
-            //If there were no URLs in the log, write no logs
-            if (linkCount == 0) {
-                NSDictionary *noLinksAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:0.2], NSObliquenessAttributeName, nil];
-                
-                [[_linksTextView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[ChaxLocalizedString(@"No links in transcript.") stringByAppendingString:@"\n"] attributes:noLinksAttributes] autorelease]];
-            }
-            
-            [[_linksTextView textStorage] appendAttributedString:newline];
-        }
-        
-        [pool release];
-    }];
-    
-    if ([[_linksTextView textStorage] length] > 0) {
-        [[_linksTextView textStorage] deleteCharactersInRange:NSMakeRange([[_linksTextView textStorage] length] - 1, 1)];
-    }
-    
-    _linksNeedUpdate = NO;
 }
 
 - (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet
@@ -1242,64 +896,19 @@ typedef enum LogViewerToolbarItem {
     [self _updateLogWithCurrentSelection];
 }
 
-- (void)_displayLogAtPath:(NSString *)path
+- (NSArray *)_selectedSavedChatPaths
 {
-    SavedChat *chat = [self _savedChatAtPath:path];
+    NSIndexSet *selectedRowIndexes = [_logsTableView selectedRowIndexes];
+    NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
+    NSMutableArray *selectedSavedChatPaths = [NSMutableArray array];
     
-    [_chatViewController scrollToBeginningSmoothly:NO];
-    [_chatViewController setChat:chat];
-    [_chatViewController _layoutIfNecessary];
-}
-
-- (SavedChat *)_savedChatAtPath:(NSString *)path
-{
-    SavedChat *chat = nil;
-    
-    if ([[path pathExtension] isEqualToString:@"ichat"]) {
-        chat = [[NSClassFromString(@"SavedChat") alloc] initWithTranscriptFile:path];
-    } else {
-        NSData *data = [NSData dataWithContentsOfFile:path];
+    [selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop){
+        NSString *path = [logPath stringByAppendingPathComponent:[_visibleLogs objectAtIndex:index]];
         
-        chat = [[NSClassFromString(@"SavedChat") alloc] initWithSavedData:data];
-    }
+        [selectedSavedChatPaths addObject:path];
+    }];
     
-    return [chat autorelease];
-}
-
-- (NSString *)_meString
-{
-    NSBundle *addressBookFramework = [NSBundle bundleWithPath:@"/System/Library/Frameworks/AddressBook.framework"];
-    
-    return [addressBookFramework localizedStringForKey:@"ME_LABEL" value:@"me" table:@"ABStrings"];
-}
-
-- (void)_jumpToMessage:(InstantMessage *)instantMessage inLogAtPath:(NSString *)logPath
-{
-    [self filterButtonAction:_conversationButton];
-    
-    //Multiple logs might be selected, in this case we need to explicitly load the correct log
-    if ([_chatViewController chat] == nil) {
-        [self _displayLogAtPath:logPath];
-    }
-    
-    //Find the frame of the message containing the link
-    NSRect messageBounds = [[_chatViewController renderer] rectOfMessage:instantMessage];
-    
-    if (NSEqualPoints(messageBounds.origin, NSZeroPoint)) {
-        //The GUIDs aren't matching, manually search through the messages and find the message
-        for (InstantMessage *msg in [[_chatViewController chat] messages]) {
-            if ([[instantMessage text] isEqualToAttributedString:[msg text]] && [[instantMessage sender] isEqual:[msg sender]]) {
-                messageBounds = [[_chatViewController renderer] rectOfMessage:msg];
-                break;
-            }
-        }
-    }
-    
-    messageBounds.origin.y += [_webView frame].size.height - messageBounds.size.height - 12;
-    
-    //Freakish thing required to get at the actual view we want to scroll
-    //ChatViewScrollHelper seems to do it this way, so I'm just copying Apple
-    [[[[[[_webView mainFrame] frameView] documentView] enclosingScrollView] contentView] scrollRectToVisible:messageBounds];
+    return selectedSavedChatPaths;
 }
 
 @end

@@ -1,5 +1,5 @@
 /*
- * LogViewerPreviewItem.h
+ * TransfersViewController.h
  *
  * Copyright (c) 2007-2010 Kent Sutherland
  * 
@@ -20,20 +20,21 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
+ 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
 
-@interface LogViewerPreviewItem : NSObject <QLPreviewItem> {
-    NSURL *_previewItemURL;
-    NSString *_itemID;
+@interface TransfersViewController : NSViewController <QLPreviewPanelDataSource, QLPreviewPanelDelegate> {
+    NSArray *_imagePaths;
+    NSDateFormatter *_dateFormatter;
+    
+    QLPreviewPanel *_previewPanel;
+    NSInteger _currentImageIndex;
 }
 
-@property(readonly) NSURL *previewItemURL;
-@property(readonly) NSString *itemID;
+@property(nonatomic, copy) NSArray *imagePaths;
 
-+ (LogViewerPreviewItem *)previewItemWithURL:(NSURL *)url itemID:(NSString *)itemID;
-
-- (id)initWithURL:(NSURL *)url itemID:(NSString *)itemID;
+- (void)quickLookImageAtIndex:(NSInteger)imageIndex;
+- (void)updateWithSavedChatPaths:(NSArray *)savedChatPaths;
 
 @end

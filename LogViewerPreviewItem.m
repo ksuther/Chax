@@ -26,16 +26,18 @@
 @implementation LogViewerPreviewItem
 
 @synthesize previewItemURL = _previewItemURL;
+@synthesize itemID = _itemID;
 
-+ (LogViewerPreviewItem *)previewItemWithURL:(NSURL *)url
++ (LogViewerPreviewItem *)previewItemWithURL:(NSURL *)url itemID:(NSString *)itemID
 {
-    return [[[[self class] alloc] initWithURL:url] autorelease];
+    return [[[[self class] alloc] initWithURL:url itemID:itemID] autorelease];
 }
 
-- (id)initWithURL:(NSURL *)url
+- (id)initWithURL:(NSURL *)url itemID:(NSString *)itemID
 {
     if ( (self = [super init]) ) {
         _previewItemURL = [url copy];
+        _itemID = [itemID copy];
     }
     return self;
 }
@@ -43,6 +45,7 @@
 - (void)dealloc
 {
     [_previewItemURL release];
+    [_itemID release];
     
     [super dealloc];
 }

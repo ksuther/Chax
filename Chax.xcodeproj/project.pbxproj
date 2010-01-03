@@ -104,7 +104,6 @@
 		375092061057012F00F472F1 /* ActivityModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */; };
 		3753EA4A10E87EAF006B0F24 /* IMRenderingFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3753EA4910E87EAF006B0F24 /* IMRenderingFoundation.framework */; };
 		3753EB7F10EEB4DA006B0F24 /* logviewer.css in Resources */ = {isa = PBXBuildFile; fileRef = 3753EB7E10EEB4DA006B0F24 /* logviewer.css */; };
-		3753EBBA10EEC045006B0F24 /* LogViewerQuickLookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3753EBB910EEC045006B0F24 /* LogViewerQuickLookController.m */; };
 		3753EC1310EED866006B0F24 /* LogViewerPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */; };
 		3753ECFD10EEEF3F006B0F24 /* ChaxHelperApp.app in Copy Executables */ = {isa = PBXBuildFile; fileRef = 377AAC3D105DEA380068A68F /* ChaxHelperApp.app */; };
 		377351F110DC948100CF1C88 /* InstallChax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 377351F010DC948100CF1C88 /* InstallChax.icns */; };
@@ -119,6 +118,9 @@
 		378D161F10E5971F003E2410 /* link-icon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 378D161E10E5971F003E2410 /* link-icon.tiff */; };
 		378D16C710E722F0003E2410 /* link-icon-selected.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 378D16C610E722F0003E2410 /* link-icon-selected.tiff */; };
 		378D182410E73D08003E2410 /* LogViewerHorizontalSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378D182310E73D08003E2410 /* LogViewerHorizontalSplitView.m */; };
+		37B737F610F030680056176C /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B737F510F030680056176C /* ConversationViewController.m */; };
+		37B737FA10F030A50056176C /* TransfersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B737F910F030A50056176C /* TransfersViewController.m */; };
+		37B737FD10F030CD0056176C /* LinksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B737FC10F030CD0056176C /* LinksViewController.m */; };
 		37BC686B1056EE9500F1FCD9 /* ChaxAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC686A1056EE9500F1FCD9 /* ChaxAddition.m */; };
 		37BC686D1056EEB700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC68881056EEC700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
@@ -235,8 +237,6 @@
 		375091321056FC5F00F472F1 /* ChaxLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxLib-Info.plist"; sourceTree = "<group>"; };
 		3753EA4910E87EAF006B0F24 /* IMRenderingFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IMRenderingFoundation.framework; path = /System/Library/Frameworks/InstantMessage.framework/Versions/A/Frameworks/IMRenderingFoundation.framework; sourceTree = "<absolute>"; };
 		3753EB7E10EEB4DA006B0F24 /* logviewer.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = logviewer.css; sourceTree = "<group>"; };
-		3753EBB810EEC045006B0F24 /* LogViewerQuickLookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerQuickLookController.h; sourceTree = "<group>"; };
-		3753EBB910EEC045006B0F24 /* LogViewerQuickLookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewerQuickLookController.m; sourceTree = "<group>"; };
 		3753EC1110EED866006B0F24 /* LogViewerPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerPreviewItem.h; sourceTree = "<group>"; };
 		3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewerPreviewItem.m; sourceTree = "<group>"; };
 		377351F010DC948100CF1C88 /* InstallChax.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = InstallChax.icns; path = Installer/InstallChax.icns; sourceTree = "<group>"; };
@@ -304,6 +304,12 @@
 		37AFBC4F1031144B001AA056 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegexKitLite.h; path = RegexKitLite/RegexKitLite.h; sourceTree = "<group>"; };
 		37AFBC501031144B001AA056 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegexKitLite.m; path = RegexKitLite/RegexKitLite.m; sourceTree = "<group>"; };
 		37AFBC6110311458001AA056 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = /usr/lib/libicucore.dylib; sourceTree = "<absolute>"; };
+		37B737F410F030680056176C /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
+		37B737F510F030680056176C /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
+		37B737F810F030A50056176C /* TransfersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransfersViewController.h; sourceTree = "<group>"; };
+		37B737F910F030A50056176C /* TransfersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransfersViewController.m; sourceTree = "<group>"; };
+		37B737FB10F030CD0056176C /* LinksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinksViewController.h; sourceTree = "<group>"; };
+		37B737FC10F030CD0056176C /* LinksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinksViewController.m; sourceTree = "<group>"; };
 		37BC68581056EBDB00F1FCD9 /* ChaxAddition.osax */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaxAddition.osax; sourceTree = BUILT_PRODUCTS_DIR; };
 		37BC68591056EBDB00F1FCD9 /* ChaxAddition-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxAddition-Info.plist"; sourceTree = "<group>"; };
 		37BC686A1056EE9500F1FCD9 /* ChaxAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxAddition.m; sourceTree = "<group>"; };
@@ -670,8 +676,12 @@
 			children = (
 				37AFBC1F1031125B001AA056 /* LogViewerController.h */,
 				37AFBC201031125B001AA056 /* LogViewerController.m */,
-				3753EBB810EEC045006B0F24 /* LogViewerQuickLookController.h */,
-				3753EBB910EEC045006B0F24 /* LogViewerQuickLookController.m */,
+				37B737F410F030680056176C /* ConversationViewController.h */,
+				37B737F510F030680056176C /* ConversationViewController.m */,
+				37B737F810F030A50056176C /* TransfersViewController.h */,
+				37B737F910F030A50056176C /* TransfersViewController.m */,
+				37B737FB10F030CD0056176C /* LinksViewController.h */,
+				37B737FC10F030CD0056176C /* LinksViewController.m */,
 				3753EC1110EED866006B0F24 /* LogViewerPreviewItem.h */,
 				3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */,
 				378D13D510E20599003E2410 /* LogViewerModeBackgroundView.h */,
@@ -1057,8 +1067,10 @@
 				378D13D710E20599003E2410 /* LogViewerModeBackgroundView.m in Sources */,
 				378D15E610E594FE003E2410 /* LinkButtonCell.m in Sources */,
 				378D182410E73D08003E2410 /* LogViewerHorizontalSplitView.m in Sources */,
-				3753EBBA10EEC045006B0F24 /* LogViewerQuickLookController.m in Sources */,
 				3753EC1310EED866006B0F24 /* LogViewerPreviewItem.m in Sources */,
+				37B737F610F030680056176C /* ConversationViewController.m in Sources */,
+				37B737FA10F030A50056176C /* TransfersViewController.m in Sources */,
+				37B737FD10F030CD0056176C /* LinksViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

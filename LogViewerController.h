@@ -24,17 +24,19 @@
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
 
-@class FezWebView, ChatViewController, LogViewerQuickLookController;
+@class FezWebView, ChatViewController, SavedChat;
+@class ConversationViewController, TransfersViewController, LinksViewController;
 
 @interface LogViewerController : NSWindowController {
     IBOutlet ChatViewController *_chatViewController;
     IBOutlet NSTableView *_logsTableView;
     IBOutlet NSTableView *_peopleTableView;
     
+    IBOutlet ConversationViewController *_conversationViewController;
+    IBOutlet TransfersViewController *_transfersViewController;
+    IBOutlet LinksViewController *_linksViewController;
+    
     IBOutlet NSTabView *_logTabView;
-    IBOutlet FezWebView *_webView;
-    IBOutlet WebView *_transfersWebView;
-    IBOutlet NSTextView *_linksTextView;
     
     IBOutlet NSProgressIndicator *_progressIndicator;
     IBOutlet NSTextField *_statusTextField;
@@ -64,8 +66,6 @@
     NSDateFormatter *_creationDateFormatter;
     
     NSImage *_deleteImage, *_exportImage, *_finderImage;
-    
-    LogViewerQuickLookController *_quickLookController;
 }
 
 @property(nonatomic, retain) NSArray *people;
@@ -76,9 +76,12 @@
 
 + (LogViewerController *)sharedController;
 
++ (SavedChat *)savedChatAtPath:(NSString *)path;
+
 - (IBAction)filterButtonAction:(id)sender;
 - (IBAction)toolbarAction:(id)sender;
 
-- (void)jumpToMessage:(NSString *)messageGUID inLogAtPath:(NSString *)logPath;
+- (void)jumpToMessageGUID:(NSString *)messageGUID inLogAtPath:(NSString *)logPath;
+- (void)selectConversationFilterButton;
 
 @end

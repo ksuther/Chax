@@ -1,5 +1,5 @@
 /*
- * LogViewerPreviewItem.h
+ * LinksViewController.h
  *
  * Copyright (c) 2007-2010 Kent Sutherland
  * 
@@ -22,18 +22,11 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <Quartz/Quartz.h>
 
-@interface LogViewerPreviewItem : NSObject <QLPreviewItem> {
-    NSURL *_previewItemURL;
-    NSString *_itemID;
+@interface LinksViewController : NSViewController {
+    NSDateFormatter *_dateFormatter;
 }
 
-@property(readonly) NSURL *previewItemURL;
-@property(readonly) NSString *itemID;
-
-+ (LogViewerPreviewItem *)previewItemWithURL:(NSURL *)url itemID:(NSString *)itemID;
-
-- (id)initWithURL:(NSURL *)url itemID:(NSString *)itemID;
+- (void)updateWithSavedChatPaths:(NSArray *)savedChatPaths;
 
 @end
