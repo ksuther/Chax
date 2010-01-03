@@ -160,28 +160,18 @@
 #pragma mark -
 #pragma mark WebView UI Delegate
 
-/*- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
+- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
 {
-    NSArray *menuItems = nil;
+    NSMutableArray *menuItems = [NSMutableArray array];
     
     for (NSMenuItem *item in defaultMenuItems) {
-        if ([item tag] == WebMenuItemTagCopyImageToClipboard) {
-            menuItems = [NSArray arrayWithObject:item];
-            break;
+        //2000 is Open Link. It doesn't appear to have a public tag constant.
+        if ([item tag] == WebMenuItemTagCopyLinkToClipboard || [item tag] == 2000) {
+            [menuItems addObject:item];
         }
     }
     
     return menuItems;
-}*/
-
-/*#pragma mark -
-#pragma mark NSTextView Delegate
-
-- (void)textView:(NSTextView *)textView clickedOnCell:(id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame atIndex:(NSUInteger)charIndex
-{
-    if ([cell isKindOfClass:[LinkButtonCell class]]) {
-        [[LogViewerController sharedController] jumpToMessageGUID:[[(LinkButtonCell *)cell instantMessage] guid] inLogAtPath:[(LinkButtonCell *)cell chatPath]];
-    }
-}*/
+}
 
 @end
