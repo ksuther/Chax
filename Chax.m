@@ -63,8 +63,6 @@ static id _updater = nil;
 
 + (void)bundleDidLoadNotificationReceived:(NSNotification *)note
 {
-    NSBundle *bundle = [note object];
-    
     if ([[[note object] bundleIdentifier] isEqualToString:ChaxLibBundleIdentifier]) {
         _imageDictionary = [[NSMutableDictionary alloc] init];
         

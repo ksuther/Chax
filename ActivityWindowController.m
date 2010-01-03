@@ -243,14 +243,18 @@ NSString *FilterToolbarItemIdentifier = @"FilterToolbarItemIdentifier";
 				date = [NSDate dateWithTimeIntervalSinceNow:-604800];
 				break;
 			case 3:
+            default:
 				date = [NSDate dateWithTimeIntervalSinceNow:-2678400];
 				break;
 		}
 		
 		//clear entries before the given date
 		NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+        NSPredicate *predicate = [NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"time"] rightExpression:[NSExpression expressionForConstantValue:date] modifier:NSLessThanPredicateOperatorType type:NSDirectPredicateModifier options:0];
+        
 		[fetchRequest setEntity:[[[[[self managedObjectContext] persistentStoreCoordinator] managedObjectModel] entitiesByName] objectForKey:@"IMEvent"]];
-		[fetchRequest setPredicate:[NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"time"] rightExpression:[NSExpression expressionForConstantValue:date] modifier:NSLessThanPredicateOperatorType type:NSDirectPredicateModifier options:0]];
+		[fetchRequest setPredicate:predicate];
+        
 		NSEnumerator *resultsEnumerator = [[[self managedObjectContext] executeFetchRequest:fetchRequest error:nil] objectEnumerator];
 		NSManagedObject *nextResult;
 		
