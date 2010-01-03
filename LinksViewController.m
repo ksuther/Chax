@@ -27,6 +27,11 @@
 
 @implementation LinksViewController
 
++ (BOOL)isSelectorExcludedFromWebScript:(SEL)selector
+{
+    return (selector != @selector(jumpToMessageGUID:inLogAtPath:));
+}
+
 - (void)dealloc
 {
     [_dateFormatter release];
@@ -41,76 +46,135 @@
     _dateFormatter = [[NSDateFormatter alloc] init];
     [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [[(WebView *)[self view] preferences] setJavaScriptEnabled:YES];
+}
+
+- (void)jumpToMessageGUID:(NSString *)messageGUID inLogAtPath:(NSString *)logPath
+{
+    [[LogViewerController sharedController] jumpToMessageGUID:messageGUID inLogAtPath:logPath];
 }
 
 - (void)updateWithSavedChatPaths:(NSArray *)savedChatPaths
 {
-    NSTextView *textView = (NSTextView *)[self view];
-    NSAttributedString *newline = [[[NSAttributedString alloc] initWithString:@"\n"] autorelease];
-    NSMutableParagraphStyle *paragraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] autorelease];
+    WebView *webView = (WebView *)[self view];
+    NSMutableString *htmlString = [[[NSMutableString alloc] initWithString:@"<html><head>\n"] autorelease];
     
-    [paragraphStyle setParagraphSpacing:4.0];
+    [htmlString appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"logviewer.css\"/>\n"];
+    [htmlString appendString:@"<script type=\"text/javascript\">\n"];
+    [htmlString appendString:@"var linksViewController; function jumpToMessage(guid, logPath) { linksViewController.jumpToMessageGUID_inLogAtPath_(guid, logPath); }\n"];
+    [htmlString appendString:@"</script>\n"];
+    [htmlString appendString:@"</head><body>\n"];
     
-    NSDictionary *headingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSFont boldSystemFontOfSize:12], NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
-    
-    //Get the links out of the selected logs
-    [textView setString:@""];
+    if ([savedChatPaths count] == 0) {
+        [[webView mainFrame] loadHTMLString:@"" baseURL:nil];
+    }
     
     for (NSString *nextSavedChatPath in savedChatPaths) {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         SavedChat *chat = [LogViewerController savedChatAtPath:nextSavedChatPath];
         
         if ([(NSArray *)[chat messages] count] > 0) {
-            NSString *headingString = [NSString stringWithFormat:@"%@: %@\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
-            NSAttributedString *attributedHeadingString = [[[NSAttributedString alloc] initWithString:headingString attributes:headingAttributes] autorelease];
+            NSString *headingString = [NSString stringWithFormat:@"%@: %@<br />\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
             __block NSUInteger linkCount = 0;
             
-            [[textView textStorage] appendAttributedString:attributedHeadingString];
+            [htmlString appendFormat:@"<div id=\"%@\" class=\"transcript links\">", nextSavedChatPath];
+            [htmlString appendFormat:@"<h2>%@</h2>", headingString];
             
             for (InstantMessage *msg in [chat messages]) {
                 //Add a line for each URL
                 [[msg text] enumerateAttribute:@"IMLinkAttributeName" inRange:NSMakeRange(0, [(NSAttributedString *)[msg text] length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop){
                     if (value) {
-                        NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:NSUnderlineStyleSingle], NSUnderlineStyleAttributeName, value, NSLinkAttributeName, nil];
-                        NSString *senderString = [NSString stringWithFormat:@" %@: ", [(IMHandle *)[msg sender] name]];
-                        NSTextAttachment *attachment = [[[NSTextAttachment alloc] initWithFileWrapper:nil] autorelease];
-                        LinkButtonCell *linkButtonCell = [[[LinkButtonCell alloc] initWithInstantMessage:msg] autorelease];
-                        
-                        [linkButtonCell setChatPath:nextSavedChatPath];
-                        [attachment setAttachmentCell:linkButtonCell];
-                        
-                        NSMutableAttributedString *attachmentString = [[[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy] autorelease];
-                        
-                        [attachmentString addAttribute:NSToolTipAttributeName value:ChaxLocalizedString(@"Show link in transcript") range:NSMakeRange(0, [attachmentString length])];
-                        
-                        [[textView textStorage] appendAttributedString:attachmentString];
-                        [[textView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:senderString] autorelease]];
-                        [[textView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", value] attributes:linkAttributes] autorelease]];
+                        [htmlString appendFormat:@"<div class=\"transcript_link\" id=\"%@\">", [msg guid]];
+                        [htmlString appendFormat:@"<div class=\"jump_to_conversation_link\" title=\"%@\" onclick=\"jumpToMessage('%@', '%@'); event.cancelBubble=true;\"></div>", ChaxLocalizedString(@"Show link in transcript"), [msg guid], nextSavedChatPath];
+                        [htmlString appendFormat:@"%@: <a href=\"%@\">%@</a>", [(IMHandle *)[msg sender] name], value, value];
+                        [htmlString appendString:@"</div>\n"];
                         
                         linkCount++;
                     }
                 }];
             }
             
-            //If there were no URLs in the log, write no logs
+            //If there were no links in the log, write no logs
             if (linkCount == 0) {
-                NSDictionary *noLinksAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:0.2], NSObliquenessAttributeName, nil];
-                
-                [[textView textStorage] appendAttributedString:[[[NSAttributedString alloc] initWithString:[ChaxLocalizedString(@"No links in transcript.") stringByAppendingString:@"\n"] attributes:noLinksAttributes] autorelease]];
+                [htmlString appendFormat:@"<p class=\"no_items\">%@</p>\n", ChaxLocalizedString(@"No links in transcript.")];
             }
             
-            [[textView textStorage] appendAttributedString:newline];
+            [htmlString appendString:@"<div class=\"spacer\"></div>"];
+            [htmlString appendString:@"</div>"];
         }
+        
+        [htmlString appendString:@"<div class=\"spacer\"></div>"];
+        [htmlString appendString:@"</body></html>"];
+        
+        [[webView mainFrame] loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:TemporaryImagePath()]];
         
         [pool release];
     }
     
-    if ([[textView textStorage] length] > 0) {
-        [[textView textStorage] deleteCharactersInRange:NSMakeRange([[textView textStorage] length] - 1, 1)];
+    [[(WebView *)[self view] preferences] setJavaScriptEnabled:YES]; //I wish I knew why JavaScript insists on turning itself off over and over
+}
+
+#pragma mark -
+#pragma mark WebView Frame Load Delegate
+
+- (void)webView:(WebView *)sender didClearWindowObject:(WebScriptObject *)windowObject forFrame:(WebFrame *)frame
+{
+    [windowObject setValue:self forKey:@"linksViewController"];
+}
+
+#pragma mark -
+#pragma mark WebView Policy Delegate
+
+- (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
+{
+    if ([[actionInformation objectForKey:WebActionNavigationTypeKey] intValue] == WebNavigationTypeLinkClicked) {
+        [listener ignore];
+        
+        [[NSWorkspace sharedWorkspace] openURL:[request URL]];
+    } else {
+        [listener use];
     }
 }
 
 #pragma mark -
+#pragma mark WebView Resource Load Delegate
+
+- (NSURLRequest *)webView:(WebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(WebDataSource *)dataSource
+{
+    NSString *lastPathComponent = [[[request URL] path] lastPathComponent];
+    
+    if ([lastPathComponent isEqualToString:@"ChaxArrow.tiff"]) {
+        request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:[LogViewerController arrowPath]]];
+    } else if ([lastPathComponent isEqualToString:@"ChaxSelectedArrow.tiff"]) {
+        request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:[LogViewerController selectedArrowPath]]];
+    } else if ([lastPathComponent isEqualToString:@"logviewer.css"]) {
+        NSString *cssPath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForResource:[lastPathComponent stringByDeletingPathExtension] ofType:[lastPathComponent pathExtension]];
+        
+        request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:cssPath]];
+    }
+    
+    return request;
+}
+
+#pragma mark -
+#pragma mark WebView UI Delegate
+
+/*- (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
+{
+    NSArray *menuItems = nil;
+    
+    for (NSMenuItem *item in defaultMenuItems) {
+        if ([item tag] == WebMenuItemTagCopyImageToClipboard) {
+            menuItems = [NSArray arrayWithObject:item];
+            break;
+        }
+    }
+    
+    return menuItems;
+}*/
+
+/*#pragma mark -
 #pragma mark NSTextView Delegate
 
 - (void)textView:(NSTextView *)textView clickedOnCell:(id <NSTextAttachmentCell>)cell inRect:(NSRect)cellFrame atIndex:(NSUInteger)charIndex
@@ -118,6 +182,6 @@
     if ([cell isKindOfClass:[LinkButtonCell class]]) {
         [[LogViewerController sharedController] jumpToMessageGUID:[[(LinkButtonCell *)cell instantMessage] guid] inLogAtPath:[(LinkButtonCell *)cell chatPath]];
     }
-}
+}*/
 
 @end

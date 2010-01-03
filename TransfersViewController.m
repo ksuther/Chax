@@ -112,7 +112,7 @@
             NSString *headingString = [NSString stringWithFormat:@"%@: %@<br />\n", [chat _otherIMHandleOrChatroom], [_dateFormatter stringFromDate:[chat dateCreated]]];
             __block NSUInteger transferCount = 0;
             
-            [htmlString appendFormat:@"<div id=\"%@\" class=\"transcript\">", nextSavedChatPath];
+            [htmlString appendFormat:@"<div id=\"%@\" class=\"transcript transfers\">", nextSavedChatPath];
             [htmlString appendFormat:@"<h2>%@</h2>", headingString];
             
             for (InstantMessage *msg in [chat messages]) {
@@ -165,7 +165,7 @@
             
             //If there were no transfers in the log, write no transfers
             if (transferCount == 0) {
-                [htmlString appendFormat:@"<p class=\"no_images\">%@</p>\n", ChaxLocalizedString(@"No inline images in transcript.")];
+                [htmlString appendFormat:@"<p class=\"no_items\">%@</p>\n", ChaxLocalizedString(@"No inline images in transcript.")];
             }
             
             [htmlString appendString:@"<div class=\"spacer\"></div>"];

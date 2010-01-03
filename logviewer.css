@@ -1,7 +1,10 @@
+.transfers {
+    -khtml-user-select: none;
+}
+
 .transcript {
     clear: both;
     margin-bottom: 1em;
-    -khtml-user-select: none;
     cursor: default;
     background-color: rgb(253, 253, 253);
     border: 1px solid rgb(240, 240, 240);
@@ -18,7 +21,16 @@
     margin-left: 5px;
 }
 
-.no_images {
+.transcript_link {
+    font-size: 9pt;
+    width: 100%;
+    float: left;
+    word-wrap: break-word;
+    padding: 0.5em 0 0.5em 0;
+    margin-left: 5px;
+}
+
+.no_items {
     font-style: italic;
 }
 
@@ -41,9 +53,23 @@
     height: 10px;
     background-image: url('ChaxArrow.tiff');
     cursor: default;
+    -khtml-user-select: none;
 }
 
 .jump_to_conversation:active {
+    background-image: url('ChaxSelectedArrow.tiff');
+}
+
+.jump_to_conversation_link {
+    float: left;
+    margin: 2px 3px 0 0;
+    width: 10px;
+    height: 10px;
+    background-image: url('ChaxArrow.tiff');
+    cursor: default;
+}
+
+.jump_to_conversation_link:active {
     background-image: url('ChaxSelectedArrow.tiff');
 }
 
