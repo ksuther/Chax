@@ -258,7 +258,11 @@
 {
     NSString *lastPathComponent = [[[request URL] path] lastPathComponent];
     
-    if ([lastPathComponent isEqualToString:@"logviewer.css"] || [lastPathComponent isEqualToString:@"link-icon.tiff"] || [lastPathComponent isEqualToString:@"link-icon-selected.tiff"]) {
+    if ([lastPathComponent isEqualToString:@"ChaxArrow.tiff"]) {
+        request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:[LogViewerController arrowPath]]];
+    } else if ([lastPathComponent isEqualToString:@"ChaxSelectedArrow.tiff"]) {
+        request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:[LogViewerController selectedArrowPath]]];
+    } else if ([lastPathComponent isEqualToString:@"logviewer.css"]) {
         NSString *cssPath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForResource:[lastPathComponent stringByDeletingPathExtension] ofType:[lastPathComponent pathExtension]];
         
         request = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:cssPath]];

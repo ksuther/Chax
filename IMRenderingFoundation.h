@@ -21,6 +21,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+@interface NSImage (TintedImageAdditions)
+- (id)tintedImageWithColor:(id)arg1;
+- (id)tintedImageWithColor:(id)arg1 withSize:(struct _NSSize)arg2;
+@end
+
 @interface ReadOnlyInstantMessage : NSObject
 {
     IMHandle *_sender;

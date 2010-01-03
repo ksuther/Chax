@@ -22,6 +22,7 @@
  */
 
 #import "LinkButtonCell.h"
+#import "LogViewerController.h"
 
 @implementation LinkButtonCell
 
@@ -31,12 +32,12 @@
 
 - (id)initWithInstantMessage:(InstantMessage *)instantMessage
 {
-    if ( (self = [self initImageCell:[NSImage imageNamed:@"LinkIcon"]]) ) {
+    if ( (self = [self initImageCell:[[[NSImage alloc] initWithContentsOfFile:[LogViewerController arrowPath]] autorelease]]) ) {
         [self setButtonType:NSToggleButton];
         [self setBezelStyle:NSRegularSquareBezelStyle];
         [self setBordered:NO];
         
-        [self setAlternateImage:[NSImage imageNamed:@"LinkIconSelected"]];
+        [self setAlternateImage:[[[NSImage alloc] initWithContentsOfFile:[LogViewerController selectedArrowPath]] autorelease]];
         
         [self setInstantMessage:instantMessage];
     }

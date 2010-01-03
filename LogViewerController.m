@@ -85,6 +85,16 @@ typedef enum LogViewerToolbarItem {
     return [chat autorelease];
 }
 
++ (NSString *)arrowPath
+{
+    return [[TemporaryImagePath() stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"ChaxArrow.tiff"];
+}
+
++ (NSString *)selectedArrowPath
+{
+    return [[TemporaryImagePath() stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"ChaxSelectedArrow.tiff"];
+}
+
 - (id)init
 {
     if ( (self = [super initWithWindowNibName:@"LogViewer"]) ) {
@@ -113,6 +123,11 @@ typedef enum LogViewerToolbarItem {
         
         _finderImage = [[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithPath:[[NSWorkspace sharedWorkspace] fullPathForApplication:@"Finder.app"]] pathForImageResource:@"Finder.icns"]];
         [_finderImage setName:@"FinderReveal"];
+        
+        NSImage *arrowImage = [NSImage imageNamed:NSImageNameFollowLinkFreestandingTemplate];
+        
+        [[[arrowImage tintedImageWithColor:[NSColor colorWithCalibratedWhite:0.2 alpha:1.0]] TIFFRepresentation] writeToFile:[[self class] arrowPath] atomically:YES];
+        [[[arrowImage tintedImageWithColor:[NSColor colorWithCalibratedWhite:0.5 alpha:1.0]] TIFFRepresentation] writeToFile:[[self class] selectedArrowPath] atomically:YES];
     }
     return self;
 }

@@ -77,6 +77,8 @@
 + (LogViewerController *)sharedController;
 
 + (SavedChat *)savedChatAtPath:(NSString *)path;
++ (NSString *)arrowPath;
++ (NSString *)selectedArrowPath;
 
 - (IBAction)filterButtonAction:(id)sender;
 - (IBAction)toolbarAction:(id)sender;
