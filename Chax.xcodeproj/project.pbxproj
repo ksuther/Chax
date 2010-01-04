@@ -102,6 +102,7 @@
 		375091E51056FFF800F472F1 /* status-offline.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 37F4398C1049C9D5007F8638 /* status-offline.tiff */; };
 		375091E91057000E00F472F1 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 378D4FA7101E6FE300176B47 /* Growl.framework */; };
 		375092061057012F00F472F1 /* ActivityModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */; };
+		37529A1510F2AB6600021833 /* Chax_CustomMessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37529A1410F2AB6600021833 /* Chax_CustomMessageTableView.m */; };
 		3753EA4A10E87EAF006B0F24 /* IMRenderingFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3753EA4910E87EAF006B0F24 /* IMRenderingFoundation.framework */; };
 		3753EB7F10EEB4DA006B0F24 /* logviewer.css in Resources */ = {isa = PBXBuildFile; fileRef = 3753EB7E10EEB4DA006B0F24 /* logviewer.css */; };
 		3753EC1310EED866006B0F24 /* LogViewerPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */; };
@@ -233,6 +234,8 @@
 		375090F41056FA5A00F472F1 /* ChaxAgentLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxAgentLib-Info.plist"; sourceTree = "<group>"; };
 		375091311056FC5F00F472F1 /* ChaxLib.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaxLib.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		375091321056FC5F00F472F1 /* ChaxLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxLib-Info.plist"; sourceTree = "<group>"; };
+		37529A1310F2AB6600021833 /* Chax_CustomMessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_CustomMessageTableView.h; sourceTree = "<group>"; };
+		37529A1410F2AB6600021833 /* Chax_CustomMessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_CustomMessageTableView.m; sourceTree = "<group>"; };
 		3753EA4910E87EAF006B0F24 /* IMRenderingFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IMRenderingFoundation.framework; path = /System/Library/Frameworks/InstantMessage.framework/Versions/A/Frameworks/IMRenderingFoundation.framework; sourceTree = "<absolute>"; };
 		3753EB7E10EEB4DA006B0F24 /* logviewer.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = logviewer.css; sourceTree = "<group>"; };
 		3753EC1110EED866006B0F24 /* LogViewerPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerPreviewItem.h; sourceTree = "<group>"; };
@@ -630,6 +633,8 @@
 				37F43A561049D730007F8638 /* Chax_ChatNotifier.m */,
 				37F29AAC1043AC82005460A5 /* Chax_ChatWindowController.h */,
 				37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */,
+				37529A1310F2AB6600021833 /* Chax_CustomMessageTableView.h */,
+				37529A1410F2AB6600021833 /* Chax_CustomMessageTableView.m */,
 				3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */,
 				3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */,
 				371A8732103B65C9003EC364 /* Chax_FezPreferences.h */,
@@ -1063,6 +1068,7 @@
 				37B737F610F030680056176C /* ConversationViewController.m in Sources */,
 				37B737FA10F030A50056176C /* TransfersViewController.m in Sources */,
 				37B737FD10F030CD0056176C /* LinksViewController.m in Sources */,
+				37529A1510F2AB6600021833 /* Chax_CustomMessageTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
