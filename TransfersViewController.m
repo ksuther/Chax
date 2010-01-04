@@ -176,7 +176,7 @@
             
             //If there were no transfers in the log, write no transfers
             if (transferCount == 0) {
-                [htmlString appendFormat:@"<p class=\"no_items\">%@</p>\n", ChaxLocalizedString(@"No inline images in transcript.")];
+                [htmlString appendFormat:@"<p class=\"no_items\">%@</p>\n", ChaxLocalizedString(@"No images in transcript.")];
             }
             
             [htmlString appendString:@"<div class=\"spacer\"></div>"];
@@ -325,7 +325,7 @@
                 
                 [jumpElement setAttribute:@"class" value:@"jump_to_conversation"];
                 [jumpElement setAttribute:@"id" value:@"jump_to_conversation"];
-                [jumpElement setAttribute:@"title" value:ChaxLocalizedString(@"Show link in transcript")];
+                [jumpElement setAttribute:@"title" value:ChaxLocalizedString(@"Show image in transcript")];
             }
             
             NSString *guid = [node getAttribute:@"id"]; //The guid of the InstantMessage to jump to

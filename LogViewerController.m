@@ -126,8 +126,8 @@ typedef enum LogViewerToolbarItem {
         
         NSImage *arrowImage = [NSImage imageNamed:NSImageNameFollowLinkFreestandingTemplate];
         
-        [[[arrowImage tintedImageWithColor:[NSColor colorWithCalibratedWhite:0.2 alpha:1.0]] TIFFRepresentation] writeToFile:[[self class] arrowPath] atomically:YES];
-        [[[arrowImage tintedImageWithColor:[NSColor colorWithCalibratedWhite:0.5 alpha:1.0]] TIFFRepresentation] writeToFile:[[self class] selectedArrowPath] atomically:YES];
+        [[[arrowImage tintedImageWithColor:[NSColor colorWithCalibratedRed:0.45 green:0.50 blue:0.57 alpha:1.0]] TIFFRepresentation] writeToFile:[[self class] arrowPath] atomically:YES];
+        [[[arrowImage tintedImageWithColor:[NSColor colorWithCalibratedWhite:0.6 alpha:1.0]] TIFFRepresentation] writeToFile:[[self class] selectedArrowPath] atomically:YES];
     }
     return self;
 }
