@@ -39,7 +39,14 @@ Chat *_lastChat = nil;
 - (void)chax_swizzle_displayChat:(id)fp8
 {
 	if ([Chax boolForKey:@"SkipNewMessageNotification"] && _lastChat && _lastChat == fp8) {
-		[self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
+        if ([fp8 isChat]) {
+            //This is a group chat, display it immediately since it came through a notifier
+            [self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
+            
+            [self chax_swizzle_displayChat:fp8];
+        } else {
+            [self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
+        }
 	} else {
 		[self chax_swizzle_displayChat:fp8];
 	}

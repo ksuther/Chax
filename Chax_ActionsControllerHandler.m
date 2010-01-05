@@ -28,7 +28,9 @@
 
 - (id)chax_swizzle_performActionsForEvent:(int)fp8 withIMHandle:(id)fp12 withObject:(id)fp16 withChat:(id)fp20 silent:(BOOL)fp24
 {
-    if (fp20 && [fp20 isKindOfClass:NSClassFromString(@"ActiveChat")] && [fp20 joinState] == 0 && [Chax boolForKey:@"SkipNewMessageNotification"]) {
+    //joinState of 0 means that the notifier window is still up
+    //isChat being true means it is a group chat, so don't auto-accept those (auto-accepting group chats also crashes)
+    if (fp20 && [fp20 isKindOfClass:NSClassFromString(@"ActiveChat")] && [fp20 joinState] == 0 && ![fp20 isChat] && [Chax boolForKey:@"SkipNewMessageNotification"]) {
 		[[[fp20 chatController] notifier] performSelector:@selector(acceptNotification) withObject:nil afterDelay:0.0];
 	}
     
