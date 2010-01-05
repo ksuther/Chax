@@ -70,6 +70,10 @@ static id _updater = nil;
         [image setName:@"ChaxIcon"];
         [_imageDictionary setObject:image forKey:@"ChaxIcon"];
         
+        NSImage *badgeImage = [[[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForImageResource:@"menu-badge"]] autorelease];
+        [badgeImage setName:@"ChaxBadge"];
+        [_imageDictionary setObject:badgeImage forKey:@"ChaxBadge"];
+        
         [self addMenuItems];
         [self registerURLHandlers];
         [self setupSparkle];
@@ -152,7 +156,6 @@ static id _updater = nil;
 
 + (void)addMenuItems
 {
-	NSImage *badgeImage = [[[NSImage alloc] initByReferencingFile:[[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForImageResource:@"menu-badge"]] autorelease];
 	NSMutableArray *menuItems = [NSMutableArray array];
 	NSMenuItem *menuItem;
 	NSMenu *viewMenu = [[[NSApp mainMenu] itemAtIndex:3] submenu];
@@ -208,7 +211,7 @@ static id _updater = nil;
 	[menuItems addObject:menuItem];*/
 	
     if (![Chax boolForKey:@"HideMenuBadge"]) {
-        [menuItems makeObjectsPerformSelector:@selector(setImage:) withObject:badgeImage];
+        [menuItems makeObjectsPerformSelector:@selector(setImage:) withObject:[NSImage imageNamed:@"ChaxBadge"]];
     }
 	
 	_chaxMenuItems = [[NSArray alloc] initWithArray:menuItems];

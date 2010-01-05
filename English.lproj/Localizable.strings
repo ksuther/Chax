@@ -29,6 +29,7 @@
 "No links in transcript." = "No links in transcript.";
 "Show link in transcript" = "Show link in transcript";
 "Show image in transcript" = "Show image in transcript";
+"Show in Log Viewer" = "Show in Log Viewer";
 
 /* Log Viewer - Status Strings */
 "No results" = "No results";

@@ -24,13 +24,14 @@
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
 
-@class FezWebView, ChatViewController, SavedChat, InstantMessage;
+@class FezWebView, ChatViewController, SavedChat, InstantMessage, IMHandle;
 @class ConversationViewController, TransfersViewController, LinksViewController;
 
 @interface LogViewerController : NSWindowController {
     IBOutlet ChatViewController *_chatViewController;
     IBOutlet NSTableView *_logsTableView;
     IBOutlet NSTableView *_peopleTableView;
+    IBOutlet NSSearchField *_searchField;
     
     IBOutlet ConversationViewController *_conversationViewController;
     IBOutlet TransfersViewController *_transfersViewController;
@@ -59,6 +60,7 @@
     NSMutableDictionary *_logs;
     NSMutableDictionary *_creationDateCache;
     
+    IMHandle *_imHandleToSelect;
     NSArray *_searchPeople;
     NSMutableArray *_searchLogs;
     
@@ -83,6 +85,7 @@
 - (IBAction)filterButtonAction:(id)sender;
 - (IBAction)toolbarAction:(id)sender;
 
+- (void)showLogsForIMHandle:(IMHandle *)imHandle;
 - (void)jumpToInstantMessage:(InstantMessage *)instantMessage inLogAtPath:(NSString *)logPath;
 - (void)selectConversationFilterButton;
 

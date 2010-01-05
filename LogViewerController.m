@@ -51,6 +51,7 @@ typedef enum LogViewerToolbarItem {
 - (void)_updateLogWithCurrentSelection;
 - (void)_removeLogsWithIndexSet:(NSIndexSet *)indexSet;
 - (NSArray *)_selectedSavedChatPaths;
+- (void)_didFinishLoadingLogs;
 
 @end
 
@@ -143,6 +144,8 @@ typedef enum LogViewerToolbarItem {
     [_operationQueue release];
     [_searchQueue release];
     
+    [_imHandleToSelect release];
+    
     [_dateFormatter release];
     [_creationDateFormatter release];
     
@@ -175,6 +178,8 @@ typedef enum LogViewerToolbarItem {
         }];
         
         [self _updateLogsTableView];
+    } else {
+        [self _didFinishLoadingLogs];
     }
     
     [super showWindow:sender];
@@ -253,6 +258,13 @@ typedef enum LogViewerToolbarItem {
             [self _removeLogsWithIndexSet:[_logsTableView selectedRowIndexes]];
         }
     }
+}
+
+- (void)showLogsForIMHandle:(IMHandle *)imHandle
+{
+    _imHandleToSelect = [imHandle retain];
+    
+    [self showWindow:self];
 }
 
 - (void)jumpToInstantMessage:(InstantMessage *)instantMessage inLogAtPath:(NSString *)logPath
@@ -679,6 +691,8 @@ typedef enum LogViewerToolbarItem {
     
     [self _stopSpinnerAnimation];
     [_statusTextField setStringValue:@""];
+    
+    [self performSelectorOnMainThread:@selector(_didFinishLoadingLogs) withObject:nil waitUntilDone:NO];
 }
 
 - (NSString *)_fullNameForFile:(NSString *)file
@@ -924,6 +938,24 @@ typedef enum LogViewerToolbarItem {
     }];
     
     return selectedSavedChatPaths;
+}
+
+- (void)_didFinishLoadingLogs
+{
+    if (_imHandleToSelect) {
+        [_searchField setStringValue:@""];
+        [self _beginSpotlightSearch:nil];
+        
+        NSInteger index = [_people indexOfObject:[_imHandleToSelect name]];
+        
+        if (index != NSNotFound) {
+            [_peopleTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+            [_peopleTableView scrollRowToVisible:index];
+        }
+        
+        [_imHandleToSelect release];
+        _imHandleToSelect = nil;
+    }
 }
 
 @end

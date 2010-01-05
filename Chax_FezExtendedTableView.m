@@ -22,11 +22,21 @@
  */
 
 #import "Chax_FezExtendedTableView.h"
+#import "LogViewerController.h"
 
 @implementation Chax_FezExtendedTableView
 
 #pragma mark -
 #pragma mark Added Methods
+
+- (void)chax_menuAction:(id)sender
+{
+	switch ([sender tag]) {
+		case ChaxMenuItemLogViewer:
+			[[LogViewerController sharedController] window];
+			[[LogViewerController sharedController] showLogsForIMHandle:[[self delegate] imHandleAtRow:[[sender representedObject] intValue]]];
+	}
+}
 
 - (void)chax_popToFront
 {
@@ -49,6 +59,31 @@
 	[[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(chax_popToFront) object:nil];
     
 	return [self chax_swizzle_performDragOperation:fp8];
+}
+
+- (NSMenu *)chax_swizzle_menuForEvent:(NSEvent *)event
+{
+	NSMenu *menu = [self chax_swizzle_menuForEvent:event];
+    
+	if ([menu numberOfItems] > 15) {
+		NSMenuItem *menuItem;
+		
+		//Remove the previous "Show in Log Viewer" menu items
+		menuItem = [menu itemWithTag:ChaxMenuItemLogViewer];
+		if (menuItem) {
+			[menu removeItem:menuItem];
+		}
+		
+		menuItem = [menu insertItemWithTitle:ChaxLocalizedString(@"Show in Log Viewer") action:@selector(chax_menuAction:) keyEquivalent:@"" atIndex:[menu numberOfItems] - 1];
+		[menuItem setTag:ChaxMenuItemLogViewer];
+		[menuItem setTarget:self];
+		[menuItem setRepresentedObject:[NSNumber numberWithInt:[self _rowAtEventLocation:event]]];
+		
+		if (![Chax boolForKey:@"HideMenuBadge"]) {
+			[menuItem setImage:[NSImage imageNamed:@"ChaxBadge"]];
+		}
+	}
+	return menu;
 }
 
 @end

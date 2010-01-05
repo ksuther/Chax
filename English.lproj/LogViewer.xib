@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="111"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -89,9 +89,11 @@
 								<string key="NSToolbarItemPaletteLabel">Search</string>
 								<nil key="NSToolbarItemToolTip"/>
 								<object class="NSSearchField" key="NSToolbarItemView" id="84095718">
-									<nil key="NSNextResponder"/>
+									<reference key="NSNextResponder"/>
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{0, 14}, {150, 22}}</string>
+									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<int key="NSTag">4</int>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSearchFieldCell" key="NSCell" id="341180105">
@@ -799,21 +801,13 @@
 																									<bool key="EncodedWithXMLCoder">YES</bool>
 																									<string>WebKitDefaultFixedFontSize</string>
 																									<string>WebKitDefaultFontSize</string>
-																									<string>WebKitJavaEnabled</string>
-																									<string>WebKitJavaScriptCanOpenWindowsAutomatically</string>
 																									<string>WebKitMinimumFontSize</string>
-																									<string>WebKitPluginsEnabled</string>
-																									<string>WebKitStandardFont</string>
 																								</object>
 																								<object class="NSMutableArray" key="dict.values">
 																									<bool key="EncodedWithXMLCoder">YES</bool>
 																									<integer value="12"/>
 																									<integer value="12"/>
-																									<boolean value="NO"/>
-																									<boolean value="NO"/>
 																									<integer value="1"/>
-																									<boolean value="NO"/>
-																									<string>Lucida Grande</string>
 																								</object>
 																							</object>
 																						</object>
@@ -1523,6 +1517,14 @@
 					</object>
 					<int key="connectionID">194</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_searchField</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="84095718"/>
+					</object>
+					<int key="connectionID">195</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -2092,7 +2094,7 @@
 					<string>FezWebView</string>
 					<string>com.apple.WebKitIBPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{138, 740}, {616, 0}}</string>
+					<string>{{209, 757}, {616, 0}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2135,7 +2137,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">194</int>
+			<int key="maxID">195</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2208,6 +2210,7 @@
 							<string>_logsTableView</string>
 							<string>_peopleTableView</string>
 							<string>_progressIndicator</string>
+							<string>_searchField</string>
 							<string>_statusTextField</string>
 							<string>_transfersViewController</string>
 							<string>_verticalSplitView</string>
@@ -2225,6 +2228,7 @@
 							<string>NSTableView</string>
 							<string>NSTableView</string>
 							<string>NSProgressIndicator</string>
+							<string>NSSearchField</string>
 							<string>NSTextField</string>
 							<string>TransfersViewController</string>
 							<string>NSSplitView</string>

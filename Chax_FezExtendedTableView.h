@@ -26,13 +26,18 @@
 @protocol Chax_FezExtendedTableViewMethods
 
 @optional
+- (id)delegate;
+- (id)imHandleAtRow:(NSInteger)row;
 - (NSWindow *)window;
+
+- (NSInteger)_rowAtEventLocation:(NSEvent *)event;
 
 @end
 
 @interface Chax_FezExtendedTableView : NSObject <Chax_FezExtendedTableViewMethods> {
 }
 
+- (void)chax_menuAction:(id)sender;
 - (void)chax_popToFront;
 
 @end
