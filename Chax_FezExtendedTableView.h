@@ -1,7 +1,7 @@
 /*
- * Chax_AnimatingTableView.h
+ * Chax_FezExtendedTableView.h
  *
- * Copyright (c) 2007- Kent Sutherland
+ * Copyright (c) 2007-2010 Kent Sutherland
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -22,16 +22,15 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "iChat5.h"
 
-@protocol Chax_AnimatingTableViewMethods
+@protocol Chax_FezExtendedTableViewMethods
 
 @optional
 - (NSWindow *)window;
 
 @end
 
-@interface Chax_AnimatingTableView : NSObject <Chax_AnimatingTableViewMethods> {
+@interface Chax_FezExtendedTableView : NSObject <Chax_FezExtendedTableViewMethods> {
 }
 
 - (void)chax_popToFront;
