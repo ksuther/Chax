@@ -35,6 +35,7 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
 @interface InstallController ()
 - (BOOL)_createScriptingAdditionsDirectory;
 - (BOOL)_isInstalled;
+- (void)_quitChaxHelperApp;
 @end
 
 
@@ -166,6 +167,8 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
         NSString *removePath = [SCRIPTING_ADDITIONS_PATH stringByAppendingPathComponent:ChaxAdditionFilename];
         
         [[NSFileManager defaultManager] removeItemAtPath:removePath error:&error];
+        
+        [self _quitChaxHelperApp];
     }
     
     //Copy ChaxAddition to ~/Library/ScriptingAdditions
@@ -184,7 +187,20 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
         }
         
         [self setLaunchAtLogin:YES];
-        [[NSWorkspace sharedWorkspace] launchApplicationAtURL:launchURL options:NSWorkspaceLaunchWithoutActivation configuration:nil error:NULL];
+        
+        LSApplicationParameters params;
+        FSRef fsRef;
+        
+        CFURLGetFSRef((CFURLRef)launchURL, &fsRef);
+        
+        params.version = 0;
+        params.flags = kLSLaunchDontSwitch | kLSLaunchNewInstance | kLSLaunchNoParams;
+        params.application = &fsRef;
+        params.environment = NULL;
+        params.argv = NULL;
+        params.initialEvent = NULL;
+        
+        LSOpenApplication(&params, NULL);
         
         [self displaySheetTitled:@"success_title" message:@"success_msg" defaultButton:@"donate" secondaryButton:@"quit" callback:@selector(installedSheetDidEnd:returnCode:contextInfo:)];
     } else {
@@ -206,10 +222,7 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
     
     if (removed) {
         [self setLaunchAtLogin:NO];
-        
-        //Quit the helper app if it is running
-        NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"ChaxHelperApp\" to quit"] autorelease];
-        [script executeAndReturnError:nil];
+        [self _quitChaxHelperApp];
         
         [self displaySheetTitled:@"remove_title" message:@"remove_msg" defaultButton:nil secondaryButton:nil callback:NULL];
     } else {
@@ -258,6 +271,12 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
     NSString *removePath = [SCRIPTING_ADDITIONS_PATH stringByAppendingPathComponent:ChaxAdditionFilename];
     
     return [[NSFileManager defaultManager] fileExistsAtPath:removePath];
+}
+
+- (void)_quitChaxHelperApp
+{
+    NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"ChaxHelperApp\" to quit"] autorelease];
+    [script executeAndReturnError:nil];
 }
 
 @end
