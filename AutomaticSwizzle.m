@@ -81,7 +81,7 @@ void PerformAutomaticSwizzle()
 		const char *name = sel_getName(selector);
 		
 		if (strncmp(name, ChaxMethodSwizzlePrefix, strlen(ChaxMethodSwizzlePrefix)) == 0) {
-			MethodSwizzle(swizzleTargetClass, sel_registerName(name + strlen(ChaxMethodSwizzlePrefix)), selector);
+			MethodSwizzleClass(swizzleTargetClass, sel_registerName(name + strlen(ChaxMethodSwizzlePrefix)), selector);
 		}
 	}
 	free(methods);

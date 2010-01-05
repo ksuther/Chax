@@ -103,6 +103,7 @@
 		375091E91057000E00F472F1 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 378D4FA7101E6FE300176B47 /* Growl.framework */; };
 		375092061057012F00F472F1 /* ActivityModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 37F438D91049C5BA007F8638 /* ActivityModel.xcdatamodel */; };
 		37529A1510F2AB6600021833 /* Chax_CustomMessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37529A1410F2AB6600021833 /* Chax_CustomMessageTableView.m */; };
+		37529A2210F2B38800021833 /* Chax_ServiceErrorDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 37529A2110F2B38800021833 /* Chax_ServiceErrorDialog.m */; };
 		3753EA4A10E87EAF006B0F24 /* IMRenderingFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3753EA4910E87EAF006B0F24 /* IMRenderingFoundation.framework */; };
 		3753EB7F10EEB4DA006B0F24 /* logviewer.css in Resources */ = {isa = PBXBuildFile; fileRef = 3753EB7E10EEB4DA006B0F24 /* logviewer.css */; };
 		3753EC1310EED866006B0F24 /* LogViewerPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */; };
@@ -236,6 +237,8 @@
 		375091321056FC5F00F472F1 /* ChaxLib-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChaxLib-Info.plist"; sourceTree = "<group>"; };
 		37529A1310F2AB6600021833 /* Chax_CustomMessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_CustomMessageTableView.h; sourceTree = "<group>"; };
 		37529A1410F2AB6600021833 /* Chax_CustomMessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_CustomMessageTableView.m; sourceTree = "<group>"; };
+		37529A2010F2B38800021833 /* Chax_ServiceErrorDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ServiceErrorDialog.h; sourceTree = "<group>"; };
+		37529A2110F2B38800021833 /* Chax_ServiceErrorDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ServiceErrorDialog.m; sourceTree = "<group>"; };
 		3753EA4910E87EAF006B0F24 /* IMRenderingFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IMRenderingFoundation.framework; path = /System/Library/Frameworks/InstantMessage.framework/Versions/A/Frameworks/IMRenderingFoundation.framework; sourceTree = "<absolute>"; };
 		3753EB7E10EEB4DA006B0F24 /* logviewer.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = logviewer.css; sourceTree = "<group>"; };
 		3753EC1110EED866006B0F24 /* LogViewerPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerPreviewItem.h; sourceTree = "<group>"; };
@@ -657,6 +660,8 @@
 				370189891044504500C7C798 /* Chax_PeopleListControllerWindow.m */,
 				3701897E10444F9600C7C798 /* Chax_SecureWindow.h */,
 				3701897F10444F9600C7C798 /* Chax_SecureWindow.m */,
+				37529A2010F2B38800021833 /* Chax_ServiceErrorDialog.h */,
+				37529A2110F2B38800021833 /* Chax_ServiceErrorDialog.m */,
 			);
 			name = "Swizzled Classes";
 			sourceTree = "<group>";
@@ -1069,6 +1074,7 @@
 				37B737FA10F030A50056176C /* TransfersViewController.m in Sources */,
 				37B737FD10F030CD0056176C /* LinksViewController.m in Sources */,
 				37529A1510F2AB6600021833 /* Chax_CustomMessageTableView.m in Sources */,
+				37529A2210F2B38800021833 /* Chax_ServiceErrorDialog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
