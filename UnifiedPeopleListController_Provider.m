@@ -80,10 +80,6 @@ NSMenu *_addMenu = nil;
 	
 	objc_msgSendSuper(&superData, @selector(windowDidLoad));
     
-    //Populate the unified list with the people from the other lists
-    //We have to do this manually now since we're loading in after launch
-    [self performSelector:@selector(reloadContacts) withObject:nil afterDelay:5.0];
-    
     //Hide the other contact lists if the unified list is primary
     if ([Chax boolForKey:@"PreferAllContacts"]) {
         [self performSelector:@selector(hideOtherLists) withObject:nil afterDelay:0.0];
