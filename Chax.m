@@ -29,6 +29,7 @@
 #import "LogViewerController.h"
 #import "DonateWindowController.h"
 #import "ActivityWindowController.h"
+#import "ChaxHelperAppUtils.h"
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 NSString *ChaxLibBundleIdentifier = @"com.ksuther.chax.lib";
@@ -227,13 +228,10 @@ static id _updater = nil;
 
 + (void)updaterWillRelaunchApplication:(id)updater
 {
-    //Quit ChaxHelperApp
-    NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"ChaxHelperApp\" to quit"] autorelease];
-    
-    [script executeAndReturnError:nil];
+    QuitChaxHelperApp();
     
     //Relaunch ChaxHelperApp
-    NSString *launchPath = [[NSBundle bundleWithIdentifier:ChaxAdditionBundleIdentifier] pathForResource:@"ChaxHelperApp" ofType:@"app"];
+    NSString *launchPath = InstalledHelperAppPath();
     
     if (launchPath) {
         OSStatus err;
@@ -253,6 +251,8 @@ static id _updater = nil;
         if (err != noErr) {
             NSLog(@"Failed to relaunch ChaxHelperApp: LSOpenApplication() failed (%d)", err);
         }
+    } else {
+        NSLog(@"Failed to relaunch ChaxHelperApp: No path to executable");
     }
 }
 

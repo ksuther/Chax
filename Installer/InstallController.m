@@ -22,22 +22,16 @@
  */
 
 #import "InstallController.h"
+#import "ChaxHelperAppUtils.h"
 #import "SystemEvents.h"
 
 #define DONATE_URL [NSURL URLWithString:@"http://www.ksuther.com/chax/donate"]
 #define FAQ_URL [NSURL URLWithString:@"http://www.ksuther.com/chax/faq"]
 
-#define SCRIPTING_ADDITIONS_PATH [@"~/Library/ScriptingAdditions" stringByExpandingTildeInPath]
-#define SCRIPTING_ADDITIONS_OLD_PATH [@"~/Library/ScriptingAdditionsOld" stringByExpandingTildeInPath]
-
-NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
-
 @interface InstallController ()
 - (BOOL)_createScriptingAdditionsDirectory;
 - (BOOL)_isInstalled;
-- (void)_quitChaxHelperApp;
 @end
-
 
 @implementation InstallController
 
@@ -107,7 +101,7 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
     
     //Readd to login items
     if (enabled) {
-        NSString *path = [self installedHelperAppPath];
+        NSString *path = InstalledHelperAppPath();
         NSString *source = [NSString stringWithFormat:@"tell application \"System Events\" to make new login item with properties {path:\"%@\", hidden:false} at end", path];
         NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:source] autorelease];
         
@@ -121,14 +115,6 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
 - (NSString *)chaxAdditionPath
 {
     return [[NSBundle bundleForClass:[self class]] pathForResource:@"ChaxAddition" ofType:@"osax"];
-}
-
-- (NSString *)installedHelperAppPath
-{
-    NSBundle *installedAdditionsBundle = [NSBundle bundleWithPath:[SCRIPTING_ADDITIONS_PATH stringByAppendingPathComponent:ChaxAdditionFilename]];
-    
-    //pathForAuxiliaryExecutable nor pathForResource:ofType: seem to work here
-    return [[[[installedAdditionsBundle bundlePath] stringByAppendingPathComponent:@"Contents"] stringByAppendingPathComponent:@"MacOS"] stringByAppendingPathComponent:@"ChaxHelperApp.app"];
 }
 
 #pragma mark -
@@ -167,16 +153,16 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
         NSString *removePath = [SCRIPTING_ADDITIONS_PATH stringByAppendingPathComponent:ChaxAdditionFilename];
         
         [[NSFileManager defaultManager] removeItemAtPath:removePath error:&error];
-        
-        [self _quitChaxHelperApp];
     }
+    
+    QuitChaxHelperApp();
     
     //Copy ChaxAddition to ~/Library/ScriptingAdditions
     installed = [[NSFileManager defaultManager] copyItemAtPath:[self chaxAdditionPath] toPath:[SCRIPTING_ADDITIONS_PATH stringByAppendingPathComponent:ChaxAdditionFilename] error:&error];
     
     //Lastly, set the helper app to launch at login
     if (installed) {
-        NSString *launchPath = [self installedHelperAppPath];
+        NSString *launchPath = InstalledHelperAppPath();
         NSURL *launchURL = [NSURL fileURLWithPath:launchPath];
         OSStatus err;
         
@@ -222,7 +208,7 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
     
     if (removed) {
         [self setLaunchAtLogin:NO];
-        [self _quitChaxHelperApp];
+        QuitChaxHelperApp();
         
         [self displaySheetTitled:@"remove_title" message:@"remove_msg" defaultButton:nil secondaryButton:nil callback:NULL];
     } else {
@@ -271,12 +257,6 @@ NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
     NSString *removePath = [SCRIPTING_ADDITIONS_PATH stringByAppendingPathComponent:ChaxAdditionFilename];
     
     return [[NSFileManager defaultManager] fileExistsAtPath:removePath];
-}
-
-- (void)_quitChaxHelperApp
-{
-    NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"ChaxHelperApp\" to quit"] autorelease];
-    [script executeAndReturnError:nil];
 }
 
 @end

@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:[ChaxHelperApp class] selector:@selector(applicationDidLaunch:) name:NSWorkspaceDidLaunchApplicationNotification object:nil];
+    [[NSProcessInfo processInfo] enableSuddenTermination];
     
     [[NSApplication sharedApplication] run];
     

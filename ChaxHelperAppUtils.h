@@ -1,5 +1,5 @@
 /*
- * InstallController.h
+ * ChaxHelperAppUtils.h
  *
  * Copyright (c) 2007-2010 Kent Sutherland
  * 
@@ -23,24 +23,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface InstallController : NSObject {
-    IBOutlet NSWindow *_window;
-    IBOutlet NSButton *_installButton;
-    IBOutlet NSButton *_removeButton;
-    
-    IBOutlet NSTextField *_installTitle;
-    IBOutlet NSTextField *_installText;
-}
+#define SCRIPTING_ADDITIONS_PATH [@"~/Library/ScriptingAdditions" stringByExpandingTildeInPath]
+#define SCRIPTING_ADDITIONS_OLD_PATH [@"~/Library/ScriptingAdditionsOld" stringByExpandingTildeInPath]
 
-- (void)updateInstallInfo;
+extern NSString *ChaxHelperAppBundleIdentifier;
+extern NSString *ChaxAdditionFilename;
 
-- (void)displaySheetTitled:(NSString *)title message:(NSString *)message defaultButton:(NSString *)defaultButton secondaryButton:(NSString *)secondaryButton callback:(SEL)callback;
-- (void)displayError:(NSError *)error;
-- (void)setLaunchAtLogin:(BOOL)enabled;
-
-- (NSString *)chaxAdditionPath;
-
-- (IBAction)install:(id)sender;
-- (IBAction)remove:(id)sender;
-
-@end
+NSString *InstalledHelperAppPath();
+void QuitChaxHelperApp();

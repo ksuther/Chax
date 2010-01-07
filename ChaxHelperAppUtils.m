@@ -1,5 +1,5 @@
 /*
- * InstallController.h
+ * ChaxHelperAppUtils.m
  *
  * Copyright (c) 2007-2010 Kent Sutherland
  * 
@@ -21,26 +21,25 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "ChaxHelperAppUtils.h"
 
-@interface InstallController : NSObject {
-    IBOutlet NSWindow *_window;
-    IBOutlet NSButton *_installButton;
-    IBOutlet NSButton *_removeButton;
+NSString *ChaxHelperAppBundleIdentifier = @"com.ksuther.chax.helperapp";
+NSString *ChaxAdditionFilename = @"ChaxAddition.osax";
+
+NSString *InstalledHelperAppPath()
+{
+    NSBundle *installedAdditionsBundle = [NSBundle bundleWithPath:[SCRIPTING_ADDITIONS_PATH stringByAppendingPathComponent:ChaxAdditionFilename]];
     
-    IBOutlet NSTextField *_installTitle;
-    IBOutlet NSTextField *_installText;
+    //pathForAuxiliaryExecutable nor pathForResource:ofType: seem to work here
+    return [[[[installedAdditionsBundle bundlePath] stringByAppendingPathComponent:@"Contents"] stringByAppendingPathComponent:@"MacOS"] stringByAppendingPathComponent:@"ChaxHelperApp.app"];
 }
 
-- (void)updateInstallInfo;
 
-- (void)displaySheetTitled:(NSString *)title message:(NSString *)message defaultButton:(NSString *)defaultButton secondaryButton:(NSString *)secondaryButton callback:(SEL)callback;
-- (void)displayError:(NSError *)error;
-- (void)setLaunchAtLogin:(BOOL)enabled;
-
-- (NSString *)chaxAdditionPath;
-
-- (IBAction)install:(id)sender;
-- (IBAction)remove:(id)sender;
-
-@end
+void QuitChaxHelperApp()
+{
+    NSArray *runningHelperApps = [NSRunningApplication runningApplicationsWithBundleIdentifier:ChaxHelperAppBundleIdentifier];
+    
+    for (NSRunningApplication *nextHelperApp in runningHelperApps) {
+        [nextHelperApp terminate];
+    }
+}

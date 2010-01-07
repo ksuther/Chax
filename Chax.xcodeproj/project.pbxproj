@@ -111,6 +111,8 @@
 		377351FE10DC960600CF1C88 /* InstallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377351FD10DC960600CF1C88 /* InstallController.m */; };
 		3773526110DC9B5900CF1C88 /* ChaxAddition.osax in Resources */ = {isa = PBXBuildFile; fileRef = 37BC68581056EBDB00F1FCD9 /* ChaxAddition.osax */; };
 		3773527710DC9BDC00CF1C88 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3773527610DC9BDC00CF1C88 /* ScriptingBridge.framework */; };
+		377644D510F66DE900ECA38A /* ChaxHelperAppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */; };
+		377644D610F66DE900ECA38A /* ChaxHelperAppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */; };
 		377AAC63105DEACA0068A68F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		377AAC76105DEC1F0068A68F /* helper_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AAC75105DEC1F0068A68F /* helper_main.m */; };
 		378D13D710E20599003E2410 /* LogViewerModeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378D13D610E20599003E2410 /* LogViewerModeBackgroundView.m */; };
@@ -246,6 +248,8 @@
 		377351FD10DC960600CF1C88 /* InstallController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstallController.m; path = Installer/InstallController.m; sourceTree = "<group>"; };
 		3773526C10DC9BAE00CF1C88 /* SystemEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemEvents.h; path = Installer/SystemEvents.h; sourceTree = "<group>"; };
 		3773527610DC9BDC00CF1C88 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
+		377644D310F66DE900ECA38A /* ChaxHelperAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaxHelperAppUtils.h; sourceTree = "<group>"; };
+		377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxHelperAppUtils.m; sourceTree = "<group>"; };
 		3776F5A9101CF798009D87B6 /* UnifiedAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnifiedAccount.h; sourceTree = "<group>"; };
 		3776F5AA101CF798009D87B6 /* UnifiedAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnifiedAccount.m; sourceTree = "<group>"; };
 		3776F5AB101CF798009D87B6 /* UnifiedPeopleListController_Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnifiedPeopleListController_Provider.h; sourceTree = "<group>"; };
@@ -502,6 +506,8 @@
 			children = (
 				256AC3F00F4B6AF500CF3369 /* Chax_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				377644D310F66DE900ECA38A /* ChaxHelperAppUtils.h */,
+				377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -1069,6 +1075,7 @@
 				37B737FD10F030CD0056176C /* LinksViewController.m in Sources */,
 				37529A2210F2B38800021833 /* Chax_ServiceErrorDialog.m in Sources */,
 				37B6A52010F3DA9800B865D5 /* Chax_FezExtendedTableView.m in Sources */,
+				377644D510F66DE900ECA38A /* ChaxHelperAppUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1094,6 +1101,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				377351FE10DC960600CF1C88 /* InstallController.m in Sources */,
+				377644D610F66DE900ECA38A /* ChaxHelperAppUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
