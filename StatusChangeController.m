@@ -79,7 +79,9 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 {
     NSString *statusMessage = [presentity scriptStatusMessage];
     
-	if ([presentity timeSinceStatusChanged] < 1 && [[presentity account] accountLoginStatus] == 4 && ![[presentity account] justLoggedIn] &&
+    //NSLog(@"presentityStatusChanged: %@ (%@) timeSinceStatusChanged: %f accountLoginStatus: %d justLoggedIn: %d status: %d previousStatus: %d person: %@", presentity, statusMessage, [presentity timeSinceStatusChanged], [[presentity account] accountLoginStatus], [[presentity account] justLoggedIn], [presentity status], [presentity previousStatus], [presentity person]);
+    
+	if ([[[presentity account] arrayOfAllIMHandles] containsObject:presentity] && [presentity timeSinceStatusChanged] < 1 && [[presentity account] accountLoginStatus] == 4 && ![[presentity account] justLoggedIn] &&
         [presentity status] != [presentity previousStatus] && [presentity status] != 5 && [presentity person] != [[IMMe me] person]) {
 		//Notify the activity window of the change
 		[[ActivityWindowController sharedController] addPresentityToActivity:presentity];
