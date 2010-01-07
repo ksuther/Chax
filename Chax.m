@@ -228,11 +228,13 @@ static id _updater = nil;
 
 + (void)updaterWillRelaunchApplication:(id)updater
 {
+    NSLog(@"Quitting old ChaxHelperApp");
     QuitChaxHelperApp();
     
     //Relaunch ChaxHelperApp
     NSString *launchPath = InstalledHelperAppPath();
     
+    NSLog(@"Attempting to relaunch ChaxHelperApp at path %@", launchPath);
     if (launchPath) {
         OSStatus err;
         LSApplicationParameters params;
