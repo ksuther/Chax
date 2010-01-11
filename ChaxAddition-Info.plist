@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>OSAX</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0a6</string>
+	<string>3.0a7</string>
 	<key>CFBundleSignature</key>
 	<string>ChxA</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>7</string>
 	<key>OSAScriptingDefinition</key>
 	<string>ChaxAddition.sdef</string>
 	<key>OSAXHandlers</key>
