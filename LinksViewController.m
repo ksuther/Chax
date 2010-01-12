@@ -51,6 +51,9 @@
     [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
     [[(WebView *)[self view] preferences] setJavaScriptEnabled:YES];
+    [[(WebView *)[self view] preferences] setDefaultFontSize:11];
+    [[(WebView *)[self view] preferences] setDefaultFixedFontSize:11];
+    [[(WebView *)[self view] preferences] setStandardFontFamily:@"Lucida Grande"];
 }
 
 - (void)jumpToMessageGUID:(NSString *)messageGUID inLogAtPath:(NSString *)logPath
