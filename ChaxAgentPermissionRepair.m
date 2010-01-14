@@ -24,6 +24,16 @@
 #import "ChaxAgentPermissionRepair.h"
 #import "Chax.h"
 #import <sys/stat.h>
+#import <Security/Security.h>
+
+BOOL ChaxAgentInjectorPerformInjection()
+{
+    NSBundle *chaxLibBundle = [NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier];
+    NSString *injectorPath = [chaxLibBundle pathForAuxiliaryExecutable:@"ChaxAgentInjector"];
+    NSArray *arguments = [NSArray arrayWithObjects:[[chaxLibBundle privateFrameworksPath] stringByAppendingPathComponent:@"mach_inject_bundle.framework"], [chaxLibBundle pathForResource:@"ChaxAgentLib" ofType:@"bundle"], nil];
+    
+    [NSTask launchedTaskWithLaunchPath:injectorPath arguments:arguments];
+}
 
 BOOL ChaxAgentInjectorNeedsPermissionRepair()
 {
@@ -33,4 +43,60 @@ BOOL ChaxAgentInjectorNeedsPermissionRepair()
     
     //Is ChaxAgentInjector not setgid and in the group procmod?
     return ![[attributes fileGroupOwnerAccountName] isEqualToString:@"procmod"] || ([attributes filePosixPermissions] & 02000 == 0);
+}
+
+BOOL ChaxAgentInjectorRepairPermissions()
+{
+    NSString *targetPath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForAuxiliaryExecutable:@"ChaxAgentInjector"];
+    OSStatus err = noErr;
+    
+    if (targetPath) {
+        AuthorizationRef authorizationRef;
+        AuthorizationItem items[1];
+        AuthorizationRights rights;
+        
+        err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
+        
+        if (err == noErr) {
+            items[0].name = kAuthorizationRightExecute;
+            items[0].value = NULL;
+            items[0].valueLength = 0;
+            items[0].flags = 0;
+            
+            rights.count = 1;
+            rights.items = items;
+            
+            err = AuthorizationCopyRights(authorizationRef, &rights, kAuthorizationEmptyEnvironment, kAuthorizationFlagInteractionAllowed | kAuthorizationFlagExtendRights, NULL);
+            
+            if (err == noErr) {
+                char *args[3];
+                
+                args[0] = "g+s";
+                args[1] = (char *)[targetPath fileSystemRepresentation];
+                args[2] = NULL;
+                
+                err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/chmod", 0, args, NULL);
+                
+                args[0] = "procmod";
+                args[1] = (char *)[targetPath fileSystemRepresentation];
+                args[2] = NULL;
+                
+                err = AuthorizationExecuteWithPrivileges(authorizationRef, "/usr/bin/chgrp", 0, args, NULL);
+                
+                if (err == noErr) {
+                    err = AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
+                }
+            }
+        }
+        
+        if (err != noErr) {
+            NSRunAlertPanel(ChaxLocalizedString(@"Permission repair error"), ChaxLocalizedString(@"There was an error repairing permissions. Please try again or reinstall Chax if the problem persists. (Error %d)"), @"OK", nil, nil, err);
+        }
+    } else {
+        NSLog(@"Unable to locate ChaxAgentInjector.");
+        
+        err = 1;
+    }
+    
+    return err == noErr;
 }

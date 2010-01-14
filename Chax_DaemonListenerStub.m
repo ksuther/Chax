@@ -1,7 +1,7 @@
 /*
- * Chax_IMDaemonController.m
+ * Chax_DaemonListenerStub.m
  *
- * Copyright (c) 2007-2009 Kent Sutherland
+ * Copyright (c) 2007-2010 Kent Sutherland
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -21,17 +21,32 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "Chax_IMDaemonController.h"
+#import "Chax_DaemonListenerStub.h"
+#import "IMCore.h"
 
-@implementation Chax_IMDaemonController
+@implementation Chax_DaemonListenerStub
 
-- (void)chax_swizzle__agentDidLaunchNotification:(id)fp8
+- (void)chax_loadChaxAgentLib
 {
-    NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"iChatAgent\" to Load ChaxAgent"] autorelease];
+    if (ChaxAgentInjectorNeedsPermissionRepair()) {
+        if (NSRunAlertPanel(ChaxLocalizedString(@"Permissions repair required"),
+                            ChaxLocalizedString(@"This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users."),
+                            ChaxLocalizedString(@"OK"),
+                            ChaxLocalizedString(@"Cancel"), nil) == NSAlertDefaultReturn) {
+            ChaxAgentInjectorRepairPermissions();
+        }
+    }
     
-    [script executeAndReturnError:nil];
+    ChaxAgentInjectorPerformInjection();
+}
+
+- (oneway void)chax_swizzle_setupComplete
+{
+    if ([Chax boolForKey:@"ICQPlainTextEnabled"]) {
+        [self performSelector:@selector(chax_loadChaxAgentLib) withObject:nil afterDelay:1.0];
+    }
     
-    [self chax_swizzle__agentDidLaunchNotification:fp8];
+    [self chax_swizzle_setupComplete];
 }
 
 @end

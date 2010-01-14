@@ -23,4 +23,6 @@
 
 #import <Cocoa/Cocoa.h>
 
+BOOL ChaxAgentInjectorPerformInjection();
 BOOL ChaxAgentInjectorNeedsPermissionRepair();
+BOOL ChaxAgentInjectorRepairPermissions();

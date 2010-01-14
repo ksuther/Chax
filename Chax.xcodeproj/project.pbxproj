@@ -131,10 +131,11 @@
 		37EA7F5010FE94C400B20782 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		37EA7F5F10FE950000B20782 /* ChaxAgentInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA7F5E10FE950000B20782 /* ChaxAgentInjector.m */; };
 		37EA7F6910FE95C400B20782 /* ChaxAgentInjector in Copy Executables */ = {isa = PBXBuildFile; fileRef = 37EA7F4410FE94B200B20782 /* ChaxAgentInjector */; };
-		37EA7F6A10FE95CB00B20782 /* ChaxAgentSetup.sh in Copy Executables */ = {isa = PBXBuildFile; fileRef = 37EA7F3D10FE949900B20782 /* ChaxAgentSetup.sh */; };
 		37EA800E10FE97D000B20782 /* ChaxAgentLib.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 375090F31056FA5A00F472F1 /* ChaxAgentLib.bundle */; };
 		37EA802610FE98EB00B20782 /* mach_inject_bundle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 37EA7F7510FE961C00B20782 /* mach_inject_bundle.framework */; };
 		37EA804F10FE9EAC00B20782 /* ChaxAgentPermissionRepair.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA804510FE9E0800B20782 /* ChaxAgentPermissionRepair.m */; };
+		37EA80DA10FECFE500B20782 /* Chax_DaemonListenerStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA80D910FECFE500B20782 /* Chax_DaemonListenerStub.m */; };
+		37EA810210FED32F00B20782 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EA810110FED32F00B20782 /* Security.framework */; };
 		37FEDB1D10E1594A0060BB05 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3710F5DF104260E400EAD72D /* dsa_pub.pem */; };
 		37FEDB5010E15AFD0060BB05 /* Chax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3786DA1F0FF7C0A8000CBC6A /* Chax.icns */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -232,7 +233,6 @@
 			dstSubfolderSpec = 6;
 			files = (
 				37EA7F6910FE95C400B20782 /* ChaxAgentInjector in Copy Executables */,
-				37EA7F6A10FE95CB00B20782 /* ChaxAgentSetup.sh in Copy Executables */,
 			);
 			name = "Copy Executables";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,12 +375,14 @@
 		37D5C5CA103D151600EE8A49 /* Chax_Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Chat.m; sourceTree = "<group>"; };
 		37D5C5D9103D157F00EE8A49 /* Chax_ChatDOMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ChatDOMView.h; sourceTree = "<group>"; };
 		37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatDOMView.m; sourceTree = "<group>"; };
-		37EA7F3D10FE949900B20782 /* ChaxAgentSetup.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ChaxAgentSetup.sh; sourceTree = "<group>"; };
 		37EA7F4410FE94B200B20782 /* ChaxAgentInjector */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ChaxAgentInjector; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EA7F5E10FE950000B20782 /* ChaxAgentInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxAgentInjector.m; sourceTree = "<group>"; };
 		37EA7F7510FE961C00B20782 /* mach_inject_bundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mach_inject_bundle.framework; path = Frameworks/mach_inject_bundle.framework; sourceTree = "<group>"; };
 		37EA804410FE9E0800B20782 /* ChaxAgentPermissionRepair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaxAgentPermissionRepair.h; sourceTree = "<group>"; };
 		37EA804510FE9E0800B20782 /* ChaxAgentPermissionRepair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxAgentPermissionRepair.m; sourceTree = "<group>"; };
+		37EA80D810FECFE500B20782 /* Chax_DaemonListenerStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_DaemonListenerStub.h; sourceTree = "<group>"; };
+		37EA80D910FECFE500B20782 /* Chax_DaemonListenerStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_DaemonListenerStub.m; sourceTree = "<group>"; };
+		37EA810110FED32F00B20782 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		37F29A941043AB70005460A5 /* CameraSnapshotController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSnapshotController.h; sourceTree = "<group>"; };
 		37F29A951043AB70005460A5 /* CameraSnapshotController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSnapshotController.m; sourceTree = "<group>"; };
 		37F29A9E1043ABB1005460A5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CameraSnapshot.xib; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				375091481056FC8600F472F1 /* libicucore.dylib in Frameworks */,
 				3750918D1056FDB900F472F1 /* Carbon.framework in Frameworks */,
 				3753EA4A10E87EAF006B0F24 /* IMRenderingFoundation.framework in Frameworks */,
+				37EA810210FED32F00B20782 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +510,7 @@
 				37AFBC6110311458001AA056 /* libicucore.dylib */,
 				37BC686C1056EEB700F1FCD9 /* Carbon.framework */,
 				3773527610DC9BDC00CF1C88 /* ScriptingBridge.framework */,
+				37EA810110FED32F00B20782 /* Security.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -581,7 +585,6 @@
 				375091321056FC5F00F472F1 /* ChaxLib-Info.plist */,
 				375090F41056FA5A00F472F1 /* ChaxAgentLib-Info.plist */,
 				37BC689B1056EFD400F1FCD9 /* ChaxAddition.sdef */,
-				37EA7F3D10FE949900B20782 /* ChaxAgentSetup.sh */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				3786DAA20FF7C513000CBC6A /* Localizable.strings */,
 				3710F5DF104260E400EAD72D /* dsa_pub.pem */,
@@ -691,6 +694,8 @@
 				37F43A561049D730007F8638 /* Chax_ChatNotifier.m */,
 				37F29AAC1043AC82005460A5 /* Chax_ChatWindowController.h */,
 				37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */,
+				37EA80D810FECFE500B20782 /* Chax_DaemonListenerStub.h */,
+				37EA80D910FECFE500B20782 /* Chax_DaemonListenerStub.m */,
 				37B6A51E10F3DA9800B865D5 /* Chax_FezExtendedTableView.h */,
 				37B6A51F10F3DA9800B865D5 /* Chax_FezExtendedTableView.m */,
 				3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */,
@@ -1160,6 +1165,7 @@
 				37B6A52010F3DA9800B865D5 /* Chax_FezExtendedTableView.m in Sources */,
 				377644D510F66DE900ECA38A /* ChaxHelperAppUtils.m in Sources */,
 				37EA804F10FE9EAC00B20782 /* ChaxAgentPermissionRepair.m in Sources */,
+				37EA80DA10FECFE500B20782 /* Chax_DaemonListenerStub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,7 +1,7 @@
 /*
  * Prefs_Chax.h
  *
- * Copyright (c) 2007- Kent Sutherland
+ * Copyright (c) 2007-2010 Kent Sutherland
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -271,9 +271,13 @@ enum {
 - (void)setICQPlainTextEnabled:(BOOL)value
 {
 	if (value && ChaxAgentInjectorNeedsPermissionRepair()) {
-		NSBeginAlertSheet(ChaxLocalizedString(@"Permissions repair required"), ChaxLocalizedString(@"Cancel"), ChaxLocalizedString(@"OK"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)4, ChaxLocalizedString(@"This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users."));
+		NSBeginAlertSheet(ChaxLocalizedString(@"Permissions repair required"), ChaxLocalizedString(@"OK"), ChaxLocalizedString(@"Cancel"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)4, ChaxLocalizedString(@"This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users."));
 	} else {
 		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"ICQPlainTextEnabled"];
+        
+        if (value) {
+            ChaxAgentInjectorPerformInjection();
+        }
 	}
 }
 
@@ -306,13 +310,20 @@ enum {
 			[self didChangeValueForKey:@"autoAcceptScreenSharing"];
 			break;
         case 4:
+            value = (returnCode == NSOKButton);
+            
+            if (returnCode == NSOKButton) {
+                if (ChaxAgentInjectorRepairPermissions()) {
+                    ChaxAgentInjectorPerformInjection();
+                } else {
+                    //Permission repair failed, uncheck the checkbox
+                    value = NO;
+                }
+            }
+            
             [self willChangeValueForKey:@"ICQPlainTextEnabled"];
 			[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"ICQPlainTextEnabled"];
 			[self didChangeValueForKey:@"ICQPlainTextEnabled"];
-            
-            if (value) {
-                //Run ChaxAgentSetup.sh
-            }
             break;
 	}
 }

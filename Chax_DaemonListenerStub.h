@@ -1,7 +1,7 @@
 /*
- * Chax_IMDaemonController.h
+ * Chax_DaemonListenerStub.h
  *
- * Copyright (c) 2007-2009 Kent Sutherland
+ * Copyright (c) 2007-2010 Kent Sutherland
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -23,7 +23,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Chax_IMDaemonController : NSObject {
+@interface Chax_DaemonListenerStub : NSObject {
 
 }
 
