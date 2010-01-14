@@ -27,6 +27,7 @@
 
 @optional
 - (id)avChat;
+- (id)notifier;
 - (void)endConference:(id)sender;
 
 @end

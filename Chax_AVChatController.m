@@ -32,29 +32,28 @@ static BOOL allowClose = NO;
 {
 	if (returnCode == NSOKButton) {
 		allowClose = YES;
+        
 		[self endConference:nil];
 	}
 }
 
 - (BOOL)chax_swizzle_windowShouldClose:(NSWindow *)window
 {
-	if (![Chax boolForKey:@"ConfirmCloseAV"] && !allowClose) {
-		allowClose = YES;
-	}
-	
-	//Confirm closing an active AV chat
-	if ([[self avChat] isActive] && !allowClose) {
+	//Confirm closing an active AV chat. Only do so if the notifier window isn't visible and the chat is still active.
+	if ([Chax boolForKey:@"ConfirmCloseAV"] && ![[self notifier] isRealWindowHidden] && [[self avChat] isActive] && !allowClose) {
 		NSString *close = ChaxLocalizedString(@"Close");
 		NSString *dont_close = ChaxLocalizedString(@"Don't Close");
 		NSString *title = ChaxLocalizedString(@"End AV Chat?");
 		NSString *msg = ChaxLocalizedString(@"Are you sure you want to end this AV chat?");
 		
 		NSAlert *alert = [NSAlert alertWithMessageText:title defaultButton:close alternateButton:dont_close otherButton:nil informativeTextWithFormat:msg];
-		[[[alert buttons] objectAtIndex:1] setKeyEquivalent:@"\\E"];
+		[[[alert buttons] objectAtIndex:1] setKeyEquivalent:@"\033"];
 		
 		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(chax_confirmAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
-	}
-	
+	} else {
+        allowClose = YES;
+    }
+    
 	return allowClose && [self chax_swizzle_windowShouldClose:window];
 }
 
@@ -84,6 +83,8 @@ static BOOL allowClose = NO;
             [self performSelector:@selector(acceptVC:) withObject:nil afterDelay:0.5];
         }
 	}
+    
+    allowClose = NO;
 }
 
 @end
