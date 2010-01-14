@@ -24,7 +24,39 @@
 #import "Chax_AVChatController.h"
 #import "iChat5.h"
 
+static BOOL allowClose = NO;
+
 @implementation Chax_AVChatController
+
+- (void)chax_confirmAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	if (returnCode == NSOKButton) {
+		allowClose = YES;
+		[self endConference:nil];
+	}
+}
+
+- (BOOL)chax_swizzle_windowShouldClose:(NSWindow *)window
+{
+	if (![Chax boolForKey:@"ConfirmCloseAV"] && !allowClose) {
+		allowClose = YES;
+	}
+	
+	//Confirm closing an active AV chat
+	if ([[self avChat] isActive] && !allowClose) {
+		NSString *close = ChaxLocalizedString(@"Close");
+		NSString *dont_close = ChaxLocalizedString(@"Don't Close");
+		NSString *title = ChaxLocalizedString(@"End AV Chat?");
+		NSString *msg = ChaxLocalizedString(@"Are you sure you want to end this AV chat?");
+		
+		NSAlert *alert = [NSAlert alertWithMessageText:title defaultButton:close alternateButton:dont_close otherButton:nil informativeTextWithFormat:msg];
+		[[[alert buttons] objectAtIndex:1] setKeyEquivalent:@"\\E"];
+		
+		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(chax_confirmAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+	}
+	
+	return allowClose && [self chax_swizzle_windowShouldClose:window];
+}
 
 - (void)chax_swizzle_windowDidLoad
 {

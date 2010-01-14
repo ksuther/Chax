@@ -62,6 +62,12 @@
 "Permission repair error" = "Permission repair error";
 "There was an error repairing permissions. Please try again or reinstall Chax if the problem persists. (Error %d)" = "There was an error repairing permissions. Please try again or reinstall Chax if the problem persists. (Error %d)";
 
+/* AV Chat Close Confirmation */
+"End AV Chat?" = "End AV Chat?";
+"Are you sure you want to end this AV chat?" = "Are you sure you want to end this AV chat?";
+"Close" = "Close";
+"Don't Close" = "Don't Close";
+
 /* Preferences - Auto-Accept */
 "Are you sure you want to automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options...\" to only accept AV chats from specific users or on specific accounts." = "Are you sure you want to automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options…\" to only accept AV chats from specific users or on specific accounts.";
 "Automatically Accept AV Chat Invitations?" = "Automatically Accept AV Chat Invitations?";
