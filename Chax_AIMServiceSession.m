@@ -32,34 +32,33 @@
 {
     NSLog(@"ChaxAgentLib loaded.");
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chax_notificationReceived:) name:NSBundleDidLoadNotification object:nil];
-}
-
-+ (void)chax_notificationReceived:(NSNotification *)note
-{
-    NSSet *bundleClasses = [[note userInfo] objectForKey:@"NSLoadedClasses"];
-    
-    if ([bundleClasses containsObject:@"AIMServiceSession"]) {
+    if (NSClassFromString(@"AIMServiceSession") != nil) {
         Class swizzleTargetClass = NSClassFromString(@"AIMServiceSession");
         
         [BundleUtilities extendClass:swizzleTargetClass withMethodsFromClass:self];
         
         MethodSwizzle(swizzleTargetClass, @selector(_sendMessage:toBuddy:secure:), @selector(chax_swizzle__sendMessage:toBuddy:secure:));
+    } else {
+        NSLog(@"Error swizzling AIMServiceSession");
     }
     
-    if ([bundleClasses containsObject:@"SuperToAIMParserContext"]) {
+    if (NSClassFromString(@"SuperToAIMParserContext") != nil) {
         Class swizzleTargetClass = NSClassFromString(@"SuperToAIMParserContext");
         
         [BundleUtilities extendClass:swizzleTargetClass withMethodsFromClass:NSClassFromString(@"Chax_SuperToAIMParserContext")];
         
         MethodSwizzle(swizzleTargetClass, @selector(outAIML), @selector(chax_swizzle_outAIML));
         MethodSwizzle(swizzleTargetClass, @selector(initWithAttributedString:markupMode:), @selector(chax_swizzle_initWithAttributedString:markupMode:));
+    } else {
+        NSLog(@"Error swizzling SuperToAIMParserContext");
     }
 }
 
 - (int)chax_swizzle__sendMessage:(id)arg1 toBuddy:(id)arg2 secure:(BOOL)arg3
 {
-    if ([arg2 isICQ] && !CFPreferencesGetAppBooleanValue((CFStringRef)@"ICQPlainTextEnabled", (CFStringRef)@"com.ksuther.chax", nil)) {
+    CFPreferencesSynchronize(CFSTR("com.ksuther.chax"), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+    
+    if ([arg2 isICQ] && CFPreferencesGetAppBooleanValue((CFStringRef)@"ICQPlainTextEnabled", (CFStringRef)@"com.ksuther.chax", nil)) {
         chax_sendNextPlainText = YES;
     }
     
