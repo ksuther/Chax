@@ -69,15 +69,15 @@
 "Don't Close" = "Don't Close";
 
 /* Preferences - Auto-Accept */
-"Are you sure you want to automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options...\" to only accept AV chats from specific users or on specific accounts." = "Are you sure you want to automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options…\" to only accept AV chats from specific users or on specific accounts.";
-"Automatically Accept AV Chat Invitations?" = "Automatically Accept AV Chat Invitations?";
+"Are you sure you want to Automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options...\" to only accept AV chats from specific users or on specific accounts." = "Are you sure you want to Automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options…\" to only accept AV chats from specific users or on specific accounts.";
+"Automatically accept AV chat invitations?" = "Automatically accept AV chat invitations?";
 "Auto-accept AV chats from:" = "Auto-accept AV chats from:";
 "Auto-accept files from:" = "Auto-accept files from:";
 "Are you sure you want to automatically accept all files that are sent to you? All files are automatically accepted by default. Click \"Options...\" to only accept files from specific users or on specific accounts." = "Are you sure you want to automatically accept all files that are sent to you? All files are automatically accepted by default. Click \"Options…\" to only accept files from specific users or on specific accounts.";
-"Automatically Accept File Transfers?" = "Automatically Accept File Transfers?";
+"Automatically accept file transfers?" = "Automatically accept file transfers?";
 "Auto-accept screen sharing from:" = "Auto-accept screen sharing from:";
 "Are you sure you want to automatically accept all screen sharing invitations that are sent to you? All screen sharing invitations are automatically accepted by default. Click \"Options...\" to only accept screen sharing invitations from specific users or on specific accounts." = "Are you sure you want to automatically accept all screen sharing invitations that are sent to you? All screen sharing invitations are automatically accepted by default. Click \"Options…\" to only accept screen sharing invitations from specific users or on specific accounts.";
-"Automatically Accept Screen Sharing Invitations?" = "Automatically Accept Screen Sharing Invitations?";
+"Automatically accept screen sharing invitations?" = "Automatically accept screen sharing invitations?";
 "Anyone" = "Anyone";
 
 /* Other */

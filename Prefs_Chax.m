@@ -229,7 +229,7 @@ enum {
 - (void)setAutoAcceptFiles:(BOOL)value
 {
 	if (value) {
-		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically Accept File Transfers?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)1, ChaxLocalizedString(@"Are you sure you want to automatically accept all files that are sent to you? All files are automatically accepted by default. Click \"Options...\" to only accept files from specific users or on specific accounts."));
+		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically accept file transfers?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)1, ChaxLocalizedString(@"Are you sure you want to automatically accept all files that are sent to you? All files are automatically accepted by default. Click \"Options...\" to only accept files from specific users or on specific accounts."));
 	} else {
 		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptFiles"];
 	}
@@ -243,7 +243,7 @@ enum {
 - (void)setAutoAcceptAVChats:(BOOL)value
 {
 	if (value) {
-		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically Accept AV Chat Invitations?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)2, ChaxLocalizedString(@"Are you sure you want to automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options...\" to only accept AV chats from specific users or on specific accounts."));
+		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically accept AV chat invitations?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)2, ChaxLocalizedString(@"Are you sure you want to Automatically accept AV chat invitations that are sent to you? All AV chats are automatically accepted by default. Click \"Options...\" to only accept AV chats from specific users or on specific accounts."));
 	} else {
 		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptAVChats"];
 	}
@@ -257,7 +257,7 @@ enum {
 - (void)setAutoAcceptScreenSharing:(BOOL)value
 {
 	if (value) {
-		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically Accept Screen Sharing Invitations?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)3, ChaxLocalizedString(@"Are you sure you want to automatically accept all screen sharing invitations that are sent to you? All screen sharing invitations are automatically accepted by default. Click \"Options...\" to only accept screen sharing invitations from specific users or on specific accounts."));
+		NSBeginAlertSheet(ChaxLocalizedString(@"Automatically accept screen sharing invitations?"), ChaxLocalizedString(@"No"), ChaxLocalizedString(@"Yes"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)3, ChaxLocalizedString(@"Are you sure you want to automatically accept all screen sharing invitations that are sent to you? All screen sharing invitations are automatically accepted by default. Click \"Options...\" to only accept screen sharing invitations from specific users or on specific accounts."));
 	} else {
 		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptScreenSharing"];
 	}
