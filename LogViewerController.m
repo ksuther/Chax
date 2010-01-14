@@ -161,6 +161,7 @@ typedef enum LogViewerToolbarItem {
     [super windowDidLoad];
     
     [_chatViewController willBecomeVisible];
+    [self setNextResponder:_conversationViewController];
     
     [[self window] center];
 }
