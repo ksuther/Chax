@@ -57,10 +57,10 @@
 "Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again." = "Thank you for continuing to use Chax. Please consider making a donation to support the development of Chax if you find it to be a useful addition to iChat. This message will not appear again.";
 
 /* iChatAgent Injection */
-"Permissions repair required" = "Permissions repair required";
-"This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users." = "This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users.";
-"Permission repair error" = "Permission repair error";
-"There was an error repairing permissions. Please try again or reinstall Chax if the problem persists. (Error %d)" = "There was an error repairing permissions. Please try again or reinstall Chax if the problem persists. (Error %d)";
+"Administrator password required" = "Administrator password required";
+"Sending plain text to ICQ users requires your admin password to function properly. Please enter your admin password to enable this feature." = "Sending plain text to ICQ users requires your admin password to function properly. Please enter your admin password to enable this feature.";
+"Administrator password error" = "Administrator password error";
+"There was an error enabling plain text support for ICQ users. Please try again or reinstall Chax if the problem persists. (Error %d)" = "There was an error enabling plain text support for ICQ users. Please try again or reinstall Chax if the problem persists. (Error %d)";
 
 /* AV Chat Close Confirmation */
 "End AV Chat?" = "End AV Chat?";

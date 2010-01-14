@@ -29,8 +29,8 @@
 - (void)chax_loadChaxAgentLib
 {
     if (ChaxAgentInjectorNeedsPermissionRepair()) {
-        if (NSRunAlertPanel(ChaxLocalizedString(@"Permissions repair required"),
-                            ChaxLocalizedString(@"This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users."),
+        if (NSRunAlertPanel(ChaxLocalizedString(@"Administrator password required"),
+                            ChaxLocalizedString(@"Sending plain text to ICQ users requires your admin password to function properly. Please enter your admin password to enable this feature."),
                             ChaxLocalizedString(@"OK"),
                             ChaxLocalizedString(@"Cancel"), nil) == NSAlertDefaultReturn) {
             ChaxAgentInjectorRepairPermissions();

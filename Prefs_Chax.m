@@ -271,7 +271,7 @@ enum {
 - (void)setICQPlainTextEnabled:(BOOL)value
 {
 	if (value && ChaxAgentInjectorNeedsPermissionRepair()) {
-		NSBeginAlertSheet(ChaxLocalizedString(@"Permissions repair required"), ChaxLocalizedString(@"OK"), ChaxLocalizedString(@"Cancel"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)4, ChaxLocalizedString(@"This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users."));
+		NSBeginAlertSheet(ChaxLocalizedString(@"Administrator password required"), ChaxLocalizedString(@"OK"), ChaxLocalizedString(@"Cancel"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)4, ChaxLocalizedString(@"Sending plain text to ICQ users requires your admin password to function properly. Please enter your admin password to enable this feature."));
 	} else {
 		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"ICQPlainTextEnabled"];
         

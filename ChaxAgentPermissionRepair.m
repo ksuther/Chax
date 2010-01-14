@@ -90,7 +90,7 @@ BOOL ChaxAgentInjectorRepairPermissions()
         }
         
         if (err != noErr) {
-            NSRunAlertPanel(ChaxLocalizedString(@"Permission repair error"), ChaxLocalizedString(@"There was an error repairing permissions. Please try again or reinstall Chax if the problem persists. (Error %d)"), @"OK", nil, nil, err);
+            NSRunAlertPanel(ChaxLocalizedString(@"Administrator password error"), ChaxLocalizedString(@"There was an error enabling plain text support for ICQ users. Please try again or reinstall Chax if the problem persists. (Error %d)"), @"OK", nil, nil, err);
         }
     } else {
         NSLog(@"Unable to locate ChaxAgentInjector.");
