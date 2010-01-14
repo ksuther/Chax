@@ -51,6 +51,8 @@
 	[_installTitle setStringValue:installTitle];
 	[_installText setStringValue:[NSString stringWithFormat:NSLocalizedString(@"install_msg", nil), version]];
 	[_installButton setTitle:NSLocalizedString(@"install", nil)];
+    
+    [_removeButton setTitle:NSLocalizedString(@"remove", nil)];
 	[_removeButton setEnabled:NO];
     
     if ([self _isInstalled]) {

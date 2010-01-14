@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		37267AB110FFD5780058110F /* Update Localizable Strings */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 37267ABF10FFD5860058110F /* Build configuration list for PBXAggregateTarget "Update Localizable Strings" */;
+			buildPhases = (
+				37267AB710FFD5840058110F /* Generate XIB Strings */,
+				37267AE810FFD8FB0058110F /* Copy Localizable Strings */,
+			);
+			dependencies = (
+				37267AD710FFD72B0058110F /* PBXTargetDependency */,
+			);
+			name = "Update Localizable Strings";
+			productName = "Update Localizable Strings";
+		};
 		3784D28010473F2000B56C81 /* Build Disk Image */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 3784D28910473F2500B56C81 /* Build configuration list for PBXAggregateTarget "Build Disk Image" */;
@@ -14,6 +27,7 @@
 				3784D28F10473F3400B56C81 /* Build DMG */,
 			);
 			dependencies = (
+				37267AF210FFD9EC0058110F /* PBXTargetDependency */,
 				3784D28B10473F2F00B56C81 /* PBXTargetDependency */,
 			);
 			name = "Build Disk Image";
@@ -33,6 +47,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		37267AD510FFD7230058110F /* xibLocalizationPreprocessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 37267AD410FFD7230058110F /* xibLocalizationPreprocessor.m */; };
+		37267B6710FFDE650058110F /* DMLocalizedNibBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37267AED10FFD9C80058110F /* DMLocalizedNibBundle.m */; };
 		375090531056F59500F472F1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		375090CA1056F8D200F472F1 /* ChaxAddition.r in Rez */ = {isa = PBXBuildFile; fileRef = 375090AA1056F7FC00F472F1 /* ChaxAddition.r */; };
 		375091071056FAC900F472F1 /* Chax_AIMServiceSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D7156104DC6E9007DC7EE /* Chax_AIMServiceSession.m */; };
@@ -143,6 +159,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		37267AD610FFD72B0058110F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37267ACD10FFD7020058110F /* xibLocalizationPostprocessor */;
+			remoteInfo = xibLocalizationPostprocessor;
+		};
+		37267AF110FFD9EC0058110F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37267AB110FFD5780058110F /* Update Localizable Strings */;
+			remoteInfo = "Update Localizable Strings";
+		};
 		375090F91056FA6300F472F1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -263,6 +293,10 @@
 		371BA4BB101134CC00CF88C0 /* BundleUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundleUtilities.m; sourceTree = "<group>"; };
 		372586491053716D0073C799 /* Chax_PeopleListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_PeopleListItem.h; sourceTree = "<group>"; };
 		3725864A1053716D0073C799 /* Chax_PeopleListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_PeopleListItem.m; sourceTree = "<group>"; };
+		37267ACE10FFD7020058110F /* xibLocalizationPostprocessor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xibLocalizationPostprocessor; sourceTree = BUILT_PRODUCTS_DIR; };
+		37267AD410FFD7230058110F /* xibLocalizationPreprocessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xibLocalizationPreprocessor.m; sourceTree = "<group>"; };
+		37267AEC10FFD9C80058110F /* DMLocalizedNibBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMLocalizedNibBundle.h; sourceTree = "<group>"; };
+		37267AED10FFD9C80058110F /* DMLocalizedNibBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMLocalizedNibBundle.m; sourceTree = "<group>"; };
 		372D8A6410478E2A005E2F5F /* Chax_ChatInputLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ChatInputLine.h; sourceTree = "<group>"; };
 		372D8A6510478E2A005E2F5F /* Chax_ChatInputLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatInputLine.m; sourceTree = "<group>"; };
 		375090AA1056F7FC00F472F1 /* ChaxAddition.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = ChaxAddition.r; sourceTree = "<group>"; };
@@ -415,6 +449,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		37267ACC10FFD7020058110F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		375090F11056FA5A00F472F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,6 +576,7 @@
 				375090F31056FA5A00F472F1 /* ChaxAgentLib.bundle */,
 				375091311056FC5F00F472F1 /* ChaxLib.bundle */,
 				37EA7F4410FE94B200B20782 /* ChaxAgentInjector */,
+				37267ACE10FFD7020058110F /* xibLocalizationPostprocessor */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -563,6 +605,7 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				377644D310F66DE900ECA38A /* ChaxHelperAppUtils.h */,
 				377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */,
+				37267AD410FFD7230058110F /* xibLocalizationPreprocessor.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -668,6 +711,8 @@
 				371BA4BB101134CC00CF88C0 /* BundleUtilities.m */,
 				37BCAA571041A2E40088A681 /* NSArrayAdditions.h */,
 				37BCAA581041A2E40088A681 /* NSArrayAdditions.m */,
+				37267AEC10FFD9C80058110F /* DMLocalizedNibBundle.h */,
+				37267AED10FFD9C80058110F /* DMLocalizedNibBundle.m */,
 				37AFBC4E10311444001AA056 /* RegexKit */,
 			);
 			name = "Other Sources";
@@ -843,6 +888,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		37267ACD10FFD7020058110F /* xibLocalizationPostprocessor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37267AD310FFD70B0058110F /* Build configuration list for PBXNativeTarget "xibLocalizationPostprocessor" */;
+			buildPhases = (
+				37267ACB10FFD7020058110F /* Sources */,
+				37267ACC10FFD7020058110F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = xibLocalizationPostprocessor;
+			productName = xibLocalizationPostprocessor;
+			productReference = 37267ACE10FFD7020058110F /* xibLocalizationPostprocessor */;
+			productType = "com.apple.product-type.tool";
+		};
 		375090F21056FA5A00F472F1 /* ChaxAgentLib */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 375090F81056FA5B00F472F1 /* Build configuration list for PBXNativeTarget "ChaxAgentLib" */;
@@ -975,8 +1036,10 @@
 				37BC68571056EBDB00F1FCD9 /* ChaxAddition */,
 				375091301056FC5F00F472F1 /* ChaxLib */,
 				375090F21056FA5A00F472F1 /* ChaxAgentLib */,
-				37CC44C610E0A22600998593 /* Update Plist Versions */,
 				37EA7F4310FE94B200B20782 /* ChaxAgentInjector */,
+				37267ACD10FFD7020058110F /* xibLocalizationPostprocessor */,
+				37CC44C610E0A22600998593 /* Update Plist Versions */,
+				37267AB110FFD5780058110F /* Update Localizable Strings */,
 			);
 		};
 /* End PBXProject section */
@@ -1049,6 +1112,36 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		37267AB710FFD5840058110F /* Generate XIB Strings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate XIB Strings";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "if [ ! -d ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${DEVELOPMENT_LANGUAGE}.lproj ]; then\n    mkdir -p ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${DEVELOPMENT_LANGUAGE}.lproj\nfi\n\nforeach xibFile (${SOURCE_ROOT}/${DEVELOPMENT_LANGUAGE}.lproj/*.xib)\n  stringsFilePath=${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/`basename ${xibFile} .xib`.strings\n  \n  if [[ -e ${xibFile} ]] {\n    ibtool --generate-stringsfile ${stringsFilePath}~ ${xibFile}\n    ${BUILT_PRODUCTS_DIR}/xibLocalizationPostprocessor ${stringsFilePath}~ ${stringsFilePath}\n    rm ${stringsFilePath}~\n  }\nend";
+			showEnvVarsInLog = 0;
+		};
+		37267AE810FFD8FB0058110F /* Copy Localizable Strings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Localizable Strings";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -d ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${DEVELOPMENT_LANGUAGE}.lproj ]; then\n    mkdir -p ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${DEVELOPMENT_LANGUAGE}.lproj\nfi\n\nif [ ! -d ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer ]; then\n    mkdir -p ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer\nfi\n\ncp ${SOURCE_ROOT}/${DEVELOPMENT_LANGUAGE}.lproj/Localizable.strings ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${DEVELOPMENT_LANGUAGE}.lproj\ncp ${SOURCE_ROOT}/Installer/${DEVELOPMENT_LANGUAGE}.lproj/Localizable.strings ${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer";
+			showEnvVarsInLog = 0;
+		};
 		375090A91056F7E200F472F1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1095,6 +1188,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		37267ACB10FFD7020058110F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37267AD510FFD7230058110F /* xibLocalizationPreprocessor.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		375090F01056FA5A00F472F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1166,6 +1267,7 @@
 				37EA804F10FE9EAC00B20782 /* ChaxAgentPermissionRepair.m in Sources */,
 				37EA80DA10FECFE500B20782 /* Chax_DaemonListenerStub.m in Sources */,
 				37EA81B010FEDEDE00B20782 /* Chax_FileTransferCenter.m in Sources */,
+				37267B6710FFDE650058110F /* DMLocalizedNibBundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1206,6 +1308,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		37267AD710FFD72B0058110F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37267ACD10FFD7020058110F /* xibLocalizationPostprocessor */;
+			targetProxy = 37267AD610FFD72B0058110F /* PBXContainerItemProxy */;
+		};
+		37267AF210FFD9EC0058110F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37267AB110FFD5780058110F /* Update Localizable Strings */;
+			targetProxy = 37267AF110FFD9EC0058110F /* PBXContainerItemProxy */;
+		};
 		375090FA1056FA6300F472F1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 375090F21056FA5A00F472F1 /* ChaxAgentLib */;
@@ -1324,6 +1436,75 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		37267AB210FFD5780058110F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Update Localizable Strings";
+				UNLOCALIZED_RESOURCES_FOLDER_PATH = ChaxLocalizableStrings;
+			};
+			name = Debug;
+		};
+		37267AB310FFD5780058110F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Update Localizable Strings";
+				UNLOCALIZED_RESOURCES_FOLDER_PATH = ChaxLocalizableStrings;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		37267AD010FFD7020058110F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = xibLocalizationPostprocessor;
+			};
+			name = Debug;
+		};
+		37267AD110FFD7020058110F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = xibLocalizationPostprocessor;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		375090F51056FA5A00F472F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1714,6 +1895,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		37267ABF10FFD5860058110F /* Build configuration list for PBXAggregateTarget "Update Localizable Strings" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37267AB210FFD5780058110F /* Debug */,
+				37267AB310FFD5780058110F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37267AD310FFD70B0058110F /* Build configuration list for PBXNativeTarget "xibLocalizationPostprocessor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37267AD010FFD7020058110F /* Debug */,
+				37267AD110FFD7020058110F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		375090F81056FA5B00F472F1 /* Build configuration list for PBXNativeTarget "ChaxAgentLib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
