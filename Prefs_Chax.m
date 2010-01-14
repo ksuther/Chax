@@ -26,6 +26,7 @@
 #import "AutoAcceptPrefsWindowController.h"
 #import "Chax_FezPreferences.h"
 #import "iChat5.h"
+#import "ChaxAgentPermissionRepair.h"
 
 #define SENDER_STATE ([(NSCell *)sender state] == NSOnState)
 #define PREF_STATE(x) [Chax boolForKey:x] ? NSOnState : NSOffState
@@ -267,6 +268,20 @@ enum {
 	return [[_defaults valueForKey:@"AutoAcceptScreenSharing"] boolValue];
 }
 
+- (void)setICQPlainTextEnabled:(BOOL)value
+{
+	if (value && ChaxAgentInjectorNeedsPermissionRepair()) {
+		NSBeginAlertSheet(ChaxLocalizedString(@"Permissions repair required"), ChaxLocalizedString(@"Cancel"), ChaxLocalizedString(@"OK"), nil, [[NSClassFromString(@"FezPreferences") sharedPreferences] chax_preferencesPanel], self, @selector(confirmSheetDidEnd:returnCode:contextInfo:), nil, (void *)4, ChaxLocalizedString(@"This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users."));
+	} else {
+		[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"ICQPlainTextEnabled"];
+	}
+}
+
+- (BOOL)ICQPlainTextEnabled
+{
+	return [[_defaults valueForKey:@"ICQPlainTextEnabled"] boolValue];
+}
+
 #pragma mark -
 #pragma mark Sheet Callback
 
@@ -290,6 +305,15 @@ enum {
 			[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptScreenSharing"];
 			[self didChangeValueForKey:@"autoAcceptScreenSharing"];
 			break;
+        case 4:
+            [self willChangeValueForKey:@"ICQPlainTextEnabled"];
+			[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"ICQPlainTextEnabled"];
+			[self didChangeValueForKey:@"ICQPlainTextEnabled"];
+            
+            if (value) {
+                //Run ChaxAgentSetup.sh
+            }
+            break;
 	}
 }
 

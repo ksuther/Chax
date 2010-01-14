@@ -30,6 +30,7 @@
 #import "DonateWindowController.h"
 #import "ActivityWindowController.h"
 #import "ChaxHelperAppUtils.h"
+#import "ChaxAgentPermissionRepair.h"
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 NSString *ChaxLibBundleIdentifier = @"com.ksuther.chax.lib";
@@ -79,6 +80,8 @@ static id _updater = nil;
         [self registerURLHandlers];
         [self setupSparkle];
         [self performSelector:@selector(displayDonateWindowIfWanted) withObject:nil afterDelay:2.0];
+        [self performSelector:@selector(checkChaxAgentPermissions) withObject:nil afterDelay:2.0];
+        
         [NSClassFromString(@"Prefs") setKnockKnock:![Chax boolForKey:@"SkipNewMessageNotification"]];
         
         [StatusChangeController sharedController]; //Load the Growl framework and register for status changes
@@ -152,6 +155,18 @@ static id _updater = nil;
     if (msg) {
         DonateWindowController *controller = [[DonateWindowController alloc] initWithMessage:ChaxLocalizedString(msg)];
         [controller showWindow:nil];
+    }
+}
+
++ (void)checkChaxAgentPermissions
+{
+    if ([Chax boolForKey:@"ICQPlainTextEnabled"] && ChaxAgentInjectorNeedsPermissionRepair()) {
+        if (NSRunAlertPanel(ChaxLocalizedString(@"Permissions repair required"),
+                            ChaxLocalizedString(@"This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users."),
+                            ChaxLocalizedString(@"OK"),
+                            ChaxLocalizedString(@"Cancel"), nil) == NSAlertDefaultReturn) {
+            //Fix permissions here
+        }
     }
 }
 

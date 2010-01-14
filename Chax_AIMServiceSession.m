@@ -30,7 +30,7 @@
 
 + (void)load
 {
-    NSLog(@"rawr!");
+    NSLog(@"ChaxAgentLib loaded.");
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chax_notificationReceived:) name:NSBundleDidLoadNotification object:nil];
 }
@@ -59,7 +59,7 @@
 
 - (int)chax_swizzle__sendMessage:(id)arg1 toBuddy:(id)arg2 secure:(BOOL)arg3
 {
-    if ([arg2 isICQ] && !CFPreferencesGetAppBooleanValue((CFStringRef)@"DisablePlainText", (CFStringRef)@"com.ksuther.chax", nil)) {
+    if ([arg2 isICQ] && !CFPreferencesGetAppBooleanValue((CFStringRef)@"ICQPlainTextEnabled", (CFStringRef)@"com.ksuther.chax", nil)) {
         chax_sendNextPlainText = YES;
     }
     
