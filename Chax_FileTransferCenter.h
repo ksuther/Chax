@@ -1,5 +1,5 @@
 /*
- * Chax_IMFileTransferCenter.h
+ * Chax_FileTransferCenter.h
  *
  * Copyright (c) 2007-2010 Kent Sutherland
  * 
@@ -23,15 +23,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol Chax_IMFileTransferCenterMethods
+@protocol Chax_FileTransferCenterMethods
 
 @optional
 - (id)transferForGUID:(id)fp8;
 
 @end
 
-
-@interface Chax_IMFileTransferCenter : NSObject <Chax_IMFileTransferCenterMethods> {
+@interface Chax_FileTransferCenter : NSObject <Chax_FileTransferCenterMethods> {
 
 }
 

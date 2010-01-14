@@ -1,5 +1,12 @@
+//
+//  Chax_FileTransferCenter.m
+//  Chax
+//
+//  Created by Kent Sutherland on 1/14/10.
+//  Copyright 2010 Kent Sutherland. All rights reserved.
+//
 /*
- * Chax_IMFileTransferCenter.m
+ * Chax_FileTransferCenter.m
  *
  * Copyright (c) 2007-2010 Kent Sutherland
  * 
@@ -20,17 +27,17 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
- 
-#import "Chax_IMFileTransferCenter.h"
+
+#import "Chax_FileTransferCenter.h"
 #import "IMFoundation.h"
 #import "IMCore.h"
 #import "iChat5.h"
 
-@implementation Chax_IMFileTransferCenter
+@implementation Chax_FileTransferCenter
 
-- (void)chax_swizzle__addPendingTransfer:(id)fp8
+- (void)chax_swizzle__handleStandaloneFileTransferRegistered:(id)fp8
 {
-    [self chax_swizzle__addPendingTransfer:fp8];
+    [self chax_swizzle__handleStandaloneFileTransferRegistered:fp8];
     
     IMFileTransfer *transfer = [self transferForGUID:fp8];
     
