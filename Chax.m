@@ -1,7 +1,7 @@
 /*
  * Chax.m
  *
- * Copyright (c) 2007- Kent Sutherland
+ * Copyright (c) 2007-2010 Kent Sutherland
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -80,7 +80,6 @@ static id _updater = nil;
         [self registerURLHandlers];
         [self setupSparkle];
         [self performSelector:@selector(displayDonateWindowIfWanted) withObject:nil afterDelay:2.0];
-        [self performSelector:@selector(checkChaxAgentPermissions) withObject:nil afterDelay:2.0];
         
         [NSClassFromString(@"Prefs") setKnockKnock:![Chax boolForKey:@"SkipNewMessageNotification"]];
         
@@ -155,18 +154,6 @@ static id _updater = nil;
     if (msg) {
         DonateWindowController *controller = [[DonateWindowController alloc] initWithMessage:ChaxLocalizedString(msg)];
         [controller showWindow:nil];
-    }
-}
-
-+ (void)checkChaxAgentPermissions
-{
-    if ([Chax boolForKey:@"ICQPlainTextEnabled"] && ChaxAgentInjectorNeedsPermissionRepair()) {
-        if (NSRunAlertPanel(ChaxLocalizedString(@"Permissions repair required"),
-                            ChaxLocalizedString(@"This feature requires permissions to be repaired in order to function properly. Please enter your admin password to enable sending plain text to ICQ users."),
-                            ChaxLocalizedString(@"OK"),
-                            ChaxLocalizedString(@"Cancel"), nil) == NSAlertDefaultReturn) {
-            //Fix permissions here
-        }
     }
 }
 
