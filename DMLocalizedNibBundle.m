@@ -19,6 +19,7 @@
 // localize particular attributes in objects
 + (void)_localizeTitleOfObject:(id)object table:(NSString *)table;
 + (void)_localizeLabelOfObject:(id)object table:(NSString *)table;
++ (void)_localizePaletteLabelOfObject:(id)object table:(NSString *)table;
 + (void)_localizeAlternateTitleOfObject:(id)object table:(NSString *)table;
 + (void)_localizeStringValueOfObject:(id)object table:(NSString *)table;
 + (void)_localizePlaceholderStringOfObject:(id)object table:(NSString *)table;
@@ -190,11 +191,18 @@
         [self _localizeTitleOfObject:window table:table];
         
         [self _localizeStringsInObject:[window contentView] table:table];
-        
+        [self _localizeStringsInObject:[window toolbar] table:table];
     } else if ([object isKindOfClass:[NSTabViewItem class]]) {
         [self _localizeStringsInObject:[object view] table:table];
         
         [self _localizeLabelOfObject:object table:table];
+    } else if ([object isKindOfClass:[NSToolbar class]]) {
+        for (NSToolbarItem *toolbarItem in [object items]) {
+            [self _localizeStringsInObject:toolbarItem table:table];
+        }
+    } else if ([object isKindOfClass:[NSToolbarItem class]]) {
+        [self _localizeLabelOfObject:object table:table];
+        [self _localizePaletteLabelOfObject:object table:table];
     }
 }
 
@@ -229,6 +237,7 @@ if (localizedBlah) \
 
 DM_DEFINE_LOCALIZE_BLAH_OF_OBJECT(title, Title)
 DM_DEFINE_LOCALIZE_BLAH_OF_OBJECT(label, Label)
+DM_DEFINE_LOCALIZE_BLAH_OF_OBJECT(paletteLabel, PaletteLabel)
 DM_DEFINE_LOCALIZE_BLAH_OF_OBJECT(alternateTitle, AlternateTitle)
 DM_DEFINE_LOCALIZE_BLAH_OF_OBJECT(stringValue, StringValue)
 DM_DEFINE_LOCALIZE_BLAH_OF_OBJECT(placeholderString, PlaceholderString)
