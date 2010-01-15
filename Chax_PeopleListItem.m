@@ -31,6 +31,10 @@
 {
     Presentity *presentity = [[fp8 userInfo] objectForKey:@"kIMHandleResponsible"];
     
+    if ([Chax boolForKey:@"LogStatusChanges"]) {
+        NSLog(@"Presence status changed: %@", [fp8 userInfo]);
+    }
+    
     if (presentity != nil) {
         [[StatusChangeController sharedController] presentityStatusChanged:presentity];
     }

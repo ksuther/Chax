@@ -202,6 +202,10 @@ NSString *FilterToolbarItemIdentifier = @"FilterToolbarItemIdentifier";
 			statusMessage = nil;
 		}
 		
+        if ([Chax boolForKey:@"LogStatusChanges"]) {
+            NSLog(@"Adding person to activity: %@", presentity);
+        }
+        
 		NSManagedObject *event = [NSEntityDescription insertNewObjectForEntityForName:@"IMEvent" inManagedObjectContext:_managedObjectContext];
 		[event setValue:name forKey:@"name"];
 		[event setValue:[NSNumber numberWithInt:[presentity status]] forKey:@"status"];

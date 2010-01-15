@@ -79,10 +79,16 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 {
     NSString *statusMessage = [presentity scriptStatusMessage];
     
-    //NSLog(@"presentityStatusChanged: %@ (%@) timeSinceStatusChanged: %f accountLoginStatus: %d justLoggedIn: %d status: %d previousStatus: %d person: %@", presentity, statusMessage, [presentity timeSinceStatusChanged], [[presentity account] accountLoginStatus], [[presentity account] justLoggedIn], [presentity status], [presentity previousStatus], [presentity person]);
+    if ([Chax boolForKey:@"LogStatusChanges"]) {
+        NSLog(@"presentityStatusChanged: %@ (statusMessage: %@) on contact list: %d timeSinceStatusChanged: %f accountLoginStatus: %d justLoggedIn: %d status: %d previousStatus: %d person: %@ me: %@", presentity, statusMessage, [[[presentity account] arrayOfAllIMHandles] containsObject:presentity], [presentity timeSinceStatusChanged], [[presentity account] accountLoginStatus], [[presentity account] justLoggedIn], [presentity status], [presentity previousStatus], [presentity person], [[IMMe me] person]);
+    }
     
 	if ([[[presentity account] arrayOfAllIMHandles] containsObject:presentity] && [presentity timeSinceStatusChanged] < 1 && [[presentity account] accountLoginStatus] == 4 && ![[presentity account] justLoggedIn] &&
         [presentity status] != [presentity previousStatus] && [presentity status] != 5 && [presentity person] != [[IMMe me] person]) {
+        if ([Chax boolForKey:@"LogStatusChanges"]) {
+            NSLog(@"Person status changed: %@", presentity);
+        }
+        
 		//Notify the activity window of the change
 		[[ActivityWindowController sharedController] addPresentityToActivity:presentity];
 		
@@ -165,6 +171,10 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
         
         if (imageData == nil) {
             imageData = [[[presentity genericPicture] image] TIFFRepresentation];
+        }
+        
+        if ([Chax boolForKey:@"LogStatusChanges"]) {
+            NSLog(@"Posting Growl notification: %@ %@ %@", title, description, notification);
         }
         
         [self postGrowlNotificationWithTitle:title description:description notificationName:notification iconData:imageData clickContext:[NSDictionary dictionaryWithObject:[presentity guid] forKey:@"IMHandle"]];
