@@ -35,6 +35,7 @@
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 NSString *ChaxLibBundleIdentifier = @"com.ksuther.chax.lib";
 NSString *ChaxAdditionBundleIdentifier = @"com.ksuther.chax.addition";
+NSString *iChatAgentBundleIdentifier = @"com.apple.iChatAgent";
 
 static NSInteger kChaxDonateRequestFirstInterval = 604800;
 static NSInteger kChaxDonateRequestSecondInterval = 2678400;

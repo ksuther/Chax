@@ -226,7 +226,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 37267AB110FFD5780058110F /* Update Localizable Strings */;
+			remoteGlobalIDString = 37267AB110FFD5780058110F;
 			remoteInfo = "Update Localizable Strings";
 		};
 /* End PBXContainerItemProxy section */
@@ -1899,6 +1899,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZABLE_STRINGS_PATH = ChaxLocalizableStrings;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1917,6 +1918,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZABLE_STRINGS_PATH = ChaxLocalizableStrings;
 				PREBINDING = NO;

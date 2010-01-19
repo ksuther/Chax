@@ -25,14 +25,49 @@
 #import "Chax.h"
 #import <sys/stat.h>
 #import <Security/Security.h>
+#import <sys/sysctl.h>
 
 BOOL ChaxAgentInjectorPerformInjection()
 {
     NSBundle *chaxLibBundle = [NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier];
     NSString *injectorPath = [chaxLibBundle pathForAuxiliaryExecutable:@"ChaxAgentInjector"];
-    NSArray *arguments = [NSArray arrayWithObjects:[[chaxLibBundle privateFrameworksPath] stringByAppendingPathComponent:@"mach_inject_bundle.framework"], [chaxLibBundle pathForResource:@"ChaxAgentLib" ofType:@"bundle"], nil];
+    NSArray *runningAgents = [NSRunningApplication runningApplicationsWithBundleIdentifier:iChatAgentBundleIdentifier];
     
-    [NSTask launchedTaskWithLaunchPath:injectorPath arguments:arguments];
+    if ([runningAgents count] > 0) {
+        //NSRunningApplication executableArchitecture isn't working here for some reason
+        //Using solution from http://stackoverflow.com/questions/1350181/determine-a-processs-architecture instead (same as in top source)
+        
+        //Check the architecture of iChatAgent so we run the injector with the same architecture, otherwise mach_inject will fail
+        pid_t pid = [[runningAgents lastObject] processIdentifier];
+        cpu_type_t cpuType;
+        size_t cpuTypeSize;
+        int mib[CTL_MAXNAME];
+        size_t mibLen = CTL_MAXNAME;
+        int err;
+        
+        err = sysctlnametomib("sysctl.proc_cputype", mib, &mibLen);
+        
+        if (err == -1) {
+            err = errno;
+        }
+        
+        if (err == 0) {
+            assert(mibLen < CTL_MAXNAME);
+            mib[mibLen] = pid;
+            mibLen += 1;
+            
+            cpuTypeSize = sizeof(cpuType);
+            err = sysctl(mib, mibLen, &cpuType, &cpuTypeSize, 0, 0);
+            if (err == -1) {
+                err = errno;
+            }
+        }
+        
+        NSString *architectureString = (cpuType & CPU_ARCH_ABI64) ? @"x86_64" : @"i386";
+        NSArray *arguments = [NSArray arrayWithObjects:@"-arch", architectureString, injectorPath, [[chaxLibBundle privateFrameworksPath] stringByAppendingPathComponent:@"mach_inject_bundle.framework"], [chaxLibBundle pathForResource:@"ChaxAgentLib" ofType:@"bundle"], nil];
+        
+        [NSTask launchedTaskWithLaunchPath:@"/usr/bin/arch" arguments:arguments];
+    }
 }
 
 BOOL ChaxAgentInjectorNeedsPermissionRepair()
