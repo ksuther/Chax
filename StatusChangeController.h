@@ -31,6 +31,7 @@ extern NSString *ChaxGrowlUserOnline;
 extern NSString *ChaxGrowlUserAway;
 extern NSString *ChaxGrowlUserIdle;
 extern NSString *ChaxGrowlUserAvailable;
+extern NSString *ChaxGrowlUserStatusChanged;
 
 @class Presentity;
 

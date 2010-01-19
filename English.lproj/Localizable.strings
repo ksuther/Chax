@@ -1,6 +1,7 @@
 /* Growl */
 "%@ became available" = "%@ became available";
 "%@ came online" = "%@ came online";
+"%@ changed status" = "%@ changed status";
 "%@ says" = "%@ says";
 "%@ went away" = "%@ went away";
 "%@ went idle" = "%@ went idle";

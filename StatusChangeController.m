@@ -33,6 +33,7 @@ NSString *ChaxGrowlUserOnline = @"User came online";
 NSString *ChaxGrowlUserAway = @"User went away";
 NSString *ChaxGrowlUserIdle = @"User went idle";
 NSString *ChaxGrowlUserAvailable = @"User became available";
+NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
 
 @implementation StatusChangeController
 
@@ -157,6 +158,10 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
                     title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ came online"), name];
                     description = nil;
                     notification = ChaxGrowlUserOnline;
+                } else if ([presentity previousStatus] == 0) {
+                    title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ changed status"), name];
+                    description = statusMessage;
+                    notification = ChaxGrowlUserStatusChanged;
                 } else {
                     title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ became available"), name];
                     description = statusMessage;
@@ -203,8 +208,8 @@ NSString *ChaxGrowlUserAvailable = @"User became available";
 
 - (NSDictionary *)registrationDictionaryForGrowl
 {
-	NSArray *notifications = [NSArray arrayWithObjects:ChaxGrowlNewMessage, ChaxGrowlTextInvitation, ChaxGrowlUserOffline, ChaxGrowlUserOnline, ChaxGrowlUserIdle, ChaxGrowlUserAway, ChaxGrowlUserAvailable, nil];
-	return [NSDictionary dictionaryWithObjectsAndKeys:notifications, GROWL_NOTIFICATIONS_ALL, notifications, GROWL_NOTIFICATIONS_DEFAULT, nil, nil];
+	NSArray *notifications = [NSArray arrayWithObjects:ChaxGrowlNewMessage, ChaxGrowlTextInvitation, ChaxGrowlUserOffline, ChaxGrowlUserOnline, ChaxGrowlUserIdle, ChaxGrowlUserAway, ChaxGrowlUserAvailable, ChaxGrowlUserStatusChanged, nil];
+	return [NSDictionary dictionaryWithObjectsAndKeys:notifications, GROWL_NOTIFICATIONS_ALL, notifications, GROWL_NOTIFICATIONS_DEFAULT, [[NSImage imageNamed:@"ChaxIcon"] TIFFRepresentation], GROWL_APP_ICON, nil];
 }
 
 - (NSString *)applicationNameForGrowl
