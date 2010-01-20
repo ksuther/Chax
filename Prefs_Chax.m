@@ -286,6 +286,48 @@ enum {
 	return [[_defaults valueForKey:@"ICQPlainTextEnabled"] boolValue];
 }
 
+- (void)setHideContactLists:(BOOL)value
+{
+	[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"HideContactListsWhenInactive"];
+	
+	NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
+	
+	for (PeopleListController *nextController in controllers) {
+		[[nextController window] setHidesOnDeactivate:value];
+		
+		if ([nextController isVisible]) {
+			[nextController displayWithoutKey];
+		}
+	}
+}
+
+- (BOOL)hideContactLists
+{
+	return [[_defaults valueForKey:@"HideContactListsWhenInactive"] boolValue];
+}
+
+- (void)setHideChatWindows:(BOOL)value
+{
+	[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"HideChatsWhenInactive"];
+	
+	NSArray *controllers = [NSClassFromString(@"ChatWindowController") allChatWindowControllers];
+	
+	for (ChatWindowController *nextController in controllers) {
+		if ([[nextController currentChatController] notifier]) {
+			[[[[nextController currentChatController] notifier] floaterWindow] setHidesOnDeactivate:value];
+			[[[[nextController currentChatController] notifier] floaterWindow] orderFront:nil];
+		} else {
+			[[nextController window] setHidesOnDeactivate:value];
+			[[nextController window] orderBack:nil];
+		}
+	}
+}
+
+- (BOOL)hideChatWindows
+{
+	return [[_defaults valueForKey:@"HideChatsWhenInactive"] boolValue];
+}
+
 #pragma mark -
 #pragma mark Sheet Callback
 

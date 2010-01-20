@@ -146,6 +146,7 @@
 		37BE0DF311077A52004647C4 /* Donate.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37BE0DEA11077A52004647C4 /* Donate.strings */; };
 		37BE0DF411077A52004647C4 /* LogViewer.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37BE0DED11077A52004647C4 /* LogViewer.strings */; };
 		37BE0DF511077A52004647C4 /* Preferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37BE0DEF11077A52004647C4 /* Preferences.strings */; };
+		37BE0E161107800F004647C4 /* Chax_Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE0E151107800F004647C4 /* Chax_Notifier.m */; };
 		37CC446C10DEDDE300998593 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37CC446A10DEDDE300998593 /* Localizable.strings */; };
 		37CC44F210E140E200998593 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3710F5B210425E6900EAD72D /* Sparkle.framework */; };
 		37EA7F5010FE94C400B20782 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
@@ -400,6 +401,8 @@
 		37BE0DEC11077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37BE0DEE11077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/LogViewer.strings; sourceTree = "<group>"; };
 		37BE0DF011077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/Preferences.strings; sourceTree = "<group>"; };
+		37BE0E141107800F004647C4 /* Chax_Notifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Notifier.h; sourceTree = "<group>"; };
+		37BE0E151107800F004647C4 /* Chax_Notifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Notifier.m; sourceTree = "<group>"; };
 		37CC446B10DEDDE300998593 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = Installer/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37D0E26A104612C1009C42DA /* DonateWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DonateWindowController.h; path = "../Chax 10.5/DonateWindowController.h"; sourceTree = "<group>"; };
 		37D0E26B104612C1009C42DA /* DonateWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DonateWindowController.m; path = "../Chax 10.5/DonateWindowController.m"; sourceTree = "<group>"; };
@@ -770,6 +773,8 @@
 				3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */,
 				37018C0C1044997300C7C798 /* Chax_FileTransferManager.h */,
 				37018C0D1044997300C7C798 /* Chax_FileTransferManager.m */,
+				37BE0E141107800F004647C4 /* Chax_Notifier.h */,
+				37BE0E151107800F004647C4 /* Chax_Notifier.m */,
 				3786DA550FF7C2F3000CBC6A /* Chax_NSDockTile.h */,
 				3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */,
 				3786DBC10FF7D189000CBC6A /* Chax_PeopleList.h */,
@@ -1329,6 +1334,7 @@
 				37EA80DA10FECFE500B20782 /* Chax_DaemonListenerStub.m in Sources */,
 				37EA81B010FEDEDE00B20782 /* Chax_FileTransferCenter.m in Sources */,
 				37267B6710FFDE650058110F /* DMLocalizedNibBundle.m in Sources */,
+				37BE0E161107800F004647C4 /* Chax_Notifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

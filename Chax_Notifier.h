@@ -1,5 +1,5 @@
 /*
- * Chax_ChatWindowController.h
+ * Chax_Notifier.h
  *
  * Copyright (c) 2007-2010 Kent Sutherland
  * 
@@ -23,16 +23,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol Chax_ChatWindowControllerMethods
+@protocol Chax_NotifierMethods
 
 @optional
-- (id)currentChatController;
-- (void)cancelActiveNotifierAnimations;
-- (NSWindow *)window;
+- (NSWindow *)floaterWindow;
 
 @end
 
-@interface Chax_ChatWindowController : NSObject <Chax_ChatWindowControllerMethods> {
+@interface Chax_Notifier : NSObject <Chax_NotifierMethods> {
 
 }
 

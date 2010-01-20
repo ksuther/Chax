@@ -52,6 +52,15 @@ Chat *_lastChat = nil;
 	}
 }
 
+- (void)chax_swizzle_windowDidLoad
+{
+	[self chax_swizzle_windowDidLoad];
+	
+	if ([Chax boolForKey:@"HideChatsWhenInactive"]) {
+		[[self window] setHidesOnDeactivate:YES];
+	}
+}
+
 -(void)chax_swizzle__startNotifierAnimationTimer
 {
     [self chax_swizzle__startNotifierAnimationTimer];

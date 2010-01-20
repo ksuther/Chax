@@ -1,5 +1,12 @@
+//
+//  Chax_Notifier.m
+//  Chax
+//
+//  Created by Kent Sutherland on 1/20/10.
+//  Copyright 2010 Kent Sutherland. All rights reserved.
+//
 /*
- * Chax_ChatWindowController.h
+ * Chax_Notifier.m
  *
  * Copyright (c) 2007-2010 Kent Sutherland
  * 
@@ -21,19 +28,17 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "Chax_Notifier.h"
 
-@protocol Chax_ChatWindowControllerMethods
+@implementation Chax_Notifier
 
-@optional
-- (id)currentChatController;
-- (void)cancelActiveNotifierAnimations;
-- (NSWindow *)window;
-
-@end
-
-@interface Chax_ChatWindowController : NSObject <Chax_ChatWindowControllerMethods> {
-
+- (void)chax_swizzle_buildFloaterWindowWithFrame:(NSRect)fp8 styleMask:(int)fp24
+{
+	[self chax_swizzle_buildFloaterWindowWithFrame:fp8 styleMask:fp24];
+	
+	if ([Chax boolForKey:@"HideChatsWhenInactive"]) {
+		[[self floaterWindow] setHidesOnDeactivate:YES];
+	}
 }
 
 @end
