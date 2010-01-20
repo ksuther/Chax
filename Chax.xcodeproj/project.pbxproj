@@ -141,6 +141,11 @@
 		37BC686D1056EEB700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC68881056EEC700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC689C1056EFD400F1FCD9 /* ChaxAddition.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 37BC689B1056EFD400F1FCD9 /* ChaxAddition.sdef */; };
+		37BE0DF111077A52004647C4 /* ActivityWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37BE0DE611077A52004647C4 /* ActivityWindow.strings */; };
+		37BE0DF211077A52004647C4 /* CameraSnapshot.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37BE0DE811077A52004647C4 /* CameraSnapshot.strings */; };
+		37BE0DF311077A52004647C4 /* Donate.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37BE0DEA11077A52004647C4 /* Donate.strings */; };
+		37BE0DF411077A52004647C4 /* LogViewer.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37BE0DED11077A52004647C4 /* LogViewer.strings */; };
+		37BE0DF511077A52004647C4 /* Preferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37BE0DEF11077A52004647C4 /* Preferences.strings */; };
 		37CC446C10DEDDE300998593 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37CC446A10DEDDE300998593 /* Localizable.strings */; };
 		37CC44F210E140E200998593 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3710F5B210425E6900EAD72D /* Sparkle.framework */; };
 		37EA7F5010FE94C400B20782 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
@@ -343,7 +348,7 @@
 		3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_NSDockTile.m; path = Swizzled/Chax_NSDockTile.m; sourceTree = "<group>"; };
 		3786DA930FF7C41F000CBC6A /* Chax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax.h; sourceTree = "<group>"; };
 		3786DA940FF7C41F000CBC6A /* Chax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax.m; sourceTree = "<group>"; };
-		3786DAA30FF7C513000CBC6A /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3786DAA30FF7C513000CBC6A /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3786DAC10FF7C5AD000CBC6A /* menu-badge.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "menu-badge.tiff"; sourceTree = "<group>"; };
 		3786DADF0FF7C757000CBC6A /* iChat5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iChat5.h; sourceTree = "<group>"; };
 		3786DAE00FF7C778000CBC6A /* Chax_PeopleListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_PeopleListController.h; path = Swizzled/Chax_PeopleListController.h; sourceTree = "<group>"; };
@@ -388,6 +393,13 @@
 		37BC689B1056EFD400F1FCD9 /* ChaxAddition.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.sdef; path = ChaxAddition.sdef; sourceTree = "<group>"; };
 		37BCAA571041A2E40088A681 /* NSArrayAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayAdditions.h; sourceTree = "<group>"; };
 		37BCAA581041A2E40088A681 /* NSArrayAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArrayAdditions.m; sourceTree = "<group>"; };
+		37BE0DE511077A3A004647C4 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Russian; path = Installer/Russian.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37BE0DE711077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/ActivityWindow.strings; sourceTree = "<group>"; };
+		37BE0DE911077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/CameraSnapshot.strings; sourceTree = "<group>"; };
+		37BE0DEB11077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/Donate.strings; sourceTree = "<group>"; };
+		37BE0DEC11077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37BE0DEE11077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/LogViewer.strings; sourceTree = "<group>"; };
+		37BE0DF011077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/Preferences.strings; sourceTree = "<group>"; };
 		37CC446B10DEDDE300998593 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = Installer/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37D0E26A104612C1009C42DA /* DonateWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DonateWindowController.h; path = "../Chax 10.5/DonateWindowController.h"; sourceTree = "<group>"; };
 		37D0E26B104612C1009C42DA /* DonateWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DonateWindowController.m; path = "../Chax 10.5/DonateWindowController.m"; sourceTree = "<group>"; };
@@ -630,6 +642,11 @@
 				37BC689B1056EFD400F1FCD9 /* ChaxAddition.sdef */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				3786DAA20FF7C513000CBC6A /* Localizable.strings */,
+				37BE0DE611077A52004647C4 /* ActivityWindow.strings */,
+				37BE0DE811077A52004647C4 /* CameraSnapshot.strings */,
+				37BE0DEA11077A52004647C4 /* Donate.strings */,
+				37BE0DED11077A52004647C4 /* LogViewer.strings */,
+				37BE0DEF11077A52004647C4 /* Preferences.strings */,
 				3710F5DF104260E400EAD72D /* dsa_pub.pem */,
 			);
 			name = Resources;
@@ -1028,6 +1045,13 @@
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Chax" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Russian,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Chax */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1068,6 +1092,11 @@
 				375091D41056FF9600F472F1 /* Localizable.strings in Resources */,
 				3753EB7F10EEB4DA006B0F24 /* logviewer.css in Resources */,
 				37EA800E10FE97D000B20782 /* ChaxAgentLib.bundle in Resources */,
+				37BE0DF111077A52004647C4 /* ActivityWindow.strings in Resources */,
+				37BE0DF211077A52004647C4 /* CameraSnapshot.strings in Resources */,
+				37BE0DF311077A52004647C4 /* Donate.strings in Resources */,
+				37BE0DF411077A52004647C4 /* LogViewer.strings in Resources */,
+				37BE0DF511077A52004647C4 /* Preferences.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1413,6 +1442,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3786DAA30FF7C513000CBC6A /* English */,
+				37BE0DEC11077A52004647C4 /* Russian */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1425,10 +1455,51 @@
 			name = LogViewer.xib;
 			sourceTree = "<group>";
 		};
+		37BE0DE611077A52004647C4 /* ActivityWindow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37BE0DE711077A52004647C4 /* Russian */,
+			);
+			name = ActivityWindow.strings;
+			sourceTree = "<group>";
+		};
+		37BE0DE811077A52004647C4 /* CameraSnapshot.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37BE0DE911077A52004647C4 /* Russian */,
+			);
+			name = CameraSnapshot.strings;
+			sourceTree = "<group>";
+		};
+		37BE0DEA11077A52004647C4 /* Donate.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37BE0DEB11077A52004647C4 /* Russian */,
+			);
+			name = Donate.strings;
+			sourceTree = "<group>";
+		};
+		37BE0DED11077A52004647C4 /* LogViewer.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37BE0DEE11077A52004647C4 /* Russian */,
+			);
+			name = LogViewer.strings;
+			sourceTree = "<group>";
+		};
+		37BE0DEF11077A52004647C4 /* Preferences.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37BE0DF011077A52004647C4 /* Russian */,
+			);
+			name = Preferences.strings;
+			sourceTree = "<group>";
+		};
 		37CC446A10DEDDE300998593 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				37CC446B10DEDDE300998593 /* English */,
+				37BE0DE511077A3A004647C4 /* Russian */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

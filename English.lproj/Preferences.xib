@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="15"/>
+			<integer value="14"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -53,7 +53,7 @@
 							<object class="NSTabViewItem" id="129882857">
 								<string key="NSIdentifier">1</string>
 								<object class="NSView" key="NSView" id="895868353">
-									<reference key="NSNextResponder" ref="872417880"/>
+									<nil key="NSNextResponder"/>
 									<int key="NSvFlags">256</int>
 									<object class="NSMutableArray" key="NSSubviews">
 										<bool key="EncodedWithXMLCoder">YES</bool>
@@ -468,7 +468,6 @@
 										</object>
 									</object>
 									<string key="NSFrame">{{10, 33}, {508, 274}}</string>
-									<reference key="NSSuperview" ref="872417880"/>
 								</object>
 								<string key="NSLabel">General</string>
 								<reference key="NSColor" ref="101190166"/>
@@ -724,7 +723,7 @@
 							<object class="NSTabViewItem" id="231072023">
 								<string key="NSIdentifier">2</string>
 								<object class="NSView" key="NSView" id="586895007">
-									<nil key="NSNextResponder"/>
+									<reference key="NSNextResponder" ref="872417880"/>
 									<int key="NSvFlags">256</int>
 									<object class="NSMutableArray" key="NSSubviews">
 										<bool key="EncodedWithXMLCoder">YES</bool>
@@ -771,7 +770,7 @@
 										<object class="NSButton" id="385569064">
 											<reference key="NSNextResponder" ref="586895007"/>
 											<int key="NSvFlags">264</int>
-											<string key="NSFrame">{{131, 104}, {159, 32}}</string>
+											<string key="NSFrame">{{121, 104}, {178, 32}}</string>
 											<reference key="NSSuperview" ref="586895007"/>
 											<int key="NSTag">500</int>
 											<bool key="NSEnabled">YES</bool>
@@ -851,7 +850,7 @@
 										<object class="NSButton" id="621064911">
 											<reference key="NSNextResponder" ref="586895007"/>
 											<int key="NSvFlags">264</int>
-											<string key="NSFrame">{{290, 104}, {86, 32}}</string>
+											<string key="NSFrame">{{299, 104}, {86, 32}}</string>
 											<reference key="NSSuperview" ref="586895007"/>
 											<int key="NSTag">501</int>
 											<bool key="NSEnabled">YES</bool>
@@ -1067,20 +1066,21 @@
 										</object>
 									</object>
 									<string key="NSFrame">{{10, 33}, {508, 274}}</string>
+									<reference key="NSSuperview" ref="872417880"/>
 								</object>
 								<string key="NSLabel">About</string>
 								<reference key="NSColor" ref="101190166"/>
 								<reference key="NSTabView" ref="872417880"/>
 							</object>
 						</object>
-						<reference key="NSSelectedTabViewItem" ref="129882857"/>
+						<reference key="NSSelectedTabViewItem" ref="231072023"/>
 						<reference key="NSFont" ref="76721948"/>
 						<int key="NSTvFlags">0</int>
 						<bool key="NSAllowTruncatedLabels">YES</bool>
 						<bool key="NSDrawsBackground">YES</bool>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="895868353"/>
+							<reference ref="586895007"/>
 						</object>
 					</object>
 				</object>
@@ -2888,6 +2888,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>229.IBPluginDependency</string>
 					<string>232.IBPluginDependency</string>
 					<string>232.ImportedFromIB2</string>
+					<string>233.IBPluginDependency</string>
 					<string>34.IBPluginDependency</string>
 					<string>34.ImportedFromIB2</string>
 					<string>35.IBPluginDependency</string>
@@ -3045,6 +3046,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

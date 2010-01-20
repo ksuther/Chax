@@ -140,8 +140,13 @@
                     NSMenu *menu = [popUpButton menu];
                     
                     [self _localizeStringsInObject:[menu itemArray] table:table];
-                } else
+                } else {
                     [self _localizeStringsInObject:[button cell] table:table];
+                    
+                    if ([[[button cell] valueForKey:@"buttonType"] intValue] == NSSwitchButton) {
+                        [button sizeToFit];
+                    }
+                }
                 
                 
             } else if ([view isKindOfClass:[NSMatrix class]]) {
