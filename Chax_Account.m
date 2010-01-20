@@ -35,7 +35,7 @@
 		[[NSClassFromString(@"UnifiedPeopleListController") sharedController] reloadContacts];
 	}
 	
-	//[[UnifiedPeopleListController sharedController] rebuildAddBuddyMenu];
+	[[NSClassFromString(@"UnifiedPeopleListController") sharedController] rebuildAddBuddyMenu];
 }
 
 - (void)chax_swizzle_invitedToChat:(id)fp8 isChatRoom:(BOOL)fp12 invitation:(id)fp16
