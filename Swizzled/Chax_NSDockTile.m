@@ -31,7 +31,7 @@
 	if (![Chax boolForKey:@"ShowNamesInDock"]) {
 		[self chax_swizzle_setBadgeLabel:label];
 	} else {
-        [self chax_swizzle_setBadgeLabel:nil];
+        [self chax_swizzle_setBadgeLabel:@""];
         
         //Immediately update the dock icon so it doesn't continue flashing until the animation timer fires again
         [[DockIconController sharedController] updateDockIcon];
