@@ -107,6 +107,24 @@ enum {
     newFrame = [_checkForUpdatesCheckbox frame];
     newFrame.origin.x = ([[_checkForUpdatesCheckbox superview] frame].size.width - newFrame.size.width) / 2;
     [_checkForUpdatesCheckbox setFrame:newFrame];
+    
+    //Move the options buttons so they are aligned along the longest checkbox title
+    CGFloat rightEdge = NSMaxX([_autoAcceptFilesCheckbox frame]);
+    
+    rightEdge = MAX(rightEdge, NSMaxX([_autoAcceptAVCheckbox frame]));
+    rightEdge = MAX(rightEdge, NSMaxX([_autoAcceptScreenSharingCheckbox frame]));
+    
+    newFrame = [_autoAcceptFilesOptionsButton frame];
+    newFrame.origin.x = rightEdge + 10;
+    [_autoAcceptFilesOptionsButton setFrame:newFrame];
+    
+    newFrame = [_autoAcceptAVOptionsButton frame];
+    newFrame.origin.x = rightEdge + 10;
+    [_autoAcceptAVOptionsButton setFrame:newFrame];
+    
+    newFrame = [_autoAcceptScreenSharingOptionsButton frame];
+    newFrame.origin.x = rightEdge + 10;
+    [_autoAcceptScreenSharingOptionsButton setFrame:newFrame];
 }
 
 #pragma mark -

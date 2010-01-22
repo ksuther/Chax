@@ -31,6 +31,13 @@
     IBOutlet NSView *_view;
     IBOutlet URLTextView *_urlTextView;
     
+    IBOutlet NSButton *_autoAcceptFilesCheckbox;
+    IBOutlet NSButton *_autoAcceptAVCheckbox;
+    IBOutlet NSButton *_autoAcceptScreenSharingCheckbox;
+    IBOutlet NSButton *_autoAcceptFilesOptionsButton;
+    IBOutlet NSButton *_autoAcceptAVOptionsButton;
+    IBOutlet NSButton *_autoAcceptScreenSharingOptionsButton;
+    
     IBOutlet NSButton *_checkForUpdatesButton;
     IBOutlet NSButton *_checkForUpdatesCheckbox;
     IBOutlet NSButton *_donateButton;

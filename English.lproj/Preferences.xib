@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="11"/>
+			<integer value="200"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -53,7 +53,7 @@
 							<object class="NSTabViewItem" id="129882857">
 								<string key="NSIdentifier">1</string>
 								<object class="NSView" key="NSView" id="895868353">
-									<reference key="NSNextResponder" ref="872417880"/>
+									<nil key="NSNextResponder"/>
 									<int key="NSvFlags">256</int>
 									<object class="NSMutableArray" key="NSSubviews">
 										<bool key="EncodedWithXMLCoder">YES</bool>
@@ -490,7 +490,6 @@
 										</object>
 									</object>
 									<string key="NSFrame">{{10, 33}, {508, 297}}</string>
-									<reference key="NSSuperview" ref="872417880"/>
 								</object>
 								<string key="NSLabel">General</string>
 								<reference key="NSColor" ref="101190166"/>
@@ -499,14 +498,14 @@
 							<object class="NSTabViewItem" id="523873726">
 								<string key="NSIdentifier">Item 2</string>
 								<object class="NSView" key="NSView" id="306443542">
-									<nil key="NSNextResponder"/>
+									<reference key="NSNextResponder" ref="872417880"/>
 									<int key="NSvFlags">256</int>
 									<object class="NSMutableArray" key="NSSubviews">
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<object class="NSButton" id="692183019">
 											<reference key="NSNextResponder" ref="306443542"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{317, 218}, {82, 16}}</string>
+											<string key="NSFrame">{{277, 218}, {82, 16}}</string>
 											<reference key="NSSuperview" ref="306443542"/>
 											<int key="NSTag">3</int>
 											<bool key="NSEnabled">YES</bool>
@@ -527,7 +526,7 @@
 										<object class="NSButton" id="541425772">
 											<reference key="NSNextResponder" ref="306443542"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{317, 238}, {82, 16}}</string>
+											<string key="NSFrame">{{277, 238}, {82, 16}}</string>
 											<reference key="NSSuperview" ref="306443542"/>
 											<int key="NSTag">2</int>
 											<bool key="NSEnabled">YES</bool>
@@ -592,7 +591,7 @@
 										<object class="NSButton" id="868601112">
 											<reference key="NSNextResponder" ref="306443542"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{317, 258}, {82, 16}}</string>
+											<string key="NSFrame">{{277, 258}, {82, 16}}</string>
 											<reference key="NSSuperview" ref="306443542"/>
 											<int key="NSTag">1</int>
 											<bool key="NSEnabled">YES</bool>
@@ -656,6 +655,7 @@
 										</object>
 									</object>
 									<string key="NSFrame">{{10, 33}, {508, 297}}</string>
+									<reference key="NSSuperview" ref="872417880"/>
 								</object>
 								<string key="NSLabel">Auto-Accept</string>
 								<reference key="NSColor" ref="101190166"/>
@@ -1121,14 +1121,14 @@
 								<reference key="NSTabView" ref="872417880"/>
 							</object>
 						</object>
-						<reference key="NSSelectedTabViewItem" ref="129882857"/>
+						<reference key="NSSelectedTabViewItem" ref="523873726"/>
 						<reference key="NSFont" ref="76721948"/>
 						<int key="NSTvFlags">0</int>
 						<bool key="NSAllowTruncatedLabels">YES</bool>
 						<bool key="NSDrawsBackground">YES</bool>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="895868353"/>
+							<reference ref="306443542"/>
 						</object>
 					</object>
 				</object>
@@ -2145,6 +2145,54 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="destination" ref="290190335"/>
 					</object>
 					<int key="connectionID">243</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_autoAcceptFilesCheckbox</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="53970495"/>
+					</object>
+					<int key="connectionID">244</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_autoAcceptAVCheckbox</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="305349934"/>
+					</object>
+					<int key="connectionID">245</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_autoAcceptScreenSharingCheckbox</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="427755329"/>
+					</object>
+					<int key="connectionID">246</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_autoAcceptFilesOptionsButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="868601112"/>
+					</object>
+					<int key="connectionID">247</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_autoAcceptAVOptionsButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="541425772"/>
+					</object>
+					<int key="connectionID">248</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_autoAcceptScreenSharingOptionsButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="692183019"/>
+					</object>
+					<int key="connectionID">249</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3277,7 +3325,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">243</int>
+			<int key="maxID">249</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3450,7 +3498,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>_autoAcceptAVCheckbox</string>
+							<string>_autoAcceptAVOptionsButton</string>
+							<string>_autoAcceptFilesCheckbox</string>
+							<string>_autoAcceptFilesOptionsButton</string>
 							<string>_autoAcceptPrefs</string>
+							<string>_autoAcceptScreenSharingCheckbox</string>
+							<string>_autoAcceptScreenSharingOptionsButton</string>
 							<string>_checkForUpdatesButton</string>
 							<string>_checkForUpdatesCheckbox</string>
 							<string>_donateButton</string>
@@ -3459,7 +3513,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSButton</string>
+							<string>NSButton</string>
+							<string>NSButton</string>
+							<string>NSButton</string>
 							<string>AutoAcceptPrefsWindowController</string>
+							<string>NSButton</string>
+							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
