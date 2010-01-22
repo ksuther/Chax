@@ -92,7 +92,7 @@ enum {
     NSRect newFrame = [_checkForUpdatesButton frame];
     
     updatesSize.width += 8;
-    donateSize.width = MAX(donateSize.width, 96);
+    donateSize.width = MAX(donateSize.width + 8, 96);
     
     newFrame.size.width = updatesSize.width;
     newFrame.origin.x = ([[_checkForUpdatesButton superview] frame].size.width - newFrame.size.width - donateSize.width) / 2;
@@ -100,6 +100,7 @@ enum {
     [_checkForUpdatesButton setFrame:newFrame];
     
     newFrame = [_donateButton frame];
+    newFrame.size.width = donateSize.width;
     newFrame.origin.x = NSMaxX([_checkForUpdatesButton frame]);
     
     [_donateButton setFrame:newFrame];
