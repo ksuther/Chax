@@ -164,6 +164,19 @@ typedef enum LogViewerToolbarItem {
     [self setNextResponder:_conversationViewController];
     
     [[self window] center];
+    
+    //Size the conversation/images/links buttons to fit exactly according to their localized text
+    [_conversationButton sizeToFit];
+    [_fileButton sizeToFit];
+    [_linkButton sizeToFit];
+    
+    NSRect buttonFrame = [_fileButton frame];
+    buttonFrame.origin.x = NSMaxX([_conversationButton frame]) + 3;
+    [_fileButton setFrame:buttonFrame];
+    
+    buttonFrame = [_linkButton frame];
+    buttonFrame.origin.x = NSMaxX([_fileButton frame]) + 3;
+    [_linkButton setFrame:buttonFrame];
 }
 
 - (void)showWindow:(id)sender
