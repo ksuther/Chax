@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="115"/>
+			<integer value="91"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -717,12 +717,12 @@
 												<object class="NSTextField" id="426067088">
 													<reference key="NSNextResponder" ref="317384909"/>
 													<int key="NSvFlags">301</int>
-													<string key="NSFrame">{{159, 124}, {124, 19}}</string>
+													<string key="NSFrame">{{17, 124}, {408, 19}}</string>
 													<reference key="NSSuperview" ref="317384909"/>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSTextFieldCell" key="NSCell" id="504055929">
 														<int key="NSCellFlags">68288064</int>
-														<int key="NSCellFlags2">1346372608</int>
+														<int key="NSCellFlags2">1212154880</int>
 														<string key="NSContents">No log selected</string>
 														<object class="NSFont" key="NSSupport">
 															<string key="NSName">LucidaGrande</string>
@@ -800,14 +800,12 @@
 																									<string>WebKitDefaultFixedFontSize</string>
 																									<string>WebKitDefaultFontSize</string>
 																									<string>WebKitMinimumFontSize</string>
-																									<string>WebKitStandardFont</string>
 																								</object>
 																								<object class="NSMutableArray" key="dict.values">
 																									<bool key="EncodedWithXMLCoder">YES</bool>
-																									<integer value="11"/>
-																									<integer value="11"/>
+																									<integer value="12"/>
+																									<integer value="12"/>
 																									<integer value="1"/>
-																									<string>Lucida Grande</string>
 																								</object>
 																							</object>
 																						</object>
