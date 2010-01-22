@@ -122,7 +122,22 @@
 
 - (void)systemDidWake
 {
-	[[NSClassFromString(@"UnifiedPeopleListController") sharedController] logServiceInOrOut:nil];
+    //Mostly copied from [UnifiedPeopleListController logServiceInOrOut:] to try to work around some people having wake from sleep problems.
+    //My theory is that some accounts are getting marked as attempting to log in before this gets called and logServiceInOrOut: then logs everything out.
+	NSArray *accounts = [[IMAccountController sharedInstance] allActiveAccounts];
+    
+    for (Account *account in accounts) {
+        if ([account autoLogin]) {
+            [(IMAccountController *)[IMAccountController sharedInstance] autoLogin];
+            [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] setAccountLoginStatus:4];
+            
+            [[NSClassFromString(@"UnifiedPeopleListController") sharedController] uncollapseTableAnimated:YES];
+            
+            return;
+        }
+    }
+    
+    [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] setAccountLoginStatus:0];
 }
 
 - (void)systemWillSleep
