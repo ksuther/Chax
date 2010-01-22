@@ -78,6 +78,37 @@ enum {
     [[_urlTextView textStorage] addAttribute:NSCursorAttributeName value:[NSCursor pointingHandCursor] range:attributeRange];
 }
 
+- (void)moduleWasInstalled
+{
+    [self performLocalizationUICorrections];
+    
+    [super moduleWasInstalled];
+}
+
+- (void)performLocalizationUICorrections
+{
+    NSSize updatesSize = [[_checkForUpdatesButton cell] cellSize];
+    NSSize donateSize = [[_donateButton cell] cellSize];
+    NSRect newFrame = [_checkForUpdatesButton frame];
+    
+    updatesSize.width += 8;
+    donateSize.width = MAX(donateSize.width, 96);
+    
+    newFrame.size.width = updatesSize.width;
+    newFrame.origin.x = ([[_checkForUpdatesButton superview] frame].size.width - newFrame.size.width - donateSize.width) / 2;
+    
+    [_checkForUpdatesButton setFrame:newFrame];
+    
+    newFrame = [_donateButton frame];
+    newFrame.origin.x = NSMaxX([_checkForUpdatesButton frame]);
+    
+    [_donateButton setFrame:newFrame];
+    
+    newFrame = [_checkForUpdatesCheckbox frame];
+    newFrame.origin.x = ([[_checkForUpdatesCheckbox superview] frame].size.width - newFrame.size.width) / 2;
+    [_checkForUpdatesCheckbox setFrame:newFrame];
+}
+
 #pragma mark -
 
 - (NSImage *)imageForPreferenceNamed:(NSString *)name
@@ -101,6 +132,7 @@ enum {
 }
 
 #pragma mark -
+#pragma mark IBActions
 
 - (IBAction)aboutAction:(id)sender
 {

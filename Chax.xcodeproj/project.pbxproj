@@ -149,6 +149,9 @@
 		37BE0E161107800F004647C4 /* Chax_Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE0E151107800F004647C4 /* Chax_Notifier.m */; };
 		37CC446C10DEDDE300998593 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37CC446A10DEDDE300998593 /* Localizable.strings */; };
 		37CC44F210E140E200998593 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3710F5B210425E6900EAD72D /* Sparkle.framework */; };
+		37D6315811099ED700E22722 /* Chax_SmileyGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D6315711099ED700E22722 /* Chax_SmileyGrid.m */; };
+		37D6317F110A150A00E22722 /* MainMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37D6317D110A150A00E22722 /* MainMenu.strings */; };
+		37D63181110A152400E22722 /* DMLocalizedNibBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37267AED10FFD9C80058110F /* DMLocalizedNibBundle.m */; };
 		37EA7F5010FE94C400B20782 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		37EA7F5F10FE950000B20782 /* ChaxAgentInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA7F5E10FE950000B20782 /* ChaxAgentInjector.m */; };
 		37EA7F6910FE95C400B20782 /* ChaxAgentInjector in Copy Executables */ = {isa = PBXBuildFile; fileRef = 37EA7F4410FE94B200B20782 /* ChaxAgentInjector */; };
@@ -424,6 +427,16 @@
 		37D5C5CA103D151600EE8A49 /* Chax_Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Chat.m; sourceTree = "<group>"; };
 		37D5C5D9103D157F00EE8A49 /* Chax_ChatDOMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ChatDOMView.h; sourceTree = "<group>"; };
 		37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatDOMView.m; sourceTree = "<group>"; };
+		37D6315611099ED700E22722 /* Chax_SmileyGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_SmileyGrid.h; sourceTree = "<group>"; };
+		37D6315711099ED700E22722 /* Chax_SmileyGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_SmileyGrid.m; sourceTree = "<group>"; };
+		37D6317E110A150A00E22722 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Installer/Russian.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		37D6318B110A166400E22722 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ActivityWindow.strings; sourceTree = "<group>"; };
+		37D6318C110A166400E22722 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CameraSnapshot.strings; sourceTree = "<group>"; };
+		37D6318D110A166400E22722 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Donate.strings; sourceTree = "<group>"; };
+		37D6318E110A166400E22722 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37D6318F110A166400E22722 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LogViewer.strings; sourceTree = "<group>"; };
+		37D63190110A166400E22722 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Preferences.strings; sourceTree = "<group>"; };
+		37D63191110A168500E22722 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Installer/de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37EA7F4410FE94B200B20782 /* ChaxAgentInjector */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ChaxAgentInjector; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EA7F5E10FE950000B20782 /* ChaxAgentInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxAgentInjector.m; sourceTree = "<group>"; };
 		37EA7F7510FE961C00B20782 /* mach_inject_bundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mach_inject_bundle.framework; path = Frameworks/mach_inject_bundle.framework; sourceTree = "<group>"; };
@@ -620,6 +633,8 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				377644D310F66DE900ECA38A /* ChaxHelperAppUtils.h */,
 				377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */,
+				37267AEC10FFD9C80058110F /* DMLocalizedNibBundle.h */,
+				37267AED10FFD9C80058110F /* DMLocalizedNibBundle.m */,
 				37267AD410FFD7230058110F /* xibLocalizationPreprocessor.m */,
 			);
 			name = "Other Sources";
@@ -701,6 +716,7 @@
 				377351F010DC948100CF1C88 /* InstallChax.icns */,
 				3773526C10DC9BAE00CF1C88 /* SystemEvents.h */,
 				37CC446A10DEDDE300998593 /* Localizable.strings */,
+				37D6317D110A150A00E22722 /* MainMenu.strings */,
 			);
 			name = "Chax Installer";
 			sourceTree = "<group>";
@@ -731,8 +747,6 @@
 				371BA4BB101134CC00CF88C0 /* BundleUtilities.m */,
 				37BCAA571041A2E40088A681 /* NSArrayAdditions.h */,
 				37BCAA581041A2E40088A681 /* NSArrayAdditions.m */,
-				37267AEC10FFD9C80058110F /* DMLocalizedNibBundle.h */,
-				37267AED10FFD9C80058110F /* DMLocalizedNibBundle.m */,
 				37AFBC4E10311444001AA056 /* RegexKit */,
 			);
 			name = "Other Sources";
@@ -789,6 +803,8 @@
 				3701897F10444F9600C7C798 /* Chax_SecureWindow.m */,
 				37529A2010F2B38800021833 /* Chax_ServiceErrorDialog.h */,
 				37529A2110F2B38800021833 /* Chax_ServiceErrorDialog.m */,
+				37D6315611099ED700E22722 /* Chax_SmileyGrid.h */,
+				37D6315711099ED700E22722 /* Chax_SmileyGrid.m */,
 			);
 			name = "Swizzled Classes";
 			sourceTree = "<group>";
@@ -1056,6 +1072,7 @@
 				French,
 				German,
 				Russian,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Chax */;
 			projectDirPath = "";
@@ -1131,6 +1148,7 @@
 				377351F610DC959F00CF1C88 /* MainMenu.xib in Resources */,
 				377351F110DC948100CF1C88 /* InstallChax.icns in Resources */,
 				37CC446C10DEDDE300998593 /* Localizable.strings in Resources */,
+				37D6317F110A150A00E22722 /* MainMenu.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1160,7 +1178,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "if [ ! -d ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj ]; then\n    mkdir -p ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj\nfi\n\nforeach xibFile (${SOURCE_ROOT}/${DEVELOPMENT_LANGUAGE}.lproj/*.xib)\n  xibName=`basename ${xibFile} .xib`\n  stringsFilePath=${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/${xibName}.strings\n\n  #MainMenu.xib isn't localized\n  if [[ -e ${xibFile} && ${xibName} != \"MainMenu\" ]] {\n    ibtool --generate-stringsfile ${stringsFilePath}~ ${xibFile}\n    ${BUILT_PRODUCTS_DIR}/xibLocalizationPostprocessor ${stringsFilePath}~ ${stringsFilePath}\n    rm ${stringsFilePath}~\n  }\nend";
+			shellScript = "if [ ! -d ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj ]; then\n    mkdir -p ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj\nfi\n\nif [ ! -d ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer ]; then\n    mkdir -p ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer\nfi\n\nforeach xibFile (${SOURCE_ROOT}/${DEVELOPMENT_LANGUAGE}.lproj/*.xib)\n  xibName=`basename ${xibFile} .xib`\n  stringsFilePath=${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/${xibName}.strings\n\n  if [[ -e ${xibFile} ]] {\n    ibtool --generate-stringsfile ${stringsFilePath}~ ${xibFile}\n    ${BUILT_PRODUCTS_DIR}/xibLocalizationPostprocessor ${stringsFilePath}~ ${stringsFilePath}\n    rm ${stringsFilePath}~\n  }\nend\n\nmv ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/MainMenu.strings ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer/MainMenu.strings";
 			showEnvVarsInLog = 0;
 		};
 		37267AE810FFD8FB0058110F /* Copy Localizable Strings */ = {
@@ -1175,7 +1193,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ ! -d ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj ]; then\n    mkdir -p ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj\nfi\n\nif [ ! -d ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer ]; then\n    mkdir -p ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer\nfi\n\ncp ${SOURCE_ROOT}/${DEVELOPMENT_LANGUAGE}.lproj/Localizable.strings ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj\ncp ${SOURCE_ROOT}/Installer/${DEVELOPMENT_LANGUAGE}.lproj/Localizable.strings ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer";
+			shellScript = "cp ${SOURCE_ROOT}/${DEVELOPMENT_LANGUAGE}.lproj/Localizable.strings ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj\ncp ${SOURCE_ROOT}/Installer/${DEVELOPMENT_LANGUAGE}.lproj/Localizable.strings ${TARGET_BUILD_DIR}/${LOCALIZABLE_STRINGS_PATH}/${DEVELOPMENT_LANGUAGE}.lproj/Installer";
 			showEnvVarsInLog = 0;
 		};
 		375090A91056F7E200F472F1 /* ShellScript */ = {
@@ -1335,6 +1353,7 @@
 				37EA81B010FEDEDE00B20782 /* Chax_FileTransferCenter.m in Sources */,
 				37267B6710FFDE650058110F /* DMLocalizedNibBundle.m in Sources */,
 				37BE0E161107800F004647C4 /* Chax_Notifier.m in Sources */,
+				37D6315811099ED700E22722 /* Chax_SmileyGrid.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1369,6 +1388,7 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				377351FE10DC960600CF1C88 /* InstallController.m in Sources */,
 				377644D610F66DE900ECA38A /* ChaxHelperAppUtils.m in Sources */,
+				37D63181110A152400E22722 /* DMLocalizedNibBundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1449,6 +1469,7 @@
 			children = (
 				3786DAA30FF7C513000CBC6A /* English */,
 				37BE0DEC11077A52004647C4 /* Russian */,
+				37D6318E110A166400E22722 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1465,6 +1486,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				37BE0DE711077A52004647C4 /* Russian */,
+				37D6318B110A166400E22722 /* de */,
 			);
 			name = ActivityWindow.strings;
 			sourceTree = "<group>";
@@ -1473,6 +1495,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				37BE0DE911077A52004647C4 /* Russian */,
+				37D6318C110A166400E22722 /* de */,
 			);
 			name = CameraSnapshot.strings;
 			sourceTree = "<group>";
@@ -1481,6 +1504,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				37BE0DEB11077A52004647C4 /* Russian */,
+				37D6318D110A166400E22722 /* de */,
 			);
 			name = Donate.strings;
 			sourceTree = "<group>";
@@ -1489,6 +1513,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				37BE0DEE11077A52004647C4 /* Russian */,
+				37D6318F110A166400E22722 /* de */,
 			);
 			name = LogViewer.strings;
 			sourceTree = "<group>";
@@ -1497,6 +1522,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				37BE0DF011077A52004647C4 /* Russian */,
+				37D63190110A166400E22722 /* de */,
 			);
 			name = Preferences.strings;
 			sourceTree = "<group>";
@@ -1506,6 +1532,7 @@
 			children = (
 				37CC446B10DEDDE300998593 /* English */,
 				37BE0DE511077A3A004647C4 /* Russian */,
+				37D63191110A168500E22722 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1524,6 +1551,14 @@
 				37D5BBB7103B679B00EE8A49 /* English */,
 			);
 			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
+		37D6317D110A150A00E22722 /* MainMenu.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37D6317E110A150A00E22722 /* Russian */,
+			);
+			name = MainMenu.strings;
 			sourceTree = "<group>";
 		};
 		37F29A9D1043ABB1005460A5 /* CameraSnapshot.xib */ = {

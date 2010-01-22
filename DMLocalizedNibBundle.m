@@ -14,6 +14,7 @@
 @end
 
 @interface NSBundle ()
++ (NSBundle *)_localizedStringsBundle;
 + (void)_localizeStringsInObject:(id)object table:(NSString *)table;
 + (NSString *)_localizedStringForString:(NSString *)string table:(NSString *)table;
 // localize particular attributes in objects
@@ -47,8 +48,7 @@
 + (BOOL)deliciousLocalizingLoadNibFile:(NSString *)fileName externalNameTable:(NSDictionary *)context withZone:(NSZone *)zone;
 {
     NSString *localizedStringsTableName = [[fileName lastPathComponent] stringByDeletingPathExtension];
-    //NSString *localizedStringsTablePath = [[NSBundle mainBundle] pathForResource:localizedStringsTableName ofType:@"strings"];
-    NSString *localizedStringsTablePath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForResource:localizedStringsTableName ofType:@"strings"];
+    NSString *localizedStringsTablePath = [[self _localizedStringsBundle] pathForResource:localizedStringsTableName ofType:@"strings"];
     
     if (localizedStringsTablePath && ![[[localizedStringsTablePath stringByDeletingLastPathComponent] lastPathComponent] isEqualToString:@"English.lproj"]) {
         
@@ -73,6 +73,17 @@
 
 
 #pragma mark Private API
+
++ (NSBundle *)_localizedStringsBundle
+{
+    NSBundle *bundle = [NSBundle mainBundle];
+    
+    if ([[[bundle bundleIdentifier] lowercaseString] isEqualToString:@"com.apple.ichat"]) {
+        bundle = [NSBundle bundleWithIdentifier:@"com.ksuther.chax.lib"];
+    }
+    
+    return bundle;
+}
 
 + (void)_localizeStringsInObject:(id)object table:(NSString *)table;
 {
@@ -217,8 +228,7 @@
         return nil;
     
     static NSString *defaultValue = @"I AM THE DEFAULT VALUE";
-    //NSString *localizedString = [[NSBundle mainBundle] localizedStringForKey:string value:defaultValue table:table];
-    NSString *localizedString = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] localizedStringForKey:string value:defaultValue table:table];
+    NSString *localizedString = [[self _localizedStringsBundle] localizedStringForKey:string value:defaultValue table:table];
     if (localizedString != defaultValue) {
         return localizedString;
     } else { 

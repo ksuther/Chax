@@ -31,6 +31,10 @@
     IBOutlet NSView *_view;
     IBOutlet URLTextView *_urlTextView;
     
+    IBOutlet NSButton *_checkForUpdatesButton;
+    IBOutlet NSButton *_checkForUpdatesCheckbox;
+    IBOutlet NSButton *_donateButton;
+    
     ChaxDefaults *_defaults;
     
     NSUInteger _editedFont;
@@ -41,6 +45,8 @@
 @property(nonatomic, retain) NSFont *contactsFont;
 @property(nonatomic, retain) NSFont *statusMessagesFont;
 @property(nonatomic, retain) NSFont *currentContactFont;
+
+- (void)performLocalizationUICorrections;
 
 - (IBAction)aboutAction:(id)sender;
 - (IBAction)changeContactListFont:(id)sender;
