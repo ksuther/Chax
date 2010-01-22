@@ -319,6 +319,7 @@
 		3753EB7E10EEB4DA006B0F24 /* logviewer.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = logviewer.css; sourceTree = "<group>"; };
 		3753EC1110EED866006B0F24 /* LogViewerPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerPreviewItem.h; sourceTree = "<group>"; };
 		3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewerPreviewItem.m; sourceTree = "<group>"; };
+		37654A82110A271E0054FF9F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Installer/de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		377351F010DC948100CF1C88 /* InstallChax.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = InstallChax.icns; path = Installer/InstallChax.icns; sourceTree = "<group>"; };
 		377351F310DC94D700CF1C88 /* ChaxInstaller-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ChaxInstaller-Info.plist"; sourceTree = "<group>"; };
 		377351FC10DC960600CF1C88 /* InstallController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstallController.h; path = Installer/InstallController.h; sourceTree = "<group>"; };
@@ -1557,6 +1558,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				37D6317E110A150A00E22722 /* Russian */,
+				37654A82110A271E0054FF9F /* de */,
 			);
 			name = MainMenu.strings;
 			sourceTree = "<group>";
