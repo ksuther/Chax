@@ -407,6 +407,14 @@
 		37BE0DF011077A52004647C4 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Russian; path = Russian.lproj/Preferences.strings; sourceTree = "<group>"; };
 		37BE0E141107800F004647C4 /* Chax_Notifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Notifier.h; sourceTree = "<group>"; };
 		37BE0E151107800F004647C4 /* Chax_Notifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Notifier.m; sourceTree = "<group>"; };
+		37C1FB84110B583A009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Polish.lproj/ActivityWindow.strings; sourceTree = "<group>"; };
+		37C1FB85110B583A009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Polish.lproj/CameraSnapshot.strings; sourceTree = "<group>"; };
+		37C1FB86110B583A009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Polish.lproj/Donate.strings; sourceTree = "<group>"; };
+		37C1FB87110B583A009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Polish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37C1FB88110B583A009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Polish.lproj/LogViewer.strings; sourceTree = "<group>"; };
+		37C1FB89110B583A009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Polish.lproj/Preferences.strings; sourceTree = "<group>"; };
+		37C1FB8E110B5881009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Installer/Polish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37C1FB8F110B5881009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Installer/Polish.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		37CC446B10DEDDE300998593 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = English; path = Installer/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37D0E26A104612C1009C42DA /* DonateWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DonateWindowController.h; path = "../Chax 10.5/DonateWindowController.h"; sourceTree = "<group>"; };
 		37D0E26B104612C1009C42DA /* DonateWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DonateWindowController.m; path = "../Chax 10.5/DonateWindowController.m"; sourceTree = "<group>"; };
@@ -1081,6 +1089,7 @@
 				German,
 				Russian,
 				de,
+				Polish,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Chax */;
 			projectDirPath = "";
@@ -1479,6 +1488,7 @@
 				37BE0DEC11077A52004647C4 /* Russian */,
 				37D6318E110A166400E22722 /* de */,
 				37E71870110A646700A48E72 /* French */,
+				37C1FB87110B583A009529E9 /* Polish */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1497,6 +1507,7 @@
 				37BE0DE711077A52004647C4 /* Russian */,
 				37D6318B110A166400E22722 /* de */,
 				37E7186D110A646700A48E72 /* French */,
+				37C1FB84110B583A009529E9 /* Polish */,
 			);
 			name = ActivityWindow.strings;
 			sourceTree = "<group>";
@@ -1507,6 +1518,7 @@
 				37BE0DE911077A52004647C4 /* Russian */,
 				37D6318C110A166400E22722 /* de */,
 				37E7186E110A646700A48E72 /* French */,
+				37C1FB85110B583A009529E9 /* Polish */,
 			);
 			name = CameraSnapshot.strings;
 			sourceTree = "<group>";
@@ -1517,6 +1529,7 @@
 				37BE0DEB11077A52004647C4 /* Russian */,
 				37D6318D110A166400E22722 /* de */,
 				37E7186F110A646700A48E72 /* French */,
+				37C1FB86110B583A009529E9 /* Polish */,
 			);
 			name = Donate.strings;
 			sourceTree = "<group>";
@@ -1527,6 +1540,7 @@
 				37BE0DEE11077A52004647C4 /* Russian */,
 				37D6318F110A166400E22722 /* de */,
 				37E71871110A646700A48E72 /* French */,
+				37C1FB88110B583A009529E9 /* Polish */,
 			);
 			name = LogViewer.strings;
 			sourceTree = "<group>";
@@ -1537,6 +1551,7 @@
 				37BE0DF011077A52004647C4 /* Russian */,
 				37D63190110A166400E22722 /* de */,
 				37E71872110A646700A48E72 /* French */,
+				37C1FB89110B583A009529E9 /* Polish */,
 			);
 			name = Preferences.strings;
 			sourceTree = "<group>";
@@ -1548,6 +1563,7 @@
 				37BE0DE511077A3A004647C4 /* Russian */,
 				37D63191110A168500E22722 /* de */,
 				37E71873110A649B00A48E72 /* French */,
+				37C1FB8E110B5881009529E9 /* Polish */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1573,6 +1589,7 @@
 			children = (
 				37D6317E110A150A00E22722 /* Russian */,
 				37654A82110A271E0054FF9F /* de */,
+				37C1FB8F110B5881009529E9 /* Polish */,
 			);
 			name = MainMenu.strings;
 			sourceTree = "<group>";
