@@ -640,9 +640,13 @@ typedef enum LogViewerToolbarItem {
 			if (name != nil) {
                 if (![peopleSet containsObject:name]) {
                     [peopleSet addObject:name];
-                    
-                    [logsToScan setObject:name forKey:[logPath stringByAppendingPathComponent:nextFile]];
                 }
+                
+                //Always update the logsToScan dictionary with the latest file
+                //Assume that files are being enumerated in alphabetical order, which would imply chronological order
+                //I can't find any documentation saying NSDirectoryEnumerator actually does this, but I'll assume it for now
+                //since it isn't critical
+                [logsToScan setObject:[logPath stringByAppendingPathComponent:nextFile] forKey:name];
                 
                 NSMutableSet *personLogs = [_logs objectForKey:name];
                 
@@ -669,15 +673,17 @@ typedef enum LogViewerToolbarItem {
 
 - (void)_updateAssociationsWithLogs:(NSDictionary *)logs people:(NSMutableSet *)peopleSet
 {
+    //logs dictionary's key is the person's name, value is the path to the log being used to pull their 'actual' full name
+    //the idea is that the latest log from that person will be the most accurate version of their name
     NSMutableDictionary *peopleAssociations = [NSMutableDictionary dictionary];
     
     //Read the current name from the log
-    for (NSString *nextFile in logs) {
-        NSString *name = [logs objectForKey:nextFile];
-        NSString *fullName = [self _fullNameForFile:nextFile];
+    for (NSString *nextName in logs) {
+        NSString *file = [logs objectForKey:nextName];
+        NSString *fullName = [self _fullNameForFile:file];
         
-        if (fullName != nil && ![name isEqualToString:fullName]) {
-            [peopleAssociations setObject:fullName forKey:name];
+        if (fullName != nil && ![nextName isEqualToString:fullName]) {
+            [peopleAssociations setObject:fullName forKey:nextName];
         }
     }
     
@@ -931,7 +937,20 @@ typedef enum LogViewerToolbarItem {
             [logsForPerson removeObject:log];
         }
         
-        [[NSWorkspace sharedWorkspace] recycleURLs:[NSArray arrayWithObject:logURL] completionHandler:nil];
+        [[NSWorkspace sharedWorkspace] recycleURLs:[NSArray arrayWithObject:logURL] completionHandler:^(NSDictionary *newURLs, NSError *error) {
+            if (error == nil) {
+                //Is the folder containing logURL now empty? If so, remove it
+                NSURL *containingDirectoryURL = [logURL URLByDeletingLastPathComponent];
+                NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:containingDirectoryURL includingPropertiesForKeys:[NSArray array] options:NSDirectoryEnumerationSkipsHiddenFiles error:&error];
+                
+                if (!error && [contents count] == 0) {
+                    //The containing is folder, recycle it also
+                    [[NSWorkspace sharedWorkspace] recycleURLs:[NSArray arrayWithObject:containingDirectoryURL] completionHandler:nil];
+                }
+            } else {
+                NSLog(@"Error recycling log: %@ %@ %@", logURL, [error localizedDescription], [error localizedFailureReason]);
+            }
+        }];
     }];
     
     [self setVisibleLogs:newVisibleLogs];
