@@ -39,6 +39,10 @@ extern NSString *ChaxBundleIdentifier;
 extern NSString *ChaxLibBundleIdentifier;
 extern NSString *iChatAgentBundleIdentifier;
 
+BOOL ChaxDebugLoggingEnabled();
+void SetChaxDebugLoggingEnabled(BOOL enable);
+void ChaxDebugLog(NSString *format, ...);
+
 static inline NSString * ChaxLocalizedString(NSString *key) {
 	return [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] localizedStringForKey:(key) value:(key) table:nil];
 }

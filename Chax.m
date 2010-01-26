@@ -48,6 +48,25 @@ static NSMutableDictionary *_imageDictionary = nil;
 static NSString *_bundlePath = nil;
 static id _updater = nil;
 
+static BOOL _ChaxDebugLoggingEnabled = NO;
+
+BOOL ChaxDebugLoggingEnabled() {
+	return _ChaxDebugLoggingEnabled;
+}
+
+void SetChaxDebugLoggingEnabled(BOOL enable) {
+	_ChaxDebugLoggingEnabled = enable;
+}
+
+void ChaxDebugLog(NSString *format, ...) {
+    if (_ChaxDebugLoggingEnabled) {
+        va_list ap;
+        va_start(ap, format);
+        NSLogv(format, ap);
+        va_end (ap);
+    }
+}
+
 @implementation Chax
 
 + (void)load
@@ -99,6 +118,11 @@ static id _updater = nil;
         PerformAutomaticSwizzle();
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadContactList" object:nil];
+        
+        if ([NSEvent modifierFlags] & NSCommandKeyMask) {
+            SetChaxDebugLoggingEnabled(YES);
+            ChaxDebugLog(@"Chax: Debug logging enabled.");
+        }
     }
 }
 

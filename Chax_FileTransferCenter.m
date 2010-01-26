@@ -41,8 +41,13 @@
     
     IMFileTransfer *transfer = [self transferForGUID:fp8];
     
+    ChaxDebugLog(@"Incoming file transfer: %@ accept on? %d incoming? %d standalone? %d", transfer, [Chax boolForKey:@"AutoAcceptFiles"], [transfer isIncoming], [transfer wasRegisteredAsStandalone]);
+    
     if ([Chax boolForKey:@"AutoAcceptFiles"] && [transfer isIncoming] && [transfer wasRegisteredAsStandalone]) {
         NSArray *autoAcceptContacts = [[Chax objectForKey:@"AutoAccept.Files"] objectForKey:[transfer accountID]];
+        
+        ChaxDebugLog(@"AutoAcceptSelect.Files: %d Accept anyone? %d Contains other person? %d", [Chax integerForKey:@"AutoAcceptSelect.Files"], [autoAcceptContacts containsObject:@"Chax_AcceptAnyone"], [autoAcceptContacts containsObject:[[transfer otherPerson] lowercaseString]]);
+        ChaxDebugLog(@"AutoAccept.Files for account %@: %@", [transfer accountID], autoAcceptContacts);
         
         if ([Chax integerForKey:@"AutoAcceptSelect.Files"] == 0 || [autoAcceptContacts containsObject:@"Chax_AcceptAnyone"] || [autoAcceptContacts containsObject:[[transfer otherPerson] lowercaseString]]) {
             [self performSelector:@selector(chax_autoAcceptTransfer:) withObject:transfer afterDelay:0.0];
@@ -52,6 +57,8 @@
 
 - (void)chax_autoAcceptTransfer:(IMFileTransfer *)transfer
 {
+    ChaxDebugLog(@"Auto-accepting file transfer...");
+    
     [NSClassFromString(@"FileTransferManager") fileTransfer:transfer saveTo:nil attachedToWindow:nil];
 }
 

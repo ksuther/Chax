@@ -36,4 +36,7 @@
 
 }
 
+- (void)chax_allowSelect;
+- (void)chax_sendCameraSnapshot:(id)sender;
+
 @end

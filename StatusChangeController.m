@@ -24,6 +24,7 @@
 #import "StatusChangeController.h"
 #import "iChat5.h"
 #import "ActivityWindowController.h"
+#import "Chax_ChatWindowController.h"
 #import <InstantMessage/IMService.h>
 
 NSString *ChaxGrowlNewMessage = @"New message received";
@@ -80,15 +81,11 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
 {
     NSString *statusMessage = [presentity scriptStatusMessage];
     
-    if ([Chax boolForKey:@"LogStatusChanges"]) {
-        NSLog(@"presentityStatusChanged: %@ (statusMessage: %@) on contact list: %d timeSinceStatusChanged: %f accountLoginStatus: %d justLoggedIn: %d status: %d previousStatus: %d person: %@ me: %@", presentity, statusMessage, [[[presentity account] arrayOfAllIMHandles] containsObject:presentity], [presentity timeSinceStatusChanged], [[presentity account] accountLoginStatus], [[presentity account] justLoggedIn], [presentity status], [presentity previousStatus], [presentity person], [[IMMe me] person]);
-    }
+    ChaxDebugLog(@"presentityStatusChanged: %@ (statusMessage: %@) on contact list: %d timeSinceStatusChanged: %f accountLoginStatus: %d justLoggedIn: %d status: %d previousStatus: %d person: %@ me: %@", presentity, statusMessage, [[[presentity account] arrayOfAllIMHandles] containsObject:presentity], [presentity timeSinceStatusChanged], [[presentity account] accountLoginStatus], [[presentity account] justLoggedIn], [presentity status], [presentity previousStatus], [presentity person], [[IMMe me] person]);
     
 	if ([[[presentity account] arrayOfAllIMHandles] containsObject:presentity] && [presentity timeSinceStatusChanged] < 1 && [[presentity account] accountLoginStatus] == 4 && ![[presentity account] justLoggedIn] &&
         [presentity status] != [presentity previousStatus] && [presentity status] != 5 && [presentity person] != [[IMMe me] person]) {
-        if ([Chax boolForKey:@"LogStatusChanges"]) {
-            NSLog(@"Person status changed: %@", presentity);
-        }
+        ChaxDebugLog(@"Person status changed: %@", presentity);
         
 		//Notify the activity window of the change
 		[[ActivityWindowController sharedController] addPresentityToActivity:presentity];
@@ -178,9 +175,7 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
             imageData = [[[presentity genericPicture] image] TIFFRepresentation];
         }
         
-        if ([Chax boolForKey:@"LogStatusChanges"]) {
-            NSLog(@"Posting Growl notification: %@ %@ %@", title, description, notification);
-        }
+        ChaxDebugLog(@"Posting Growl notification: %@ %@ %@", title, description, notification);
         
         [self postGrowlNotificationWithTitle:title description:description notificationName:notification iconData:imageData clickContext:[NSDictionary dictionaryWithObject:[presentity guid] forKey:@"IMHandle"]];
 	}
@@ -220,39 +215,50 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
 - (void)growlNotificationWasClicked:(NSDictionary *)clickContext
 {
 	if (clickContext) {
+        Chat *chat = nil;
+        
 		[NSApp activateIgnoringOtherApps:YES];
 		
 		if ([clickContext objectForKey:@"Chat"]) {
-			[NSClassFromString(@"ChatWindowController") displayChat:[NSClassFromString(@"ChatWindowController") visibleChatWithID:[clickContext objectForKey:@"Chat"]]];
-		} else {
+            chat = [NSClassFromString(@"ChatWindowController") visibleChatWithID:[clickContext objectForKey:@"Chat"]];
+        }
+        
+		if (chat == nil) {
 			NSArray *accounts = [[IMAccountController sharedInstance] allConnectedAccounts];
 			
 			for (IMAccount *account in accounts) {
 				IMHandle *handle = [account imHandleForGuid:[clickContext objectForKey:@"IMHandle"]];
 				
 				if (handle != nil) {
-					Chat *chat = [NSClassFromString(@"ChatWindowController") existingChatWithIMHandle:handle];
-					
-					if (chat != nil) {
-						[NSClassFromString(@"ChatWindowController") displayChat:chat];
-					} else {
+					chat = [NSClassFromString(@"ChatWindowController") existingChatWithIMHandle:handle];
+                    
+					if (!chat) {
 						//There still may be a chat open with the given presentity, but existingChatWithPresentity isn't giving it up
 						NSArray *chats = [NSClassFromString(@"Chat") chatList];
 						
 						for (Chat *nextChat in chats) {
 							IMHandle *otherHandle = [nextChat otherIMHandle];
 							if ([[otherHandle ID] isEqualToString:[otherHandle ID]] && [otherHandle service] == [otherHandle service]) {
-								[NSClassFromString(@"ChatWindowController") displayChat:nextChat];
-								return;
+                                chat = nextChat;
+                                break;
 							}
 						}
 						
 						[NSClassFromString(@"ChatWindowController") displayChatForIMHandle:handle style:1];
+                        ChaxDebugLog(@"Attempting to use displayChatForIMHandle: to display chat for %@", handle);
 					}
+                    
 					break;
 				}
 			}
 		}
+        
+        if (chat) {
+            [[chat chatWindowController] chax_allowSelect];
+            [NSClassFromString(@"ChatWindowController") displayChat:chat];
+        } else {
+            ChaxDebugLog(@"No chat found for Growl context: %@", clickContext);
+        }
 	}
 }
 
