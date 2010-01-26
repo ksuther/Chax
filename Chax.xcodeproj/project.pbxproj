@@ -152,6 +152,7 @@
 		37D6315811099ED700E22722 /* Chax_SmileyGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D6315711099ED700E22722 /* Chax_SmileyGrid.m */; };
 		37D6317F110A150A00E22722 /* MainMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37D6317D110A150A00E22722 /* MainMenu.strings */; };
 		37D63181110A152400E22722 /* DMLocalizedNibBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37267AED10FFD9C80058110F /* DMLocalizedNibBundle.m */; };
+		37E718F5110A951400A48E72 /* Chax_SmileyPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E718F4110A951400A48E72 /* Chax_SmileyPicker.m */; };
 		37EA7F5010FE94C400B20782 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		37EA7F5F10FE950000B20782 /* ChaxAgentInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA7F5E10FE950000B20782 /* ChaxAgentInjector.m */; };
 		37EA7F6910FE95C400B20782 /* ChaxAgentInjector in Copy Executables */ = {isa = PBXBuildFile; fileRef = 37EA7F4410FE94B200B20782 /* ChaxAgentInjector */; };
@@ -454,6 +455,8 @@
 		37E71871110A646700A48E72 /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = French; path = French.lproj/LogViewer.strings; sourceTree = "<group>"; };
 		37E71872110A646700A48E72 /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = French; path = French.lproj/Preferences.strings; sourceTree = "<group>"; };
 		37E71873110A649B00A48E72 /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = French; path = Installer/French.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37E718F3110A951400A48E72 /* Chax_SmileyPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_SmileyPicker.h; sourceTree = "<group>"; };
+		37E718F4110A951400A48E72 /* Chax_SmileyPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_SmileyPicker.m; sourceTree = "<group>"; };
 		37EA7F4410FE94B200B20782 /* ChaxAgentInjector */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ChaxAgentInjector; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EA7F5E10FE950000B20782 /* ChaxAgentInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxAgentInjector.m; sourceTree = "<group>"; };
 		37EA7F7510FE961C00B20782 /* mach_inject_bundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mach_inject_bundle.framework; path = Frameworks/mach_inject_bundle.framework; sourceTree = "<group>"; };
@@ -822,6 +825,8 @@
 				37529A2110F2B38800021833 /* Chax_ServiceErrorDialog.m */,
 				37D6315611099ED700E22722 /* Chax_SmileyGrid.h */,
 				37D6315711099ED700E22722 /* Chax_SmileyGrid.m */,
+				37E718F3110A951400A48E72 /* Chax_SmileyPicker.h */,
+				37E718F4110A951400A48E72 /* Chax_SmileyPicker.m */,
 			);
 			name = "Swizzled Classes";
 			sourceTree = "<group>";
@@ -1372,6 +1377,7 @@
 				37267B6710FFDE650058110F /* DMLocalizedNibBundle.m in Sources */,
 				37BE0E161107800F004647C4 /* Chax_Notifier.m in Sources */,
 				37D6315811099ED700E22722 /* Chax_SmileyGrid.m in Sources */,
+				37E718F5110A951400A48E72 /* Chax_SmileyPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
