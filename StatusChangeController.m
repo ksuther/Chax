@@ -80,11 +80,12 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
 - (void)presentityStatusChanged:(Presentity *)presentity
 {
     NSString *statusMessage = [presentity scriptStatusMessage];
+    IMHandle *myHandle = [IMMe imHandleForService:[presentity service]];
     
-    ChaxDebugLog(@"presentityStatusChanged: %@ (statusMessage: %@) on contact list: %d timeSinceStatusChanged: %f accountLoginStatus: %d justLoggedIn: %d status: %d previousStatus: %d person: %@ me: %@", presentity, statusMessage, [[[presentity account] arrayOfAllIMHandles] containsObject:presentity], [presentity timeSinceStatusChanged], [[presentity account] accountLoginStatus], [[presentity account] justLoggedIn], [presentity status], [presentity previousStatus], [presentity person], [[IMMe me] person]);
+    ChaxDebugLog(@"presentityStatusChanged: %@ (statusMessage: %@) on contact list: %d timeSinceStatusChanged: %f accountLoginStatus: %d justLoggedIn: %d status: %d previousStatus: %d handle: %@ me: %@", presentity, statusMessage, [[[presentity account] arrayOfAllIMHandles] containsObject:presentity], [presentity timeSinceStatusChanged], [[presentity account] accountLoginStatus], [[presentity account] justLoggedIn], [presentity status], [presentity previousStatus], presentity, [IMMe imHandleForService:[presentity service]]);
     
 	if ([[[presentity account] arrayOfAllIMHandles] containsObject:presentity] && [presentity timeSinceStatusChanged] < 1 && [[presentity account] accountLoginStatus] == 4 && ![[presentity account] justLoggedIn] &&
-        [presentity status] != [presentity previousStatus] && [presentity status] != 5 && [presentity person] != [[IMMe me] person]) {
+        [presentity status] != [presentity previousStatus] && [presentity status] != 5 && myHandle != presentity) {
         ChaxDebugLog(@"Person status changed: %@", presentity);
         
 		//Notify the activity window of the change
@@ -244,8 +245,17 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
 							}
 						}
 						
-						[NSClassFromString(@"ChatWindowController") displayChatForIMHandle:handle style:1];
-                        ChaxDebugLog(@"Attempting to use displayChatForIMHandle: to display chat for %@", handle);
+                        ChaxDebugLog(@"Displaying a new chat window for %@", handle);
+						[NSClassFromString(@"People") sendMessageToIMHandle:handle];
+                        
+                        Chat *chat = [NSClassFromString(@"ChatWindowController") existingChatWithIMHandle:handle];
+                        
+                        if ([NSClassFromString(@"ChatWindowController") wantsCollectedChats]) {
+                            [[chat chatWindowController] showWindow:nil];
+                            [[chat chatWindowController] performSelector:@selector(selectChat:) withObject:chat afterDelay:0.0];
+                        } else {
+                            [[chat chatWindowController] performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
+                        }
 					}
                     
 					break;
