@@ -246,19 +246,9 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
 						}
 						
                         ChaxDebugLog(@"Displaying a new chat window for %@", handle);
-						[NSClassFromString(@"People") sendMessageToIMHandle:handle];
-                        
-                        Chat *chat = [NSClassFromString(@"ChatWindowController") existingChatWithIMHandle:handle];
-                        
-                        if ([NSClassFromString(@"ChatWindowController") wantsCollectedChats]) {
-                            [[chat chatWindowController] showWindow:nil];
-                            [[chat chatWindowController] performSelector:@selector(selectChat:) withObject:chat afterDelay:0.0];
-                        } else {
-                            [[chat chatWindowController] performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
-                        }
+                        [NSClassFromString(@"People") sendMessageToIMHandle:handle];
+                        return;
 					}
-                    
-					break;
 				}
 			}
 		}
