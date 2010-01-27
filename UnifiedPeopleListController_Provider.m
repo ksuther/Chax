@@ -200,6 +200,19 @@ NSMenu *_addMenu = nil;
     [[self peopleList] endChanges];
 }
 
+- (id)peopleList:(id)fp8 siblingsForIMHandle:(id)fp12
+{
+    NSMutableArray *siblings = [NSMutableArray array];
+    
+    for (PeopleListController *plc in [NSClassFromString(@"PeopleListController") peopleListControllers]) {
+        if (![self isEqual:plc]) {
+            [siblings addObjectsFromArray:[plc peopleList:[plc peopleList] siblingsForIMHandle:fp12]];
+        }
+    }
+    
+    return siblings;
+}
+
 - (void)reloadContacts
 {
     NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
