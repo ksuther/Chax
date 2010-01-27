@@ -119,7 +119,7 @@ void ChaxDebugLog(NSString *format, ...) {
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadContactList" object:nil];
         
-        if ([NSEvent modifierFlags] & NSCommandKeyMask) {
+        if ([NSEvent modifierFlags] & NSShiftKeyMask) {
             SetChaxDebugLoggingEnabled(YES);
             ChaxDebugLog(@"Chax: Debug logging enabled.");
         }
