@@ -2050,10 +2050,7 @@
 				GCC_PREFIX_HEADER = Chax_Prefix.pch;
 				INFOPLIST_FILE = "ChaxInstaller-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../Desktop/Test/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "Chax Installer";
 			};
 			name = Release;

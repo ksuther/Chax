@@ -111,7 +111,10 @@ Chat *_lastChat = nil;
     imageData = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
     [imageData writeToFile:imagePath atomically:NO];
     
-	[[[self currentChatController] fieldEditor] insertAttachedFile:imagePath];
+    ChatController *chatController = [self currentChatController];
+    
+    [[chatController window] makeFirstResponder:[chatController inputLine]];
+	[[chatController fieldEditor] insertAttachedFile:imagePath];
 	
 	[cameraSnapshotController release];
 }
