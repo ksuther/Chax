@@ -27,11 +27,27 @@
 #import <Security/Security.h>
 #import <sys/sysctl.h>
 
+BOOL ChaxAgentInjectorCheckAndInject()
+{
+    if (ChaxAgentInjectorNeedsPermissionRepair()) {
+        if (NSRunAlertPanel(ChaxLocalizedString(@"Administrator password required"),
+                            ChaxLocalizedString(@"Sending plain text to ICQ users requires your admin password to function properly. Please enter your admin password to enable this feature."),
+                            ChaxLocalizedString(@"OK"),
+                            ChaxLocalizedString(@"Cancel"), nil) == NSAlertDefaultReturn) {
+            ChaxAgentInjectorRepairPermissions();
+        }
+    }
+    
+    ChaxAgentInjectorPerformInjection();
+}
+
 BOOL ChaxAgentInjectorPerformInjection()
 {
     NSBundle *chaxLibBundle = [NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier];
     NSString *injectorPath = [chaxLibBundle pathForAuxiliaryExecutable:@"ChaxAgentInjector"];
     NSArray *runningAgents = [NSRunningApplication runningApplicationsWithBundleIdentifier:iChatAgentBundleIdentifier];
+    
+    ChaxDebugLog(@"Attempting to perform injection into iChatAgent. %d running agents found.", [runningAgents count]);
     
     if ([runningAgents count] > 0) {
         //NSRunningApplication executableArchitecture isn't working here for some reason
@@ -67,6 +83,8 @@ BOOL ChaxAgentInjectorPerformInjection()
         NSArray *arguments = [NSArray arrayWithObjects:@"-arch", architectureString, injectorPath, [[chaxLibBundle privateFrameworksPath] stringByAppendingPathComponent:@"mach_inject_bundle.framework"], [chaxLibBundle pathForResource:@"ChaxAgentLib" ofType:@"bundle"], nil];
         
         [NSTask launchedTaskWithLaunchPath:@"/usr/bin/arch" arguments:arguments];
+        
+        ChaxDebugLog(@"Launched with arguments: %@", arguments);
     }
 }
 
@@ -84,6 +102,8 @@ BOOL ChaxAgentInjectorRepairPermissions()
 {
     NSString *targetPath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForAuxiliaryExecutable:@"ChaxAgentInjector"];
     OSStatus err = noErr;
+    
+    ChaxDebugLog(@"Attempting ChaxAgentInjector permission repair.");
     
     if (targetPath) {
         AuthorizationRef authorizationRef;
@@ -111,12 +131,14 @@ BOOL ChaxAgentInjectorRepairPermissions()
                 args[2] = NULL;
                 
                 err = AuthorizationExecuteWithPrivileges(authorizationRef, "/bin/chmod", 0, args, NULL);
+                ChaxDebugLog(@"Ran chmod (%d).", err);
                 
                 args[0] = "procmod";
                 args[1] = (char *)[targetPath fileSystemRepresentation];
                 args[2] = NULL;
                 
                 err = AuthorizationExecuteWithPrivileges(authorizationRef, "/usr/bin/chgrp", 0, args, NULL);
+                ChaxDebugLog(@"Ran chgrp (%d).", err);
                 
                 if (err == noErr) {
                     err = AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);

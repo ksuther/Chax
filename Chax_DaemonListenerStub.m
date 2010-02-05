@@ -28,20 +28,13 @@
 
 - (void)chax_loadChaxAgentLib
 {
-    if (ChaxAgentInjectorNeedsPermissionRepair()) {
-        if (NSRunAlertPanel(ChaxLocalizedString(@"Administrator password required"),
-                            ChaxLocalizedString(@"Sending plain text to ICQ users requires your admin password to function properly. Please enter your admin password to enable this feature."),
-                            ChaxLocalizedString(@"OK"),
-                            ChaxLocalizedString(@"Cancel"), nil) == NSAlertDefaultReturn) {
-            ChaxAgentInjectorRepairPermissions();
-        }
-    }
-    
-    ChaxAgentInjectorPerformInjection();
+    ChaxAgentInjectorCheckAndInject();
 }
 
 - (oneway void)chax_swizzle_setupComplete
 {
+    ChaxDebugLog(@"DaemonListenerStub setupComplete.");
+    
     if ([Chax boolForKey:@"ICQPlainTextEnabled"]) {
         [self performSelector:@selector(chax_loadChaxAgentLib) withObject:nil afterDelay:1.0];
     }
