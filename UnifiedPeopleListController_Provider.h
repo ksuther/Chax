@@ -47,7 +47,6 @@
 
 + (id)sharedController;
 
-- (void)processIMHandleGroupChange:(IMHandle *)imHandle;
 - (void)reloadContacts;
 - (void)rebuildAddBuddyMenu;
 

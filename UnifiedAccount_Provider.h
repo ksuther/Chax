@@ -24,7 +24,15 @@
 #import <Cocoa/Cocoa.h>
 #import "iChat5.h"
 
-@interface UnifiedAccount : IMAccount {
+@protocol UnifiedAccount_ProviderMethods
+
+@optional
+- (void)setAccountLoginStatus:(int)status;
+- (void)logoutAccount;
+
+@end
+
+@interface UnifiedAccount_Provider : NSObject <UnifiedAccount_ProviderMethods> {
 
 }
 @end

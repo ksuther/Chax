@@ -69,7 +69,7 @@
 		3750914E1056FCA300F472F1 /* Chax.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA940FF7C41F000CBC6A /* Chax.m */; };
 		3750914F1056FCA300F472F1 /* Chax_PeopleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DAE10FF7C778000CBC6A /* Chax_PeopleListController.m */; };
 		375091501056FCA300F472F1 /* Chax_NSDockTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */; };
-		375091521056FCA300F472F1 /* UnifiedAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F5AA101CF798009D87B6 /* UnifiedAccount.m */; };
+		375091521056FCA300F472F1 /* UnifiedAccount_Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F5AA101CF798009D87B6 /* UnifiedAccount_Provider.m */; };
 		375091531056FCA300F472F1 /* UnifiedPeopleListController_Provider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */; };
 		375091541056FCA300F472F1 /* Chax_IMPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */; };
 		375091551056FCA300F472F1 /* Chax_Fezz.m in Sources */ = {isa = PBXBuildFile; fileRef = 3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */; };
@@ -337,8 +337,8 @@
 		3773527610DC9BDC00CF1C88 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
 		377644D310F66DE900ECA38A /* ChaxHelperAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaxHelperAppUtils.h; sourceTree = "<group>"; };
 		377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxHelperAppUtils.m; sourceTree = "<group>"; };
-		3776F5A9101CF798009D87B6 /* UnifiedAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnifiedAccount.h; sourceTree = "<group>"; };
-		3776F5AA101CF798009D87B6 /* UnifiedAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnifiedAccount.m; sourceTree = "<group>"; };
+		3776F5A9101CF798009D87B6 /* UnifiedAccount_Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnifiedAccount_Provider.h; sourceTree = "<group>"; };
+		3776F5AA101CF798009D87B6 /* UnifiedAccount_Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnifiedAccount_Provider.m; sourceTree = "<group>"; };
 		3776F5AB101CF798009D87B6 /* UnifiedPeopleListController_Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnifiedPeopleListController_Provider.h; sourceTree = "<group>"; };
 		3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnifiedPeopleListController_Provider.m; sourceTree = "<group>"; };
 		3776F63A101CFC35009D87B6 /* Chax_IMPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_IMPeople.h; sourceTree = "<group>"; };
@@ -727,8 +727,8 @@
 		3776F5A7101CF77D009D87B6 /* Unified Contact List */ = {
 			isa = PBXGroup;
 			children = (
-				3776F5A9101CF798009D87B6 /* UnifiedAccount.h */,
-				3776F5AA101CF798009D87B6 /* UnifiedAccount.m */,
+				3776F5A9101CF798009D87B6 /* UnifiedAccount_Provider.h */,
+				3776F5AA101CF798009D87B6 /* UnifiedAccount_Provider.m */,
 				3776F5AB101CF798009D87B6 /* UnifiedPeopleListController_Provider.h */,
 				3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */,
 			);
@@ -1334,7 +1334,7 @@
 				3750914E1056FCA300F472F1 /* Chax.m in Sources */,
 				3750914F1056FCA300F472F1 /* Chax_PeopleListController.m in Sources */,
 				375091501056FCA300F472F1 /* Chax_NSDockTile.m in Sources */,
-				375091521056FCA300F472F1 /* UnifiedAccount.m in Sources */,
+				375091521056FCA300F472F1 /* UnifiedAccount_Provider.m in Sources */,
 				375091531056FCA300F472F1 /* UnifiedPeopleListController_Provider.m in Sources */,
 				375091541056FCA300F472F1 /* Chax_IMPeople.m in Sources */,
 				375091551056FCA300F472F1 /* Chax_Fezz.m in Sources */,

@@ -21,10 +21,21 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "UnifiedAccount.h"
+#import "UnifiedAccount_Provider.h"
 #import "UnifiedPeopleListController_Provider.h"
+#import <objc/runtime.h>
+#import <objc/message.h>
 
-@implementation UnifiedAccount
+@implementation UnifiedAccount_Provider
+
++ (void)load
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    [BundleUtilities subclass:NSClassFromString(@"Account") usingClassName:@"UnifiedAccount" providerClass:self];
+    
+    [pool release];
+}
 
 - (BOOL)justLoggedIn
 {
@@ -71,41 +82,47 @@
 - (void)setInvisible:(BOOL)flag
 {
 	[[[NSClassFromString(@"Fezz") sharedInstance] valueForKey:@"statusController"] setInvisible:flag];
-	[super setInvisible:flag];
+    
+    struct objc_super superData = {self, [self superclass]};
+	objc_msgSendSuper(&superData, @selector(setInvisible:), flag);
 }
 
 - (void)loginAccount
 {
 	[self setAccountLoginStatus:4];
 	[NSClassFromString(@"Fezz") connectAndAutoLogin];
-	[super loginAccount];
+    
+    struct objc_super superData = {self, [self superclass]};
+	objc_msgSendSuper(&superData, @selector(loginAccount));
 }
 
 - (void)setAccountLoginStatus:(int)fp8
 {
 	if (fp8 == 2) {
 		[[IMDaemonController sharedController] logoutAllAccounts];
-		[super setAccountLoginStatus:0];
-	} else {
-		[super setAccountLoginStatus:fp8];
+        fp8 = 0;
 	}
+    
+    struct objc_super superData = {self, [self superclass]};
+	objc_msgSendSuper(&superData, @selector(setAccountLoginStatus:), fp8);
 }
 
 - (void)reorderGroups:(id)fp8
 {
 	[Chax setObject:fp8 forKey:@"UnifiedGroupOrder"];
-	
-	[_groups release];
-	_groups = [fp8 copy];
-	
-	[super reorderGroups:fp8];
+    
+	[[self valueForKey:@"_groups"] release];
+    object_setInstanceVariable(self, "_groups", [fp8 copy]);
+    
+    struct objc_super superData = {self, [self superclass]};
+	objc_msgSendSuper(&superData, @selector(reorderGroups:), fp8);
 }
 
 - (NSArray *)groupList
 {
 	NSMutableArray *sortedGroups = [[[Chax objectForKey:@"UnifiedGroupOrder"] mutableCopy] autorelease];
 	NSMutableArray *unusedGroups = [[[Chax objectForKey:@"UnifiedGroupOrder"] mutableCopy] autorelease];
-	NSArray *handles = [_buddyList people];
+	NSArray *handles = [[self valueForKey:@"_buddyList"] people];
 	
 	for (IMHandle *nextHandle in handles) {
 		NSString *group = [[nextHandle groups] anyObject];

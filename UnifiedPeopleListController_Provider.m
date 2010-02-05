@@ -44,7 +44,7 @@ NSMenu *_addMenu = nil;
 	static id sharedController = nil;
 	
 	if (!sharedController) {
-		IMAccount *account = [[[UnifiedAccount alloc] initWithUniqueID:@"Chax" service:nil] autorelease];
+		IMAccount *account = [[[NSClassFromString(@"UnifiedAccount") alloc] initWithUniqueID:@"Chax" service:nil] autorelease];
 		
 		[account setAccountLoginStatus:4];
 		
@@ -164,11 +164,6 @@ NSMenu *_addMenu = nil;
 	}
 }
 
-- (void)processIMHandleGroupChange:(IMHandle *)imHandle
-{
-	[self reloadContacts];
-}
-
 - (void)_arrangesByGroupChanged
 {
 	struct objc_super superData = {self, [self superclass]};
@@ -217,15 +212,15 @@ NSMenu *_addMenu = nil;
 {
     NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
     
-    [[self peopleList] beginChangesNoAnimation];
-    
     [[self peopleList] removeAllIMHandlesAndGroups:YES];
+    
+    [[self peopleList] beginChangesNoAnimation];
     
     for (PeopleListController *plc in controllers) {
         if (![self isEqual:plc]) {
             id people = [[plc sourcePeople] people];
             
-            [[self peopleList] addPeopleFromArray:people];
+            [[self sourcePeople] addPeopleFromArray:people];
         }
     }
     
