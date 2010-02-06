@@ -149,6 +149,10 @@ void ChaxDebugLog(NSString *format, ...) {
     
     _updater = [[NSClassFromString(@"SUUpdater") updaterForBundle:[NSBundle bundleWithIdentifier:ChaxAdditionBundleIdentifier]] retain];
     [_updater setDelegate:self];
+    
+    if ([NSEvent modifierFlags] & NSCommandKeyMask && [NSEvent modifierFlags] & NSAlternateKeyMask) {
+        [_updater setAutomaticallyChecksForUpdates:NO];
+    }
 }
 
 + (void)checkForUpdates
