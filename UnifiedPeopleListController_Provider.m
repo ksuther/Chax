@@ -22,7 +22,7 @@
  */
 
 #import "UnifiedPeopleListController_Provider.h"
-#import "UnifiedAccount.h"
+#import "UnifiedAccount_Provider.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
 
