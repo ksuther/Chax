@@ -327,7 +327,6 @@
 		375789DF111799180001662A /* Dutch */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Dutch; path = Dutch.lproj/LogViewer.strings; sourceTree = "<group>"; };
 		375789E0111799180001662A /* Dutch */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Dutch; path = Dutch.lproj/Preferences.strings; sourceTree = "<group>"; };
 		375789ED111799610001662A /* Dutch */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Dutch; path = Installer/Dutch.lproj/Localizable.strings; sourceTree = "<group>"; };
-		375789EE111799610001662A /* Dutch */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Dutch; path = Installer/Dutch.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		37654A82110A271E0054FF9F /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = de; path = Installer/de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		377351F010DC948100CF1C88 /* InstallChax.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = InstallChax.icns; path = Installer/InstallChax.icns; sourceTree = "<group>"; };
 		377351F310DC94D700CF1C88 /* ChaxInstaller-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ChaxInstaller-Info.plist"; sourceTree = "<group>"; };
@@ -423,7 +422,6 @@
 		37C1FB88110B583A009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Polish.lproj/LogViewer.strings; sourceTree = "<group>"; };
 		37C1FB89110B583A009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Polish.lproj/Preferences.strings; sourceTree = "<group>"; };
 		37C1FB8E110B5881009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Installer/Polish.lproj/Localizable.strings; sourceTree = "<group>"; };
-		37C1FB8F110B5881009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Installer/Polish.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		37C1FBC0110BBC7B009529E9 /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = French; path = Installer/French.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		37CC446B10DEDDE300998593 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = English; path = Installer/English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37D0E26A104612C1009C42DA /* DonateWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DonateWindowController.h; path = "../Chax 10.5/DonateWindowController.h"; sourceTree = "<group>"; };
@@ -448,7 +446,6 @@
 		37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatDOMView.m; sourceTree = "<group>"; };
 		37D6315611099ED700E22722 /* Chax_SmileyGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_SmileyGrid.h; sourceTree = "<group>"; };
 		37D6315711099ED700E22722 /* Chax_SmileyGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_SmileyGrid.m; sourceTree = "<group>"; };
-		37D6317E110A150A00E22722 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Russian; path = Installer/Russian.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		37D6318B110A166400E22722 /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = de; path = de.lproj/ActivityWindow.strings; sourceTree = "<group>"; };
 		37D6318C110A166400E22722 /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = de; path = de.lproj/CameraSnapshot.strings; sourceTree = "<group>"; };
 		37D6318D110A166400E22722 /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = de; path = de.lproj/Donate.strings; sourceTree = "<group>"; };
@@ -1610,11 +1607,8 @@
 		37D6317D110A150A00E22722 /* MainMenu.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				37D6317E110A150A00E22722 /* Russian */,
 				37654A82110A271E0054FF9F /* de */,
-				37C1FB8F110B5881009529E9 /* Polish */,
 				37C1FBC0110BBC7B009529E9 /* French */,
-				375789EE111799610001662A /* Dutch */,
 			);
 			name = MainMenu.strings;
 			sourceTree = "<group>";

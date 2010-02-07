@@ -46,7 +46,7 @@
 {
 	NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
 	NSString *installTitle = [NSString stringWithFormat:NSLocalizedString(@"install_title", nil), version];
-	
+    
 	[_window setTitle:installTitle];
 	[_installTitle setStringValue:installTitle];
 	[_installText setStringValue:[NSString stringWithFormat:NSLocalizedString(@"install_msg", nil), version]];
@@ -129,6 +129,19 @@
 	if ((Gestalt(gestaltSystemVersion, &version) == noErr) && ((version < 0x1060) || (version > 0x1070))) {
         [self displaySheetTitled:@"version_title" message:@"version_msg" defaultButton:@"quit" secondaryButton:nil callback:@selector(versionSheetDidEnd:returnCode:contextInfo:)];
 	}
+    
+    [NSApp activateIgnoringOtherApps:YES];
+    
+    //Special case handling for localizing the application menu
+    NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+	NSString *installTitle = [NSString stringWithFormat:NSLocalizedString(@"install_title", nil), versionString];
+	
+    [[[[NSApp mainMenu] itemAtIndex:0] submenu] setTitle:installTitle];
+}
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    return YES;
 }
 
 #pragma mark -
