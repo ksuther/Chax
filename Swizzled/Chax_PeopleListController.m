@@ -59,7 +59,11 @@
 		[[self peopleList] performSelector:@selector(chax_updateRowHeights) withObject:nil afterDelay:0.0];
 	}
 	
-	[self performSelector:@selector(chax_resizeWindow) withObject:nil afterDelay:0.0];
+    NSInteger delayTime = [[self representedAccount] justLoggedIn] ? 2.0 : 0.0;
+    
+    //Prevent a boatload of resize requests from stacking up on themselves and lagging
+    [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(chax_resizeWindow) object:nil];
+	[self performSelector:@selector(chax_resizeWindow) withObject:nil afterDelay:delayTime];
 }
 
 - (void)chax_resizeWindow
