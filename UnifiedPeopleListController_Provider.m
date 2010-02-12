@@ -208,25 +208,6 @@ NSMenu *_addMenu = nil;
     return siblings;
 }
 
-- (void)reloadContacts
-{
-    NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
-    
-    [[self peopleList] removeAllIMHandlesAndGroups:YES];
-    
-    [[self peopleList] beginChangesNoAnimation];
-    
-    for (PeopleListController *plc in controllers) {
-        if (![self isEqual:plc]) {
-            id people = [[plc sourcePeople] people];
-            
-            [[self sourcePeople] addPeopleFromArray:people];
-        }
-    }
-    
-    [[self peopleList] endChanges];
-}
-
 - (void)rebuildAddBuddyMenu
 {
 	if (!_addMenu) {
