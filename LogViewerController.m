@@ -765,6 +765,13 @@ typedef enum LogViewerToolbarItem {
         [savedChat release];
     }
     
+    if (creationDate == nil) {
+        //There's still no creation date for some reason, take the file's creation date
+        NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
+        
+        creationDate = [attributes fileCreationDate];
+    }
+    
     return creationDate;
 }
 
@@ -800,7 +807,11 @@ typedef enum LogViewerToolbarItem {
         for (NSString *logName in allLogs) {
             NSDate *creationDate = [self _creationDateForLogAtPath:[logPath stringByAppendingPathComponent:logName]];
             
-            [_creationDateCache setObject:creationDate forKey:logName];
+            if (creationDate) {
+                [_creationDateCache setObject:creationDate forKey:logName];
+            } else {
+                NSLog(@"Unable to find a creation date for %@!", logName);
+            }
         }
         
         [allLogs sortUsingComparator:^(id obj1, id obj2){
