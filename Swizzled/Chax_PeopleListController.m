@@ -74,6 +74,8 @@
 		NSRect frame = [[self window] frame], screenFrame = [[[self window] screen] frame];
 		NSRect preferredFrame = [self windowWillUseStandardFrame:[self window] defaultFrame:screenFrame];
 		
+        ChaxDebugLog(@"chax_resizeWindow called on %@", self);
+        
 		//if the bottom edge of the window is within 20 pixels of the bottom and the top of the buddy list isn't at the top of the screen, resize upwards if possible
 		//otherwise resize down as usual
 		if (frame.origin.y < 20 && (screenFrame.size.height - GetMBarHeight() - (frame.origin.y + frame.size.height) > 10)) {
