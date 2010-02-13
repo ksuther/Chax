@@ -358,8 +358,12 @@ typedef enum LogViewerToolbarItem {
                 [_spotlightQuery autorelease];
                 _spotlightQuery = nil;
                 
+                //Save the list of selected people so it can be restored after reloading the table view
+                NSArray *selectedPeople = [self selectedPeople];
+                
                 [self setSearchPeople:[[searchPeopleSet allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]];
                 
+                [_peopleTableView deselectAll:nil];
                 [_peopleTableView reloadData];
                 
                 [_logsTableView deselectAll:nil];
@@ -375,6 +379,16 @@ typedef enum LogViewerToolbarItem {
                 } else {
                     [_statusTextField setStringValue:[NSString stringWithFormat:ChaxLocalizedString(@"%d results"), resultCount]];
                 }
+                
+                //Reselect previously selected people
+                NSMutableIndexSet *indices = [NSMutableIndexSet indexSet];
+                
+                for (NSString *person in selectedPeople) {
+                    [indices addIndex:[[self visiblePeople] indexOfObject:person]];
+                }
+                
+                [_peopleTableView selectRowIndexes:indices byExtendingSelection:YES];
+                [_peopleTableView scrollRowToVisible:[indices firstIndex]];
             }
         });
     }];
@@ -757,6 +771,10 @@ typedef enum LogViewerToolbarItem {
 		} else if ([[path pathExtension] isEqualToString:@"chat"]) {
 			NSData *data = [NSData dataWithContentsOfFile:path];
             
+            if (data == nil) {
+                ChaxDebugLog(@"Log Viewer: Unable to read any data from %@", path);
+            }
+            
 			savedChat = [[NSClassFromString(@"SavedChat") alloc] initWithSavedData:data];
 		}
         
@@ -885,6 +903,9 @@ typedef enum LogViewerToolbarItem {
 			[[NSNotificationCenter defaultCenter] removeObserver:self name:NSMetadataQueryDidFinishGatheringNotification object:_spotlightQuery];
 		}
         
+        //Save the list of selected people so it can be restored after reloading the table view
+        NSArray *selectedPeople = [self selectedPeople];
+        
         if ([self searchPeople] != nil) {
             [self setSearchPeople:nil];
             
@@ -896,6 +917,16 @@ typedef enum LogViewerToolbarItem {
             [_peopleTableView reloadData];
             [_logsTableView reloadData];
         }
+        
+        //Reselect previously selected people
+        NSMutableIndexSet *indices = [NSMutableIndexSet indexSet];
+        
+        for (NSString *person in selectedPeople) {
+            [indices addIndex:[[self visiblePeople] indexOfObject:person]];
+        }
+        
+        [_peopleTableView selectRowIndexes:indices byExtendingSelection:YES];
+        [_peopleTableView scrollRowToVisible:[indices firstIndex]];
         
         [self _stopSpinnerAnimation];
         [_statusTextField setStringValue:@""];
