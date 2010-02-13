@@ -29,10 +29,10 @@
 + (void)chax_swizzle_displayDisconnectAlertInfoText:(id)fp8 wasConnected:(BOOL)fp12 forAccount:(id)fp16
 {
     if (fp12 && [Chax boolForKey:@"AttemptAutoReconnect"]) {
-        NSLog(@"Chax: %@ was connected, now disconnected due to error '%@'", fp16, fp8);
-        NSLog(@"Attempting to reconnect in 10 seconds...");
+        ChaxDebugLog(@"Chax: %@ was connected, now disconnected due to error '%@'", fp16, fp8);
+        ChaxDebugLog(@"Attempting to reconnect in 7 seconds...");
         
-        [fp16 performSelector:@selector(loginAccount) withObject:nil afterDelay:10.0];
+        [fp16 performSelector:@selector(loginAccount) withObject:nil afterDelay:7.0];
     }
     
     [self chax_swizzle_displayDisconnectAlertInfoText:fp8 wasConnected:fp12 forAccount:fp16];
