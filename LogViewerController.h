@@ -24,6 +24,9 @@
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
 
+extern NSString *ChaxSavedChatLoadFailedNotification;
+extern NSString *ChaxSavedChatLoadSucceededNotification;
+
 @class FezWebView, ChatViewController, SavedChat, InstantMessage, IMHandle;
 @class ConversationViewController, TransfersViewController, LinksViewController;
 
@@ -49,7 +52,7 @@
     IBOutlet NSButton *_fileButton;
     IBOutlet NSButton *_linkButton;
     
-    BOOL _transfersNeedUpdate, _linksNeedUpdate;
+    BOOL _transfersNeedUpdate, _linksNeedUpdate, _logLoadError;
     
     NSOperationQueue *_operationQueue;
     NSOperationQueue *_searchQueue;

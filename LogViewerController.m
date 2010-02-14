@@ -31,6 +31,9 @@
 #import "ConversationViewController.h"
 #import "LinksViewController.h"
 
+NSString *ChaxSavedChatLoadFailedNotification = @"ChaxSavedChatLoadFailedNotification";
+NSString *ChaxSavedChatLoadSucceededNotification = @"ChaxSavedChatLoadSucceededNotification";
+
 typedef enum LogViewerToolbarItem {
     LogViewerToolbarItemDelete = 1,
     LogViewerToolbarItemExport,
@@ -83,6 +86,12 @@ typedef enum LogViewerToolbarItem {
         chat = [[NSClassFromString(@"SavedChat") alloc] initWithSavedData:data];
     }
     
+    if (chat == nil) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ChaxSavedChatLoadFailedNotification object:nil userInfo:[NSDictionary dictionaryWithObject:path forKey:@"Path"]];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ChaxSavedChatLoadSucceededNotification object:nil userInfo:[NSDictionary dictionaryWithObject:path forKey:@"Path"]];
+    }
+    
     return [chat autorelease];
 }
 
@@ -129,12 +138,17 @@ typedef enum LogViewerToolbarItem {
         
         [[[arrowImage tintedImageWithColor:[NSColor colorWithCalibratedRed:0.45 green:0.50 blue:0.57 alpha:1.0]] TIFFRepresentation] writeToFile:[[self class] arrowPath] atomically:YES];
         [[[arrowImage tintedImageWithColor:[NSColor colorWithCalibratedWhite:0.6 alpha:1.0]] TIFFRepresentation] writeToFile:[[self class] selectedArrowPath] atomically:YES];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatLoadNotification:) name:ChaxSavedChatLoadFailedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatLoadNotification:) name:ChaxSavedChatLoadSucceededNotification object:nil];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [_people release];
     [_visibleLogs release];
     [_logs release];
@@ -289,6 +303,24 @@ typedef enum LogViewerToolbarItem {
 - (void)selectConversationFilterButton
 {
     [self filterButtonAction:_conversationButton];
+}
+
+- (void)chatLoadNotification:(NSNotification *)note
+{
+    NSString *path = [[note userInfo] objectForKey:@"Path"];
+    
+    if ([[note name] isEqualToString:ChaxSavedChatLoadFailedNotification]) {
+        ChaxDebugLog(@"Error loading chat at %@", path);
+        
+        [self _stopSpinnerAnimation];
+        [_statusTextField setStringValue:[NSString stringWithFormat:ChaxLocalizedString(@"Error loading log: %@"), [path lastPathComponent]]];
+        
+        _logLoadError = YES;
+    } else {
+        if (_logLoadError) {
+            [_statusTextField setStringValue:@""];
+        }
+    }
 }
 
 #pragma mark -
