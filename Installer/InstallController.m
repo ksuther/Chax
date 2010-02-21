@@ -195,7 +195,7 @@
         CFURLGetFSRef((CFURLRef)launchURL, &fsRef);
         
         params.version = 0;
-        params.flags = kLSLaunchDontSwitch | kLSLaunchNewInstance | kLSLaunchNoParams;
+        params.flags = kLSLaunchDontSwitch | kLSLaunchNewInstance | kLSLaunchNoParams | kLSLaunchAsync;
         params.application = &fsRef;
         params.environment = NULL;
         params.argv = NULL;
