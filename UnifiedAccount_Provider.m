@@ -26,6 +26,12 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
+//Used to keep the unified account from logging out all other accounts
+//We want these other accounts to log themselves out because of a sleep preparation notice
+//so that they attempt to log themselves back in as usual when waking back up
+//This should fix the problem where some accounts aren't coming back as expected when waking up
+static BOOL _preparingToSleep = NO;
+
 @implementation UnifiedAccount_Provider
 
 + (void)load
@@ -98,7 +104,7 @@
 
 - (void)setAccountLoginStatus:(int)fp8
 {
-	if (fp8 == 2) {
+	if (fp8 == 2 && !_preparingToSleep) {
 		[[IMDaemonController sharedController] logoutAllAccounts];
         fp8 = 0;
 	}
@@ -139,26 +145,15 @@
 
 - (void)systemDidWake
 {
-    //Mostly copied from [UnifiedPeopleListController logServiceInOrOut:] to try to work around some people having wake from sleep problems.
-    //My theory is that some accounts are getting marked as attempting to log in before this gets called and logServiceInOrOut: then logs everything out.
-	NSArray *accounts = [[IMAccountController sharedInstance] allActiveAccounts];
+    _preparingToSleep = NO;
     
-    for (Account *account in accounts) {
-        if ([account autoLogin]) {
-            [(IMAccountController *)[IMAccountController sharedInstance] autoLogin];
-            [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] setAccountLoginStatus:4];
-            
-            [[NSClassFromString(@"UnifiedPeopleListController") sharedController] uncollapseTableAnimated:YES];
-            
-            return;
-        }
-    }
-    
-    [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] setAccountLoginStatus:0];
+    //Recconnect on wake code has been moved to -[Chax_Account chax_swizzle_nowLoggedIn]
 }
 
 - (void)systemWillSleep
 {
+    _preparingToSleep = YES;
+    
     [self logoutAccount];
 }
 

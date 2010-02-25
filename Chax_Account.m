@@ -98,4 +98,25 @@
 	}*/
 }
 
+- (void)chax_swizzle_nowLoggedIn
+{
+    //Notify the unified contact list that an account connected so that we can "connect" it also if necessary
+    if (![[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] connected]) {
+        [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] setAccountLoginStatus:4];
+        [[NSClassFromString(@"UnifiedPeopleListController") sharedController] uncollapseTableAnimated:YES];
+    }
+    
+    [self chax_swizzle_nowLoggedIn];
+}
+
+- (void)chax_swizzle_nowLoggedOut
+{
+    //Tell the unified contact list to "disconnect" if no accounts are connected
+    if ([(NSArray *)[[IMAccountController sharedInstance] allConnectedAccounts] count] == 0) {
+        [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] logoutAccount];
+    }
+    
+    [self chax_swizzle_nowLoggedOut];
+}
+
 @end
