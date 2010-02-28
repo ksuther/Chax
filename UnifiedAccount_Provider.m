@@ -153,6 +153,18 @@ static BOOL _preparingToSleep = NO;
     }
 }
 
+- (void)changeBuddyList:(id)fp8 add:(BOOL)fp12 groups:(id)fp16 atLocation:(int)fp20
+{
+    //Iterate over all accounts and delete any applicable groups
+    for (IMAccount *nextAccount in [[IMAccountController sharedInstance] allConnectedAccounts]) {
+        for (NSString *nextGroup in fp16) {
+            if ([[nextAccount groupList] containsObject:nextGroup]) {
+                [nextAccount changeBuddyList:fp8 add:fp12 groups:[NSSet setWithObject:nextGroup] atLocation:fp20];
+            }
+        }
+    }
+}
+
 - (void)systemDidWake
 {
     _preparingToSleep = NO;

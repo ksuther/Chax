@@ -128,7 +128,9 @@
             NSString *groupName = [groupInfo objectForKey:@"FZGroupName"];
             NSArray *members = [groupInfo objectForKey:@"FZGroupMembers"];
             
+            //Prevents duplicate contact list from stacking up on each other
             [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] _rebuildItems];
+            [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] _resort];
             
             if (![[self groupList] containsObject:groupName]) {
                 [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] removeGroup:groupName];
