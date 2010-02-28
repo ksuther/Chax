@@ -143,6 +143,16 @@ static BOOL _preparingToSleep = NO;
 	return sortedGroups;
 }
 
+- (void)renameGroup:(id)fp8 to:(id)fp12
+{
+    //Iterate over all accounts and rename any applicable group
+    for (IMAccount *nextAccount in [[IMAccountController sharedInstance] allConnectedAccounts]) {
+        if ([[nextAccount groupList] containsObject:fp8]) {
+            [nextAccount renameGroup:fp8 to:fp12];
+        }
+    }
+}
+
 - (void)systemDidWake
 {
     _preparingToSleep = NO;
