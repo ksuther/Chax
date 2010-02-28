@@ -332,7 +332,6 @@
 		377351F310DC94D700CF1C88 /* ChaxInstaller-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ChaxInstaller-Info.plist"; sourceTree = "<group>"; };
 		377351FC10DC960600CF1C88 /* InstallController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstallController.h; path = Installer/InstallController.h; sourceTree = "<group>"; };
 		377351FD10DC960600CF1C88 /* InstallController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstallController.m; path = Installer/InstallController.m; sourceTree = "<group>"; };
-		3773526C10DC9BAE00CF1C88 /* SystemEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemEvents.h; path = Installer/SystemEvents.h; sourceTree = "<group>"; };
 		3773527610DC9BDC00CF1C88 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
 		377644D310F66DE900ECA38A /* ChaxHelperAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaxHelperAppUtils.h; sourceTree = "<group>"; };
 		377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaxHelperAppUtils.m; sourceTree = "<group>"; };
@@ -739,7 +738,6 @@
 				377351FC10DC960600CF1C88 /* InstallController.h */,
 				377351FD10DC960600CF1C88 /* InstallController.m */,
 				377351F010DC948100CF1C88 /* InstallChax.icns */,
-				3773526C10DC9BAE00CF1C88 /* SystemEvents.h */,
 				37CC446A10DEDDE300998593 /* Localizable.strings */,
 				37D6317D110A150A00E22722 /* MainMenu.strings */,
 			);

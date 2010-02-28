@@ -23,7 +23,6 @@
 
 #import "InstallController.h"
 #import "ChaxHelperAppUtils.h"
-#import "SystemEvents.h"
 
 #define DONATE_URL [NSURL URLWithString:@"http://www.ksuther.com/chax/donate"]
 #define FAQ_URL [NSURL URLWithString:@"http://www.ksuther.com/chax/faq"]
@@ -91,24 +90,48 @@
 
 - (void)setLaunchAtLogin:(BOOL)enabled
 {
-    //Remove from login items
-    SystemEventsApplication *app = [SBApplication applicationWithBundleIdentifier:@"com.apple.systemevents"];
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(kCFAllocatorDefault, kLSSharedFileListSessionLoginItems, NULL);
+    NSString *path = InstalledHelperAppPath();
     
-    for (id nextItem in [app loginItems]) {
-        if ([[nextItem name] isEqualToString:@"ChaxHelperApp"]) {
-            [[app loginItems] removeObject:nextItem];
-            break;
+    if (loginItems) {
+        if (enabled) {
+            //Add ChaxHelperApp to login items
+            LSSharedFileListItemRef item = LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemLast, NULL, NULL, (CFURLRef)[NSURL fileURLWithPath:path], NULL, NULL);
+            
+            if (item) {
+                CFRelease(item);
+            }
+        } else {
+            //Remove ChaxHelperApp from login items
+            UInt32 seedValue;
+            NSArray *loginItemsArray = [(NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue) autorelease];
+            NSURL *itemURL;
+            BOOL foundMatch = NO;
+            
+            //Loop through the list of login items and remove the one that matches the path of ChaxHelperApp
+            for (id loginItem in loginItemsArray) {
+                if (LSSharedFileListItemResolve((LSSharedFileListItemRef)loginItem, 0, (CFURLRef*)&itemURL, NULL) == noErr) {
+                    if ([[itemURL path] isEqualToString:path]) {
+                        OSStatus error = LSSharedFileListItemRemove(loginItems, (LSSharedFileListItemRef)loginItem);
+                        
+                        foundMatch = YES;
+                        
+                        if (error != noErr) {
+                            NSLog(@"Error, failed to remove ChaxHelperApp from the login items (%d)", error);
+                        }
+                    }
+                }
+            }
+            
+            if (!foundMatch) {
+                NSLog(@"Did not find a matching login item to remove (%@).", path);
+            }
         }
-    }
-    
-    //Readd to login items
-    if (enabled) {
-        NSString *path = InstalledHelperAppPath();
-        NSString *source = [NSString stringWithFormat:@"tell application \"System Events\" to make new login item with properties {path:\"%@\", hidden:false} at end", path];
-        NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:source] autorelease];
         
-        [script executeAndReturnError:nil];
-	}
+        CFRelease(loginItems);
+    } else {
+        NSLog(@"Error, unable to get login items list while installing Chax.");
+    }
 }
 
 #pragma mark -
@@ -218,13 +241,13 @@
     NSError *error = nil;
     
     if ([self _isInstalled]) {
+        [self setLaunchAtLogin:NO];
+        QuitChaxHelperApp();
+        
         removed = [[NSFileManager defaultManager] removeItemAtPath:removePath error:&error];
     }
     
     if (removed) {
-        [self setLaunchAtLogin:NO];
-        QuitChaxHelperApp();
-        
         [self displaySheetTitled:@"remove_title" message:@"remove_msg" defaultButton:nil secondaryButton:nil callback:NULL];
     } else {
         [self displayError:error];
