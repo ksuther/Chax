@@ -84,6 +84,8 @@ NSMenu *_addMenu = nil;
     if ([Chax boolForKey:@"PreferAllContacts"]) {
         [self performSelector:@selector(hideOtherLists) withObject:nil afterDelay:0.0];
     }
+    
+    [[[self peopleList] table] setTrackingRectsEnabled:YES];
 }
 
 - (void)hideOtherLists
