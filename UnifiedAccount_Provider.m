@@ -115,21 +115,33 @@ static BOOL _preparingToSleep = NO;
 
 - (void)reorderGroups:(id)fp8
 {
+    ChaxDebugLog(@"Entering reorderGroups: %@", fp8);
+    
 	[Chax setObject:fp8 forKey:@"UnifiedGroupOrder"];
+    
+    ChaxDebugLog(@"Update _groups instance variable");
     
 	[[self valueForKey:@"_groups"] release];
     object_setInstanceVariable(self, "_groups", [fp8 copy]);
     
+    ChaxDebugLog(@"Call super");
+    
     struct objc_super superData = {self, [self superclass]};
 	objc_msgSendSuper(&superData, @selector(reorderGroups:), fp8);
+    
+    ChaxDebugLog(@"Exiting reorderGroups:");
 }
 
 - (NSArray *)groupList
-{
+{   
+    ChaxDebugLog(@"Entering groupList");
+    
 	NSMutableArray *sortedGroups = [[[Chax objectForKey:@"UnifiedGroupOrder"] mutableCopy] autorelease];
 	NSMutableArray *unusedGroups = [[[Chax objectForKey:@"UnifiedGroupOrder"] mutableCopy] autorelease];
 	NSArray *handles = [[self valueForKey:@"_buddyList"] people];
 	
+    ChaxDebugLog(@"Removing unused groups");
+    
 	for (IMHandle *nextHandle in handles) {
 		NSString *group = [[nextHandle groups] anyObject];
 		
@@ -140,6 +152,8 @@ static BOOL _preparingToSleep = NO;
 	
 	[sortedGroups removeObjectsInArray:unusedGroups];
 	
+    ChaxDebugLog(@"Exiting groupList: %@", sortedGroups);
+    
 	return sortedGroups;
 }
 
