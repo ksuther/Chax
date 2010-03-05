@@ -119,40 +119,4 @@
     [self chax_swizzle_nowLoggedOut];
 }
 
-- (void)chax_swizzle_groupsChanged:(id)fp8 error:(id)fp12
-{
-    //Only attempt to rename groups if the unified list arranges by groups
-    if (![self isKindOfClass:NSClassFromString(@"UnifiedAccount")] && [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] arrangesByGroup]) {
-        //Notify the unified list that groups are changing
-        for (NSDictionary *groupInfo in fp8) {
-            NSString *groupName = [groupInfo objectForKey:@"FZGroupName"];
-            NSArray *members = [groupInfo objectForKey:@"FZGroupMembers"];
-            
-            //Prevents duplicate contact list from stacking up on each other
-            [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] _rebuildItems];
-            [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] _resort];
-            
-            if (![[self groupList] containsObject:groupName]) {
-                BOOL isDuplicateGroup = NO;
-                
-                //Check if any other account uses this group also before actually removing it
-                for (IMAccount *nextAccount in [[IMAccountController sharedInstance] allConnectedAccounts]) {
-                    if (![nextAccount isKindOfClass:NSClassFromString(@"UnifiedAccount")] && nextAccount != (IMAccount *)self && [[nextAccount groupList] containsObject:groupName]) {
-                        isDuplicateGroup = YES;
-                        break;
-                    }
-                }
-                
-                if (!isDuplicateGroup) {
-                    [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] removeGroup:groupName];
-                }
-            } else if (![[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] containsGroup:groupName]) {
-                [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] addGroup:groupName];
-            }
-        }
-    }
-    
-    [self chax_swizzle_groupsChanged:fp8 error:fp12];
-}
-
 @end

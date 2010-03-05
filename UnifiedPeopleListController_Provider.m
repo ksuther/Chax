@@ -260,4 +260,43 @@ NSMenu *_addMenu = nil;
 	[NSClassFromString(@"GroupsEditorController") addGroupForPeopleListController:accountPeopleListController];
 }
 
+- (void)reloadGroupsChax
+{
+    NSMutableSet *activeGroups = [NSMutableSet set];
+    
+    //Build a list of all the active groups in connected accounts
+    for (IMAccount *nextAccount in [[IMAccountController sharedInstance] allConnectedAccounts]) {
+        if (![nextAccount isKindOfClass:NSClassFromString(@"UnifiedAccount")]) {
+            [activeGroups addObjectsFromArray:[nextAccount groupList]];
+        }
+    }
+    
+    //Add groups missing from the unified list
+    for (NSString *nextGroup in activeGroups) {
+        if (![[[[self peopleList] valueForKey:@"_peopleListGroups"] valueForKey:@"name"] containsObject:nextGroup]) {
+            for (PeopleListController *plc in [NSClassFromString(@"PeopleListController") peopleListControllers]) {
+                [(AnimatingTableView *)[[plc peopleList] table] reloadData];
+                [[plc peopleList] _stopTransitions];
+            }
+            
+            [[self peopleList] addGroup:nextGroup];
+        }
+    }
+    
+    //Remove groups missing from other accounts
+    for (NSString *nextGroup in [[[self peopleList] valueForKey:@"_peopleListGroups"] valueForKey:@"name"]) {
+        if (![activeGroups containsObject:nextGroup]) {
+            for (PeopleListController *plc in [NSClassFromString(@"PeopleListController") peopleListControllers]) {
+                [(AnimatingTableView *)[[plc peopleList] table] reloadData];
+                [[plc peopleList] _stopTransitions];
+            }
+            
+            [[self peopleList] removeGroup:nextGroup];
+        }
+    }
+    
+    //Prevents duplicate contact list from stacking up on each other
+    [[self peopleList] refreshList];
+}
+
 @end

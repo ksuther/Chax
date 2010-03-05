@@ -141,4 +141,15 @@
 	[self chax_resizeWindow];
 }
 
+- (void)chax_swizzle__serviceGroupsChanged:(id)fp8
+{
+    //Only attempt to update groups if the unified list arranges by groups
+    if (![self isKindOfClass:NSClassFromString(@"UnifiedAccount")] && [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] arrangesByGroup]) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:[NSClassFromString(@"UnifiedPeopleListController") sharedController] selector:@selector(reloadGroupsChax) object:nil];
+        [[NSClassFromString(@"UnifiedPeopleListController") sharedController] performSelector:@selector(reloadGroupsChax) withObject:nil afterDelay:0.5];
+    }
+    
+    [self chax_swizzle__serviceGroupsChanged:fp8];
+}
+
 @end

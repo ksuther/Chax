@@ -133,7 +133,7 @@ static BOOL _preparingToSleep = NO;
 }
 
 - (NSArray *)groupList
-{   
+{
     ChaxDebugLog(@"Entering groupList");
     
 	NSMutableArray *sortedGroups = [[[Chax objectForKey:@"UnifiedGroupOrder"] mutableCopy] autorelease];

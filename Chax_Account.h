@@ -29,6 +29,7 @@
 @optional
 - (id)_createInstantMessage:(id)fp8 chatID:(id)fp12;
 - (id)groupList;
+- (BOOL)justLoggedIn;
 @end
 
 @interface Chax_Account : NSObject <Chax_AccountMethods> {
