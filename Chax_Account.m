@@ -133,7 +133,19 @@
             [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] _resort];
             
             if (![[self groupList] containsObject:groupName]) {
-                [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] removeGroup:groupName];
+                BOOL isDuplicateGroup = NO;
+                
+                //Check if any other account uses this group also before actually removing it
+                for (IMAccount *nextAccount in [[IMAccountController sharedInstance] allConnectedAccounts]) {
+                    if (![nextAccount isKindOfClass:NSClassFromString(@"UnifiedAccount")] && nextAccount != (IMAccount *)self && [[nextAccount groupList] containsObject:groupName]) {
+                        isDuplicateGroup = YES;
+                        break;
+                    }
+                }
+                
+                if (!isDuplicateGroup) {
+                    [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] removeGroup:groupName];
+                }
             } else if (![[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] containsGroup:groupName]) {
                 [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] addGroup:groupName];
             }
