@@ -384,6 +384,14 @@
 		378D4FA7101E6FE300176B47 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/Growl.framework; sourceTree = "<group>"; };
 		378D4FF1101E722B00176B47 /* StatusChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusChangeController.h; sourceTree = "<group>"; };
 		378D4FF2101E722B00176B47 /* StatusChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusChangeController.m; sourceTree = "<group>"; };
+		3790FDFE1155DEDA00C44DCF /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/ActivityWindow.strings; sourceTree = "<group>"; };
+		3790FDFF1155DEDA00C44DCF /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/CameraSnapshot.strings; sourceTree = "<group>"; };
+		3790FE001155DEDA00C44DCF /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Donate.strings; sourceTree = "<group>"; };
+		3790FE011155DEDA00C44DCF /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3790FE021155DEDA00C44DCF /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/LogViewer.strings; sourceTree = "<group>"; };
+		3790FE031155DEDA00C44DCF /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Preferences.strings; sourceTree = "<group>"; };
+		3790FE041155DEFF00C44DCF /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Installer/Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3790FE051155DEFF00C44DCF /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Installer/Spanish.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		37AFBC1F1031125B001AA056 /* LogViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogViewerController.h; sourceTree = "<group>"; };
 		37AFBC201031125B001AA056 /* LogViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogViewerController.m; sourceTree = "<group>"; };
 		37AFBC26103112EB001AA056 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/LogViewer.xib; sourceTree = "<group>"; };
@@ -1100,6 +1108,7 @@
 				de,
 				Polish,
 				Dutch,
+				Spanish,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Chax */;
 			projectDirPath = "";
@@ -1501,6 +1510,7 @@
 				37E71870110A646700A48E72 /* French */,
 				37C1FB87110B583A009529E9 /* Polish */,
 				375789DE111799180001662A /* Dutch */,
+				3790FE011155DEDA00C44DCF /* Spanish */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1521,6 +1531,7 @@
 				37E7186D110A646700A48E72 /* French */,
 				37C1FB84110B583A009529E9 /* Polish */,
 				375789DB111799180001662A /* Dutch */,
+				3790FDFE1155DEDA00C44DCF /* Spanish */,
 			);
 			name = ActivityWindow.strings;
 			sourceTree = "<group>";
@@ -1533,6 +1544,7 @@
 				37E7186E110A646700A48E72 /* French */,
 				37C1FB85110B583A009529E9 /* Polish */,
 				375789DC111799180001662A /* Dutch */,
+				3790FDFF1155DEDA00C44DCF /* Spanish */,
 			);
 			name = CameraSnapshot.strings;
 			sourceTree = "<group>";
@@ -1545,6 +1557,7 @@
 				37E7186F110A646700A48E72 /* French */,
 				37C1FB86110B583A009529E9 /* Polish */,
 				375789DD111799180001662A /* Dutch */,
+				3790FE001155DEDA00C44DCF /* Spanish */,
 			);
 			name = Donate.strings;
 			sourceTree = "<group>";
@@ -1557,6 +1570,7 @@
 				37E71871110A646700A48E72 /* French */,
 				37C1FB88110B583A009529E9 /* Polish */,
 				375789DF111799180001662A /* Dutch */,
+				3790FE021155DEDA00C44DCF /* Spanish */,
 			);
 			name = LogViewer.strings;
 			sourceTree = "<group>";
@@ -1569,6 +1583,7 @@
 				37E71872110A646700A48E72 /* French */,
 				37C1FB89110B583A009529E9 /* Polish */,
 				375789E0111799180001662A /* Dutch */,
+				3790FE031155DEDA00C44DCF /* Spanish */,
 			);
 			name = Preferences.strings;
 			sourceTree = "<group>";
@@ -1582,6 +1597,7 @@
 				37E71873110A649B00A48E72 /* French */,
 				37C1FB8E110B5881009529E9 /* Polish */,
 				375789ED111799610001662A /* Dutch */,
+				3790FE041155DEFF00C44DCF /* Spanish */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1607,6 +1623,7 @@
 			children = (
 				37654A82110A271E0054FF9F /* de */,
 				37C1FBC0110BBC7B009529E9 /* French */,
+				3790FE051155DEFF00C44DCF /* Spanish */,
 			);
 			name = MainMenu.strings;
 			sourceTree = "<group>";
