@@ -127,7 +127,11 @@ NSString *FilterToolbarItemIdentifier = @"FilterToolbarItemIdentifier";
 			} else {
 				NSLog(@"Error migrating store: %@", error);
 			}
-		} else if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
+		} else if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                             configuration:nil
+                                                                       URL:url
+                                                                   options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:NSSQLiteManualVacuumOption]
+                                                                     error:&error]) {
 			[[NSApplication sharedApplication] presentError:error];
 		}
 		
