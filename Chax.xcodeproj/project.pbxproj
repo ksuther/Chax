@@ -431,8 +431,8 @@
 		37C1FB8E110B5881009529E9 /* Polish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Polish; path = Installer/Polish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37C1FBC0110BBC7B009529E9 /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = French; path = Installer/French.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		37CC446B10DEDDE300998593 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = English; path = Installer/English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		37D0E26A104612C1009C42DA /* DonateWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DonateWindowController.h; path = "../Chax 10.5/DonateWindowController.h"; sourceTree = "<group>"; };
-		37D0E26B104612C1009C42DA /* DonateWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DonateWindowController.m; path = "../Chax 10.5/DonateWindowController.m"; sourceTree = "<group>"; };
+		37D0E26A104612C1009C42DA /* DonateWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonateWindowController.h; sourceTree = "<group>"; };
+		37D0E26B104612C1009C42DA /* DonateWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DonateWindowController.m; sourceTree = "<group>"; };
 		37D0E2861046133B009C42DA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Donate.xib; sourceTree = "<group>"; };
 		37D1F4AC1022591F006F0D8C /* Chax_Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_Account.h; sourceTree = "<group>"; };
 		37D1F4AD1022591F006F0D8C /* Chax_Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_Account.m; sourceTree = "<group>"; };
