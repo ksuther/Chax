@@ -189,8 +189,6 @@ static BOOL _preparingToSleep = NO;
 - (void)systemWillSleep
 {
     _preparingToSleep = YES;
-    
-    [self logoutAccount];
 }
 
 /*- (void)willSleepNotification:(id)fp8
