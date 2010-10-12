@@ -34,8 +34,6 @@ int main(int argc, char **argv)
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     if (argc == 3) {
-        BOOL valid = NO;
-        
         NSString *injectFrameworkPath = [NSString stringWithCString:argv[1] encoding:NSUTF8StringEncoding];
         NSString *injectBundlePath = [NSString stringWithCString:argv[2] encoding:NSUTF8StringEncoding];
         NSArray *runningAgents = [NSRunningApplication runningApplicationsWithBundleIdentifier:iChatAgentBundleIdentifier];

@@ -95,7 +95,6 @@
 - (void)updateWithSavedChatPaths:(NSArray *)savedChatPaths
 {
     WebView *webView = (WebView *)[self view];
-    NSString *logPath = [NSClassFromString(@"Prefs") savedChatPath];
     NSMutableString *htmlString = [[[NSMutableString alloc] initWithString:@"<html><head>\n"] autorelease];
     NSMutableArray *imagePaths = [NSMutableArray array];
     

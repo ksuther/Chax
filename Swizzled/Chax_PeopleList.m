@@ -39,7 +39,7 @@
     unsigned int viewOptions = (NSUInteger)object_getIvar(self, ivar);
     
     //This means showing of buddy pictures is being turned off
-    if ((viewOptions & 1 == 1)) {
+    if ((viewOptions & 1) == 1) {
         if ([Chax boolForKey:@"UseCustomContactListFonts"]) {
             NSData *data = [Chax dataForKey:@"ContactListFont"];
             NSFont *font = (data != nil) ? [NSUnarchiver unarchiveObjectWithData:data] : nil;

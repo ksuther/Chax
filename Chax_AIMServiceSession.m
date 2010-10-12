@@ -25,6 +25,7 @@
 #import "BundleUtilities.h"
 #import "IMFoundation.h"
 #import "Chax_SuperToAIMParserContext.h"
+#import "MethodSwizzle.h"
 
 @implementation Chax_AIMServiceSession
 

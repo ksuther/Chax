@@ -38,7 +38,7 @@ BOOL ChaxAgentInjectorCheckAndInject()
         }
     }
     
-    ChaxAgentInjectorPerformInjection();
+    return ChaxAgentInjectorPerformInjection();
 }
 
 BOOL ChaxAgentInjectorPerformInjection()
@@ -86,16 +86,17 @@ BOOL ChaxAgentInjectorPerformInjection()
         
         ChaxDebugLog(@"Launched with arguments: %@", arguments);
     }
+    
+    return YES;
 }
 
 BOOL ChaxAgentInjectorNeedsPermissionRepair()
 {
-    struct stat statResult;
     NSString *injectorPath = [[NSBundle bundleWithIdentifier:ChaxLibBundleIdentifier] pathForAuxiliaryExecutable:@"ChaxAgentInjector"];
     NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:injectorPath error:nil];
     
     //Is ChaxAgentInjector not setgid and in the group procmod?
-    return ![[attributes fileGroupOwnerAccountName] isEqualToString:@"procmod"] || ([attributes filePosixPermissions] & 02000 == 0);
+    return ![[attributes fileGroupOwnerAccountName] isEqualToString:@"procmod"] || (([attributes filePosixPermissions] & 02000) == 0);
 }
 
 BOOL ChaxAgentInjectorRepairPermissions()

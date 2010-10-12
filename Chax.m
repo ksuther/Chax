@@ -31,6 +31,7 @@
 #import "ActivityWindowController.h"
 #import "ChaxHelperAppUtils.h"
 #import "ChaxAgentPermissionRepair.h"
+#import "AutomaticSwizzle.h"
 
 NSString *ChaxBundleIdentifier = @"com.ksuther.chax";
 NSString *ChaxLibBundleIdentifier = @"com.ksuther.chax.lib";
@@ -282,7 +283,7 @@ void ChaxDebugLog(NSString *format, ...) {
         
         err = LSOpenApplication(&params, NULL);
         if (err != noErr) {
-            NSLog(@"Failed to relaunch ChaxHelperApp: LSOpenApplication() failed (%d)", err);
+            NSLog(@"Failed to relaunch ChaxHelperApp: LSOpenApplication() failed (%d)", (int)err);
         }
     } else {
         NSLog(@"Failed to relaunch ChaxHelperApp: No path to executable");

@@ -23,6 +23,7 @@
 
 #import "Chax_DaemonListenerStub.h"
 #import "IMCore.h"
+#import "ChaxAgentPermissionRepair.h"
 
 @implementation Chax_DaemonListenerStub
 
