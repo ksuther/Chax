@@ -416,7 +416,11 @@ typedef enum LogViewerToolbarItem {
                 NSMutableIndexSet *indices = [NSMutableIndexSet indexSet];
                 
                 for (NSString *person in selectedPeople) {
-                    [indices addIndex:[[self visiblePeople] indexOfObject:person]];
+                    NSUInteger index = [[self visiblePeople] indexOfObject:person];
+                    
+                    if (index != NSNotFound) {
+                        [indices addIndex:index];
+                    }
                 }
                 
                 [_peopleTableView selectRowIndexes:indices byExtendingSelection:YES];
@@ -954,7 +958,11 @@ typedef enum LogViewerToolbarItem {
         NSMutableIndexSet *indices = [NSMutableIndexSet indexSet];
         
         for (NSString *person in selectedPeople) {
-            [indices addIndex:[[self visiblePeople] indexOfObject:person]];
+            NSUInteger index = [[self visiblePeople] indexOfObject:person];
+            
+            if (index != NSNotFound) {
+                [indices addIndex:index];
+            }
         }
         
         [_peopleTableView selectRowIndexes:indices byExtendingSelection:YES];
