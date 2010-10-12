@@ -82,11 +82,11 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
     NSString *statusMessage = [presentity scriptStatusMessage];
     IMHandle *myHandle = [IMMe imHandleForService:[presentity service]];
     
-    ChaxDebugLog(@"presentityStatusChanged: %@ (statusMessage: %@) on contact list: %d timeSinceStatusChanged: %f accountLoginStatus: %d justLoggedIn: %d status: %d previousStatus: %d handle: %@ me: %@", presentity, statusMessage, [[[presentity account] arrayOfAllIMHandles] containsObject:presentity], [presentity timeSinceStatusChanged], [[presentity account] accountLoginStatus], [[presentity account] justLoggedIn], [presentity status], [presentity previousStatus], presentity, [IMMe imHandleForService:[presentity service]]);
+    //ChaxDebugLog(@"presentityStatusChanged: %@ (statusMessage: %@) on contact list: %d timeSinceStatusChanged: %f accountLoginStatus: %d justLoggedIn: %d status: %d previousStatus: %d handle: %@ me: %@", presentity, statusMessage, [[[presentity account] arrayOfAllIMHandles] containsObject:presentity], [presentity timeSinceStatusChanged], [[presentity account] accountLoginStatus], [[presentity account] justLoggedIn], [presentity status], [presentity previousStatus], presentity, [IMMe imHandleForService:[presentity service]]);
     
 	if ([[[presentity account] arrayOfAllIMHandles] containsObject:presentity] && [presentity timeSinceStatusChanged] < 1 && [[presentity account] accountLoginStatus] == 4 && ![[presentity account] justLoggedIn] &&
         [presentity status] != [presentity previousStatus] && [presentity status] != 5 && myHandle != presentity) {
-        ChaxDebugLog(@"Person status changed: %@", presentity);
+        //ChaxDebugLog(@"Person status changed: %@", presentity);
         
 		//Notify the activity window of the change
 		[[ActivityWindowController sharedController] addPresentityToActivity:presentity];
