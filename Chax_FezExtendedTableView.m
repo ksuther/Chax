@@ -23,6 +23,7 @@
 
 #import "Chax_FezExtendedTableView.h"
 #import "LogViewerController.h"
+#import "iChat5.h"
 
 @implementation Chax_FezExtendedTableView
 
@@ -33,8 +34,23 @@
 {
 	switch ([sender tag]) {
 		case ChaxMenuItemLogViewer:
-			[[LogViewerController sharedController] window];
-			[[LogViewerController sharedController] showLogsForIMHandle:[[self delegate] imHandleAtRow:[[sender representedObject] intValue]]];
+            {
+                NSInteger row = [[sender representedObject] integerValue];
+                IMHandle *handle = nil;
+                
+                [[LogViewerController sharedController] window];
+                
+                if ([[self delegate] isKindOfClass:NSClassFromString(@"PeopleList")]) {
+                    handle = [(PeopleList *)[self delegate] imHandleAtRow:row];
+                } else if ([[self delegate] isKindOfClass:NSClassFromString(@"ChatWindowController")]) {
+                    handle = [[[self delegate] chatAtIndex:[[sender representedObject] integerValue]] otherIMHandle];
+                }
+                
+                if (handle) {
+                    [[LogViewerController sharedController] showLogsForIMHandle:handle];
+                }
+            }
+            break;
 	}
 }
 
