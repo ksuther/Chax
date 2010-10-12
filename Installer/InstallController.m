@@ -23,6 +23,7 @@
 
 #import "InstallController.h"
 #import "ChaxHelperAppUtils.h"
+#import <sys/xattr.h>
 
 #define DONATE_URL [NSURL URLWithString:@"http://www.ksuther.com/chax/donate"]
 #define FAQ_URL [NSURL URLWithString:@"http://www.ksuther.com/chax/faq"]

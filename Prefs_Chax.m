@@ -386,7 +386,7 @@ enum {
 {
 	BOOL value = (returnCode != NSOKButton);
 	
-	switch ((int)contextInfo) {
+	switch ((NSInteger)contextInfo) {
 		case 1:
 			[self willChangeValueForKey:@"autoAcceptFiles"];
 			[_defaults setValue:[NSNumber numberWithBool:value] forKey:@"AutoAcceptFiles"];
