@@ -13,10 +13,10 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0.2</string>
+	<string>3.0.3b1</string>
 	<key>CFBundleSignature</key>
 	<string>ChxL</string>
 	<key>CFBundleVersion</key>
-	<string>15</string>
+	<string>16</string>
 </dict>
 </plist>
