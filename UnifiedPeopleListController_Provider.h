@@ -47,6 +47,7 @@
 
 + (id)sharedController;
 
+- (void)reloadContacts;
 - (void)rebuildAddBuddyMenu;
 
 @end

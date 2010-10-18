@@ -31,6 +31,10 @@
 {
 	[self chax_swizzle_loginStatusChanged:fp8 message:fp12 reason:fp16 properties:fp20];
 	
+	if (fp8 == 0) {
+		[[NSClassFromString(@"UnifiedPeopleListController") sharedController] reloadContacts];
+	}
+	
 	[[NSClassFromString(@"UnifiedPeopleListController") sharedController] rebuildAddBuddyMenu];
 }
 
