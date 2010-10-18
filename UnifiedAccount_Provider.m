@@ -26,12 +26,6 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-//Used to keep the unified account from logging out all other accounts
-//We want these other accounts to log themselves out because of a sleep preparation notice
-//so that they attempt to log themselves back in as usual when waking back up
-//This should fix the problem where some accounts aren't coming back as expected when waking up
-static BOOL _preparingToSleep = NO;
-
 @implementation UnifiedAccount_Provider
 
 + (void)load
@@ -104,8 +98,7 @@ static BOOL _preparingToSleep = NO;
 
 - (void)setAccountLoginStatus:(int)fp8
 {
-	if (fp8 == 2 && !_preparingToSleep) {
-		[[IMDaemonController sharedController] logoutAllAccounts];
+	if (fp8 == 2) {
         fp8 = 0;
 	}
     
@@ -181,14 +174,11 @@ static BOOL _preparingToSleep = NO;
 
 - (void)systemDidWake
 {
-    _preparingToSleep = NO;
-    
     //Recconnect on wake code has been moved to -[Chax_Account chax_swizzle_nowLoggedIn]
 }
 
 - (void)systemWillSleep
 {
-    _preparingToSleep = YES;
 }
 
 /*- (void)willSleepNotification:(id)fp8
