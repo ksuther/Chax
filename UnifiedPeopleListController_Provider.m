@@ -213,20 +213,10 @@ NSMenu *_addMenu = nil;
 
 - (void)reloadContacts
 {
-    NSArray *controllers = [NSClassFromString(@"PeopleListController") peopleListControllers];
-    
+    [[self peopleList] beginChangesNoAnimation];
     [[self peopleList] removeAllIMHandlesAndGroups:YES];
     
-    [[self peopleList] beginChangesNoAnimation];
-    
-    for (PeopleListController *plc in controllers) {
-        if (![self isEqual:plc]) {
-            id people = [[plc sourcePeople] people];
-            
-            [[self sourcePeople] addPeopleFromArray:people];
-        }
-    }
-    
+    [self refreshList];
     [[self peopleList] endChanges];
 }
 
