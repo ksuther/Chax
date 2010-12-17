@@ -23,8 +23,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define SCRIPTING_ADDITIONS_PATH [@"~/Library/ScriptingAdditions" stringByExpandingTildeInPath]
-#define SCRIPTING_ADDITIONS_OLD_PATH [@"~/Library/ScriptingAdditionsOld" stringByExpandingTildeInPath]
+#define SCRIPTING_ADDITIONS_PATH [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"ScriptingAdditions"]
+#define SCRIPTING_ADDITIONS_OLD_PATH [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"ScriptingAdditionsOld"]
 
 extern NSString *ChaxHelperAppBundleIdentifier;
 extern NSString *ChaxAdditionFilename;
