@@ -210,6 +210,11 @@ typedef enum LogViewerToolbarItem {
         [self _didFinishLoadingLogs];
     }
     
+    if ([_chatViewController chat]) {
+        [_chatViewController setNeedsNewLayout:YES];
+        [_chatViewController willBecomeVisible];
+    }
+    
     [super showWindow:sender];
     
     if (![NSClassFromString(@"Prefs") autosaveChats]) {
