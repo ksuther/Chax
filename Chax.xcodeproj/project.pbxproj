@@ -101,7 +101,6 @@
 		375091701056FCA300F472F1 /* ActivityDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F438DF1049C5BA007F8638 /* ActivityDateFormatter.m */; };
 		375091711056FCA300F472F1 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F438E11049C5BA007F8638 /* ActivityTableView.m */; };
 		375091721056FCA300F472F1 /* Chax_ActionsControllerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F43A371049D622007F8638 /* Chax_ActionsControllerHandler.m */; };
-		375091731056FCA300F472F1 /* Chax_ChatNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F43A561049D730007F8638 /* Chax_ChatNotifier.m */; };
 		375091751056FCA300F472F1 /* Chax_ActiveChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C2EF104C87F300C01941 /* Chax_ActiveChat.m */; };
 		375091761056FCA300F472F1 /* AutomaticSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 377D7189104DC7A8007DC7EE /* AutomaticSwizzle.m */; };
 		375091771056FCA300F472F1 /* Chax_PeopleListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725864A1053716D0073C799 /* Chax_PeopleListItem.m */; };
@@ -501,8 +500,6 @@
 		37F4398C1049C9D5007F8638 /* status-offline.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "status-offline.tiff"; sourceTree = "<group>"; };
 		37F43A361049D622007F8638 /* Chax_ActionsControllerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ActionsControllerHandler.h; sourceTree = "<group>"; };
 		37F43A371049D622007F8638 /* Chax_ActionsControllerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ActionsControllerHandler.m; sourceTree = "<group>"; };
-		37F43A551049D730007F8638 /* Chax_ChatNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ChatNotifier.h; sourceTree = "<group>"; };
-		37F43A561049D730007F8638 /* Chax_ChatNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ChatNotifier.m; sourceTree = "<group>"; };
 		37F7C2EE104C87F300C01941 /* Chax_ActiveChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_ActiveChat.h; sourceTree = "<group>"; };
 		37F7C2EF104C87F300C01941 /* Chax_ActiveChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_ActiveChat.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Chax Installer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chax Installer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -800,8 +797,6 @@
 				37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */,
 				372D8A6410478E2A005E2F5F /* Chax_ChatInputLine.h */,
 				372D8A6510478E2A005E2F5F /* Chax_ChatInputLine.m */,
-				37F43A551049D730007F8638 /* Chax_ChatNotifier.h */,
-				37F43A561049D730007F8638 /* Chax_ChatNotifier.m */,
 				37F29AAC1043AC82005460A5 /* Chax_ChatWindowController.h */,
 				37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */,
 				37EA80D810FECFE500B20782 /* Chax_DaemonListenerStub.h */,
@@ -1371,7 +1366,6 @@
 				375091701056FCA300F472F1 /* ActivityDateFormatter.m in Sources */,
 				375091711056FCA300F472F1 /* ActivityTableView.m in Sources */,
 				375091721056FCA300F472F1 /* Chax_ActionsControllerHandler.m in Sources */,
-				375091731056FCA300F472F1 /* Chax_ChatNotifier.m in Sources */,
 				375091751056FCA300F472F1 /* Chax_ActiveChat.m in Sources */,
 				375091761056FCA300F472F1 /* AutomaticSwizzle.m in Sources */,
 				375091771056FCA300F472F1 /* Chax_PeopleListItem.m in Sources */,

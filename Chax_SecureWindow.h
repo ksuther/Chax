@@ -27,6 +27,4 @@
 
 }
 
-+ (void)chax_blockNextShowWindow;
-
 @end
