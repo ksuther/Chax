@@ -72,6 +72,9 @@ NSMenu *_addMenu = nil;
     struct objc_super superData = {self, [self superclass]};
 	
 	objc_msgSendSuper(&superData, @selector(dealloc));
+    
+    return;
+    [super dealloc];
 }
 
 - (void)windowDidLoad
