@@ -135,34 +135,45 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
         NSString *title, *description, *notification;
         NSString *name = [presentity name];
         
+        title = name;
+        
         switch ([presentity status]) {
             case IMPersonStatusOffline:
-                title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went offline"), name];
-                description = nil;
+                description = ChaxLocalizedString(@"went offline");
                 notification = ChaxGrowlUserOffline;
                 break;
             case IMPersonStatusIdle:
-                title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went idle"), name];
-                description = nil;
+                description = ChaxLocalizedString(@"went idle");
                 notification = ChaxGrowlUserIdle;
                 break;
             case IMPersonStatusAway:
-                title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ went away"), name];
-                description = statusMessage;
+                if ([statusMessage length] > 0) {
+                    description = [NSString stringWithFormat:ChaxLocalizedString(@"went away: %@"), statusMessage];
+                } else {
+                    description = ChaxLocalizedString(@"went away");
+                }
+                
                 notification = ChaxGrowlUserAway;
                 break;
             case IMPersonStatusAvailable:
                 if ([presentity previousStatus] == 1) {
-                    title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ came online"), name];
-                    description = nil;
+                    description = ChaxLocalizedString(@"came online");
                     notification = ChaxGrowlUserOnline;
                 } else if ([presentity previousStatus] == 0) {
-                    title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ changed status"), name];
-                    description = statusMessage;
+                    if ([statusMessage length] > 0) {
+                        description = [NSString stringWithFormat:ChaxLocalizedString(@"changed status: %@"), statusMessage];
+                    } else {
+                        description = ChaxLocalizedString(@"changed status");
+                    }
+                    
                     notification = ChaxGrowlUserStatusChanged;
                 } else {
-                    title = [NSString stringWithFormat:ChaxLocalizedString(@"%@ became available"), name];
-                    description = statusMessage;
+                    if ([statusMessage length] > 0) {
+                        description = [NSString stringWithFormat:ChaxLocalizedString(@"became available: %@"), statusMessage];
+                    } else {
+                        description = ChaxLocalizedString(@"became available");
+                    }
+                    
                     notification = ChaxGrowlUserAvailable;
                 }
                 break;
