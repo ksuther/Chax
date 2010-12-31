@@ -89,7 +89,10 @@ NSMenu *_addMenu = nil;
     }
     
     [[[self peopleList] table] setTrackingRectsEnabled:YES];
-    [[self peopleList] setSeparateServices:NO];
+    
+    if (![Chax boolForKey:@"SeparateServices"]) {
+        [[self peopleList] setSeparateServices:NO];
+    }
 }
 
 - (void)hideOtherLists
