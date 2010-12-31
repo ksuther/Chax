@@ -1,14 +1,7 @@
-//
-//  Chax_FileTransferCenter.m
-//  Chax
-//
-//  Created by Kent Sutherland on 1/14/10.
-//  Copyright 2010 Kent Sutherland. All rights reserved.
-//
 /*
  * Chax_FileTransferCenter.m
  *
- * Copyright (c) 2007-2010 Kent Sutherland
+ * Copyright (c) 2007-2011 Kent Sutherland
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
