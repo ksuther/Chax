@@ -120,6 +120,7 @@
 		3753EB7F10EEB4DA006B0F24 /* logviewer.css in Resources */ = {isa = PBXBuildFile; fileRef = 3753EB7E10EEB4DA006B0F24 /* logviewer.css */; };
 		3753EC1310EED866006B0F24 /* LogViewerPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3753EC1210EED866006B0F24 /* LogViewerPreviewItem.m */; };
 		3753ECFD10EEEF3F006B0F24 /* ChaxHelperApp.app in Copy Executables */ = {isa = PBXBuildFile; fileRef = 377AAC3D105DEA380068A68F /* ChaxHelperApp.app */; };
+		376BE5C412E3840500E49C7D /* Chax_StatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376BE59A12E3816200E49C7D /* Chax_StatusController.m */; };
 		377351F110DC948100CF1C88 /* InstallChax.icns in Resources */ = {isa = PBXBuildFile; fileRef = 377351F010DC948100CF1C88 /* InstallChax.icns */; };
 		377351F610DC959F00CF1C88 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377AAC1D105DE96E0068A68F /* MainMenu.xib */; };
 		377351FE10DC960600CF1C88 /* InstallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377351FD10DC960600CF1C88 /* InstallController.m */; };
@@ -327,6 +328,8 @@
 		375789E0111799180001662A /* Dutch */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Dutch; path = Dutch.lproj/Preferences.strings; sourceTree = "<group>"; };
 		375789ED111799610001662A /* Dutch */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Dutch; path = Installer/Dutch.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37654A82110A271E0054FF9F /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = de; path = Installer/de.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		376BE59912E3816200E49C7D /* Chax_StatusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chax_StatusController.h; sourceTree = "<group>"; };
+		376BE59A12E3816200E49C7D /* Chax_StatusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chax_StatusController.m; sourceTree = "<group>"; };
 		377351F010DC948100CF1C88 /* InstallChax.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = InstallChax.icns; path = Installer/InstallChax.icns; sourceTree = "<group>"; };
 		377351F310DC94D700CF1C88 /* ChaxInstaller-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ChaxInstaller-Info.plist"; sourceTree = "<group>"; };
 		377351FC10DC960600CF1C88 /* InstallController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstallController.h; path = Installer/InstallController.h; sourceTree = "<group>"; };
@@ -833,6 +836,8 @@
 				37D6315711099ED700E22722 /* Chax_SmileyGrid.m */,
 				37E718F3110A951400A48E72 /* Chax_SmileyPicker.h */,
 				37E718F4110A951400A48E72 /* Chax_SmileyPicker.m */,
+				376BE59912E3816200E49C7D /* Chax_StatusController.h */,
+				376BE59A12E3816200E49C7D /* Chax_StatusController.m */,
 			);
 			name = "Swizzled Classes";
 			sourceTree = "<group>";
@@ -1386,6 +1391,7 @@
 				37BE0E161107800F004647C4 /* Chax_Notifier.m in Sources */,
 				37D6315811099ED700E22722 /* Chax_SmileyGrid.m in Sources */,
 				37E718F5110A951400A48E72 /* Chax_SmileyPicker.m in Sources */,
+				376BE5C412E3840500E49C7D /* Chax_StatusController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
