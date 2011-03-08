@@ -8,9 +8,6 @@ NAME="Chax $VERSION"
 FINAL_NAME="Chax_$VERSION"
 BUILD_DIR=$BUILD_ROOT/$BUILD_STYLE
 
-#IS_BETA="no"
-#[[ "$VERSION" =~ "b" ]] && IS_BETA="beta"
-
 rm -f "$BUILD_DIR/$NAME.dmg"
 
 hdiutil create "$BUILD_DIR/$NAME.dmg" -size 05m -fs HFS+ -volname "$NAME"
@@ -24,6 +21,3 @@ hdiutil convert "$BUILD_DIR/$NAME.dmg" -format UDZO -o "$BUILD_DIR/$NAME.udzo.dm
 rm -f "$BUILD_DIR/$NAME.dmg"
 hdiutil internet-enable -yes "$BUILD_DIR/$NAME.udzo.dmg"
 mv "$BUILD_DIR/$NAME.udzo.dmg" "$BUILD_DIR/$FINAL_NAME.dmg"
-
-#Upload the file
-#osascript /Users/kent/Programming/Chax/Release/upload_dmg.scpt $IS_BETA /Users/kent/Sites/chax/downloads/beta/$FINAL_NAME.dmg
