@@ -10,4 +10,5 @@
 	#import "Chax.h"
 	#import "BundleUtilities.h"
 	#import "MethodSwizzle.h"
+    #import "iChat6.h"
 #endif

@@ -22,6 +22,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <CoreServices/CoreServices.h>
 
 NSString *iChatBundleIdentifier = @"com.apple.iChat";
 
@@ -35,8 +36,12 @@ NSString *iChatBundleIdentifier = @"com.apple.iChat";
 + (void)applicationDidLaunch:(NSNotification *)note
 {
     NSString *bundleIdentifier = [[note userInfo] objectForKey:@"NSApplicationBundleIdentifier"];
+    SInt32 major = 0;
+    SInt32 minor = 0;   
+    Gestalt(gestaltSystemVersionMajor, &major);
+    Gestalt(gestaltSystemVersionMinor, &minor);
     
-    if ([bundleIdentifier isEqualToString:iChatBundleIdentifier]) {
+    if ([bundleIdentifier isEqualToString:iChatBundleIdentifier] && major == 10 && minor == 7) {
         NSAppleScript *script = [[[NSAppleScript alloc] initWithSource:@"tell application \"iChat\" to Load Chax"] autorelease];
         NSDictionary *errorInfo = nil;
         

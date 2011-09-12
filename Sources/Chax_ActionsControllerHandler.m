@@ -22,7 +22,6 @@
  */
 
 #import "Chax_ActionsControllerHandler.h"
-#import "iChat5.h"
 
 @implementation Chax_ActionsControllerHandler
 

@@ -23,7 +23,6 @@
 
 #import "Chax_FezExtendedTableView.h"
 #import "LogViewerController.h"
-#import "iChat5.h"
 
 @implementation Chax_FezExtendedTableView
 

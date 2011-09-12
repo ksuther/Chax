@@ -48,13 +48,13 @@
 	
 	if (![NSApp isActive] || [Chax boolForKey:@"AlwaysShowGrowlNotifications"]) {
 		InstantMessage *message = [self _createInstantMessage:fp16 chatID:fp8];
-		Presentity *presentity = [message sender];
+		Presentity *presentity = (Presentity *)[message sender];
 		
 		if ([[[message text] string] length] > 0) {
             NSData *imageData = [[[presentity customPicture] image] TIFFRepresentation];
             
             if (imageData == nil) {
-                imageData = [[[presentity genericPicture] image] TIFFRepresentation];
+                imageData = [[[presentity picture] image] TIFFRepresentation];
             }
             
 			[[StatusChangeController sharedController] postGrowlNotificationWithTitle:[NSString stringWithFormat:ChaxLocalizedString(@"%@ says"), [presentity name]]
@@ -83,7 +83,7 @@
             NSData *imageData = [[[presentity customPicture] image] TIFFRepresentation];
             
             if (imageData == nil) {
-                imageData = [[[presentity genericPicture] image] TIFFRepresentation];
+                imageData = [[[presentity picture] image] TIFFRepresentation];
             }
             
 			[[StatusChangeController sharedController] postGrowlNotificationWithTitle:[NSString stringWithFormat:ChaxLocalizedString(@"%@ says"), [presentity name]]
@@ -100,27 +100,6 @@
 			[Chax undimScreenAndStopScreenSaver];
 		}
 	}*/
-}
-
-- (void)chax_swizzle_nowLoggedIn
-{
-    //Notify the unified contact list that an account connected so that we can "connect" it also if necessary
-    if (![[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] connected]) {
-        [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] setAccountLoginStatus:4];
-        [[NSClassFromString(@"UnifiedPeopleListController") sharedController] uncollapseTableAnimated:YES];
-    }
-    
-    [self chax_swizzle_nowLoggedIn];
-}
-
-- (void)chax_swizzle_nowLoggedOut
-{
-    //Tell the unified contact list to "disconnect" if no accounts are connected
-    if ([(NSArray *)[[IMAccountController sharedInstance] allConnectedAccounts] count] == 0) {
-        [[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount] logoutAccount];
-    }
-    
-    [self chax_swizzle_nowLoggedOut];
 }
 
 @end

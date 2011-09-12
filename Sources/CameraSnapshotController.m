@@ -22,7 +22,6 @@
  */
 
 #import "CameraSnapshotController.h"
-#import "iChat5.h"
 
 @implementation CameraSnapshotController
 
@@ -52,7 +51,7 @@
 	[_sendButton setAlternateImage:cameraDownImage];
 	
 	//Set the window's aspect ratio
-	CGFloat viewHeight = _cameraView.frame.size.width / [[_cameraView layerModel] preferredAspectRatio];
+	CGFloat viewHeight = _cameraView.frame.size.width / [[_cameraView layerModel] localAspectRatio];
 	NSRect windowFrame = [[self window] frame];
 	
 	windowFrame.size.height += viewHeight - _cameraView.frame.size.height;

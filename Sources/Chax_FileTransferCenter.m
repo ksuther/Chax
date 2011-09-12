@@ -24,7 +24,6 @@
 #import "Chax_FileTransferCenter.h"
 #import "IMFoundation.h"
 #import "IMCore.h"
-#import "iChat5.h"
 
 @implementation Chax_FileTransferCenter
 

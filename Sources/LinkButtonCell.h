@@ -22,7 +22,6 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "iChat5.h"
 
 @interface LinkButtonCell : NSButtonCell <NSTextAttachmentCell> {
     NSTextAttachment *_attachment;

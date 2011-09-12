@@ -22,7 +22,6 @@
  */
 
 #import "DockIconController.h"
-#import "iChat5.h"
 #import "ChaxDockView.h"
 
 static DockIconController *_sharedController = nil;

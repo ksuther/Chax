@@ -23,7 +23,6 @@
 
 #import "Chax_PeopleListItem.h"
 #import "StatusChangeController.h"
-#import "iChat5.h"
 
 @implementation Chax_PeopleListItem
 

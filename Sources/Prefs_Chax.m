@@ -25,7 +25,6 @@
 #import "ChaxDefaults.h"
 #import "AutoAcceptPrefsWindowController.h"
 #import "Chax_FezPreferences.h"
-#import "iChat5.h"
 #import "ChaxAgentPermissionRepair.h"
 
 #define SENDER_STATE ([(NSCell *)sender state] == NSOnState)

@@ -23,7 +23,6 @@
 
 #import "ConversationViewController.h"
 #import "LogViewerController.h"
-#import "iChat5.h"
 
 @implementation ConversationViewController
 

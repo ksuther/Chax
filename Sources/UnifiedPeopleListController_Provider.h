@@ -22,7 +22,6 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "iChat5.h"
 #import "IMCore.h"
 
 @protocol UnifiedPeopleListController_ProviderMethods

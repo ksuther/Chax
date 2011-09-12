@@ -23,7 +23,6 @@
 
 #import "LogViewerController.h"
 #import "RegexKitLite.h"
-#import "iChat5.h"
 #import "IMFoundation.h"
 #import "IMRenderingFoundation.h"
 #import "LinkButtonCell.h"

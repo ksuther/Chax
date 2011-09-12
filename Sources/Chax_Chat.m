@@ -22,7 +22,6 @@
  */
 
 #import "Chax_Chat.h"
-#import "iChat5.h"
 #import "DockIconController.h"
 
 @implementation Chax_Chat

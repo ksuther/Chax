@@ -22,7 +22,6 @@
  */
 
 #import "Chax_ServiceErrorDialog.h"
-#import "iChat5.h"
 
 @implementation Chax_ServiceErrorDialog
 

@@ -22,7 +22,6 @@
  */
 
 #import "Chax_AVChatController.h"
-#import "iChat5.h"
 
 static BOOL allowClose = NO;
 

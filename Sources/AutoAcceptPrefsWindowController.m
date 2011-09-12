@@ -22,7 +22,6 @@
  */
 
 #import "AutoAcceptPrefsWindowController.h"
-#import "iChat5.h"
 #import "Chax.h"
 
 enum {

@@ -23,7 +23,6 @@
 
 #import "ChaxDockView.h"
 #import "DockIconController.h"
-#import "iChat5.h"
 
 @implementation ChaxDockView
 

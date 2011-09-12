@@ -24,7 +24,6 @@
 #import "ActivityWindowController.h"
 #import "Chax.h"
 #import <InstantMessage/IMService.h>
-#import "iChat5.h"
 #import "ActivityDateFormatter.h"
 #import "ActivityStatusCell.h"
 #import "ActivityTableView.h"
@@ -391,50 +390,49 @@ NSString *FilterToolbarItemIdentifier = @"FilterToolbarItemIdentifier";
 		[alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:@selector(clearSheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
 	} else if ([[sender itemIdentifier] isEqualToString:SaveLogToolbarItemIdentifier]) {
 		NSSavePanel *panel = [NSSavePanel savePanel];
-		[panel setRequiredFileType:@"html"];
+        
+        [panel setAllowedFileTypes:[NSArray arrayWithObject:@"html"]];
 		[panel setCanSelectHiddenExtension:YES];
-		[panel beginSheetForDirectory:nil file:ChaxLocalizedString(@"iChat Activity Log") modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(savePanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
-	}
-}
-
-- (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
-{
-	if (returnCode == NSOKButton) {
-		NSEnumerator *enumerator = [[_arrayController arrangedObjects] objectEnumerator];
-		NSManagedObject *nextObject;
-		NSMutableString *string = [NSMutableString string];
-		NSString *timeString;
-		
-		[string appendString:@"<table>"];
-		
-		while ( (nextObject = [enumerator nextObject]) ) {
-			timeString = [[nextObject valueForKey:@"time"] descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M:%S" timeZone:nil locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-			
-			if ([nextObject valueForKey:@"statusMessage"]) {
-				int status = [[nextObject valueForKey:@"status"] intValue];
-				NSString *statusString;
-				
-				switch (status) {
-					case 101:
-						statusString = ChaxLocalizedString(@"Incoming File");
-						break;
-					case 102:
-						statusString = ChaxLocalizedString(@"Outgoing File");
-						break;
-					default:
-						statusString = [NSClassFromString(@"IMHandle") nameOfStatus:status];
-						break;
-				}
-				
-				[string appendFormat:@"<tr><td width=\"175\">%@</td><td>%@</td><td>%@</td><td>%@</td></tr>\n", timeString, [nextObject valueForKey:@"name"], statusString, [nextObject valueForKey:@"statusMessage"]];
-			} else {
-				[string appendFormat:@"<tr><td width=\"175\">%@</td><td>%@</td><td>%@</td></tr>\n", timeString, [nextObject valueForKey:@"name"], [NSClassFromString(@"IMHandle") nameOfStatus:[[nextObject valueForKey:@"status"] intValue]]];
-			}
-		}
-		
-		[string appendString:@"</table>"];
-		
-		[string writeToFile:[sheet filename] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        [panel setNameFieldStringValue:ChaxLocalizedString(@"iChat Activity Log")];
+        [panel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result){
+            if (result == NSOKButton) {
+                NSEnumerator *enumerator = [[_arrayController arrangedObjects] objectEnumerator];
+                NSManagedObject *nextObject;
+                NSMutableString *string = [NSMutableString string];
+                NSString *timeString;
+                
+                [string appendString:@"<table>"];
+                
+                while ( (nextObject = [enumerator nextObject]) ) {
+                    timeString = [[nextObject valueForKey:@"time"] descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M:%S" timeZone:nil locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+                    
+                    if ([nextObject valueForKey:@"statusMessage"]) {
+                        int status = [[nextObject valueForKey:@"status"] intValue];
+                        NSString *statusString;
+                        
+                        switch (status) {
+                            case 101:
+                                statusString = ChaxLocalizedString(@"Incoming File");
+                                break;
+                            case 102:
+                                statusString = ChaxLocalizedString(@"Outgoing File");
+                                break;
+                            default:
+                                statusString = [NSClassFromString(@"IMHandle") nameOfStatus:status];
+                                break;
+                        }
+                        
+                        [string appendFormat:@"<tr><td width=\"175\">%@</td><td>%@</td><td>%@</td><td>%@</td></tr>\n", timeString, [nextObject valueForKey:@"name"], statusString, [nextObject valueForKey:@"statusMessage"]];
+                    } else {
+                        [string appendFormat:@"<tr><td width=\"175\">%@</td><td>%@</td><td>%@</td></tr>\n", timeString, [nextObject valueForKey:@"name"], [NSClassFromString(@"IMHandle") nameOfStatus:[[nextObject valueForKey:@"status"] intValue]]];
+                    }
+                }
+                
+                [string appendString:@"</table>"];
+                
+                [string writeToURL:[panel URL] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+            }
+        }];
 	}
 }
 

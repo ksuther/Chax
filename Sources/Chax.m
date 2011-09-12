@@ -23,8 +23,6 @@
 
 #import <Sparkle/Sparkle.h>
 #import "Chax.h"
-#import "iChat5.h"
-#import "UnifiedPeopleListController_Provider.h"
 #import "StatusChangeController.h"
 #import "LogViewerController.h"
 #import "DonateWindowController.h"
@@ -108,12 +106,6 @@ void ChaxDebugLog(NSString *format, ...) {
         
         if ([Chax boolForKey:@"ConfirmQuit"]) {
             [[NSProcessInfo processInfo] disableSuddenTermination];
-        }
-        
-        //Display the unified contact list if it has never been shown before
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Chax.Visible"] == nil || [[NSClassFromString(@"UnifiedPeopleListController") sharedController] prefVisible]) {
-            //Calling showWindow: instead of displayIfPrefVisible ensures that the window is made key if no other windows are opened
-            [[NSClassFromString(@"UnifiedPeopleListController") sharedController] performSelector:@selector(showWindow:) withObject:nil afterDelay:0.0];
         }
         
         PerformAutomaticSwizzle();
@@ -212,23 +204,15 @@ void ChaxDebugLog(NSString *format, ...) {
 	[menuItems addObject:menuItem];
 	
 	//Log viewer menu item
-	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"Log Viewer") action:@selector(showWindow:) keyEquivalent:@""];
+	/*menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"Log Viewer") action:@selector(showWindow:) keyEquivalent:@""];
 	[menuItem setTag:ChaxMenuItemLogViewer];
 	[menuItem setTarget:[LogViewerController sharedController]];
-	[menuItems addObject:menuItem];
+	[menuItems addObject:menuItem];*/
 	
 	//Activity window menu item
 	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"Activity") action:@selector(showWindow:) keyEquivalent:@"a"];
 	[menuItem setTag:ChaxMenuItemActivityViewer];
 	[menuItem setTarget:[ActivityWindowController sharedController]];
-	[menuItem setKeyEquivalentModifierMask:NSCommandKeyMask | NSAlternateKeyMask];
-	[menuItems addObject:menuItem];
-	
-	//All contacts menu item
-	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"All Contacts") action:@selector(showPeopleListController:) keyEquivalent:@"1"];
-	[menuItem setTag:ChaxMenuItemAllContacts];
-	[menuItem setTarget:[NSClassFromString(@"Fezz") sharedInstance]];
-	[menuItem setRepresentedObject:[[NSClassFromString(@"UnifiedPeopleListController") sharedController] representedAccount]];
 	[menuItem setKeyEquivalentModifierMask:NSCommandKeyMask | NSAlternateKeyMask];
 	[menuItems addObject:menuItem];
 	

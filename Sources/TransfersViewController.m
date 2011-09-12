@@ -22,7 +22,6 @@
  */
 
 #import "TransfersViewController.h"
-#import "iChat5.h"
 #import "LogViewerPreviewItem.h"
 #import "LogViewerController.h"
 

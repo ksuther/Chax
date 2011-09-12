@@ -22,14 +22,11 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "iChat5.h"
 
 @protocol Chax_AccountMethods
 
 @optional
 - (id)_createInstantMessage:(id)fp8 chatID:(id)fp12;
-- (id)groupList;
-- (BOOL)justLoggedIn;
 @end
 
 @interface Chax_Account : NSObject <Chax_AccountMethods> {
