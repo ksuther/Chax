@@ -102,6 +102,7 @@
 		377644D610F66DE900ECA38A /* ChaxHelperAppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */; };
 		377AAC63105DEACA0068A68F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		377AAC76105DEC1F0068A68F /* helper_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AAC75105DEC1F0068A68F /* helper_main.m */; };
+		3784AA24141DACD60065D65E /* Chax_IMChatRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3784AA23141DACD60065D65E /* Chax_IMChatRegistry.m */; };
 		37BC686B1056EE9500F1FCD9 /* ChaxAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC686A1056EE9500F1FCD9 /* ChaxAddition.m */; };
 		37BC686D1056EEB700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC68881056EEC700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
@@ -114,7 +115,6 @@
 		37BFE8411417F75E00F339EA /* StatusChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 378D4FF2101E722B00176B47 /* StatusChangeController.m */; };
 		37BFE8631417FD6D00F339EA /* Chax_ChatWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */; };
 		37BFE8641417FD7A00F339EA /* CameraSnapshotController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F29A951043AB70005460A5 /* CameraSnapshotController.m */; };
-		37BFE8651417FF7800F339EA /* Chax_Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D1F4AD1022591F006F0D8C /* Chax_Account.m */; };
 		37CC446C10DEDDE300998593 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37CC446A10DEDDE300998593 /* Localizable.strings */; };
 		37CC44F210E140E200998593 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3710F5B210425E6900EAD72D /* Sparkle.framework */; };
 		37D6317F110A150A00E22722 /* MainMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37D6317D110A150A00E22722 /* MainMenu.strings */; };
@@ -319,6 +319,8 @@
 		377D7189104DC7A8007DC7EE /* AutomaticSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutomaticSwizzle.m; path = Sources/AutomaticSwizzle.m; sourceTree = "<group>"; };
 		377D71C8104DCB3E007DC7EE /* Chax_SuperToAIMParserContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_SuperToAIMParserContext.h; path = Sources/Chax_SuperToAIMParserContext.h; sourceTree = "<group>"; };
 		377D71C9104DCB3E007DC7EE /* Chax_SuperToAIMParserContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_SuperToAIMParserContext.m; path = Sources/Chax_SuperToAIMParserContext.m; sourceTree = "<group>"; };
+		3784AA22141DACD60065D65E /* Chax_IMChatRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_IMChatRegistry.h; path = Sources/Chax_IMChatRegistry.h; sourceTree = "<group>"; };
+		3784AA23141DACD60065D65E /* Chax_IMChatRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_IMChatRegistry.m; path = Sources/Chax_IMChatRegistry.m; sourceTree = "<group>"; };
 		3786DA1F0FF7C0A8000CBC6A /* Chax.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Chax.icns; sourceTree = "<group>"; };
 		3786DA430FF7C271000CBC6A /* MethodSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MethodSwizzle.h; path = Sources/MethodSwizzle.h; sourceTree = "<group>"; };
 		3786DA440FF7C271000CBC6A /* MethodSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MethodSwizzle.m; path = Sources/MethodSwizzle.m; sourceTree = "<group>"; };
@@ -401,8 +403,6 @@
 		37D0E26A104612C1009C42DA /* DonateWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DonateWindowController.h; path = Sources/DonateWindowController.h; sourceTree = "<group>"; };
 		37D0E26B104612C1009C42DA /* DonateWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DonateWindowController.m; path = Sources/DonateWindowController.m; sourceTree = "<group>"; };
 		37D0E2861046133B009C42DA /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Donate.xib; sourceTree = "<group>"; };
-		37D1F4AC1022591F006F0D8C /* Chax_Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_Account.h; path = Sources/Chax_Account.h; sourceTree = "<group>"; };
-		37D1F4AD1022591F006F0D8C /* Chax_Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_Account.m; path = Sources/Chax_Account.m; sourceTree = "<group>"; };
 		37D5BBB7103B679B00EE8A49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
 		37D5BBEA103C6C0100EE8A49 /* ChaxDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChaxDefaults.h; path = Sources/ChaxDefaults.h; sourceTree = "<group>"; };
 		37D5BBEB103C6C0100EE8A49 /* ChaxDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChaxDefaults.m; path = Sources/ChaxDefaults.m; sourceTree = "<group>"; };
@@ -755,8 +755,6 @@
 		3786DA540FF7C2E0000CBC6A /* Swizzled Classes */ = {
 			isa = PBXGroup;
 			children = (
-				37D1F4AC1022591F006F0D8C /* Chax_Account.h */,
-				37D1F4AD1022591F006F0D8C /* Chax_Account.m */,
 				37F43A361049D622007F8638 /* Chax_ActionsControllerHandler.h */,
 				37F43A371049D622007F8638 /* Chax_ActionsControllerHandler.m */,
 				37F7C2EE104C87F300C01941 /* Chax_ActiveChat.h */,
@@ -781,6 +779,8 @@
 				371A8733103B65C9003EC364 /* Chax_FezPreferences.m */,
 				37EA81AE10FEDEDE00B20782 /* Chax_FileTransferCenter.h */,
 				37EA81AF10FEDEDE00B20782 /* Chax_FileTransferCenter.m */,
+				3784AA22141DACD60065D65E /* Chax_IMChatRegistry.h */,
+				3784AA23141DACD60065D65E /* Chax_IMChatRegistry.m */,
 				3776F63A101CFC35009D87B6 /* Chax_IMPeople.h */,
 				3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */,
 				37018C0C1044997300C7C798 /* Chax_FileTransferManager.h */,
@@ -1321,7 +1321,7 @@
 				37BFE8411417F75E00F339EA /* StatusChangeController.m in Sources */,
 				37BFE8631417FD6D00F339EA /* Chax_ChatWindowController.m in Sources */,
 				37BFE8641417FD7A00F339EA /* CameraSnapshotController.m in Sources */,
-				37BFE8651417FF7800F339EA /* Chax_Account.m in Sources */,
+				3784AA24141DACD60065D65E /* Chax_IMChatRegistry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,4 +11,6 @@
 	#import "BundleUtilities.h"
 	#import "MethodSwizzle.h"
     #import "iChat6.h"
+    #import "IMCore.h"
+    #import "IMFoundation.h"
 #endif
