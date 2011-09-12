@@ -70,7 +70,7 @@
 		float drawY = 96;
 		
 		for (Chat *chat in chats) {
-			NSString *chatName = [chat _otherIMHandleOrChatroom];
+			NSString *chatName = [[chat participants] count] > 1 ? [chat roomName] : [[chat recipient] name];
 			
 			[backgroundColor set];
             [[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0, drawY, 128, 32) xRadius:10.0 yRadius:10.0] fill];

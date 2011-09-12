@@ -56,7 +56,7 @@ static DockIconController *_sharedController = nil;
 
 - (void)addChat:(Chat *)chat
 {
-	if (![_chats containsObject:chat] && ([Chax boolForKey:@"UseBuddyIconNotification"] || [Chax boolForKey:@"ShowNamesInDock"])) {
+	if (![[_chats valueForKey:@"roomName"] containsObject:[chat roomName]] && ([Chax boolForKey:@"UseBuddyIconNotification"] || [Chax boolForKey:@"ShowNamesInDock"])) {
 		[_chats addObject:chat];
 		
 		_chatIndex = [_chats count] - 1;
@@ -90,9 +90,9 @@ static DockIconController *_sharedController = nil;
 {
 	//Loop through all the chats to make sure they're still valid
 	for (int i = 0; i < [_chats count]; i++) {
-		ActiveChat *chat = [_chats objectAtIndex:i];
+		Chat *chat = [_chats objectAtIndex:i];
 		
-		if (![chat isActive] || ![chat hasUnreadMessages]) {
+		if (![chat isActive] || [chat unreadMessageCount] == 0) {
 			[self removeChat:chat];
 			i--;
 		}
@@ -104,7 +104,8 @@ static DockIconController *_sharedController = nil;
 		
 		if (_chatIndex < [_chats count]) {
 			ActiveChat *chat = [_chats objectAtIndex:_chatIndex];
-			[_dockView setImage:[[chat otherIMHandle] image]];
+            
+			[_dockView setImage:[[chat recipient] image]];
 		} else {
 			[_dockView setImage:nil];
 		}

@@ -102,7 +102,12 @@
 		377644D610F66DE900ECA38A /* ChaxHelperAppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */; };
 		377AAC63105DEACA0068A68F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		377AAC76105DEC1F0068A68F /* helper_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 377AAC75105DEC1F0068A68F /* helper_main.m */; };
-		3784AA24141DACD60065D65E /* Chax_IMChatRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 3784AA23141DACD60065D65E /* Chax_IMChatRegistry.m */; };
+		3784AA25141DBB310065D65E /* Chax_Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5CA103D151600EE8A49 /* Chax_Chat.m */; };
+		3784AA26141DBB3A0065D65E /* DockIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5B0103D149300EE8A49 /* DockIconController.m */; };
+		3784AA27141DBB3A0065D65E /* ChaxDockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C5B4103D14A600EE8A49 /* ChaxDockView.m */; };
+		3784AA28141DBC630065D65E /* Chax_ActionsControllerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F43A371049D622007F8638 /* Chax_ActionsControllerHandler.m */; };
+		37B531AC141DC6890034937C /* Chax_NSDockTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */; };
+		37B531AD141DCBB30034937C /* Chax_Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE0E151107800F004647C4 /* Chax_Notifier.m */; };
 		37BC686B1056EE9500F1FCD9 /* ChaxAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC686A1056EE9500F1FCD9 /* ChaxAddition.m */; };
 		37BC686D1056EEB700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC68881056EEC700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
@@ -1321,7 +1326,12 @@
 				37BFE8411417F75E00F339EA /* StatusChangeController.m in Sources */,
 				37BFE8631417FD6D00F339EA /* Chax_ChatWindowController.m in Sources */,
 				37BFE8641417FD7A00F339EA /* CameraSnapshotController.m in Sources */,
-				3784AA24141DACD60065D65E /* Chax_IMChatRegistry.m in Sources */,
+				3784AA25141DBB310065D65E /* Chax_Chat.m in Sources */,
+				3784AA26141DBB3A0065D65E /* DockIconController.m in Sources */,
+				3784AA28141DBC630065D65E /* Chax_ActionsControllerHandler.m in Sources */,
+				3784AA27141DBB3A0065D65E /* ChaxDockView.m in Sources */,
+				37B531AC141DC6890034937C /* Chax_NSDockTile.m in Sources */,
+				37B531AD141DCBB30034937C /* Chax_Notifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

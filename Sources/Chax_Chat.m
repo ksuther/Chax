@@ -26,11 +26,12 @@
 
 @implementation Chax_Chat
 
-- (int)chax_swizzle_numberOfUnreadMessages
+- (NSUInteger)chax_swizzle_unreadMessageCount
 {
-	int unreadCount = [self chax_swizzle_numberOfUnreadMessages];
-	
-	if (unreadCount > 0 && (self != [[(Chat *)self chatWindowController] currentChat] || ![NSApp isActive])) {
+	NSUInteger unreadCount = [self chax_swizzle_unreadMessageCount];
+    ChatWindowController *controller = [NSClassFromString(@"ChatWindowController") chatWindowControllerForChat:self];
+    
+	if (unreadCount > 0 && (self != [controller currentChat] || ![NSApp isActive])) {
 		[[DockIconController sharedController] addChat:(Chat *)self];
 	}
 	

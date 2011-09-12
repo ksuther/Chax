@@ -33,25 +33,10 @@ Chat *_lastChat = nil;
 	_lastChat = fp8;
     
 	[self chax_swizzle_addChatInvite:fp8 withNotifierWindow:fp12];
-}
-
-- (void)chax_swizzle_displayChat:(id)fp8
-{
-	if ([Chax boolForKey:@"SkipNewMessageNotification"] && _lastChat && _lastChat == fp8) {
-        /*if ([fp8 chatStyle]) {
-            //This is a group chat, display it immediately since it came through a notifier
-            [self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
-            
-            [self chax_swizzle_displayChat:fp8];
-        } else {
-            [self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
-        }*/
-        NSLog(@"%d", (NSInteger)[fp8 chatStyle]);
-        
-        [self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
-	} else {
-		[self chax_swizzle_displayChat:fp8];
-	}
+    
+    if ([fp8 chatStyle] == '-' && [Chax boolForKey:@"SkipNewMessageNotification"]) {
+        [fp12 setAlphaValue:0.0];
+    }
 }
 
 - (void)chax_swizzle_windowDidLoad
@@ -81,6 +66,22 @@ Chat *_lastChat = nil;
     }
 }
 
+- (void)chax_swizzle_displayChat:(id)fp8
+{
+	if ([Chax boolForKey:@"SkipNewMessageNotification"] && _lastChat && _lastChat == fp8) {
+        if ([fp8 chatStyle] == '-') {
+            [self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
+        } else {
+            //This is a group chat, display it immediately since it came through a notifier
+            [self performSelector:@selector(chax_allowSelect) withObject:nil afterDelay:0.0];
+            
+            [self chax_swizzle_displayChat:fp8];
+        }
+	} else {
+		[self chax_swizzle_displayChat:fp8];
+	}
+}
+
 - (void)chax_allowSelect
 {
 	_lastChat = nil;
@@ -104,11 +105,10 @@ Chat *_lastChat = nil;
 
 - (void)cameraSnapshotController:(CameraSnapshotController *)cameraSnapshotController didTakeSnapshot:(NSImage *)image
 {
-    NSString *tempImagePath = TemporaryImagePath();
     NSData *imageData = [image TIFFRepresentation];
     NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
     NSDictionary *imageProps = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:0.6] forKey:NSImageCompressionFactor];
-    NSString *imagePath = [tempImagePath stringByAppendingPathComponent:[NSString stringWithFormat:@"iChat Image(%lu).jpeg", (unsigned long)SecureRandomUInt()]];
+    NSString *imagePath = [[NSFileManager defaultManager] _randomTemporaryPathWithFileName:@"Snapshot.jpeg"];
     
     imageData = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
     [imageData writeToFile:imagePath atomically:NO];
@@ -116,7 +116,7 @@ Chat *_lastChat = nil;
     ChatController *chatController = [self currentChatController];
     
     [[chatController window] makeFirstResponder:[chatController inputLine]];
-	[[chatController fieldEditor] insertAttachedFile:imagePath];
+	[[chatController fieldEditor] insertFileURL:[NSURL fileURLWithPath:imagePath]];
 	
 	[cameraSnapshotController release];
 }

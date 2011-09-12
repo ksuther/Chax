@@ -34,4 +34,13 @@
 	}
 }
 
+- (id)chax_swizzle_floaterWindow
+{
+    id floaterWindow = [self chax_swizzle_floaterWindow];
+    
+    [floaterWindow setAlphaValue:0.0];
+    
+    return floaterWindow;
+}
+
 @end

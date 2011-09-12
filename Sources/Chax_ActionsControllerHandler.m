@@ -22,16 +22,34 @@
  */
 
 #import "Chax_ActionsControllerHandler.h"
+#import "StatusChangeController.h"
 
 @implementation Chax_ActionsControllerHandler
 
-- (id)chax_swizzle_performActionsForEvent:(int)fp8 withIMHandle:(id)fp12 withObject:(id)fp16 withChat:(id)fp20 silent:(BOOL)fp24
+- (id)chax_swizzle_performActionsForEvent:(int)fp8 withIMHandle:(Presentity *)fp12 withObject:(InstantMessage *)fp16 withChat:(IMChat *)fp20 silent:(BOOL)fp24
 {
-    //joinState of 0 means that the notifier window is still up
-    //isChat being true means it is a group chat, so don't auto-accept those (auto-accepting group chats also crashes)
-    if (fp20 && [fp20 isKindOfClass:NSClassFromString(@"ActiveChat")] && [fp20 joinState] == 0 && ![fp20 isChat] && [Chax boolForKey:@"SkipNewMessageNotification"]) {
-		[[[fp20 chatController] notifier] performSelector:@selector(acceptNotification) withObject:nil afterDelay:0.0];
-	}
+    //5 is an incoming message, 10 is an incoming invitation
+    if (fp8 == 5 || fp8 == 10) {
+        if ((![NSApp isActive] || [Chax boolForKey:@"AlwaysShowGrowlNotifications"]) && ![fp16 isFromMe] && [(NSAttributedString *)[fp16 text] length] > 0) {
+            NSData *imageData = [[[fp12 customPicture] image] TIFFRepresentation];
+            
+            if (imageData == nil) {
+                imageData = [[[fp12 picture] image] TIFFRepresentation];
+            }
+            
+			[[StatusChangeController sharedController] postGrowlNotificationWithTitle:[NSString stringWithFormat:ChaxLocalizedString(@"%@ says"), [fp12 name]]
+                                                                          description:[[fp16 text] string]
+                                                                     notificationName:(fp8 == 10) ? ChaxGrowlTextInvitation : ChaxGrowlNewMessage
+                                                                             iconData:imageData
+                                                                         clickContext:[NSDictionary dictionaryWithObject:[fp20 chatIdentifier] forKey:@"Chat"]];
+        }
+    }
+    
+    if (fp8 == 10 && [fp20 joinState] == 0 && [Chax boolForKey:@"SkipNewMessageNotification"] && [fp20 chatStyle] == '-') {
+        ChatController *controller = [NSClassFromString(@"ChatWindowController") chatControllerForChat:fp20];
+        
+        [[controller notifier] performSelector:@selector(acceptNotification) withObject:nil afterDelay:0.0];
+    }
     
     return [self chax_swizzle_performActionsForEvent:fp8 withIMHandle:fp12 withObject:fp16 withChat:fp20 silent:fp24];
 }

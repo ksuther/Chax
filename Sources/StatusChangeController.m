@@ -264,7 +264,7 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
 		}
         
         if (chat) {
-            [[chat chatWindowController] chax_allowSelect];
+            [[NSClassFromString(@"ChatWindowController") chatWindowControllerForChat:chat] chax_allowSelect];
             [NSClassFromString(@"ChatWindowController") displayChat:chat];
         } else {
             ChaxDebugLog(@"No chat found for Growl context: %@", clickContext);
