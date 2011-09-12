@@ -24,7 +24,6 @@
 #import <Carbon/Carbon.h>
 #import "Chax_PeopleListController.h"
 #import "Chax_PeopleList.h"
-#import "UnifiedPeopleListController_Provider.h"
 
 @implementation Chax_PeopleListController
 
@@ -115,14 +114,6 @@
 	}
 }
 
-- (void)chax_swizzle_displayWithKey:(BOOL)fp8
-{
-    //Ensures that only the unified contact list appears at launch
-    if (![Chax boolForKey:@"PreferAllContacts"] || [[NSClassFromString(@"Fezz") sharedInstance] deferredLaunchComplete]) {
-        [self chax_swizzle_displayWithKey:fp8];
-    }
-}
-
 - (BOOL)chax_swizzle_validateMenuItem:(NSMenuItem *)sender
 {
 	if ([sender tag] == ChaxMenuItemShowTextStatus) {
@@ -139,16 +130,6 @@
 	[self chax_swizzle_toggleHidePictures:fp8];
 	[[self peopleList] performSelector:@selector(chax_updateRowHeights) withObject:nil afterDelay:0];
 	[self chax_resizeWindow];
-}
-
-- (void)chax_swizzle__serviceGroupsChanged:(id)fp8
-{
-    [self chax_swizzle__serviceGroupsChanged:fp8];
-    
-    //Only attempt to update groups if the unified list arranges by groups
-    if ([[[NSClassFromString(@"UnifiedPeopleListController") sharedController] peopleList] arrangesByGroup]) {
-        [[NSClassFromString(@"UnifiedPeopleListController") sharedController] reloadContacts];
-    }
 }
 
 @end

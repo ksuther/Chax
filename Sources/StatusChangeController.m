@@ -244,17 +244,6 @@ NSString *ChaxGrowlUserStatusChanged = @"User changed status message";
 					chat = [[NSClassFromString(@"IMChatRegistry") sharedInstance] existingChatForIMHandle:handle];
                     
 					if (!chat) {
-						//There still may be a chat open with the given presentity, but existingChatWithPresentity isn't giving it up
-						/*NSArray *chats = [NSClassFromString(@"Chat") chatList];
-						
-						for (Chat *nextChat in chats) {
-							IMHandle *otherHandle = [nextChat otherIMHandle];
-							if ([[otherHandle ID] isEqualToString:[otherHandle ID]] && [otherHandle service] == [otherHandle service]) {
-                                chat = nextChat;
-                                break;
-							}
-						}*/
-						
                         ChaxDebugLog(@"Displaying a new chat window for %@", handle);
                         [NSClassFromString(@"People") sendMessageToIMHandle:handle];
                         return;

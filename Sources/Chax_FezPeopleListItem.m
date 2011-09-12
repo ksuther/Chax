@@ -1,5 +1,5 @@
 /*
- * UnifiedAccount.h
+ * Chax_FezPeopleListItem.m
  *
  * Copyright (c) 2007-2011 Kent Sutherland
  * 
@@ -21,17 +21,24 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "Chax_FezPeopleListItem.h"
+#import "StatusChangeController.h"
 
-@protocol UnifiedAccount_ProviderMethods
+@implementation Chax_FezPeopleListItem
 
-@optional
-- (void)setAccountLoginStatus:(int)status;
-- (void)logoutAccount;
-
-@end
-
-@interface UnifiedAccount_Provider : NSObject <UnifiedAccount_ProviderMethods> {
-
+- (void)chax_swizzle__presenceStatusChanged:(id)fp8
+{
+    Presentity *presentity = [[fp8 userInfo] objectForKey:@"__kkIMHandleResponsible"];
+    
+    if ([Chax boolForKey:@"LogStatusChanges"]) {
+        NSLog(@"Presence status changed: %@", [fp8 userInfo]);
+    }
+    
+    if (presentity != nil) {
+        [[StatusChangeController sharedController] presentityStatusChanged:presentity];
+    }
+    
+    [self chax_swizzle__presenceStatusChanged:fp8];
 }
+
 @end

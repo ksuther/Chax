@@ -1,5 +1,5 @@
 /*
- * Chax_PeopleListItem.h
+ * Chax_FezPeopleListItem.h
  *
  * Copyright (c) 2007-2011 Kent Sutherland
  * 
@@ -23,7 +23,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Chax_PeopleListItem : NSObject {
+@interface Chax_FezPeopleListItem : NSObject {
 
 }
 

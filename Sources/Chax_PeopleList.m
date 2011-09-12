@@ -23,8 +23,6 @@
 
 #import "Chax_PeopleList.h"
 #import <objc/runtime.h>
-//#import "Chax_PeopleListController.h"
-//#import "UnifiedPeopleListController_Provider.h"
 
 @implementation Chax_PeopleList
 

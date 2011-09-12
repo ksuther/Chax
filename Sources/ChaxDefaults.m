@@ -32,8 +32,6 @@
         if ([[NSUserDefaults standardUserDefaults] persistentDomainForName:ChaxBundleIdentifier] == nil) {
             NSMutableDictionary *defaultSettings = [NSMutableDictionary dictionary];
             
-            [defaultSettings setObject:[NSNumber numberWithBool:YES] forKey:@"PreferAllContacts"];
-            
             [[NSUserDefaults standardUserDefaults] setPersistentDomain:defaultSettings forName:ChaxBundleIdentifier];
         }
     }

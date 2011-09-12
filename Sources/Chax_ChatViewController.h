@@ -1,5 +1,5 @@
 /*
- * Chax_ChatDOMView.h
+ * Chax_ChatViewController.m
  *
  * Copyright (c) 2007-2011 Kent Sutherland
  * 
@@ -21,19 +21,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-@class Chat;
-
-@protocol Chax_ChatDOMViewMethods
-
+@protocol Chax_ChatViewControllerMethods
 @optional
-- (Chat *)chat;
-
+- (id)chat;
 @end
 
-@interface Chax_ChatDOMView : NSObject <Chax_ChatDOMViewMethods> {
-
-}
+@interface Chax_ChatViewController : NSObject <Chax_ChatViewControllerMethods>
 
 @end

@@ -1,5 +1,5 @@
 /*
- * Chax_IMPeople.h
+ * Chax_ChatViewController.m
  *
  * Copyright (c) 2007-2011 Kent Sutherland
  * 
@@ -21,15 +21,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "Chax_ChatViewController.h"
+#import "DockIconController.h"
 
-@protocol Chax_IMPeopleMethods
+@implementation Chax_ChatViewController
 
-@optional
-
-@end
-
-@interface Chax_IMPeople : NSObject <Chax_IMPeopleMethods> {
+- (void)chax_swizzle_clearUnreadMessageIfVisible
+{
+    if ([[self chat] unreadMessageCount] == 0) {
+		[[DockIconController sharedController] removeChat:[self chat]];
+	}
+    
+	[self chax_swizzle_clearUnreadMessageIfVisible];
 }
 
 @end

@@ -108,6 +108,18 @@
 		3784AA28141DBC630065D65E /* Chax_ActionsControllerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F43A371049D622007F8638 /* Chax_ActionsControllerHandler.m */; };
 		37B531AC141DC6890034937C /* Chax_NSDockTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */; };
 		37B531AD141DCBB30034937C /* Chax_Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BE0E151107800F004647C4 /* Chax_Notifier.m */; };
+		37B531AE141DCF3E0034937C /* AutoAcceptPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F437E91049B232007F8638 /* AutoAcceptPrefsWindowController.m */; };
+		37B531AF141DCF3E0034937C /* URLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5C4F5103D064700EE8A49 /* URLTextView.m */; };
+		37B531B1141DCF770034937C /* Chax_ChatInputLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 372D8A6510478E2A005E2F5F /* Chax_ChatInputLine.m */; };
+		37B531B4141DCFD20034937C /* Chax_ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B531B3141DCFD20034937C /* Chax_ChatViewController.m */; };
+		37B531B5141DD0E90034937C /* Chax_PeopleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */; };
+		37B531B6141DD0F00034937C /* Chax_FezPeopleListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3725864A1053716D0073C799 /* Chax_FezPeopleListItem.m */; };
+		37B531B7141DD0F40034937C /* Chax_PeopleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3786DAE10FF7C778000CBC6A /* Chax_PeopleListController.m */; };
+		37B531B8141DD0F70034937C /* Chax_PeopleListControllerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 370189891044504500C7C798 /* Chax_PeopleListControllerWindow.m */; };
+		37B531B9141DD0FE0034937C /* Chax_SecureWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701897F10444F9600C7C798 /* Chax_SecureWindow.m */; };
+		37B531BA141DD14F0034937C /* Chax_FileTransferCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA81AF10FEDEDE00B20782 /* Chax_FileTransferCenter.m */; };
+		37B531BB141DD2AB0034937C /* Chax_AVChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F438B21049C0FB007F8638 /* Chax_AVChatController.m */; };
+		37B531BC141DD31A0034937C /* Chax_ActiveChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7C2EF104C87F300C01941 /* Chax_ActiveChat.m */; };
 		37BC686B1056EE9500F1FCD9 /* ChaxAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BC686A1056EE9500F1FCD9 /* ChaxAddition.m */; };
 		37BC686D1056EEB700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
 		37BC68881056EEC700F1FCD9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BC686C1056EEB700F1FCD9 /* Carbon.framework */; };
@@ -270,8 +282,8 @@
 		371A873C103B6629003EC364 /* Prefs_Chax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Prefs_Chax.m; path = Sources/Prefs_Chax.m; sourceTree = "<group>"; };
 		371BA4BA101134CC00CF88C0 /* BundleUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BundleUtilities.h; path = Sources/BundleUtilities.h; sourceTree = "<group>"; };
 		371BA4BB101134CC00CF88C0 /* BundleUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BundleUtilities.m; path = Sources/BundleUtilities.m; sourceTree = "<group>"; };
-		372586491053716D0073C799 /* Chax_PeopleListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_PeopleListItem.h; path = Sources/Chax_PeopleListItem.h; sourceTree = "<group>"; };
-		3725864A1053716D0073C799 /* Chax_PeopleListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_PeopleListItem.m; path = Sources/Chax_PeopleListItem.m; sourceTree = "<group>"; };
+		372586491053716D0073C799 /* Chax_FezPeopleListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; name = Chax_FezPeopleListItem.h; path = Sources/Chax_FezPeopleListItem.h; sourceTree = "<group>"; };
+		3725864A1053716D0073C799 /* Chax_FezPeopleListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_FezPeopleListItem.m; path = Sources/Chax_FezPeopleListItem.m; sourceTree = "<group>"; };
 		37267ACE10FFD7020058110F /* xibLocalizationPostprocessor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xibLocalizationPostprocessor; sourceTree = BUILT_PRODUCTS_DIR; };
 		37267AD410FFD7230058110F /* xibLocalizationPreprocessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = xibLocalizationPreprocessor.m; path = Sources/xibLocalizationPreprocessor.m; sourceTree = "<group>"; };
 		37267AEC10FFD9C80058110F /* DMLocalizedNibBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMLocalizedNibBundle.h; path = Sources/DMLocalizedNibBundle.h; sourceTree = "<group>"; };
@@ -306,12 +318,6 @@
 		3773527610DC9BDC00CF1C88 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = /System/Library/Frameworks/ScriptingBridge.framework; sourceTree = "<absolute>"; };
 		377644D310F66DE900ECA38A /* ChaxHelperAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChaxHelperAppUtils.h; path = Sources/ChaxHelperAppUtils.h; sourceTree = "<group>"; };
 		377644D410F66DE900ECA38A /* ChaxHelperAppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChaxHelperAppUtils.m; path = Sources/ChaxHelperAppUtils.m; sourceTree = "<group>"; };
-		3776F5A9101CF798009D87B6 /* UnifiedAccount_Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnifiedAccount_Provider.h; path = Sources/UnifiedAccount_Provider.h; sourceTree = "<group>"; };
-		3776F5AA101CF798009D87B6 /* UnifiedAccount_Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnifiedAccount_Provider.m; path = Sources/UnifiedAccount_Provider.m; sourceTree = "<group>"; };
-		3776F5AB101CF798009D87B6 /* UnifiedPeopleListController_Provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnifiedPeopleListController_Provider.h; path = Sources/UnifiedPeopleListController_Provider.h; sourceTree = "<group>"; };
-		3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnifiedPeopleListController_Provider.m; path = Sources/UnifiedPeopleListController_Provider.m; sourceTree = "<group>"; };
-		3776F63A101CFC35009D87B6 /* Chax_IMPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_IMPeople.h; path = Sources/Chax_IMPeople.h; sourceTree = "<group>"; };
-		3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_IMPeople.m; path = Sources/Chax_IMPeople.m; sourceTree = "<group>"; };
 		3776F9AF101D10E3009D87B6 /* Chax_Fezz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_Fezz.h; path = Sources/Chax_Fezz.h; sourceTree = "<group>"; };
 		3776F9B0101D10E3009D87B6 /* Chax_Fezz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_Fezz.m; path = Sources/Chax_Fezz.m; sourceTree = "<group>"; };
 		377AAC1E105DE96E0068A68F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -371,6 +377,8 @@
 		37AFBC4F1031144B001AA056 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegexKitLite.h; path = RegexKitLite/RegexKitLite.h; sourceTree = "<group>"; };
 		37AFBC501031144B001AA056 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegexKitLite.m; path = RegexKitLite/RegexKitLite.m; sourceTree = "<group>"; };
 		37AFBC6110311458001AA056 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = /usr/lib/libicucore.dylib; sourceTree = "<absolute>"; };
+		37B531B2141DCFD20034937C /* Chax_ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_ChatViewController.h; path = Sources/Chax_ChatViewController.h; sourceTree = "<group>"; };
+		37B531B3141DCFD20034937C /* Chax_ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_ChatViewController.m; path = Sources/Chax_ChatViewController.m; sourceTree = "<group>"; };
 		37B6A51E10F3DA9800B865D5 /* Chax_FezExtendedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_FezExtendedTableView.h; path = Sources/Chax_FezExtendedTableView.h; sourceTree = "<group>"; };
 		37B6A51F10F3DA9800B865D5 /* Chax_FezExtendedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_FezExtendedTableView.m; path = Sources/Chax_FezExtendedTableView.m; sourceTree = "<group>"; };
 		37B737F410F030680056176C /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationViewController.h; path = Sources/ConversationViewController.h; sourceTree = "<group>"; };
@@ -421,8 +429,6 @@
 		37D5C5B4103D14A600EE8A49 /* ChaxDockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChaxDockView.m; path = Sources/ChaxDockView.m; sourceTree = "<group>"; };
 		37D5C5C9103D151600EE8A49 /* Chax_Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_Chat.h; path = Sources/Chax_Chat.h; sourceTree = "<group>"; };
 		37D5C5CA103D151600EE8A49 /* Chax_Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_Chat.m; path = Sources/Chax_Chat.m; sourceTree = "<group>"; };
-		37D5C5D9103D157F00EE8A49 /* Chax_ChatDOMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_ChatDOMView.h; path = Sources/Chax_ChatDOMView.h; sourceTree = "<group>"; };
-		37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_ChatDOMView.m; path = Sources/Chax_ChatDOMView.m; sourceTree = "<group>"; };
 		37D6315611099ED700E22722 /* Chax_SmileyGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chax_SmileyGrid.h; path = Sources/Chax_SmileyGrid.h; sourceTree = "<group>"; };
 		37D6315711099ED700E22722 /* Chax_SmileyGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chax_SmileyGrid.m; path = Sources/Chax_SmileyGrid.m; sourceTree = "<group>"; };
 		37D6318B110A166400E22722 /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = de; path = de.lproj/ActivityWindow.strings; sourceTree = "<group>"; };
@@ -560,7 +566,6 @@
 				37D5C5AC103D148200EE8A49 /* Dock Icon */,
 				37AFBC1E10311253001AA056 /* Log Viewer */,
 				37F29A931043AB70005460A5 /* Camera Snapshot */,
-				3776F5A7101CF77D009D87B6 /* Unified Contact List */,
 				37D0E269104612B8009C42DA /* Donate Window */,
 				3786DA540FF7C2E0000CBC6A /* Swizzled Classes */,
 				3786DA420FF7C268000CBC6A /* Other Sources */,
@@ -700,17 +705,6 @@
 			name = Preferences;
 			sourceTree = "<group>";
 		};
-		3776F5A7101CF77D009D87B6 /* Unified Contact List */ = {
-			isa = PBXGroup;
-			children = (
-				3776F5A9101CF798009D87B6 /* UnifiedAccount_Provider.h */,
-				3776F5AA101CF798009D87B6 /* UnifiedAccount_Provider.m */,
-				3776F5AB101CF798009D87B6 /* UnifiedPeopleListController_Provider.h */,
-				3776F5AC101CF798009D87B6 /* UnifiedPeopleListController_Provider.m */,
-			);
-			name = "Unified Contact List";
-			sourceTree = "<group>";
-		};
 		377AAC47105DEA3F0068A68F /* Chax Installer */ = {
 			isa = PBXGroup;
 			children = (
@@ -768,10 +762,10 @@
 				37F438B21049C0FB007F8638 /* Chax_AVChatController.m */,
 				37D5C5C9103D151600EE8A49 /* Chax_Chat.h */,
 				37D5C5CA103D151600EE8A49 /* Chax_Chat.m */,
-				37D5C5D9103D157F00EE8A49 /* Chax_ChatDOMView.h */,
-				37D5C5DA103D157F00EE8A49 /* Chax_ChatDOMView.m */,
 				372D8A6410478E2A005E2F5F /* Chax_ChatInputLine.h */,
 				372D8A6510478E2A005E2F5F /* Chax_ChatInputLine.m */,
+				37B531B2141DCFD20034937C /* Chax_ChatViewController.h */,
+				37B531B3141DCFD20034937C /* Chax_ChatViewController.m */,
 				37F29AAC1043AC82005460A5 /* Chax_ChatWindowController.h */,
 				37F29AAD1043AC82005460A5 /* Chax_ChatWindowController.m */,
 				37EA80D810FECFE500B20782 /* Chax_DaemonListenerStub.h */,
@@ -786,8 +780,6 @@
 				37EA81AF10FEDEDE00B20782 /* Chax_FileTransferCenter.m */,
 				3784AA22141DACD60065D65E /* Chax_IMChatRegistry.h */,
 				3784AA23141DACD60065D65E /* Chax_IMChatRegistry.m */,
-				3776F63A101CFC35009D87B6 /* Chax_IMPeople.h */,
-				3776F63B101CFC35009D87B6 /* Chax_IMPeople.m */,
 				37018C0C1044997300C7C798 /* Chax_FileTransferManager.h */,
 				37018C0D1044997300C7C798 /* Chax_FileTransferManager.m */,
 				37BE0E141107800F004647C4 /* Chax_Notifier.h */,
@@ -796,8 +788,8 @@
 				3786DA560FF7C2F3000CBC6A /* Chax_NSDockTile.m */,
 				3786DBC10FF7D189000CBC6A /* Chax_PeopleList.h */,
 				3786DBC20FF7D189000CBC6A /* Chax_PeopleList.m */,
-				372586491053716D0073C799 /* Chax_PeopleListItem.h */,
-				3725864A1053716D0073C799 /* Chax_PeopleListItem.m */,
+				372586491053716D0073C799 /* Chax_FezPeopleListItem.h */,
+				3725864A1053716D0073C799 /* Chax_FezPeopleListItem.m */,
 				3786DAE00FF7C778000CBC6A /* Chax_PeopleListController.h */,
 				3786DAE10FF7C778000CBC6A /* Chax_PeopleListController.m */,
 				370189881044504500C7C798 /* Chax_PeopleListControllerWindow.h */,
@@ -1310,9 +1302,6 @@
 				3750914E1056FCA300F472F1 /* Chax.m in Sources */,
 				375091591056FCA300F472F1 /* RegexKitLite.m in Sources */,
 				3750915A1056FCA300F472F1 /* Chax_FezPreferences.m in Sources */,
-				3750915B1056FCA300F472F1 /* Prefs_Chax.m in Sources */,
-				3750915C1056FCA300F472F1 /* ChaxDefaults.m in Sources */,
-				3750915E1056FCA300F472F1 /* ChaxPrefsView.m in Sources */,
 				375091631056FCA300F472F1 /* NSArrayAdditions.m in Sources */,
 				375091691056FCA300F472F1 /* DonateWindowController.m in Sources */,
 				3750916E1056FCA300F472F1 /* ActivityWindowController.m in Sources */,
@@ -1331,7 +1320,22 @@
 				3784AA28141DBC630065D65E /* Chax_ActionsControllerHandler.m in Sources */,
 				3784AA27141DBB3A0065D65E /* ChaxDockView.m in Sources */,
 				37B531AC141DC6890034937C /* Chax_NSDockTile.m in Sources */,
+				37B531AE141DCF3E0034937C /* AutoAcceptPrefsWindowController.m in Sources */,
+				3750915B1056FCA300F472F1 /* Prefs_Chax.m in Sources */,
+				3750915C1056FCA300F472F1 /* ChaxDefaults.m in Sources */,
+				3750915E1056FCA300F472F1 /* ChaxPrefsView.m in Sources */,
+				37B531AF141DCF3E0034937C /* URLTextView.m in Sources */,
 				37B531AD141DCBB30034937C /* Chax_Notifier.m in Sources */,
+				37B531B1141DCF770034937C /* Chax_ChatInputLine.m in Sources */,
+				37B531B4141DCFD20034937C /* Chax_ChatViewController.m in Sources */,
+				37B531B5141DD0E90034937C /* Chax_PeopleList.m in Sources */,
+				37B531B6141DD0F00034937C /* Chax_FezPeopleListItem.m in Sources */,
+				37B531B7141DD0F40034937C /* Chax_PeopleListController.m in Sources */,
+				37B531B8141DD0F70034937C /* Chax_PeopleListControllerWindow.m in Sources */,
+				37B531B9141DD0FE0034937C /* Chax_SecureWindow.m in Sources */,
+				37B531BA141DD14F0034937C /* Chax_FileTransferCenter.m in Sources */,
+				37B531BB141DD2AB0034937C /* Chax_AVChatController.m in Sources */,
+				37B531BC141DD31A0034937C /* Chax_ActiveChat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

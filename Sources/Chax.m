@@ -210,7 +210,7 @@ void ChaxDebugLog(NSString *format, ...) {
 	[menuItems addObject:menuItem];*/
 	
 	//Activity window menu item
-	menuItem = [[NSApp windowsMenu] addItemWithTitle:ChaxLocalizedString(@"Activity") action:@selector(showWindow:) keyEquivalent:@"a"];
+	menuItem = [[NSApp windowsMenu] insertItemWithTitle:ChaxLocalizedString(@"Activity") action:@selector(showWindow:) keyEquivalent:@"a" atIndex:13];
 	[menuItem setTag:ChaxMenuItemActivityViewer];
 	[menuItem setTarget:[ActivityWindowController sharedController]];
 	[menuItem setKeyEquivalentModifierMask:NSCommandKeyMask | NSAlternateKeyMask];

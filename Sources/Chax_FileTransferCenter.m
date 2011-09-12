@@ -27,9 +27,9 @@
 
 @implementation Chax_FileTransferCenter
 
-- (void)chax_swizzle__handleStandaloneFileTransferRegistered:(id)fp8
+- (void)chax_swizzle__handleIMStandaloneFileTransferRegisteredNotification:(id)fp8
 {
-    [self chax_swizzle__handleStandaloneFileTransferRegistered:fp8];
+    [self chax_swizzle__handleIMStandaloneFileTransferRegisteredNotification:fp8];
     
     IMFileTransfer *transfer = [self transferForGUID:fp8];
     
